@@ -13,8 +13,8 @@ reviewers:
   - id: security-reviewer
     enabled: false   # no real auth, no real data — nothing security-sensitive to review
 
-  # consistency-analyzer stays enabled at its default (bundled, blocker cap) —
-  # the one check still worth keeping live for a repo other tracks depend on.
+  - id: consistency-analyzer
+    enabled: false   # all three bundled reviewers off — as lightweight as review gets
 
 context_packs:
   base:

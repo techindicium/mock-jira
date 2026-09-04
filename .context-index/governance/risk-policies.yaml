@@ -13,6 +13,8 @@
 
 policies:
   high:
+    # Deliberate carve-out: "most work" automated means most, not all — a
+    # high-risk change still gets full rigor and a human in the loop.
     require_review: true
     require_hitl_approval: true
     review_mode: full
@@ -21,15 +23,18 @@ policies:
     test_depth: thorough
     additional_gates: []           # gate IDs from gates.yaml
   medium:
+    # Pushed to match low: quick mode, no HITL, minimal test depth — most
+    # work in this repo is expected to land here or in low, so most work
+    # runs fully agentic with no human gate.
     require_review: true
     require_hitl_approval: false
-    review_mode: full
-    validate_mode: full
-    implement_mode: full
-    test_depth: standard
+    review_mode: quick
+    validate_mode: quick
+    implement_mode: quick
+    test_depth: minimal
     additional_gates: []
   low:
-    require_review: true           # low-risk still reviews — but quickly
+    require_review: true           # still reviews — but quickly, no blocking
     require_hitl_approval: false
     review_mode: quick
     validate_mode: quick

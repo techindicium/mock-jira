@@ -102,3 +102,20 @@ ruff check .
 
 Issues are tracked using the backend configured in `manifest.yaml` (`tasks.backend`: `json`).
 Use `/adev:issues` to manage issues interactively.
+
+## Governance Posture
+
+Deliberately lightweight, for a small standalone mock API in a training course:
+
+- **Reviewers** (`governance/review.yaml`): all three bundled reviewers (structural-architect,
+  security-reviewer, consistency-analyzer) are disabled.
+- **Validation** (`governance/validate.yaml`): only the deterministic checks run (quality gates,
+  source-manifest, boundaries, transition-gates, gate-executability). Both subagent-review checks
+  (spec-compliance, constitution-compliance) and visual-verification are disabled.
+- **Risk policies** (`governance/risk-policies.yaml`): medium and low risk both run in `quick`
+  mode with `minimal` test depth and no human-in-the-loop approval — most work here is expected
+  to be fully agentic. `high` risk is the deliberate exception: full rigor, human approval
+  required.
+- `completion.merge_policy` is `merge` (no PR required) — but `main`/`master` remain in
+  `protected_branches`, so an agent still can't push or merge directly to `main`; every change
+  lands on a branch first.
