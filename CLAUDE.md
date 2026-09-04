@@ -1,0 +1,69 @@
+<!-- Synced from .context-index/constitution.md by adev. Do not edit above the User Additions line. -->
+
+# Constitution: mock-jira
+
+## Identity
+
+mock-jira is a standalone mock of a JIRA-shaped issue-tracking HTTP API. It exists so the
+adev-course track repos that need a realistic upstream issue tracker — `portwell-assist` (SDLC)
+and `portwell-analytics` (DDLC) today — have something concrete to integrate against, without
+any track ever reaching a real external endpoint.
+
+It is course infrastructure, not a course exercise. Its own API surface and internals are not
+something students build; they are a fixed dependency other tracks build against.
+
+## Non-Negotiable Principles
+
+1. **No inbound dependencies.** This repo never depends on `course-shared`, another `mock-*`
+   repo, or any track repo. Consuming tracks depend on it; it never depends back.
+2. **Fixture-backed, offline only.** No network call to a real endpoint, no real credentials.
+   Everything this API serves comes from local fixtures.
+3. **Identifiers reconcile with the shared canon.** Any account, user, or entity ID this API
+   returns must be consistent with `course-shared/canon/identifiers.md` where an overlap exists
+   — never invent an ID that could collide with the canon's reserved ranges.
+4. **The HTTP contract is the boundary.** Consuming tracks integrate through the documented API
+   only, never by importing this repo's internals directly.
+5. **Breaking API changes are coordinated, not silent.** Once a track depends on an endpoint or
+   response shape, changing it requires updating this constitution's Context Routing table and
+   flagging the affected tracks.
+
+## Architecture Boundaries
+
+### Requires Human Approval
+
+- Breaking changes to the public HTTP API contract (endpoint paths, request/response shapes)
+- Changing fixture data identifiers that other tracks may already key on
+- Adding a dependency on another repo in the workspace
+
+### Autonomous (Agent May Decide)
+
+- Adding new mock endpoints that extend (not break) the existing contract
+- Internal refactors that don't change the HTTP surface
+- Adding tests
+- Fixing lint errors
+
+## Commands
+
+```bash
+pip install -r requirements.txt
+python -m pytest -q     # tests
+ruff check .             # lint
+```
+
+## Context Routing
+
+| Context Need | Location |
+|-------------|----------|
+| API routes | *(not yet built — chartered via `/adev:brainstorm`)* |
+| Fixture data | *(not yet built)* |
+| Shared identifiers this mock must respect | `../course-shared/canon/identifiers.md` |
+| Consumers of this API | `../adev-workspace.yaml` (`dependencies:` naming `mock-jira` as `to`) |
+
+## Context Index
+
+Structured project context lives under `.context-index/` — constitution, manifest, governance
+(trimmed for this training-course repo: `structural-architect` and `security-reviewer` disabled
+in `governance/review.yaml`, visual verification disabled in `governance/validate.yaml`), and
+scaffolding for specs, ADRs, and samples once this repo has code to describe.
+
+<!-- User Additions -->
