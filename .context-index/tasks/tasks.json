@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 5,
+  "seq": 7,
   "epics": [],
   "issues": [
     {
@@ -67,6 +67,32 @@
       "next_action": "Run /adev:review-specs --module kanban-ui",
       "created": "2026-09-04T23:20:17.202Z",
       "updated": "2026-09-04T23:20:17.202Z"
+    },
+    {
+      "id": "issue-1g07sp",
+      "title": "Project MCP tools (list_projects, create_project)",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/mcp-server/project-tools.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/features/mcp-server/project-tools.spec.md. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --module mcp-server",
+      "created": "2026-09-04T23:21:25.477Z",
+      "updated": "2026-09-04T23:21:25.477Z"
+    },
+    {
+      "id": "issue-th0mof",
+      "title": "Issue MCP tools (list/get/create/update/delete)",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/mcp-server/issue-tools.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/features/mcp-server/issue-tools.spec.md. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --module mcp-server",
+      "created": "2026-09-04T23:21:25.591Z",
+      "updated": "2026-09-04T23:21:25.591Z"
     }
   ]
 }
