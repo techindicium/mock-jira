@@ -1,7 +1,7 @@
 ---
-status: draft
+status: approved
 kind: feature
-revision: 1
+revision: 2
 updated: 2026-09-04
 ---
 
@@ -30,7 +30,10 @@ UI and MCP server modules are both clients of this API, never the other way arou
 - Fixed kanban status set (`todo`, `in_progress`, `done`) with free-form transitions between them
   (no enforced workflow ordering — any status may move to any other status, matching how a
   simple kanban board behaves when a card is dragged).
-- CRUD HTTP endpoints for both Project and Issue.
+- Full CRUD HTTP endpoints for Issue. Create/Read only for Project in this milestone — a
+  Project's `key` is immutable once created (see Invariants), so Update has no mutable field to
+  target yet, and Delete is deferred (see Deferred Capabilities) rather than chartering a
+  cascade/conflict rule this milestone doesn't need.
 - SQLite persistence, a single local file, created fresh on first run.
 - Seed fixture data whose account/identifier references reconcile with
   `../course-shared/canon/identifiers.md` where an overlap exists.
@@ -73,9 +76,6 @@ UI and MCP server modules are both clients of this API, never the other way arou
 - A Project's `key` is unique, immutable once created, and used only to derive Issue keys — it is
   never renumbered (mirrors the identifier-stability rule other course repos already follow for
   the shared canon).
-- Deleting a Project does not implicitly delete its Issues in v1 — a Project with Issues cannot be
-  deleted (the API returns a conflict); this keeps referential integrity simple without needing
-  cascade rules.
 
 ## Capability Map
 
@@ -95,6 +95,7 @@ UI and MCP server modules are both clients of this API, never the other way arou
 |-----------|--------|-------------|------------|
 | Comments on Issues | Not needed by either consuming track yet | v2 | — |
 | Configurable workflow rules | Fixed 3-status model is sufficient for course exercises | v2 | — |
+| Delete Project | Deferred until a real cascade/conflict rule is needed — no consumer requires it yet | v2 | — |
 
 ## Interface Contracts
 
