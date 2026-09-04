@@ -82,11 +82,11 @@ UI and MCP server modules are both clients of this API, never the other way arou
 | Capability | Description | Priority | Milestone | Status |
 |-----------|-------------|----------|-------|--------|
 | Create/list/get Project | Create a Project, list all Projects, fetch one by id | must-have | mvp | specified |
-| Create Issue | Create an Issue under a Project, server assigns `key` | must-have | mvp | — |
-| List/get Issue | List Issues (filterable by `project_id` and `status`), fetch one by id | must-have | mvp | — |
-| Update Issue | Update any mutable Issue field, including `status` (the kanban drag action) | must-have | mvp | — |
-| Delete Issue | Delete a single Issue | must-have | mvp | — |
-| Seed fixture data | Populate the database with realistic starting Projects/Issues on first run, reconciled with `course-shared/canon` identifiers | must-have | mvp | — |
+| Create Issue | Create an Issue under a Project, server assigns `key` | must-have | mvp | specified |
+| List/get Issue | List Issues (filterable by `project_id` and `status`), fetch one by id | must-have | mvp | specified |
+| Update Issue | Update any mutable Issue field, including `status` (the kanban drag action) | must-have | mvp | specified |
+| Delete Issue | Delete a single Issue | must-have | mvp | specified |
+| Seed fixture data | Populate the database with realistic starting Projects/Issues on first run, reconciled with `course-shared/canon` identifiers | must-have | mvp | specified |
 | OpenAPI contract | Auto-generated, browsable API documentation | should-have | mvp | specified |
 
 ## Deferred Capabilities

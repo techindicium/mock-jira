@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 1,
+  "seq": 3,
   "epics": [],
   "issues": [
     {
@@ -15,6 +15,32 @@
       "next_action": "Run /adev:review-specs --module issue-tracker-api",
       "created": "2026-09-04T23:15:31.992Z",
       "updated": "2026-09-04T23:15:31.992Z"
+    },
+    {
+      "id": "issue-9fy0nw",
+      "title": "Issue lifecycle CRUD",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/issue-tracker-api/issue-lifecycle.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/features/issue-tracker-api/issue-lifecycle.spec.md. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --module issue-tracker-api",
+      "created": "2026-09-04T23:17:01.462Z",
+      "updated": "2026-09-04T23:17:01.462Z"
+    },
+    {
+      "id": "issue-i06jhl",
+      "title": "Fixture seed data",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/issue-tracker-api/fixture-seeding.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/features/issue-tracker-api/fixture-seeding.spec.md. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --module issue-tracker-api",
+      "created": "2026-09-04T23:18:34.261Z",
+      "updated": "2026-09-04T23:18:34.261Z"
     }
   ]
 }
