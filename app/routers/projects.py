@@ -29,3 +29,13 @@ def create_project(payload: ProjectCreate, request: Request):
 
     row = conn.execute("SELECT * FROM projects WHERE id = ?", (cursor.lastrowid,)).fetchone()
     return ProjectRead(id=row["id"], key=row["key"], name=row["name"], description=row["description"])
+
+
+@router.get("/projects", response_model=list[ProjectRead])
+def list_projects(request: Request):
+    conn = request.app.state.db_conn
+    rows = conn.execute("SELECT * FROM projects ORDER BY id ASC").fetchall()
+    return [
+        ProjectRead(id=r["id"], key=r["key"], name=r["name"], description=r["description"])
+        for r in rows
+    ]

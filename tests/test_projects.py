@@ -43,3 +43,12 @@ def test_create_project_malformed_json_returns_400(client):
     )
     assert resp.status_code == 400
     assert resp.json()["code"] == "MALFORMED_JSON"
+
+
+def test_list_projects_returns_all_ordered_by_creation(client):
+    client.post("/projects", json={"key": "SDLC", "name": "SDLC Track"})
+    client.post("/projects", json={"key": "DDLC", "name": "DDLC Track"})
+    resp = client.get("/projects")
+    assert resp.status_code == 200
+    keys = [p["key"] for p in resp.json()]
+    assert keys == ["SDLC", "DDLC"]
