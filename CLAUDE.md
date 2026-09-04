@@ -61,9 +61,19 @@ ruff check .             # lint
 
 ## Context Index
 
-Structured project context lives under `.context-index/` — constitution, manifest, governance
-(trimmed for this training-course repo: `structural-architect` and `security-reviewer` disabled
-in `governance/review.yaml`, visual verification disabled in `governance/validate.yaml`), and
-scaffolding for specs, ADRs, and samples once this repo has code to describe.
+Structured project context lives under `.context-index/` — constitution, manifest, governance,
+and scaffolding for specs, ADRs, and samples once this repo has code to describe.
+
+## Governance Posture
+
+Deliberately lightweight, for a small standalone mock API in a training course:
+
+- **Reviewers** (`governance/review.yaml`): all three bundled reviewers disabled.
+- **Validation** (`governance/validate.yaml`): only deterministic checks run; both
+  subagent-review checks and visual-verification are disabled.
+- **Risk policies** (`governance/risk-policies.yaml`): medium and low risk run `quick` mode,
+  `minimal` test depth, no human-in-the-loop — most work here runs fully agentic. `high` risk
+  keeps full rigor and human approval.
+- `merge_policy: merge`, but `main`/`master` stay in `protected_branches` — always branch first.
 
 <!-- User Additions -->
