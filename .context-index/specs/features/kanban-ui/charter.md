@@ -1,7 +1,7 @@
 ---
-status: draft
+status: approved
 kind: feature
-revision: 1
+revision: 2
 updated: 2026-09-04
 ---
 
@@ -17,7 +17,9 @@ kanban-ui gives `mock-jira` a JIRA-like kanban board web interface — issues re
 in status columns, full CRUD via forms, and column-to-column moves — so the mock reads and feels
 like a real issue tracker to anyone browsing it, not just to a program calling its API. It is a
 pure client of `issue-tracker-api`: it owns no persisted data and never touches the database
-directly.
+directly. It ships as static assets (HTML/CSS/JS) served by `issue-tracker-api`'s own HTTP
+process — same origin, same container — so its API calls are same-origin relative requests with
+no separate server, no CORS configuration, and no runtime base-URL configuration to wire up.
 
 ## Scope and Boundaries
 
@@ -43,7 +45,7 @@ directly.
 
 | Dependency | Type | Description |
 |-----------|------|-------------|
-| issue-tracker-api | internal module | Sole source of data. All reads and writes go through its HTTP API; this module never opens the SQLite file directly. |
+| issue-tracker-api | internal module | Sole source of data, and the process that serves this module's static assets. All reads and writes go through its HTTP API; this module never opens the SQLite file directly. |
 
 ## Domain Model
 
@@ -110,6 +112,6 @@ other modules.
 | Attribute | Requirement |
 |-----------|-------------|
 | Performance | Board of a few dozen issues renders with no perceptible lag on a local connection. |
-| Availability | Single local static/server process; restarting it is an acceptable recovery path. |
+| Availability | No process of its own — availability is entirely issue-tracker-api's, since that is what serves these static assets. Restarting that process is an acceptable recovery path. |
 | Security | No real auth. Bound to localhost only by default — never exposed to a real network. |
 | Observability | API errors surface to the user as a visible message naming what failed; no structured logging required. |

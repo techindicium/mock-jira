@@ -1,7 +1,7 @@
 ---
-status: draft
+status: approved
 kind: feature
-revision: 1
+revision: 2
 updated: 2026-09-04
 ---
 
@@ -14,9 +14,9 @@ updated: 2026-09-04
 ## Business Intent
 
 mcp-server exposes `issue-tracker-api`'s CRUD operations as MCP tools, so an AI agent working in
-a consuming course track (`portwell-assist`/SDLC, `portwell-analytics`/DDLC) can create, read,
-update, and delete Projects and Issues directly through the Model Context Protocol, without
-hand-rolling HTTP calls. Like `kanban-ui`, it is a pure client of `issue-tracker-api`: it owns no
+a consuming course track (`portwell-assist`/SDLC, `portwell-analytics`/DDLC) can create and list
+Projects, and fully create, read, update, and delete Issues, directly through the Model Context
+Protocol, without hand-rolling HTTP calls. Like `kanban-ui`, it is a pure client of `issue-tracker-api`: it owns no
 persisted data and never touches the database directly.
 
 ## Scope and Boundaries
