@@ -52,3 +52,16 @@ def test_list_projects_returns_all_ordered_by_creation(client):
     assert resp.status_code == 200
     keys = [p["key"] for p in resp.json()]
     assert keys == ["SDLC", "DDLC"]
+
+
+def test_get_project_by_id_returns_200(client):
+    created = client.post("/projects", json={"key": "SDLC", "name": "SDLC Track"}).json()
+    resp = client.get(f"/projects/{created['id']}")
+    assert resp.status_code == 200
+    assert resp.json()["key"] == "SDLC"
+
+
+def test_get_project_unknown_id_returns_404(client):
+    resp = client.get("/projects/999999")
+    assert resp.status_code == 404
+    assert "999999" in resp.json()["message"]
