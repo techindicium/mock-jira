@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 3,
+  "seq": 5,
   "epics": [],
   "issues": [
     {
@@ -41,6 +41,32 @@
       "next_action": "Run /adev:review-specs --module issue-tracker-api",
       "created": "2026-09-04T23:18:34.261Z",
       "updated": "2026-09-04T23:18:34.261Z"
+    },
+    {
+      "id": "issue-ipn1xg",
+      "title": "Kanban board view, project switcher, and project creation",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/kanban-ui/board-view.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/features/kanban-ui/board-view.spec.md. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --module kanban-ui",
+      "created": "2026-09-04T23:19:33.123Z",
+      "updated": "2026-09-04T23:19:33.123Z"
+    },
+    {
+      "id": "issue-8rb2d1",
+      "title": "Issue create, edit, delete, and column move",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/kanban-ui/issue-crud-forms.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/features/kanban-ui/issue-crud-forms.spec.md. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --module kanban-ui",
+      "created": "2026-09-04T23:20:17.202Z",
+      "updated": "2026-09-04T23:20:17.202Z"
     }
   ]
 }
