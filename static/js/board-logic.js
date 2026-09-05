@@ -74,8 +74,13 @@
     return null;
   }
 
+  function shouldShowEmptyState(projects) {
+    return !Array.isArray(projects) || projects.length === 0;
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
+    shouldShowEmptyState,
   };
 });

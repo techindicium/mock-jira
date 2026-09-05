@@ -96,11 +96,14 @@
       return;
     }
     const board = document.getElementById("board");
-    const defaultProject = BoardLogic.pickDefaultProject(projects, getLastSelectedKey());
-    if (!defaultProject) {
-      // Task 7 fills in the empty-state branch here.
-      return;
+    const emptyState = document.getElementById("empty-state");
+    if (BoardLogic.shouldShowEmptyState(projects)) {
+      board.hidden = true;
+      emptyState.hidden = false;
+      return; // BEH-6: prompt to create, not an error, not a blank screen
     }
+    emptyState.hidden = true;
+    const defaultProject = BoardLogic.pickDefaultProject(projects, getLastSelectedKey());
     board.hidden = false;
     renderSwitcher(projects, defaultProject.id);
     await loadIssuesFor(defaultProject.id);
