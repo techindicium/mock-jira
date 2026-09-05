@@ -1,7 +1,7 @@
 ---
 partial_schema: spec@1
 charter: issue-tracker-api
-status: review-pending
+status: review-passed
 risk_level: medium
 milestone: mvp
 revision: 1
@@ -47,8 +47,11 @@ kind: behavioral
 - **BEH-6** — **When** a `GET /issues/{id}` request is sent for an id that does not exist,
   **then** the API responds `404` naming the missing id.
 - **BEH-7** — **When** a `PATCH /issues/{id}` request is sent with one or more mutable fields
-  (including `status` — the kanban drag action), **then** the API updates exactly those fields,
-  bumps `updated_at`, and responds `200` with the full updated representation.
+  (`summary`, `description`, `issue_type`, `priority`, `assignee`, `reporter`, or `status` — the
+  kanban drag action), **then** the API updates exactly those fields, bumps `updated_at`, and
+  responds `200` with the full updated representation. `id`, `key`, and `project_id` are not
+  mutable fields and are silently ignored if present in the request body — an Issue's project
+  and key never change after creation (see Postconditions).
 - **BEH-8** — **When** a `PATCH /issues/{id}` request sets `status` to a value outside the fixed
   set (`todo`, `in_progress`, `done`), **then** the API responds `422` and persists no change.
 - **BEH-9** — **When** a `DELETE /issues/{id}` request is sent for an id that exists, **then**
@@ -60,7 +63,8 @@ kind: behavioral
   `GET /issues?project_id=...`, and `GET /issues/{id}` — no eventual consistency window.
 - A deleted Issue no longer appears in any subsequent `GET /issues` or `GET /issues/{id}` call
   for that id (the id is not reused for a future Issue).
-- An Issue's `key` never changes once assigned, including across `PATCH` updates.
+- An Issue's `key` and `project_id` never change once assigned, including across `PATCH`
+  updates — there is no move-issue-to-another-project operation in this milestone.
 
 ### Error Cases
 
