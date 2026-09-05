@@ -1,8 +1,10 @@
+from typing import Any
+
 from mcp.server.mcpserver.exceptions import ToolError
 
 from mcp_server.client import IssueTrackerClient
 from mcp_server.config import get_api_base_url
-from mcp_server.errors import UpstreamUnreachableError
+from mcp_server.errors import UpstreamError, UpstreamUnreachableError
 from mcp_server.server import mcp
 
 
@@ -16,6 +18,20 @@ async def list_projects() -> list[dict]:
     client = _client()
     try:
         return await client.list_projects()
+    except UpstreamUnreachableError as exc:
+        raise ToolError(str(exc)) from exc
+    finally:
+        await client.aclose()
+
+
+@mcp.tool()
+async def create_project(key: str, name: str, description: str | None = None) -> dict[str, Any]:
+    """Create a Project in issue-tracker-api."""
+    client = _client()
+    try:
+        return await client.create_project(key, name, description)
+    except UpstreamError as exc:
+        raise ToolError(exc.message) from exc
     except UpstreamUnreachableError as exc:
         raise ToolError(str(exc)) from exc
     finally:
