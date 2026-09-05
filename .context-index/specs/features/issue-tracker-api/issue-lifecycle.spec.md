@@ -1,14 +1,25 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 charter: issue-tracker-api
-status: review-passed
+status: implemented
 risk_level: medium
 milestone: mvp
 revision: 1
 charter-revision: 2
 created: 2026-09-04
-updated: 2026-09-04
+updated: 2026-09-05
 kind: behavioral
+source-manifest:
+  sha: "bae9198"
+  files:
+    - app/db.py
+    - app/errors.py
+    - app/main.py
+    - app/models.py
+    - app/routers/issues.py
+    - tests/test_db.py
+    - tests/test_issues.py
+  computed-at: "2026-09-05T00:38:18.552Z"
 ---
 
 # Live Spec: Issue lifecycle CRUD
@@ -102,15 +113,15 @@ kind: behavioral
 
 ## Acceptance Criteria
 
-- [ ] `POST /issues` creates an Issue with a server-assigned key and `todo` default status,
+- [x] `POST /issues` creates an Issue with a server-assigned key and `todo` default status,
       returns 201 (BEH-1)
-- [ ] `POST /issues` with an unknown `project_id` returns 404 and creates nothing (BEH-2)
-- [ ] `POST /issues` with a missing required field returns 422 (BEH-3)
-- [ ] `GET /issues` supports `project_id` and `status` filters, unfiltered when omitted (BEH-4)
-- [ ] `GET /issues/{id}` returns 200 for a valid id (BEH-5)
-- [ ] `GET /issues/{id}` returns 404 for an unknown id (BEH-6)
-- [ ] `PATCH /issues/{id}` updates the given fields (including status) and returns 200 (BEH-7)
-- [ ] `PATCH /issues/{id}` with an invalid status returns 422 and persists no change (BEH-8)
-- [ ] `DELETE /issues/{id}` deletes an existing Issue and returns 204 (BEH-9)
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] `POST /issues` with an unknown `project_id` returns 404 and creates nothing (BEH-2)
+- [x] `POST /issues` with a missing required field returns 422 (BEH-3)
+- [x] `GET /issues` supports `project_id` and `status` filters, unfiltered when omitted (BEH-4)
+- [x] `GET /issues/{id}` returns 200 for a valid id (BEH-5)
+- [x] `GET /issues/{id}` returns 404 for an unknown id (BEH-6)
+- [x] `PATCH /issues/{id}` updates the given fields (including status) and returns 200 (BEH-7)
+- [x] `PATCH /issues/{id}` with an invalid status returns 422 and persists no change (BEH-8)
+- [x] `DELETE /issues/{id}` deletes an existing Issue and returns 204 (BEH-9)
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced
