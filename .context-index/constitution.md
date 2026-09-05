@@ -88,6 +88,12 @@ something students build; they are a fixed dependency other tracks build against
 <!-- Commands that must pass before any implementation is considered complete.
      /adev:implement and /adev:validate will run these automatically. -->
 
+Requires an activated virtualenv with `requirements.txt` (and `requirements-mcp.txt` for
+mcp-server work) installed: `source .venv/bin/activate`. The ambient system `python3` is a
+different interpreter with none of this project's dependencies installed —
+`governance/gates.yaml`'s automated gates call `.venv/bin/python3`/`.venv/bin/ruff` directly for
+exactly this reason, since gate execution has no shell to activate a venv in.
+
 ```bash
 # Tests
 python3 -m pytest -q
