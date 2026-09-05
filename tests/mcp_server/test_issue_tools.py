@@ -2,7 +2,7 @@ import pytest
 from mcp import Client
 
 import mcp_server.tools.issues as issues_tools
-from mcp_server.errors import UpstreamError
+from mcp_server.errors import UpstreamError, UpstreamUnreachableError
 from mcp_server.server import mcp
 
 
@@ -296,3 +296,44 @@ async def test_delete_issue_tool_missing_issue_id_errors_before_http_request(mon
 
     assert result.is_error is True
     assert called["value"] is False
+
+
+_UNREACHABLE_MESSAGE = "Could not reach issue-tracker-api at http://issue-tracker-api: connection refused"
+
+
+class _UnreachableClient(_FakeClient):
+    async def list_issues(self, project_id=None, status=None):
+        raise UpstreamUnreachableError(_UNREACHABLE_MESSAGE)
+
+    async def get_issue(self, issue_id):
+        raise UpstreamUnreachableError(_UNREACHABLE_MESSAGE)
+
+    async def create_issue(self, *args, **kwargs):
+        raise UpstreamUnreachableError(_UNREACHABLE_MESSAGE)
+
+    async def update_issue(self, issue_id, **fields):
+        raise UpstreamUnreachableError(_UNREACHABLE_MESSAGE)
+
+    async def delete_issue(self, issue_id):
+        raise UpstreamUnreachableError(_UNREACHABLE_MESSAGE)
+
+
+@pytest.mark.anyio
+@pytest.mark.parametrize(
+    "tool_name, arguments",
+    [
+        ("list_issues", {}),
+        ("get_issue", {"issue_id": 1}),
+        ("create_issue", {"project_id": 1, "summary": "x", "issue_type": "bug", "priority": "low"}),
+        ("update_issue", {"issue_id": 1, "status": "done"}),
+        ("delete_issue", {"issue_id": 1}),
+    ],
+)
+async def test_issue_tool_unreachable_api_errors_with_clear_message(monkeypatch, tool_name, arguments):
+    monkeypatch.setattr(issues_tools, "_client", lambda: _UnreachableClient())
+
+    async with Client(mcp) as client:
+        result = await client.call_tool(tool_name, arguments)
+
+    assert result.is_error is True
+    assert "issue-tracker-api" in result.content[0].text
