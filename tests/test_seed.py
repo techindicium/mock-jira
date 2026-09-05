@@ -76,3 +76,26 @@ def test_seed_if_empty_raises_seed_db_not_writable_when_connection_is_read_only(
         seed_if_empty(conn, str(db_path))
     assert exc_info.value.code == "SEED_DB_NOT_WRITABLE"
     assert str(db_path) in str(exc_info.value)
+
+
+def test_seeding_is_idempotent_across_restarts(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    import app.main as main_module
+
+    db_path = tmp_path / "restart.db"
+    monkeypatch.setattr(main_module, "DB_PATH", str(db_path))
+
+    with TestClient(main_module.app) as c1:
+        first_projects = c1.get("/projects").json()
+
+    with TestClient(main_module.app) as c2:
+        second_projects = c2.get("/projects").json()
+        issues = c2.get(
+            "/issues", params={"project_id": second_projects[0]["id"]}
+        ).json()
+
+    assert len(first_projects) == 1
+    assert len(second_projects) == 1
+    assert first_projects[0]["id"] == second_projects[0]["id"]
+    assert len(issues) == 6
