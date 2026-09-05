@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 19,
+  "seq": 24,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -47,6 +47,24 @@
       "notes": "Extend the kanban board with create/edit/delete forms for Issues and a column-move interaction, backed by issue-tracker-api's issue-lifecycle endpoints, with optimistic-then-reconcile for the drag move and a shared revert/error path for every mutation.",
       "created": "2026-09-05T10:49:04.951Z",
       "updated": "2026-09-05T10:49:04.951Z"
+    },
+    {
+      "id": "epic-cc92jg",
+      "title": "Project MCP tools (list_projects, create_project)",
+      "status": "open",
+      "planRef": ".context-index/specs/features/mcp-server/project-tools.plan.md",
+      "notes": "Stand up a new mcp_server/ package exposing list_projects and create_project as MCP tools that thinly wrap issue-tracker-api's GET/POST /projects endpoints.",
+      "created": "2026-09-05T12:33:36.996Z",
+      "updated": "2026-09-05T12:33:36.996Z"
+    },
+    {
+      "id": "epic-f19j4n",
+      "title": "Issue MCP tools (list/get/create/update/delete)",
+      "status": "open",
+      "planRef": ".context-index/specs/features/mcp-server/issue-tools.plan.md",
+      "notes": "Extend mcp_server/ with list_issues, get_issue, create_issue, update_issue, and delete_issue MCP tools thinly wrapping issue-tracker-api's Issue endpoints, matching project-tools' established client/error/tool-registration conventions.",
+      "created": "2026-09-05T18:04:01.393Z",
+      "updated": "2026-09-05T18:04:01.393Z"
     }
   ],
   "issues": [
@@ -123,10 +141,10 @@
       "type": "feature",
       "spec_ref": ".context-index/specs/features/mcp-server/project-tools.spec.md",
       "dependencies": [],
-      "notes": "Bound 1:1 to spec at .context-index/specs/features/mcp-server/project-tools.spec.md. Created by /adev:specify on 2026-09-04.",
+      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/mcp-server/project-tools.validate.md | Files verified: 13 | Tests: PASS. Manual verification recommended.",
       "next_action": "Run /adev:review-specs --module mcp-server",
       "created": "2026-09-04T23:21:25.477Z",
-      "updated": "2026-09-04T23:21:25.477Z"
+      "updated": "2026-09-05T17:46:11.857Z"
     },
     {
       "id": "issue-th0mof",
@@ -136,10 +154,10 @@
       "type": "feature",
       "spec_ref": ".context-index/specs/features/mcp-server/issue-tools.spec.md",
       "dependencies": [],
-      "notes": "Bound 1:1 to spec at .context-index/specs/features/mcp-server/issue-tools.spec.md. Created by /adev:specify on 2026-09-04.",
+      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/mcp-server/issue-tools.validate.md | Files verified: 5 | Tests: PASS. Manual verification recommended.",
       "next_action": "Run /adev:review-specs --module mcp-server",
       "created": "2026-09-04T23:21:25.591Z",
-      "updated": "2026-09-04T23:21:25.591Z"
+      "updated": "2026-09-05T18:31:00.643Z"
     },
     {
       "id": "issue-borgvx",
