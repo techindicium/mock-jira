@@ -53,3 +53,4 @@
 {"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"gate-doctor: 1 error (test gate's 'python' binary not on bare PATH -- only resolves via .venv), 4 warnings (gate-set divergence: integration-test dropped by domain merge; no CI config; lint runner unidentified; integration-test has empty command).","ts":"2026-09-05T00:06:27.384Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T00:07:17.410Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T00:08:34.770Z"}
+{"event":"code_drift_detected","drift_source":"tests/test_db.py","drift_at":"2026-09-05T00:28:46.100Z","ts":"2026-09-05T00:28:46.101Z"}

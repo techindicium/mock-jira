@@ -26,6 +26,7 @@ source-manifest:
     - tests/test_openapi.py
     - tests/test_projects.py
   computed-at: "2026-09-04T23:59:35.117Z"
+drift_detected: true
 ---
 
 # Live Spec: Project management and OpenAPI contract
