@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 23,
+  "seq": 24,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -154,10 +154,10 @@
       "type": "feature",
       "spec_ref": ".context-index/specs/features/mcp-server/issue-tools.spec.md",
       "dependencies": [],
-      "notes": "Bound 1:1 to spec at .context-index/specs/features/mcp-server/issue-tools.spec.md. Created by /adev:specify on 2026-09-04.",
+      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/mcp-server/issue-tools.validate.md | Files verified: 5 | Tests: PASS. Manual verification recommended.",
       "next_action": "Run /adev:review-specs --module mcp-server",
       "created": "2026-09-04T23:21:25.591Z",
-      "updated": "2026-09-04T23:21:25.591Z"
+      "updated": "2026-09-05T18:31:00.643Z"
     },
     {
       "id": "issue-borgvx",

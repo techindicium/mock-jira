@@ -72,11 +72,11 @@ persisted data and never touches the database directly.
 |-----------|-------------|----------|-------|--------|
 | list_projects tool | Wraps `GET /projects` | must-have | mvp | validated |
 | create_project tool | Wraps `POST /projects` | must-have | mvp | validated |
-| list_issues tool | Wraps `GET /issues`, with `project_id`/`status` filter parameters | must-have | mvp | implemented |
-| get_issue tool | Wraps `GET /issues/{id}` | must-have | mvp | implemented |
-| create_issue tool | Wraps `POST /issues` | must-have | mvp | implemented |
-| update_issue tool | Wraps `PATCH /issues/{id}`, including status transitions | must-have | mvp | implemented |
-| delete_issue tool | Wraps `DELETE /issues/{id}` | must-have | mvp | implemented |
+| list_issues tool | Wraps `GET /issues`, with `project_id`/`status` filter parameters | must-have | mvp | validated |
+| get_issue tool | Wraps `GET /issues/{id}` | must-have | mvp | validated |
+| create_issue tool | Wraps `POST /issues` | must-have | mvp | validated |
+| update_issue tool | Wraps `PATCH /issues/{id}`, including status transitions | must-have | mvp | validated |
+| delete_issue tool | Wraps `DELETE /issues/{id}` | must-have | mvp | validated |
 
 ## Deferred Capabilities
 
