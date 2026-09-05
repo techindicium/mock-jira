@@ -78,9 +78,17 @@
     return !Array.isArray(projects) || projects.length === 0;
   }
 
+  function isNotFoundError(error) {
+    return !!(error && error.status === 404);
+  }
+
+  function formatIssueGoneMessage(action) {
+    return `${action}: this issue was already removed. The board has been updated.`;
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
-    shouldShowEmptyState,
+    shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage,
   };
 });

@@ -109,6 +109,15 @@
     await loadIssuesFor(defaultProject.id);
   }
 
+  function reportIssueMutationFailure(action, err, onNotFound) {
+    if (BoardLogic.isNotFoundError(err)) {
+      if (typeof onNotFound === "function") onNotFound();
+      showError(BoardLogic.formatIssueGoneMessage(action));
+      return;
+    }
+    showError(BoardLogic.formatFetchError(action, err));
+  }
+
   function showFormError(message) {
     const el = document.getElementById("create-project-error");
     el.textContent = message;
