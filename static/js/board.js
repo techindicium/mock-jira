@@ -69,7 +69,10 @@
     renderColumns(state.columns);
   }
 
+  let currentProjectId = null;
+
   async function loadIssuesFor(projectId) {
+    currentProjectId = projectId;
     try {
       const issues = await fetchJson(`/issues?project_id=${projectId}`);
       clearError();
@@ -166,10 +169,54 @@
   window.BoardApp = {
     fetchJson, showError, clearError, renderSwitcher, renderColumns, renderBoardState,
     loadIssuesFor, init, getLastSelectedKey, setLastSelectedKey, onProjectSwitch,
-    onCreateProjectSubmit,
+    onCreateProjectSubmit, onCreateIssueSubmit,
   };
 
   document.addEventListener("DOMContentLoaded", init);
   document.getElementById("project-switcher").addEventListener("change", onProjectSwitch);
   document.getElementById("create-project-form").addEventListener("submit", onCreateProjectSubmit);
+
+  document.getElementById("open-create-issue").addEventListener("click", () => {
+    document.getElementById("create-issue").hidden = false;
+  });
+  document.getElementById("cancel-create-issue").addEventListener("click", (event) => {
+    event.preventDefault();
+    document.getElementById("create-issue-form").reset();
+    document.getElementById("create-issue-error").hidden = true;
+    document.getElementById("create-issue").hidden = true;
+  });
+
+  async function onCreateIssueSubmit(event) {
+    event.preventDefault();
+    const fields = {
+      summary: document.getElementById("issue-summary").value,
+      issue_type: document.getElementById("issue-type").value,
+      priority: document.getElementById("issue-priority").value,
+      description: document.getElementById("issue-description").value,
+      assignee: document.getElementById("issue-assignee").value,
+    };
+    const { valid, errors } = BoardLogic.validateIssueForm(fields);
+    const errorEl = document.getElementById("create-issue-error");
+    if (!valid) {
+      errorEl.textContent = Object.values(errors)[0];
+      errorEl.hidden = false;
+      return; // client-side block — no request sent (UI_VALIDATION_ERROR)
+    }
+    errorEl.hidden = true;
+    try {
+      await fetchJson("/issues", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(BoardLogic.buildIssueCreatePayload(currentProjectId, fields)),
+      });
+    } catch (err) {
+      showError(BoardLogic.formatFetchError("Creating issue", err));
+      return; // form stays open with prior input intact
+    }
+    document.getElementById("create-issue-form").reset();
+    document.getElementById("create-issue").hidden = true;
+    await loadIssuesFor(currentProjectId); // new issue is always todo — reload shows it there
+  }
+
+  document.getElementById("create-issue-form").addEventListener("submit", onCreateIssueSubmit);
 })();

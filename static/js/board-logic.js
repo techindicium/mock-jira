@@ -94,9 +94,22 @@
     return { valid: Object.keys(errors).length === 0, errors };
   }
 
+  function buildIssueCreatePayload(projectId, fields) {
+    const payload = {
+      project_id: projectId,
+      summary: fields.summary,
+      issue_type: fields.issue_type,
+      priority: fields.priority,
+    };
+    if (fields.description && fields.description.trim()) payload.description = fields.description;
+    if (fields.assignee && fields.assignee.trim()) payload.assignee = fields.assignee;
+    return payload;
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
     shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
+    buildIssueCreatePayload,
   };
 });
