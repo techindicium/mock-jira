@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 16,
+  "seq": 17,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -88,10 +88,10 @@
       "type": "feature",
       "spec_ref": ".context-index/specs/features/kanban-ui/board-view.spec.md",
       "dependencies": [],
-      "notes": "Bound 1:1 to spec at .context-index/specs/features/kanban-ui/board-view.spec.md. Created by /adev:specify on 2026-09-04.",
+      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/kanban-ui/board-view.validate.md | Files verified: 13 | Tests: PASS. Manual verification recommended.",
       "next_action": "Run /adev:review-specs --module kanban-ui",
       "created": "2026-09-04T23:19:33.123Z",
-      "updated": "2026-09-04T23:19:33.123Z"
+      "updated": "2026-09-05T10:32:50.146Z"
     },
     {
       "id": "issue-8rb2d1",

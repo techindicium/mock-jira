@@ -6,6 +6,7 @@ __pycache__/
 
 # adev context index
 .context-index/hygiene/
+.context-index/tmp/
 .context-index/.token-cursor.json
 .context-index/.reminder-counter
 .context-index/.session-tracking.jsonl
