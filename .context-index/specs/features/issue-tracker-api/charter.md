@@ -1,7 +1,7 @@
 ---
 status: approved
 kind: feature
-revision: 7
+revision: 8
 updated: 2026-09-05
 ---
 
@@ -86,7 +86,7 @@ UI and MCP server modules are both clients of this API, never the other way arou
 | List/get Issue | List Issues (filterable by `project_id` and `status`), fetch one by id | must-have | mvp | validated |
 | Update Issue | Update any mutable Issue field, including `status` (the kanban drag action) | must-have | mvp | validated |
 | Delete Issue | Delete a single Issue | must-have | mvp | validated |
-| Seed fixture data | Populate the database with realistic starting Projects/Issues on first run, reconciled with `course-shared/canon` identifiers | must-have | mvp | specified |
+| Seed fixture data | Populate the database with realistic starting Projects/Issues on first run, reconciled with `course-shared/canon` identifiers | must-have | mvp | review-passed |
 | OpenAPI contract | Auto-generated, browsable API documentation | should-have | mvp | validated |
 
 ## Deferred Capabilities

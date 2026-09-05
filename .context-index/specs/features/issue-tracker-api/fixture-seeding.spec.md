@@ -1,11 +1,11 @@
 ---
 partial_schema: spec@1
 charter: issue-tracker-api
-status: review-pending
+status: review-passed
 risk_level: low
 milestone: mvp
-revision: 1
-charter-revision: 2
+revision: 2
+charter-revision: 8
 created: 2026-09-04
 updated: 2026-09-04
 kind: behavioral
@@ -36,7 +36,10 @@ kind: behavioral
 - **BEH-1** — **When** the API starts against an empty database (no Project rows exist),
   **then** it seeds exactly one Project (`key: ASSIST`, `name: Portwell Assist Engineering`) and
   six Issues under it in a single transaction, all present and queryable immediately once
-  startup completes — no placeholder or lorem-ipsum text in any field.
+  startup completes — no placeholder or lorem-ipsum text in any field. The six Issues span all
+  three statuses (two `todo`, two `in_progress`, two `done`) and a mix of `issue_type`
+  (`bug`/`task`/`story`) and `priority` (`low`/`medium`/`high`) values, so a fresh kanban board
+  shows populated columns rather than one column with six cards.
 - **BEH-2** — **When** the API starts against a database that already has at least one Project
   row, **then** it performs no seeding — existing data is left untouched, and restarting the
   process any number of times never creates a second copy.
