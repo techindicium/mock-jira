@@ -1,7 +1,7 @@
 ---
 status: approved
 kind: feature
-revision: 4
+revision: 9
 updated: 2026-09-05
 ---
 
@@ -72,11 +72,11 @@ persisted data and never touches the database directly.
 |-----------|-------------|----------|-------|--------|
 | list_projects tool | Wraps `GET /projects` | must-have | mvp | validated |
 | create_project tool | Wraps `POST /projects` | must-have | mvp | validated |
-| list_issues tool | Wraps `GET /issues`, with `project_id`/`status` filter parameters | must-have | mvp | specified |
-| get_issue tool | Wraps `GET /issues/{id}` | must-have | mvp | specified |
-| create_issue tool | Wraps `POST /issues` | must-have | mvp | specified |
-| update_issue tool | Wraps `PATCH /issues/{id}`, including status transitions | must-have | mvp | specified |
-| delete_issue tool | Wraps `DELETE /issues/{id}` | must-have | mvp | specified |
+| list_issues tool | Wraps `GET /issues`, with `project_id`/`status` filter parameters | must-have | mvp | review-passed |
+| get_issue tool | Wraps `GET /issues/{id}` | must-have | mvp | review-passed |
+| create_issue tool | Wraps `POST /issues` | must-have | mvp | review-passed |
+| update_issue tool | Wraps `PATCH /issues/{id}`, including status transitions | must-have | mvp | review-passed |
+| delete_issue tool | Wraps `DELETE /issues/{id}` | must-have | mvp | review-passed |
 
 ## Deferred Capabilities
 
