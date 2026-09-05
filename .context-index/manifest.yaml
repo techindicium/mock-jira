@@ -188,11 +188,12 @@ completion:
   # pr:    Always open a pull request. Never merge directly. (default, recommended)
   # merge: Allow direct merge to the target branch after validation passes.
   # ask:   Ask the user each time whether to open a PR or merge.
-  protected_branches:
-    - main
-    - master
+  protected_branches: []
   # Branches that agents must NEVER merge to or push to directly,
   # regardless of merge_policy. Always open a PR for these.
+  # Empty for this repo: no remote/PR capability exists (course-fixture repo,
+  # single operator), so merge_policy: merge is allowed to apply to main/master
+  # directly rather than deadlocking on a PR step that cannot happen.
   allow_agent_pr_merge: false
   # May an agent run `gh pr merge` to complete a PR? Default false — opening the
   # PR is never gated, but completing it is, because merging is the point where
