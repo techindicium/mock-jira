@@ -2,7 +2,7 @@ import pytest
 from mcp import Client
 
 import mcp_server.tools.projects as projects_tools
-from mcp_server.errors import UpstreamError
+from mcp_server.errors import UpstreamError, UpstreamUnreachableError
 from mcp_server.server import mcp
 
 
@@ -103,3 +103,34 @@ async def test_create_project_tool_missing_key_errors_before_http_request(monkey
 
     assert result.is_error is True
     assert called["value"] is False  # schema validation rejected the call before _client() ran
+
+
+_UNREACHABLE_MESSAGE = "Could not reach issue-tracker-api at http://issue-tracker-api: connection refused"
+
+
+class _UnreachableListClient(_FakeClient):
+    async def list_projects(self):
+        raise UpstreamUnreachableError(_UNREACHABLE_MESSAGE)
+
+
+@pytest.mark.anyio
+async def test_list_projects_tool_unreachable_api_errors_with_clear_message(monkeypatch):
+    monkeypatch.setattr(projects_tools, "_client", lambda: _UnreachableListClient())
+
+    async with Client(mcp) as client:
+        result = await client.call_tool("list_projects", {})
+
+    assert result.is_error is True
+    assert "issue-tracker-api" in result.content[0].text
+
+
+@pytest.mark.anyio
+async def test_create_project_tool_unreachable_api_errors_with_clear_message(monkeypatch):
+    fake = _FakeCreateClient(error=UpstreamUnreachableError(_UNREACHABLE_MESSAGE))
+    monkeypatch.setattr(projects_tools, "_client", lambda: fake)
+
+    async with Client(mcp) as client:
+        result = await client.call_tool("create_project", {"key": "SDLC", "name": "SDLC Track"})
+
+    assert result.is_error is True
+    assert "issue-tracker-api" in result.content[0].text
