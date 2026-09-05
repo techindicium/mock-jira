@@ -1,7 +1,7 @@
 ---
 partial_schema: spec@1
 charter: kanban-ui
-status: review-pending
+status: review-passed
 risk_level: medium
 milestone: mvp
 revision: 1
@@ -24,6 +24,12 @@ kind: behavioral
 - The `board-view` spec is implemented — a board is already rendered with a selected Project
   before any of these actions can be triggered.
 - `issue-tracker-api`'s `issue-lifecycle` spec is implemented and reachable at the same origin.
+- The create-issue form's required fields are exactly those `issue-lifecycle`'s `POST /issues`
+  requires: `summary`, `issue_type`, and `priority` (`project_id` is supplied implicitly from
+  the currently selected board, not a form field). The edit-issue form has no required fields —
+  any subset of mutable fields may be submitted (see `issue-lifecycle` BEH-7).
+- A newly created Issue's `status` defaults to `todo` server-side (per `issue-lifecycle` BEH-1);
+  the create-issue form does not offer a status field.
 
 ### Behaviors
 
@@ -45,8 +51,9 @@ kind: behavioral
 - **BEH-5** — **When** any API call in this spec fails (network error or non-2xx response),
   **then** the UI reverts any optimistic change (e.g. a dragged card returns to its original
   column) and shows a visible error message naming what failed.
-- **BEH-6** — **When** the create-issue or edit-issue form is submitted with a missing required
-  field, **then** client-side validation blocks the request before it is sent.
+- **BEH-6** — **When** the create-issue form is submitted with `summary`, `issue_type`, or
+  `priority` missing, **then** client-side validation blocks the request before it is sent. The
+  edit-issue form has no required fields and is never blocked by this rule.
 
 ### Postconditions
 
@@ -59,7 +66,7 @@ kind: behavioral
 | Condition | Expected Behavior | Error Code |
 |-----------|-------------------|------------|
 | Create/edit form submitted with a missing required field | Client-side validation blocks the request before it is sent | `UI_VALIDATION_ERROR` |
-| `PATCH`/`DELETE` targets an id the API no longer has (404) | Card is removed from the board; a message notes it was already gone | `UI_ISSUE_NOT_FOUND` |
+| `PATCH`/`DELETE` targets an id the API no longer has (404) | Card is removed from the board; a message notes it was already gone. This is the one exception to BEH-5's generic revert rule: a 404 means the card is already gone server-side, so removing it (not reverting to a stale local state) is the correct recovery. | `UI_ISSUE_NOT_FOUND` |
 | Any request fails (network error or 5xx) | Optimistic change reverted; visible error message | `UI_FETCH_FAILED` |
 
 ## System Constitution Reference
