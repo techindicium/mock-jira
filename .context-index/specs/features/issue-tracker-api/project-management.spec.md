@@ -10,7 +10,7 @@ created: 2026-09-04
 updated: 2026-09-04
 kind: behavioral
 source-manifest:
-  sha: "2171931"
+  sha: "7cd9cc0"
   files:
     - app/__init__.py
     - app/db.py
@@ -25,8 +25,7 @@ source-manifest:
     - tests/test_db.py
     - tests/test_openapi.py
     - tests/test_projects.py
-  computed-at: "2026-09-04T23:59:35.117Z"
-drift_detected: true
+  computed-at: "2026-09-05T01:27:55.239Z"
 ---
 
 # Live Spec: Project management and OpenAPI contract
