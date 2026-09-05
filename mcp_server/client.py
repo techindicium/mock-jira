@@ -21,6 +21,19 @@ class IssueTrackerClient:
         response = await self._request("POST", "/projects", json=payload)
         return response.json()
 
+    async def list_issues(self, project_id: int | None = None, status: str | None = None) -> list[dict]:
+        params: dict = {}
+        if project_id is not None:
+            params["project_id"] = project_id
+        if status is not None:
+            params["status"] = status
+        response = await self._request("GET", "/issues", params=params)
+        return response.json()
+
+    async def get_issue(self, issue_id: int) -> dict:
+        response = await self._request("GET", f"/issues/{issue_id}")
+        return response.json()
+
     async def _request(self, method: str, path: str, **kwargs) -> httpx.Response:
         try:
             response = await self._http.request(method, path, **kwargs)

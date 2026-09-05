@@ -67,3 +67,64 @@ async def test_list_projects_unreachable_api_raises_upstream_unreachable_error()
 
     with pytest.raises(UpstreamUnreachableError):
         await _client(handler).list_projects()
+
+
+@pytest.mark.anyio
+async def test_list_issues_returns_api_response_unmodified():
+    def handler(request):
+        assert request.method == "GET"
+        assert request.url.path == "/issues"
+        return httpx.Response(
+            200,
+            json=[{
+                "id": 1, "key": "SDLC-1", "project_id": 1, "summary": "Fix bug",
+                "description": "", "issue_type": "bug", "status": "todo", "priority": "high",
+                "assignee": "", "reporter": "", "created_at": "2026-09-05 00:00:00",
+                "updated_at": "2026-09-05 00:00:00",
+            }],
+        )
+
+    result = await _client(handler).list_issues()
+    assert result[0]["key"] == "SDLC-1"
+
+
+@pytest.mark.anyio
+async def test_list_issues_passes_project_id_and_status_as_query_params():
+    def handler(request):
+        assert request.url.params["project_id"] == "1"
+        assert request.url.params["status"] == "todo"
+        return httpx.Response(200, json=[])
+
+    await _client(handler).list_issues(project_id=1, status="todo")
+
+
+@pytest.mark.anyio
+async def test_get_issue_returns_the_issue():
+    def handler(request):
+        assert request.method == "GET"
+        assert request.url.path == "/issues/1"
+        return httpx.Response(
+            200,
+            json={
+                "id": 1, "key": "SDLC-1", "project_id": 1, "summary": "Fix bug",
+                "description": "", "issue_type": "bug", "status": "todo", "priority": "high",
+                "assignee": "", "reporter": "", "created_at": "2026-09-05 00:00:00",
+                "updated_at": "2026-09-05 00:00:00",
+            },
+        )
+
+    result = await _client(handler).get_issue(1)
+    assert result["key"] == "SDLC-1"
+
+
+@pytest.mark.anyio
+async def test_get_issue_unknown_id_raises_upstream_error_verbatim():
+    def handler(request):
+        return httpx.Response(
+            404, json={"message": "Issue 999 not found", "code": "ISSUE_NOT_FOUND"}
+        )
+
+    with pytest.raises(UpstreamError) as exc_info:
+        await _client(handler).get_issue(999)
+    assert exc_info.value.status_code == 404
+    assert exc_info.value.message == "Issue 999 not found"
