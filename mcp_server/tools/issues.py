@@ -36,3 +36,27 @@ async def get_issue(issue_id: int) -> dict[str, Any]:
         raise ToolError(str(exc)) from exc
     finally:
         await client.aclose()
+
+
+@mcp.tool()
+async def create_issue(
+    project_id: int,
+    summary: str,
+    issue_type: str,
+    priority: str,
+    description: str | None = None,
+    assignee: str | None = None,
+    reporter: str | None = None,
+) -> dict[str, Any]:
+    """Create an Issue under a Project in issue-tracker-api."""
+    client = _client()
+    try:
+        return await client.create_issue(
+            project_id, summary, issue_type, priority, description, assignee, reporter
+        )
+    except UpstreamError as exc:
+        raise ToolError(exc.message) from exc
+    except UpstreamUnreachableError as exc:
+        raise ToolError(str(exc)) from exc
+    finally:
+        await client.aclose()

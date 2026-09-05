@@ -104,3 +104,64 @@ async def test_list_issues_tool_invalid_project_id_type_errors_before_http_reque
 
     assert result.is_error is True
     assert called["value"] is False
+
+
+class _FakeCreateClient(_FakeClient):
+    def __init__(self, created=None, error=None):
+        super().__init__()
+        self._created = created
+        self._error = error
+
+    async def create_issue(self, project_id, summary, issue_type, priority, description=None, assignee=None, reporter=None):
+        if self._error is not None:
+            raise self._error
+        return self._created
+
+
+@pytest.mark.anyio
+async def test_create_issue_tool_returns_created_issue(monkeypatch):
+    monkeypatch.setattr(issues_tools, "_client", lambda: _FakeCreateClient(created=_SAMPLE_ISSUE))
+
+    async with Client(mcp) as client:
+        result = await client.call_tool(
+            "create_issue",
+            {"project_id": 1, "summary": "Fix bug", "issue_type": "bug", "priority": "high"},
+        )
+
+    assert result.is_error is False
+    assert result.structured_content == _SAMPLE_ISSUE
+
+
+@pytest.mark.anyio
+async def test_create_issue_tool_unknown_project_id_errors_with_verbatim_message(monkeypatch):
+    fake = _FakeCreateClient(error=UpstreamError(404, "Project 999 not found"))
+    monkeypatch.setattr(issues_tools, "_client", lambda: fake)
+
+    async with Client(mcp) as client:
+        result = await client.call_tool(
+            "create_issue",
+            {"project_id": 999, "summary": "Fix bug", "issue_type": "bug", "priority": "high"},
+        )
+
+    assert result.is_error is True
+    assert "Project 999 not found" in result.content[0].text
+
+
+@pytest.mark.anyio
+async def test_create_issue_tool_missing_required_field_errors_before_http_request(monkeypatch):
+    called = {"value": False}
+
+    def _client_spy():
+        called["value"] = True
+        return _FakeCreateClient()
+
+    monkeypatch.setattr(issues_tools, "_client", _client_spy)
+
+    async with Client(mcp) as client:
+        # missing "priority"
+        result = await client.call_tool(
+            "create_issue", {"project_id": 1, "summary": "Fix bug", "issue_type": "bug"}
+        )
+
+    assert result.is_error is True
+    assert called["value"] is False  # schema validation rejected the call before _client() ran
