@@ -1,14 +1,31 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 charter: mcp-server
-status: review-passed
+status: implemented
 risk_level: low
 milestone: mvp
 revision: 1
 charter-revision: 2
 created: 2026-09-04
-updated: 2026-09-04
+updated: 2026-09-05
 kind: behavioral
+source-manifest:
+  sha: "665525e"
+  files:
+    - mcp_server/__init__.py
+    - mcp_server/client.py
+    - mcp_server/config.py
+    - mcp_server/errors.py
+    - mcp_server/server.py
+    - mcp_server/tools/__init__.py
+    - mcp_server/tools/projects.py
+    - requirements-mcp.txt
+    - tests/mcp_server/__init__.py
+    - tests/mcp_server/conftest.py
+    - tests/mcp_server/test_client.py
+    - tests/mcp_server/test_config.py
+    - tests/mcp_server/test_project_tools.py
+  computed-at: "2026-09-05T12:45:29.187Z"
 ---
 
 # Live Spec: Project MCP tools (list_projects, create_project)
@@ -72,10 +89,10 @@ kind: behavioral
 
 ## Acceptance Criteria
 
-- [ ] `list_projects` returns the API's project list unmodified (BEH-1)
-- [ ] `create_project` creates and returns a Project on valid input (BEH-2)
-- [ ] `create_project` on a duplicate key errors with the API's message verbatim (BEH-3)
-- [ ] Schema-invalid input errors before any HTTP request (BEH-4)
-- [ ] An unreachable API produces a clear connection-error message (BEH-5)
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] `list_projects` returns the API's project list unmodified (BEH-1)
+- [x] `create_project` creates and returns a Project on valid input (BEH-2)
+- [x] `create_project` on a duplicate key errors with the API's message verbatim (BEH-3)
+- [x] Schema-invalid input errors before any HTTP request (BEH-4)
+- [x] An unreachable API produces a clear connection-error message (BEH-5)
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced

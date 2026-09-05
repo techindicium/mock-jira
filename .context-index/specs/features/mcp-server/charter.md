@@ -70,8 +70,8 @@ persisted data and never touches the database directly.
 
 | Capability | Description | Priority | Milestone | Status |
 |-----------|-------------|----------|-------|--------|
-| list_projects tool | Wraps `GET /projects` | must-have | mvp | planned |
-| create_project tool | Wraps `POST /projects` | must-have | mvp | planned |
+| list_projects tool | Wraps `GET /projects` | must-have | mvp | implemented |
+| create_project tool | Wraps `POST /projects` | must-have | mvp | implemented |
 | list_issues tool | Wraps `GET /issues`, with `project_id`/`status` filter parameters | must-have | mvp | specified |
 | get_issue tool | Wraps `GET /issues/{id}` | must-have | mvp | specified |
 | create_issue tool | Wraps `POST /issues` | must-have | mvp | specified |
