@@ -99,13 +99,13 @@ source-manifest:
 
 ## Acceptance Criteria
 
-- [ ] `list_issues` returns the API's filtered issue list unmodified (BEH-1)
-- [ ] `get_issue` returns the Issue for a valid id (BEH-2)
-- [ ] `get_issue` on an unknown id errors with the API's message verbatim (BEH-3)
-- [ ] `create_issue` creates and returns an Issue with its server-assigned key (BEH-4)
-- [ ] `create_issue` with an unknown `project_id` errors with the API's message verbatim (BEH-4b)
-- [ ] `update_issue` updates the given mutable fields and returns the result; `id`/`key`/`project_id` are ignored (BEH-5)
-- [ ] `delete_issue` deletes an existing Issue and returns `{"deleted": true, "id": <id>}` (BEH-6)
-- [ ] Schema-invalid input errors before any HTTP request, for every tool in this spec (BEH-7)
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] `list_issues` returns the API's filtered issue list unmodified (BEH-1)
+- [x] `get_issue` returns the Issue for a valid id (BEH-2)
+- [x] `get_issue` on an unknown id errors with the API's message verbatim (BEH-3)
+- [x] `create_issue` creates and returns an Issue with its server-assigned key (BEH-4)
+- [x] `create_issue` with an unknown `project_id` errors with the API's message verbatim (BEH-4b)
+- [x] `update_issue` updates the given mutable fields and returns the result; `id`/`key`/`project_id` are ignored (BEH-5)
+- [x] `delete_issue` deletes an existing Issue and returns `{"deleted": true, "id": <id>}` (BEH-6)
+- [x] Schema-invalid input errors before any HTTP request, for every tool in this spec (BEH-7)
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced
