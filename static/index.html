@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>mock-jira Kanban Board</title>
+  <link rel="stylesheet" href="/static/css/board.css" />
+</head>
+<body>
+  <header>
+    <h1>mock-jira</h1>
+    <select id="project-switcher" aria-label="Select project"></select>
+  </header>
+
+  <div id="board-error" role="alert" hidden></div>
+
+  <main id="board" hidden>
+    <section class="column" data-status="todo">
+      <h2>To Do</h2>
+      <div id="col-todo" class="cards"></div>
+    </section>
+    <section class="column" data-status="in_progress">
+      <h2>In Progress</h2>
+      <div id="col-in_progress" class="cards"></div>
+    </section>
+    <section class="column" data-status="done">
+      <h2>Done</h2>
+      <div id="col-done" class="cards"></div>
+    </section>
+  </main>
+
+  <section id="empty-state" hidden>
+    <p>No projects yet. Create one to get started.</p>
+  </section>
+
+  <section id="create-project">
+    <h2>New Project</h2>
+    <form id="create-project-form">
+      <label>Key <input id="project-key" name="key" required /></label>
+      <label>Name <input id="project-name" name="name" required /></label>
+      <button type="submit">Create Project</button>
+      <p id="create-project-error" role="alert" hidden></p>
+    </form>
+  </section>
+</body>
+</html>

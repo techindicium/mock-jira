@@ -1,0 +1,102 @@
+[hidden] {
+  display: none !important;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 1rem 1.5rem;
+  color: #1a1a1a;
+  background: #f5f6f8;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+header h1 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+#board-error,
+#create-project-error {
+  background: #fdecea;
+  color: #611a15;
+  border: 1px solid #f5c2c0;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+#board {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.column {
+  background: #fff;
+  border: 1px solid #dcdfe4;
+  border-radius: 6px;
+  padding: 0.75rem;
+  flex: 1;
+  min-width: 220px;
+}
+
+.column h2 {
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem 0;
+  color: #444;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card {
+  background: #fafbfc;
+  border: 1px solid #e2e4e8;
+  border-radius: 4px;
+  padding: 0.5rem 0.6rem;
+}
+
+.card h3 {
+  font-size: 0.9rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.card-meta {
+  font-size: 0.75rem;
+  color: #666;
+  margin: 0;
+}
+
+#empty-state,
+#create-project {
+  background: #fff;
+  border: 1px solid #dcdfe4;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+  max-width: 360px;
+}
+
+#create-project form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+
+#create-project form input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.25rem;
+  padding: 0.35rem;
+}
