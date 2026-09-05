@@ -1,3 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
 # adev context index
 .context-index/hygiene/
 .context-index/.token-cursor.json

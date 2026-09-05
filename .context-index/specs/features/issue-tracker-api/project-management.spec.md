@@ -1,7 +1,7 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 charter: issue-tracker-api
-status: review-pending
+status: implemented
 risk_level: medium
 milestone: mvp
 revision: 1
@@ -9,6 +9,23 @@ charter-revision: 2
 created: 2026-09-04
 updated: 2026-09-04
 kind: behavioral
+source-manifest:
+  sha: "2171931"
+  files:
+    - app/__init__.py
+    - app/db.py
+    - app/errors.py
+    - app/main.py
+    - app/models.py
+    - app/routers/__init__.py
+    - app/routers/projects.py
+    - requirements.txt
+    - tests/__init__.py
+    - tests/conftest.py
+    - tests/test_db.py
+    - tests/test_openapi.py
+    - tests/test_projects.py
+  computed-at: "2026-09-04T23:59:35.117Z"
 ---
 
 # Live Spec: Project management and OpenAPI contract
@@ -87,12 +104,12 @@ kind: behavioral
 
 ## Acceptance Criteria
 
-- [ ] `POST /projects` creates a Project and returns 201 with its id/key/name/description (BEH-1)
-- [ ] `POST /projects` with a duplicate key returns 409 and creates no row (BEH-2)
-- [ ] `POST /projects` with a missing key or name returns 422 (BEH-3)
-- [ ] `GET /projects` returns all Projects as a JSON array, ordered by creation time (BEH-4)
-- [ ] `GET /projects/{id}` returns 200 with the Project for a valid id (BEH-5)
-- [ ] `GET /projects/{id}` returns 404 for an unknown id (BEH-6)
-- [ ] `GET /openapi.json` returns a valid OpenAPI document listing `/projects` and `/projects/{id}` (BEH-7)
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] `POST /projects` creates a Project and returns 201 with its id/key/name/description (BEH-1)
+- [x] `POST /projects` with a duplicate key returns 409 and creates no row (BEH-2)
+- [x] `POST /projects` with a missing key or name returns 422 (BEH-3)
+- [x] `GET /projects` returns all Projects as a JSON array, ordered by creation time (BEH-4)
+- [x] `GET /projects/{id}` returns 200 with the Project for a valid id (BEH-5)
+- [x] `GET /projects/{id}` returns 404 for an unknown id (BEH-6)
+- [x] `GET /openapi.json` returns a valid OpenAPI document listing `/projects` and `/projects/{id}` (BEH-7)
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced

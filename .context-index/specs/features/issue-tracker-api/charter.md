@@ -1,7 +1,7 @@
 ---
 status: approved
 kind: feature
-revision: 2
+revision: 3
 updated: 2026-09-04
 ---
 
@@ -81,7 +81,7 @@ UI and MCP server modules are both clients of this API, never the other way arou
 
 | Capability | Description | Priority | Milestone | Status |
 |-----------|-------------|----------|-------|--------|
-| Create/list/get Project | Create a Project, list all Projects, fetch one by id | must-have | mvp | specified |
+| Create/list/get Project | Create a Project, list all Projects, fetch one by id | must-have | mvp | implemented |
 | Create Issue | Create an Issue under a Project, server assigns `key` | must-have | mvp | specified |
 | List/get Issue | List Issues (filterable by `project_id` and `status`), fetch one by id | must-have | mvp | specified |
 | Update Issue | Update any mutable Issue field, including `status` (the kanban drag action) | must-have | mvp | specified |

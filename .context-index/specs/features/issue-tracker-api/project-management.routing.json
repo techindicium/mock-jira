@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "_generated_by": "/adev:route — do not hand-edit; re-run instead.",
+  "entries": [
+    {
+      "task_id": "t1",
+      "selected_agent": "assisted-agent",
+      "scores": {
+        "spec_completeness": 0.8,
+        "pattern_coverage": 0.2,
+        "blast_radius": 0.8,
+        "novelty": 1
+      },
+      "rationale": "Foundational scaffold with full test/impl code given, but first code in a greenfield repo with no golden sample or in-repo precedent to follow."
+    },
+    {
+      "task_id": "t2",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.4,
+        "blast_radius": 0.8,
+        "novelty": 1
+      },
+      "rationale": "BEH-1/2/3 and all four error-case rows fully specified with exact test/impl code; first router/error-handling pattern in repo, no sample match yet."
+    },
+    {
+      "task_id": "t3",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-4 fully specified; extends Task 2's just-established router pattern in the same file with a trivial 2-file, mechanical change."
+    },
+    {
+      "task_id": "t4",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-5/6 plus PROJECT_NOT_FOUND fully specified; mirrors the established get-by-id pattern from Tasks 2-3 with minimal, low-risk blast radius."
+    },
+    {
+      "task_id": "t5",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-7 fully specified as a verification-only test of FastAPI's built-in OpenAPI generation; single new test file, no production code expected."
+    }
+  ]
+}
