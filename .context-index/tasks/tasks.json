@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 21,
+  "seq": 22,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -132,10 +132,10 @@
       "type": "feature",
       "spec_ref": ".context-index/specs/features/mcp-server/project-tools.spec.md",
       "dependencies": [],
-      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/mcp-server/project-tools.validate.md | Files verified: 13 | Tests: FAIL",
-      "next_action": "Fix governance/gates.yaml 'test' gate Python resolution (or environment python3), then re-run /adev:validate",
+      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/mcp-server/project-tools.validate.md | Files verified: 13 | Tests: PASS. Manual verification recommended.",
+      "next_action": "Run /adev:review-specs --module mcp-server",
       "created": "2026-09-04T23:21:25.477Z",
-      "updated": "2026-09-05T15:32:01.240Z"
+      "updated": "2026-09-05T17:46:11.857Z"
     },
     {
       "id": "issue-th0mof",
