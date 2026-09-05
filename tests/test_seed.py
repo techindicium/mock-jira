@@ -33,3 +33,46 @@ def test_validate_seed_data_rejects_invalid_status():
     with pytest.raises(SeedError) as exc_info:
         _validate_seed_data(SEED_PROJECT, bad_issues)
     assert exc_info.value.code == "SEED_DATA_INVALID"
+
+
+def test_fresh_startup_seeds_one_project_and_six_issues(client):
+    projects = client.get("/projects").json()
+    assert len(projects) == 1
+    project = projects[0]
+    assert project["key"] == "ASSIST"
+    assert project["name"] == "Portwell Assist Engineering"
+
+    issues = client.get("/issues", params={"project_id": project["id"]}).json()
+    assert len(issues) == 6
+
+    statuses = [i["status"] for i in issues]
+    assert statuses.count("todo") == 2
+    assert statuses.count("in_progress") == 2
+    assert statuses.count("done") == 2
+
+    assert {i["issue_type"] for i in issues} == {"bug", "task", "story"}
+    assert {i["priority"] for i in issues} == {"low", "medium", "high"}
+
+    for issue in issues:
+        assert issue["summary"].strip() != ""
+        assert "lorem" not in issue["summary"].lower()
+        assert "lorem" not in issue["description"].lower()
+        assert not issue["key"].startswith((
+            "ACCOUNT-", "TICKET-", "ARTICLE-", "PROPOSAL-", "INCIDENT-",
+            "POLICY-", "OPPORTUNITY-", "EXPERIMENT-", "P-",
+        ))
+
+
+def test_seed_if_empty_raises_seed_db_not_writable_when_connection_is_read_only(tmp_path):
+    from app.db import create_schema, get_connection
+    from app.seed import seed_if_empty
+
+    db_path = tmp_path / "test.db"
+    conn = get_connection(str(db_path))
+    create_schema(conn)
+    conn.execute("PRAGMA query_only = ON")  # simulate an unwritable database, no chmod needed
+
+    with pytest.raises(SeedError) as exc_info:
+        seed_if_empty(conn, str(db_path))
+    assert exc_info.value.code == "SEED_DB_NOT_WRITABLE"
+    assert str(db_path) in str(exc_info.value)

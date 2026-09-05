@@ -72,12 +72,15 @@ def test_create_issue_invalid_issue_type_returns_422(client):
 
 
 def test_list_issues_unfiltered_returns_all(client):
+    # Baseline count, not 0: fixture seeding (fixture-seeding spec BEH-1) may have already
+    # populated this fresh database with its own Project/Issues before this test runs.
+    before = len(client.get("/issues").json())
     project = _create_project(client)
     client.post("/issues", json={"project_id": project["id"], "summary": "A", "issue_type": "bug", "priority": "low"})
     client.post("/issues", json={"project_id": project["id"], "summary": "B", "issue_type": "task", "priority": "low"})
     resp = client.get("/issues")
     assert resp.status_code == 200
-    assert len(resp.json()) == 2
+    assert len(resp.json()) == before + 2
 
 
 def test_list_issues_filtered_by_project_id(client):
@@ -186,7 +189,9 @@ def test_list_issues_filtered_by_status(client):
         "/issues", json={"project_id": project["id"], "summary": "A", "issue_type": "bug", "priority": "low"}
     ).json()
     client.patch(f"/issues/{created['id']}", json={"status": "in_progress"})
-    resp = client.get("/issues?status=in_progress")
+    # Scoped to project_id as well as status: fixture seeding (fixture-seeding spec BEH-1) may
+    # have already seeded other in_progress Issues under its own Project into this database.
+    resp = client.get(f"/issues?status=in_progress&project_id={project['id']}")
     assert resp.status_code == 200
     body = resp.json()
     assert len(body) == 1

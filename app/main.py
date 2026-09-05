@@ -6,6 +6,7 @@ from app.db import create_schema, get_connection
 from app.errors import http_exception_handler, validation_exception_handler
 from app.routers.issues import router as issues_router
 from app.routers.projects import router as projects_router
+from app.seed import seed_if_empty
 
 DB_PATH = "mock_jira.db"
 
@@ -21,4 +22,5 @@ app.add_exception_handler(StarletteHTTPException, http_exception_handler)
 def on_startup() -> None:
     conn = get_connection(DB_PATH)
     create_schema(conn)
+    seed_if_empty(conn, DB_PATH)
     app.state.db_conn = conn  # kept open for the process lifetime; sqlite3 handles serialization

@@ -50,7 +50,9 @@ def test_list_projects_returns_all_ordered_by_creation(client):
     client.post("/projects", json={"key": "DDLC", "name": "DDLC Track"})
     resp = client.get("/projects")
     assert resp.status_code == 200
-    keys = [p["key"] for p in resp.json()]
+    # Filtered to this test's own keys: fixture seeding (fixture-seeding spec BEH-1) may have
+    # already seeded its own ASSIST Project into this fresh database before this test runs.
+    keys = [p["key"] for p in resp.json() if p["key"] in ("SDLC", "DDLC")]
     assert keys == ["SDLC", "DDLC"]
 
 

@@ -131,3 +131,46 @@ def _validate_seed_data(project: dict, issues: list[dict]) -> None:
                 "SEED_DATA_INVALID",
                 f"Expected exactly 2 seed issues with status '{status}', found {count}",
             )
+
+
+def seed_if_empty(conn, db_path: str) -> None:
+    """Seed one Project and six Issues on first run only. No-op if any Project already exists.
+
+    Runs synchronously during app startup, before Uvicorn begins serving requests — no request
+    can observe a partially-seeded state, and no concurrent writer can interleave with it.
+    """
+    existing = conn.execute("SELECT COUNT(*) AS n FROM projects").fetchone()
+    if existing["n"] > 0:
+        return  # BEH-2: already seeded (or real data present) — never touch it
+
+    _validate_seed_data(SEED_PROJECT, SEED_ISSUES)  # hardcoded data; a failure here is a code bug
+
+    import sqlite3
+
+    from app.db import allocate_issue_key
+
+    try:
+        cursor = conn.execute(
+            "INSERT INTO projects (key, name, description) VALUES (?, ?, ?)",
+            (SEED_PROJECT["key"], SEED_PROJECT["name"], SEED_PROJECT["description"]),
+        )
+        project_id = cursor.lastrowid
+        for issue in SEED_ISSUES:
+            key = allocate_issue_key(conn, project_id, SEED_PROJECT["key"])
+            conn.execute(
+                """
+                INSERT INTO issues
+                    (key, project_id, summary, description, issue_type, status, priority,
+                     assignee, reporter)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    key, project_id, issue["summary"], issue["description"], issue["issue_type"],
+                    issue["status"], issue["priority"], issue["assignee"], issue["reporter"],
+                ),
+            )
+        conn.commit()
+    except sqlite3.OperationalError as exc:
+        raise SeedError(
+            "SEED_DB_NOT_WRITABLE", f"Cannot write seed data to database at '{db_path}': {exc}"
+        ) from exc
