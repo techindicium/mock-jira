@@ -1,14 +1,28 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 charter: kanban-ui
-status: review-passed
+status: implemented
 risk_level: medium
 milestone: mvp
 revision: 1
 charter-revision: 2
 created: 2026-09-04
-updated: 2026-09-04
+updated: 2026-09-05
 kind: behavioral
+source-manifest:
+  sha: "a987602"
+  files:
+    - static/css/board.css
+    - static/index.html
+    - static/js/board-logic.js
+    - static/js/board.js
+    - tests_js/issue-crud-beh-1-create-issue.test.js
+    - tests_js/issue-crud-beh-2-edit-issue.test.js
+    - tests_js/issue-crud-beh-3-column-move.test.js
+    - tests_js/issue-crud-beh-4-delete-issue.test.js
+    - tests_js/issue-crud-beh-5-error-handling.test.js
+    - tests_js/issue-crud-beh-6-create-validation.test.js
+  computed-at: "2026-09-05T12:06:33.669Z"
 ---
 
 # Live Spec: Issue create, edit, delete, and column move
@@ -90,11 +104,11 @@ kind: behavioral
 
 ## Acceptance Criteria
 
-- [ ] Create-issue form creates a card in the `todo` column on success (BEH-1)
-- [ ] Edit-issue form updates only the changed fields, reflecting the server's response (BEH-2)
-- [ ] Column move calls the status-update endpoint and settles on the server-confirmed column (BEH-3)
-- [ ] Delete removes the card from the board once confirmed by the server (BEH-4)
-- [ ] Any failed call reverts its optimistic change and shows a visible error (BEH-5)
-- [ ] Missing required fields block submission client-side (BEH-6)
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] Create-issue form creates a card in the `todo` column on success (BEH-1)
+- [x] Edit-issue form updates only the changed fields, reflecting the server's response (BEH-2)
+- [x] Column move calls the status-update endpoint and settles on the server-confirmed column (BEH-3)
+- [x] Delete removes the card from the board once confirmed by the server (BEH-4)
+- [x] Any failed call reverts its optimistic change and shows a visible error (BEH-5)
+- [x] Missing required fields block submission client-side (BEH-6)
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced

@@ -55,3 +55,4 @@
 {"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"6 findings (1 error-level within doctor scale, 5 warning): test-js glob would degrade under sh (shell-free execFile avoids this in practice); no CI config; lint/test-js runners lack collect-only verification; integration-test gate unwired","ts":"2026-09-05T10:30:51.896Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T10:32:01.815Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T10:33:51.432Z"}
+{"event":"code_drift_detected","drift_source":"static/js/board-logic.js","drift_at":"2026-09-05T10:55:15.250Z","ts":"2026-09-05T10:55:15.251Z"}

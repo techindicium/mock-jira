@@ -74,10 +74,10 @@ no separate server, no CORS configuration, and no runtime base-URL configuration
 | Capability | Description | Priority | Milestone | Status |
 |-----------|-------------|----------|-------|--------|
 | Render kanban board | Fetch Issues for the selected Project, group into the three columns | must-have | mvp | validated |
-| Move issue between columns | Change an Issue's status via the board (drag-and-drop or equivalent control) | must-have | mvp | planned |
-| Create issue | Form/modal that calls the API's create-issue endpoint | must-have | mvp | planned |
-| Edit issue | Form/modal that calls the API's update-issue endpoint for non-status fields | must-have | mvp | planned |
-| Delete issue | Remove an Issue via the board | must-have | mvp | planned |
+| Move issue between columns | Change an Issue's status via the board (drag-and-drop or equivalent control) | must-have | mvp | implemented |
+| Create issue | Form/modal that calls the API's create-issue endpoint | must-have | mvp | implemented |
+| Edit issue | Form/modal that calls the API's update-issue endpoint for non-status fields | must-have | mvp | implemented |
+| Delete issue | Remove an Issue via the board | must-have | mvp | implemented |
 | Project switcher | List Projects, select one to filter the board | should-have | mvp | validated |
 | Create project | Simple form calling the API's create-project endpoint | should-have | mvp | validated |
 
