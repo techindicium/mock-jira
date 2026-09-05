@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "_generated_by": "/adev:route — do not hand-edit; re-run instead.",
+  "entries": [
+    {
+      "task_id": "t1",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.4,
+        "blast_radius": 1,
+        "novelty": 0.8
+      },
+      "rationale": "Fully specified seed data and validation with exact code in the plan; no precedent for a custom SeedError/validation pattern in this codebase, but tiny blast radius (2 new files)."
+    },
+    {
+      "task_id": "t2",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.8,
+        "novelty": 0.8
+      },
+      "rationale": "BEH-1 contract and error case fully specified; reuses allocate_issue_key and mirrors routers/issues.py insert shape; touches 3 files (seed.py, main.py, test_seed.py) with no boundary crossings."
+    },
+    {
+      "task_id": "t3",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-2 idempotency test with exact code given, strong precedent from test_db.py/conftest.py TestClient patterns, single test file touched, no production code expected."
+    }
+  ]
+}

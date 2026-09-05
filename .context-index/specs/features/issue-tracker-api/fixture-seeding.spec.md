@@ -1,14 +1,21 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 charter: issue-tracker-api
-status: review-passed
+status: implemented
 risk_level: low
 milestone: mvp
 revision: 2
 charter-revision: 8
 created: 2026-09-04
-updated: 2026-09-04
+updated: 2026-09-05
 kind: behavioral
+source-manifest:
+  sha: "a163164"
+  files:
+    - app/main.py
+    - app/seed.py
+    - tests/test_seed.py
+  computed-at: "2026-09-05T01:20:09.796Z"
 ---
 
 # Live Spec: Fixture seed data
@@ -89,10 +96,10 @@ kind: behavioral
 
 ## Acceptance Criteria
 
-- [ ] Fresh-database startup seeds one Project and six Issues, no placeholder text (BEH-1)
-- [ ] Restarting against an already-seeded database creates no duplicate rows (BEH-2)
-- [ ] Every seeded `assignee`/`reporter` is a real canon name (BEH-3)
-- [ ] No seeded Project/Issue key collides with a canon-reserved prefix (BEH-4)
-- [ ] The seed module contains no runtime file read outside this repository
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] Fresh-database startup seeds one Project and six Issues, no placeholder text (BEH-1)
+- [x] Restarting against an already-seeded database creates no duplicate rows (BEH-2)
+- [x] Every seeded `assignee`/`reporter` is a real canon name (BEH-3)
+- [x] No seeded Project/Issue key collides with a canon-reserved prefix (BEH-4)
+- [x] The seed module contains no runtime file read outside this repository
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced

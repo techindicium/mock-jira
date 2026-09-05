@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 13,
+  "seq": 14,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -20,6 +20,15 @@
       "created": "2026-09-05T00:22:46.695Z",
       "updated": "2026-09-05T00:39:39.297Z",
       "next_action": "Implementation complete; run /adev:validate"
+    },
+    {
+      "id": "epic-t4vfr4",
+      "title": "Fixture seed data",
+      "status": "open",
+      "planRef": ".context-index/specs/features/issue-tracker-api/fixture-seeding.plan.md",
+      "notes": "On a fresh database, seed exactly one Project (ASSIST) and six Issues spanning all statuses/types/priorities, with real canon names and canon-reconciled identifiers, and never seed again once any Project row exists.",
+      "created": "2026-09-05T01:11:01.509Z",
+      "updated": "2026-09-05T01:11:01.509Z"
     }
   ],
   "issues": [

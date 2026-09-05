@@ -72,3 +72,4 @@
 {"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"4 warning-severity findings (gate-set-divergence, ci-config-missing, runner-unknown/lint, empty-command/integration-test); 0 errors","ts":"2026-09-05T00:46:43.279Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T00:48:31.465Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T00:49:03.682Z"}
+{"event":"code_drift_detected","drift_source":"app/main.py","drift_at":"2026-09-05T01:17:06.844Z","ts":"2026-09-05T01:17:06.844Z"}
