@@ -44,5 +44,17 @@
     return `${action} failed: ${(error && error.message) || "network error"}`;
   }
 
-  return { BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError };
+  function pickDefaultProject(projects, lastSelectedKey) {
+    if (!Array.isArray(projects) || projects.length === 0) return null;
+    if (lastSelectedKey) {
+      const remembered = projects.find((p) => p.key === lastSelectedKey);
+      if (remembered) return remembered;
+    }
+    return projects[0];
+  }
+
+  return {
+    BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
+    pickDefaultProject,
+  };
 });
