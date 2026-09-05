@@ -1,7 +1,7 @@
 ---
 partial_schema: spec@1
 charter: mcp-server
-status: review-pending
+status: review-passed
 risk_level: low
 milestone: mvp
 revision: 1
@@ -50,6 +50,7 @@ kind: behavioral
 |-----------|-------------------|------------|
 | Input fails the tool's input schema | Tool call errors immediately; no HTTP request made | `MCP_INPUT_INVALID` |
 | API returns `409` (duplicate key) | Tool call errors with the API's message verbatim | `MCP_UPSTREAM_ERROR` |
+| API returns `422` (blank `key`/`name` that passed the tool's own schema but fails the API's) | Tool call errors with the API's message verbatim | `MCP_UPSTREAM_ERROR` |
 | API unreachable | Tool call errors with a clear connection message | `MCP_UPSTREAM_UNREACHABLE` |
 
 ## System Constitution Reference

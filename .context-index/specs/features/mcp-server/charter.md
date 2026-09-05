@@ -1,8 +1,8 @@
 ---
 status: approved
 kind: feature
-revision: 2
-updated: 2026-09-04
+revision: 4
+updated: 2026-09-05
 ---
 
 # Feature Charter: mcp-server
@@ -70,8 +70,8 @@ persisted data and never touches the database directly.
 
 | Capability | Description | Priority | Milestone | Status |
 |-----------|-------------|----------|-------|--------|
-| list_projects tool | Wraps `GET /projects` | must-have | mvp | specified |
-| create_project tool | Wraps `POST /projects` | must-have | mvp | specified |
+| list_projects tool | Wraps `GET /projects` | must-have | mvp | review-passed |
+| create_project tool | Wraps `POST /projects` | must-have | mvp | review-passed |
 | list_issues tool | Wraps `GET /issues`, with `project_id`/`status` filter parameters | must-have | mvp | specified |
 | get_issue tool | Wraps `GET /issues/{id}` | must-have | mvp | specified |
 | create_issue tool | Wraps `POST /issues` | must-have | mvp | specified |
