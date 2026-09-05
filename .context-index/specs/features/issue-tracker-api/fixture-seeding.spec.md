@@ -16,6 +16,7 @@ source-manifest:
     - app/seed.py
     - tests/test_seed.py
   computed-at: "2026-09-05T01:20:09.796Z"
+drift_detected: true
 ---
 
 # Live Spec: Fixture seed data

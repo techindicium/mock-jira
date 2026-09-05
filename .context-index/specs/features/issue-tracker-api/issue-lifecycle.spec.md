@@ -20,6 +20,7 @@ source-manifest:
     - tests/test_db.py
     - tests/test_issues.py
   computed-at: "2026-09-05T01:28:17.357Z"
+drift_detected: true
 ---
 
 # Live Spec: Issue lifecycle CRUD
