@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 9,
+  "seq": 10,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -21,10 +21,10 @@
       "type": "feature",
       "spec_ref": ".context-index/specs/features/issue-tracker-api/project-management.spec.md",
       "dependencies": [],
-      "notes": "Bound 1:1 to spec at .context-index/specs/features/issue-tracker-api/project-management.spec.md. Created by /adev:specify on 2026-09-04.",
-      "next_action": "Run /adev:review-specs --module issue-tracker-api",
+      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/issue-tracker-api/project-management.validate.md | Files verified: 13 | Tests: PASS. Manual verification recommended.",
+      "next_action": "Manual review recommended (medium confidence); then close via /adev:issues close issue-3bp9te",
       "created": "2026-09-04T23:15:31.992Z",
-      "updated": "2026-09-04T23:15:31.992Z"
+      "updated": "2026-09-05T00:07:49.082Z"
     },
     {
       "id": "issue-9fy0nw",

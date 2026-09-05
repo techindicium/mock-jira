@@ -9,7 +9,7 @@ auth: none
 deployment: none         # runs locally only; no deployment target for a course fixture server
 
 commands:
-  test: "python -m pytest -q"
+  test: "python3 -m pytest -q"
   lint: "ruff check ."
   run: ""                # unset — no entrypoint exists yet
   install: "pip install -r requirements.txt"

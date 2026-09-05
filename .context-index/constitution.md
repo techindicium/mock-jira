@@ -90,7 +90,7 @@ something students build; they are a fixed dependency other tracks build against
 
 ```bash
 # Tests
-python -m pytest -q
+python3 -m pytest -q
 
 # Linter
 ruff check .

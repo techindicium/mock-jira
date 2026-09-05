@@ -46,7 +46,7 @@ something students build; they are a fixed dependency other tracks build against
 
 ```bash
 pip install -r requirements.txt
-python -m pytest -q     # tests
+python3 -m pytest -q    # tests
 ruff check .             # lint
 ```
 
