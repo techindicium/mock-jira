@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 24,
+  "seq": 25,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -65,6 +65,15 @@
       "notes": "Extend mcp_server/ with list_issues, get_issue, create_issue, update_issue, and delete_issue MCP tools thinly wrapping issue-tracker-api's Issue endpoints, matching project-tools' established client/error/tool-registration conventions.",
       "created": "2026-09-05T18:04:01.393Z",
       "updated": "2026-09-05T18:04:01.393Z"
+    },
+    {
+      "id": "epic-44yauq",
+      "title": "Docker packaging and run instructions",
+      "status": "open",
+      "planRef": ".context-index/specs/cross-cutting/docker-packaging.plan.md",
+      "notes": "Package issue-tracker-api and mcp-server into two Dockerfiles plus a docker-compose.yml, wired with a named volume for the SQLite file and a PORT/API_BASE_URL/DATABASE_PATH env-var convention, with run instructions in the README/CLAUDE.md.",
+      "created": "2026-09-05T18:55:59.013Z",
+      "updated": "2026-09-05T18:55:59.013Z"
     }
   ],
   "issues": [

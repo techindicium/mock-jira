@@ -1,7 +1,7 @@
 ---
 partial_schema: spec@1
 affects: [issue-tracker-api, kanban-ui, mcp-server]
-status: review-pending
+status: review-passed
 risk_level: low
 milestone: mvp
 revision: 1
