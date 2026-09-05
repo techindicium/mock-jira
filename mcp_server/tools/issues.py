@@ -78,6 +78,21 @@ async def update_issue(
 
 
 @mcp.tool()
+async def delete_issue(issue_id: int) -> dict[str, Any]:
+    """Delete an Issue in issue-tracker-api and return a deletion confirmation."""
+    client = _client()
+    try:
+        await client.delete_issue(issue_id)
+        return {"deleted": True, "id": issue_id}
+    except UpstreamError as exc:
+        raise ToolError(exc.message) from exc
+    except UpstreamUnreachableError as exc:
+        raise ToolError(str(exc)) from exc
+    finally:
+        await client.aclose()
+
+
+@mcp.tool()
 async def create_issue(
     project_id: int,
     summary: str,

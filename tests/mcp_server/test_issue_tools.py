@@ -246,3 +246,53 @@ async def test_update_issue_tool_missing_issue_id_errors_before_http_request(mon
 
     assert result.is_error is True
     assert called["value"] is False
+
+
+class _FakeDeleteClient(_FakeClient):
+    def __init__(self, error=None):
+        super().__init__()
+        self._error = error
+
+    async def delete_issue(self, issue_id):
+        if self._error is not None:
+            raise self._error
+
+
+@pytest.mark.anyio
+async def test_delete_issue_tool_returns_deleted_confirmation(monkeypatch):
+    monkeypatch.setattr(issues_tools, "_client", lambda: _FakeDeleteClient())
+
+    async with Client(mcp) as client:
+        result = await client.call_tool("delete_issue", {"issue_id": 1})
+
+    assert result.is_error is False
+    assert result.structured_content == {"deleted": True, "id": 1}
+
+
+@pytest.mark.anyio
+async def test_delete_issue_tool_unknown_id_errors_with_verbatim_message(monkeypatch):
+    fake = _FakeDeleteClient(error=UpstreamError(404, "Issue 999 not found"))
+    monkeypatch.setattr(issues_tools, "_client", lambda: fake)
+
+    async with Client(mcp) as client:
+        result = await client.call_tool("delete_issue", {"issue_id": 999})
+
+    assert result.is_error is True
+    assert "Issue 999 not found" in result.content[0].text
+
+
+@pytest.mark.anyio
+async def test_delete_issue_tool_missing_issue_id_errors_before_http_request(monkeypatch):
+    called = {"value": False}
+
+    def _client_spy():
+        called["value"] = True
+        return _FakeDeleteClient()
+
+    monkeypatch.setattr(issues_tools, "_client", _client_spy)
+
+    async with Client(mcp) as client:
+        result = await client.call_tool("delete_issue", {})  # missing required "issue_id"
+
+    assert result.is_error is True
+    assert called["value"] is False
