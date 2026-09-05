@@ -4,6 +4,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.db import create_schema, get_connection
 from app.errors import http_exception_handler, validation_exception_handler
+from app.routers.issues import router as issues_router
 from app.routers.projects import router as projects_router
 
 DB_PATH = "mock_jira.db"
@@ -11,6 +12,7 @@ DB_PATH = "mock_jira.db"
 app = FastAPI(title="mock-jira", version="0.1.0")
 
 app.include_router(projects_router)
+app.include_router(issues_router)
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.add_exception_handler(StarletteHTTPException, http_exception_handler)
 

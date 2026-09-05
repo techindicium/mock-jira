@@ -14,6 +14,15 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
             )
     first = errors[0] if errors else {}
     field = first.get("loc", ["field"])[-1]
+    if first.get("type") == "literal_error":
+        allowed = first.get("ctx", {}).get("expected", "")
+        return JSONResponse(
+            status_code=422,
+            content={
+                "message": f"{field} must be one of: {allowed}",
+                "code": "VALIDATION_ERROR",
+            },
+        )
     return JSONResponse(
         status_code=422,
         content={"message": f"{field} is required", "code": "VALIDATION_ERROR"},

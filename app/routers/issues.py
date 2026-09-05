@@ -1,0 +1,47 @@
+from fastapi import APIRouter, HTTPException, Request
+
+from app.db import allocate_issue_key
+from app.models import IssueCreate, IssueRead
+
+router = APIRouter()
+
+
+def _row_to_issue_read(row) -> IssueRead:
+    return IssueRead(
+        id=row["id"], key=row["key"], project_id=row["project_id"], summary=row["summary"],
+        description=row["description"], issue_type=row["issue_type"], status=row["status"],
+        priority=row["priority"], assignee=row["assignee"], reporter=row["reporter"],
+        created_at=row["created_at"], updated_at=row["updated_at"],
+    )
+
+
+@router.post("/issues", response_model=IssueRead, status_code=201)
+def create_issue(payload: IssueCreate, request: Request):
+    conn = request.app.state.db_conn
+    project = conn.execute(
+        "SELECT * FROM projects WHERE id = ?", (payload.project_id,)
+    ).fetchone()
+    if project is None:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "message": f"Project {payload.project_id} not found",
+                "code": "ISSUE_PROJECT_NOT_FOUND",
+            },
+        )
+
+    key = allocate_issue_key(conn, project["id"], project["key"])
+    cursor = conn.execute(
+        """
+        INSERT INTO issues
+            (key, project_id, summary, description, issue_type, status, priority, assignee, reporter)
+        VALUES (?, ?, ?, ?, ?, 'todo', ?, ?, ?)
+        """,
+        (
+            key, project["id"], payload.summary, payload.description or "", payload.issue_type,
+            payload.priority, payload.assignee or "", payload.reporter or "",
+        ),
+    )
+    conn.commit()
+    row = conn.execute("SELECT * FROM issues WHERE id = ?", (cursor.lastrowid,)).fetchone()
+    return _row_to_issue_read(row)
