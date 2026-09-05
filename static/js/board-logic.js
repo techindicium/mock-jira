@@ -57,8 +57,25 @@
     return { projectId, columns: groupIssuesByStatus(issues) };
   }
 
+  function validateProjectForm(key, name) {
+    const errors = {};
+    if (!key || !key.trim()) errors.key = "Key is required";
+    if (!name || !name.trim()) errors.name = "Name is required";
+    return { valid: Object.keys(errors).length === 0, errors };
+  }
+
+  function extractProjectSubmitError(status, body) {
+    if (status === 409) {
+      return { field: "key", message: (body && body.message) || "That project key is already taken." };
+    }
+    if (status === 422) {
+      return { field: "form", message: (body && body.message) || "Please fill in all required fields." };
+    }
+    return null;
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
-    pickDefaultProject, computeBoardState,
+    pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
   };
 });
