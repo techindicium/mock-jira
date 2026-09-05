@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 15,
+  "seq": 16,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -29,6 +29,15 @@
       "notes": "On a fresh database, seed exactly one Project (ASSIST) and six Issues spanning all statuses/types/priorities, with real canon names and canon-reconciled identifiers, and never seed again once any Project row exists.",
       "created": "2026-09-05T01:11:01.509Z",
       "updated": "2026-09-05T01:11:01.509Z"
+    },
+    {
+      "id": "epic-gudtj1",
+      "title": "Kanban board view, project switcher, and project creation",
+      "status": "open",
+      "planRef": ".context-index/specs/features/kanban-ui/board-view.plan.md",
+      "notes": "Ship a same-origin kanban board UI (three fixed columns, project switcher, create-project form) as static assets served by issue-tracker-api's own FastAPI process, no build step, no framework.",
+      "created": "2026-09-05T10:08:08.350Z",
+      "updated": "2026-09-05T10:08:08.350Z"
     }
   ],
   "issues": [
