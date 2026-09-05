@@ -61,3 +61,15 @@ def list_issues(request: Request, project_id: int | None = None, status: str | N
     query += " ORDER BY id ASC"
     rows = conn.execute(query, params).fetchall()
     return [_row_to_issue_read(r) for r in rows]
+
+
+@router.get("/issues/{issue_id}", response_model=IssueRead)
+def get_issue(issue_id: int, request: Request):
+    conn = request.app.state.db_conn
+    row = conn.execute("SELECT * FROM issues WHERE id = ?", (issue_id,)).fetchone()
+    if row is None:
+        raise HTTPException(
+            status_code=404,
+            detail={"message": f"Issue {issue_id} not found", "code": "ISSUE_NOT_FOUND"},
+        )
+    return _row_to_issue_read(row)

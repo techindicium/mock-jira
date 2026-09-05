@@ -90,3 +90,21 @@ def test_list_issues_filtered_by_project_id(client):
     body = resp.json()
     assert len(body) == 1
     assert body[0]["project_id"] == p1["id"]
+
+
+def test_get_issue_by_id_returns_200(client):
+    project = _create_project(client)
+    created = client.post(
+        "/issues", json={"project_id": project["id"], "summary": "A", "issue_type": "bug", "priority": "low"}
+    ).json()
+    resp = client.get(f"/issues/{created['id']}")
+    assert resp.status_code == 200
+    assert resp.json()["key"] == "SDLC-1"
+
+
+def test_get_issue_unknown_id_returns_404(client):
+    resp = client.get("/issues/999999")
+    assert resp.status_code == 404
+    body = resp.json()
+    assert body["code"] == "ISSUE_NOT_FOUND"
+    assert "999999" in body["message"]
