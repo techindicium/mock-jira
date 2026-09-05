@@ -191,3 +191,25 @@ def test_list_issues_filtered_by_status(client):
     body = resp.json()
     assert len(body) == 1
     assert body[0]["status"] == "in_progress"
+
+
+def test_delete_issue_returns_204_and_removes_it(client):
+    project = _create_project(client)
+    created = client.post(
+        "/issues", json={"project_id": project["id"], "summary": "A", "issue_type": "bug", "priority": "low"}
+    ).json()
+    resp = client.delete(f"/issues/{created['id']}")
+    assert resp.status_code == 204
+    assert resp.content == b""
+
+    follow_up = client.get(f"/issues/{created['id']}")
+    assert follow_up.status_code == 404
+
+    listing = client.get("/issues")
+    assert created["id"] not in [i["id"] for i in listing.json()]
+
+
+def test_delete_issue_unknown_id_returns_404(client):
+    resp = client.delete("/issues/999999")
+    assert resp.status_code == 404
+    assert resp.json()["code"] == "ISSUE_NOT_FOUND"

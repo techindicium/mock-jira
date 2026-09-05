@@ -105,3 +105,16 @@ def patch_issue(issue_id: int, payload: IssuePatch, request: Request):
 
     row = conn.execute("SELECT * FROM issues WHERE id = ?", (issue_id,)).fetchone()
     return _row_to_issue_read(row)
+
+
+@router.delete("/issues/{issue_id}", status_code=204)
+def delete_issue(issue_id: int, request: Request):
+    conn = request.app.state.db_conn
+    row = conn.execute("SELECT * FROM issues WHERE id = ?", (issue_id,)).fetchone()
+    if row is None:
+        raise HTTPException(
+            status_code=404,
+            detail={"message": f"Issue {issue_id} not found", "code": "ISSUE_NOT_FOUND"},
+        )
+    conn.execute("DELETE FROM issues WHERE id = ?", (issue_id,))
+    conn.commit()
