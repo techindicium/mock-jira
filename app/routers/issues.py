@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request
 
 from app.db import allocate_issue_key
-from app.models import IssueCreate, IssueRead
+from app.models import IssueCreate, IssuePatch, IssueRead
 
 router = APIRouter()
 
@@ -72,4 +72,36 @@ def get_issue(issue_id: int, request: Request):
             status_code=404,
             detail={"message": f"Issue {issue_id} not found", "code": "ISSUE_NOT_FOUND"},
         )
+    return _row_to_issue_read(row)
+
+
+_PATCHABLE_FIELDS = ("summary", "description", "issue_type", "priority", "assignee", "reporter", "status")
+
+
+@router.patch("/issues/{issue_id}", response_model=IssueRead)
+def patch_issue(issue_id: int, payload: IssuePatch, request: Request):
+    conn = request.app.state.db_conn
+    row = conn.execute("SELECT * FROM issues WHERE id = ?", (issue_id,)).fetchone()
+    if row is None:
+        raise HTTPException(
+            status_code=404,
+            detail={"message": f"Issue {issue_id} not found", "code": "ISSUE_NOT_FOUND"},
+        )
+
+    updates = payload.model_dump(exclude_unset=True)
+    set_clauses = [f"{field} = ?" for field in _PATCHABLE_FIELDS if field in updates]
+    values = [updates[field] for field in _PATCHABLE_FIELDS if field in updates]
+    if set_clauses:
+        # Sub-second precision: schema's `created_at`/`updated_at` defaults use
+        # datetime('now') (1-second granularity), so a patch landing in the same
+        # wall-clock second as creation would otherwise produce an identical
+        # updated_at, silently violating BEH-7's "bumps updated_at" contract.
+        set_clauses.append("updated_at = strftime('%Y-%m-%d %H:%M:%f', 'now')")
+        conn.execute(
+            f"UPDATE issues SET {', '.join(set_clauses)} WHERE id = ?",
+            (*values, issue_id),
+        )
+        conn.commit()
+
+    row = conn.execute("SELECT * FROM issues WHERE id = ?", (issue_id,)).fetchone()
     return _row_to_issue_read(row)
