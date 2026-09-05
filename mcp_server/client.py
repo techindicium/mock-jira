@@ -34,6 +34,39 @@ class IssueTrackerClient:
         response = await self._request("GET", f"/issues/{issue_id}")
         return response.json()
 
+    async def create_issue(
+        self,
+        project_id: int,
+        summary: str,
+        issue_type: str,
+        priority: str,
+        description: str | None = None,
+        assignee: str | None = None,
+        reporter: str | None = None,
+    ) -> dict:
+        payload: dict = {
+            "project_id": project_id,
+            "summary": summary,
+            "issue_type": issue_type,
+            "priority": priority,
+        }
+        if description is not None:
+            payload["description"] = description
+        if assignee is not None:
+            payload["assignee"] = assignee
+        if reporter is not None:
+            payload["reporter"] = reporter
+        response = await self._request("POST", "/issues", json=payload)
+        return response.json()
+
+    async def update_issue(self, issue_id: int, **fields) -> dict:
+        payload = {key: value for key, value in fields.items() if value is not None}
+        response = await self._request("PATCH", f"/issues/{issue_id}", json=payload)
+        return response.json()
+
+    async def delete_issue(self, issue_id: int) -> None:
+        await self._request("DELETE", f"/issues/{issue_id}")
+
     async def _request(self, method: str, path: str, **kwargs) -> httpx.Response:
         try:
             response = await self._http.request(method, path, **kwargs)

@@ -128,3 +128,103 @@ async def test_get_issue_unknown_id_raises_upstream_error_verbatim():
         await _client(handler).get_issue(999)
     assert exc_info.value.status_code == 404
     assert exc_info.value.message == "Issue 999 not found"
+
+
+@pytest.mark.anyio
+async def test_create_issue_returns_created_issue():
+    def handler(request):
+        assert request.method == "POST"
+        assert request.url.path == "/issues"
+        return httpx.Response(
+            201,
+            json={
+                "id": 1, "key": "SDLC-1", "project_id": 1, "summary": "Fix bug",
+                "description": "", "issue_type": "bug", "status": "todo", "priority": "high",
+                "assignee": "", "reporter": "", "created_at": "2026-09-05 00:00:00",
+                "updated_at": "2026-09-05 00:00:00",
+            },
+        )
+
+    result = await _client(handler).create_issue(1, "Fix bug", "bug", "high")
+    assert result["key"] == "SDLC-1"
+
+
+@pytest.mark.anyio
+async def test_create_issue_unknown_project_id_raises_upstream_error_verbatim():
+    def handler(request):
+        return httpx.Response(
+            404, json={"message": "Project 999 not found", "code": "ISSUE_PROJECT_NOT_FOUND"}
+        )
+
+    with pytest.raises(UpstreamError) as exc_info:
+        await _client(handler).create_issue(999, "Fix bug", "bug", "high")
+    assert exc_info.value.status_code == 404
+    assert exc_info.value.message == "Project 999 not found"
+
+
+@pytest.mark.anyio
+async def test_create_issue_invalid_issue_type_raises_upstream_error_for_422():
+    def handler(request):
+        return httpx.Response(
+            422,
+            json={"message": "issue_type must be one of: bug, task, story", "code": "VALIDATION_ERROR"},
+        )
+
+    with pytest.raises(UpstreamError) as exc_info:
+        await _client(handler).create_issue(1, "Fix bug", "urgent", "high")
+    assert exc_info.value.status_code == 422
+
+
+@pytest.mark.anyio
+async def test_update_issue_sends_only_provided_fields_and_returns_result():
+    def handler(request):
+        assert request.method == "PATCH"
+        assert request.url.path == "/issues/1"
+        import json as _json
+        assert _json.loads(request.content) == {"status": "in_progress"}
+        return httpx.Response(
+            200,
+            json={
+                "id": 1, "key": "SDLC-1", "project_id": 1, "summary": "Fix bug",
+                "description": "", "issue_type": "bug", "status": "in_progress", "priority": "high",
+                "assignee": "", "reporter": "", "created_at": "2026-09-05 00:00:00",
+                "updated_at": "2026-09-05 00:00:01",
+            },
+        )
+
+    result = await _client(handler).update_issue(1, status="in_progress")
+    assert result["status"] == "in_progress"
+
+
+@pytest.mark.anyio
+async def test_update_issue_unknown_id_raises_upstream_error_verbatim():
+    def handler(request):
+        return httpx.Response(
+            404, json={"message": "Issue 999 not found", "code": "ISSUE_NOT_FOUND"}
+        )
+
+    with pytest.raises(UpstreamError) as exc_info:
+        await _client(handler).update_issue(999, status="done")
+    assert exc_info.value.status_code == 404
+
+
+@pytest.mark.anyio
+async def test_delete_issue_sends_delete_request():
+    def handler(request):
+        assert request.method == "DELETE"
+        assert request.url.path == "/issues/1"
+        return httpx.Response(204)
+
+    await _client(handler).delete_issue(1)  # no return value, no exception
+
+
+@pytest.mark.anyio
+async def test_delete_issue_unknown_id_raises_upstream_error_verbatim():
+    def handler(request):
+        return httpx.Response(
+            404, json={"message": "Issue 999 not found", "code": "ISSUE_NOT_FOUND"}
+        )
+
+    with pytest.raises(UpstreamError) as exc_info:
+        await _client(handler).delete_issue(999)
+    assert exc_info.value.status_code == 404
