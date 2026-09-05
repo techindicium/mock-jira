@@ -11,6 +11,7 @@
   <header>
     <h1>mock-jira</h1>
     <select id="project-switcher" aria-label="Select project"></select>
+    <button id="open-create-issue" type="button">New Issue</button>
   </header>
 
   <div id="board-error" role="alert" hidden></div>
@@ -41,6 +42,34 @@
       <label>Name <input id="project-name" name="name" required /></label>
       <button type="submit">Create Project</button>
       <p id="create-project-error" role="alert" hidden></p>
+    </form>
+  </section>
+
+  <section id="create-issue" hidden>
+    <h2>New Issue</h2>
+    <form id="create-issue-form">
+      <label>Summary <input id="issue-summary" name="summary" required /></label>
+      <label>Type
+        <select id="issue-type" name="issue_type" required>
+          <option value="">Select type&hellip;</option>
+          <option value="bug">Bug</option>
+          <option value="task">Task</option>
+          <option value="story">Story</option>
+        </select>
+      </label>
+      <label>Priority
+        <select id="issue-priority" name="priority" required>
+          <option value="">Select priority&hellip;</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </label>
+      <label>Description <textarea id="issue-description" name="description"></textarea></label>
+      <label>Assignee <input id="issue-assignee" name="assignee" /></label>
+      <button type="submit">Create Issue</button>
+      <button id="cancel-create-issue" type="button">Cancel</button>
+      <p id="create-issue-error" role="alert" hidden></p>
     </form>
   </section>
 </body>

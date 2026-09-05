@@ -78,7 +78,8 @@ header h1 {
 }
 
 #empty-state,
-#create-project {
+#create-project,
+#create-issue {
   background: #fff;
   border: 1px solid #dcdfe4;
   border-radius: 6px;
@@ -87,13 +88,24 @@ header h1 {
   max-width: 360px;
 }
 
-#create-project form label {
+#create-project form label,
+#create-issue form label {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.85rem;
 }
 
-#create-project form input {
+#create-project form input,
+#create-issue form input,
+#create-issue form select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.25rem;
+  padding: 0.35rem;
+}
+
+#create-issue form textarea {
   display: block;
   width: 100%;
   box-sizing: border-box;

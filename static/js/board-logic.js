@@ -86,9 +86,17 @@
     return `${action}: this issue was already removed. The board has been updated.`;
   }
 
+  function validateIssueForm(fields) {
+    const errors = {};
+    if (!fields.summary || !fields.summary.trim()) errors.summary = "Summary is required";
+    if (!fields.issue_type) errors.issue_type = "Type is required";
+    if (!fields.priority) errors.priority = "Priority is required";
+    return { valid: Object.keys(errors).length === 0, errors };
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
-    shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage,
+    shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
   };
 });
