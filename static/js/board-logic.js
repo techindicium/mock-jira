@@ -122,10 +122,14 @@
     );
   }
 
+  function removeIssueById(issues, issueId) {
+    return issues.filter((issue) => issue.id !== issueId);
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
     shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
-    buildIssueCreatePayload, diffIssueFields, moveIssueStatus,
+    buildIssueCreatePayload, diffIssueFields, moveIssueStatus, removeIssueById,
   };
 });

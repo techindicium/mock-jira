@@ -173,7 +173,7 @@
     fetchJson, showError, clearError, renderSwitcher, renderColumns, renderBoardState,
     loadIssuesFor, init, getLastSelectedKey, setLastSelectedKey, onProjectSwitch,
     onCreateProjectSubmit, onCreateIssueSubmit, onCardClick, onEditIssueSubmit,
-    onDragStart, onColumnDrop, reportIssueMutationFailure,
+    onDragStart, onColumnDrop, onDeleteIssueClick, reportIssueMutationFailure,
   };
 
   document.addEventListener("DOMContentLoaded", init);
@@ -336,4 +336,29 @@
     section.addEventListener("drop", onColumnDrop);
   }
   document.getElementById("board").addEventListener("dragstart", onDragStart);
+
+  async function onDeleteIssueClick(event) {
+    event.preventDefault();
+    if (!editingIssue) return;
+    const confirmed = window.confirm(`Delete issue "${editingIssue.summary}"? This cannot be undone.`);
+    if (!confirmed) return;
+    const issueId = editingIssue.id;
+    try {
+      await fetchJson(`/issues/${issueId}`, { method: "DELETE" });
+      clearError();
+    } catch (err) {
+      reportIssueMutationFailure("Deleting issue", err, () => {
+        // 404: already gone — fall through to the same removal below
+      });
+      if (!BoardLogic.isNotFoundError(err)) {
+        return; // non-404 failure: card stays, edit form stays open, error shown
+      }
+    }
+    currentIssues = BoardLogic.removeIssueById(currentIssues, issueId);
+    renderColumns(BoardLogic.groupIssuesByStatus(currentIssues));
+    document.getElementById("edit-issue").hidden = true;
+    editingIssue = null;
+  }
+
+  document.getElementById("delete-issue").addEventListener("click", onDeleteIssueClick);
 })();
