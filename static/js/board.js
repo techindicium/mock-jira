@@ -52,8 +52,8 @@
     select.innerHTML = projects
       .map((p) => {
         const sel = p.id === selectedId ? " selected" : "";
-        return `<option value="${p.id}"${sel}>${BoardLogic.escapeHtml(p.key)} — ` +
-          `${BoardLogic.escapeHtml(p.name)}</option>`;
+        return `<option value="${p.id}" data-key="${BoardLogic.escapeHtml(p.key)}"${sel}>` +
+          `${BoardLogic.escapeHtml(p.key)} — ${BoardLogic.escapeHtml(p.name)}</option>`;
       })
       .join("");
   }
@@ -65,14 +65,25 @@
     }
   }
 
+  function renderBoardState(state) {
+    renderColumns(state.columns);
+  }
+
   async function loadIssuesFor(projectId) {
     try {
       const issues = await fetchJson(`/issues?project_id=${projectId}`);
       clearError();
-      renderColumns(BoardLogic.groupIssuesByStatus(issues));
+      renderBoardState(BoardLogic.computeBoardState(projectId, issues));
     } catch (err) {
       showError(BoardLogic.formatFetchError("Loading issues", err));
     }
+  }
+
+  function onProjectSwitch(event) {
+    const projectId = Number(event.target.value);
+    const selectedOption = event.target.selectedOptions[0];
+    if (selectedOption) setLastSelectedKey(selectedOption.dataset.key);
+    loadIssuesFor(projectId);
   }
 
   async function init() {
@@ -96,9 +107,10 @@
   }
 
   window.BoardApp = {
-    fetchJson, showError, clearError, renderSwitcher, renderColumns, loadIssuesFor, init,
-    getLastSelectedKey, setLastSelectedKey,
+    fetchJson, showError, clearError, renderSwitcher, renderColumns, renderBoardState,
+    loadIssuesFor, init, getLastSelectedKey, setLastSelectedKey, onProjectSwitch,
   };
 
   document.addEventListener("DOMContentLoaded", init);
+  document.getElementById("project-switcher").addEventListener("change", onProjectSwitch);
 })();

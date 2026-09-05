@@ -53,8 +53,12 @@
     return projects[0];
   }
 
+  function computeBoardState(projectId, issues) {
+    return { projectId, columns: groupIssuesByStatus(issues) };
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
-    pickDefaultProject,
+    pickDefaultProject, computeBoardState,
   };
 });
