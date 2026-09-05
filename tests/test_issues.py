@@ -69,3 +69,24 @@ def test_create_issue_invalid_issue_type_returns_422(client):
     assert "issue_type" in body["message"]
     # Error Cases table requires naming the allowed values, not just "field is required"
     assert "bug" in body["message"] and "task" in body["message"] and "story" in body["message"]
+
+
+def test_list_issues_unfiltered_returns_all(client):
+    project = _create_project(client)
+    client.post("/issues", json={"project_id": project["id"], "summary": "A", "issue_type": "bug", "priority": "low"})
+    client.post("/issues", json={"project_id": project["id"], "summary": "B", "issue_type": "task", "priority": "low"})
+    resp = client.get("/issues")
+    assert resp.status_code == 200
+    assert len(resp.json()) == 2
+
+
+def test_list_issues_filtered_by_project_id(client):
+    p1 = _create_project(client, key="SDLC", name="SDLC")
+    p2 = _create_project(client, key="DDLC", name="DDLC")
+    client.post("/issues", json={"project_id": p1["id"], "summary": "A", "issue_type": "bug", "priority": "low"})
+    client.post("/issues", json={"project_id": p2["id"], "summary": "B", "issue_type": "bug", "priority": "low"})
+    resp = client.get(f"/issues?project_id={p1['id']}")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert len(body) == 1
+    assert body[0]["project_id"] == p1["id"]

@@ -45,3 +45,19 @@ def create_issue(payload: IssueCreate, request: Request):
     conn.commit()
     row = conn.execute("SELECT * FROM issues WHERE id = ?", (cursor.lastrowid,)).fetchone()
     return _row_to_issue_read(row)
+
+
+@router.get("/issues", response_model=list[IssueRead])
+def list_issues(request: Request, project_id: int | None = None, status: str | None = None):
+    conn = request.app.state.db_conn
+    query = "SELECT * FROM issues WHERE 1=1"
+    params: list = []
+    if project_id is not None:
+        query += " AND project_id = ?"
+        params.append(project_id)
+    if status is not None:
+        query += " AND status = ?"
+        params.append(status)
+    query += " ORDER BY id ASC"
+    rows = conn.execute(query, params).fetchall()
+    return [_row_to_issue_read(r) for r in rows]
