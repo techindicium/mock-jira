@@ -37,6 +37,23 @@ gates:
     triggers:
       - post-task
 
+  - id: test-js
+    name: JS Unit Tests
+    kind: deterministic
+    tier: fast
+    # Node's test runner (verified on Node v24.12.0) does not recurse a bare
+    # directory argv element (`tests_js/` resolves as a CJS module path and
+    # throws MODULE_NOT_FOUND); an explicit glob string is required for a
+    # shell-free argv-list command. This matches the plan's intent (run every
+    # suite under tests_js/) via a form that actually works.
+    command: [node, --test, "tests_js/**/*.test.js"]
+    scope: project
+    required: true
+    severity: error
+    triggers:
+      - post-task
+      - post-implement
+
   - id: integration-test
     name: Integration Tests
     kind: deterministic

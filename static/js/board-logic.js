@@ -37,5 +37,12 @@
     );
   }
 
-  return { BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml };
+  function formatFetchError(action, error) {
+    if (error && error.status) {
+      return `${action} failed (HTTP ${error.status}): ${error.message || "unexpected error"}`;
+    }
+    return `${action} failed: ${(error && error.message) || "network error"}`;
+  }
+
+  return { BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError };
 });
