@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 17,
+  "seq": 18,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -38,6 +38,15 @@
       "notes": "Ship a same-origin kanban board UI (three fixed columns, project switcher, create-project form) as static assets served by issue-tracker-api's own FastAPI process, no build step, no framework.",
       "created": "2026-09-05T10:08:08.350Z",
       "updated": "2026-09-05T10:08:08.350Z"
+    },
+    {
+      "id": "epic-jihpqx",
+      "title": "Issue create, edit, delete, and column move",
+      "status": "open",
+      "planRef": ".context-index/specs/features/kanban-ui/issue-crud-forms.plan.md",
+      "notes": "Extend the kanban board with create/edit/delete forms for Issues and a column-move interaction, backed by issue-tracker-api's issue-lifecycle endpoints, with optimistic-then-reconcile for the drag move and a shared revert/error path for every mutation.",
+      "created": "2026-09-05T10:49:04.951Z",
+      "updated": "2026-09-05T10:49:04.951Z"
     }
   ],
   "issues": [
