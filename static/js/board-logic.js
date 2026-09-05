@@ -28,7 +28,7 @@
 
   function buildCardHtml(issue) {
     return (
-      `<article class="card" data-issue-id="${issue.id}">` +
+      `<article class="card" data-issue-id="${issue.id}" draggable="true">` +
       `<h3>${escapeHtml(issue.summary)}</h3>` +
       `<p class="card-meta">${escapeHtml(issue.issue_type)} &middot; ` +
       `${escapeHtml(issue.priority)} &middot; ` +
@@ -116,10 +116,16 @@
     return patch;
   }
 
+  function moveIssueStatus(issues, issueId, newStatus) {
+    return issues.map((issue) =>
+      issue.id === issueId ? { ...issue, status: newStatus } : issue
+    );
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
     shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
-    buildIssueCreatePayload, diffIssueFields,
+    buildIssueCreatePayload, diffIssueFields, moveIssueStatus,
   };
 });

@@ -173,7 +173,7 @@
     fetchJson, showError, clearError, renderSwitcher, renderColumns, renderBoardState,
     loadIssuesFor, init, getLastSelectedKey, setLastSelectedKey, onProjectSwitch,
     onCreateProjectSubmit, onCreateIssueSubmit, onCardClick, onEditIssueSubmit,
-    reportIssueMutationFailure,
+    onDragStart, onColumnDrop, reportIssueMutationFailure,
   };
 
   document.addEventListener("DOMContentLoaded", init);
@@ -281,4 +281,59 @@
     event.preventDefault();
     document.getElementById("edit-issue").hidden = true;
   });
+
+  function onDragStart(event) {
+    const card = event.target.closest(".card");
+    if (!card) return;
+    event.dataTransfer.setData("text/plain", card.dataset.issueId);
+  }
+
+  function onColumnDragOver(event) {
+    event.preventDefault(); // required to allow a drop
+    event.currentTarget.classList.add("drag-over");
+  }
+
+  function onColumnDragLeave(event) {
+    event.currentTarget.classList.remove("drag-over");
+  }
+
+  async function onColumnDrop(event) {
+    event.preventDefault();
+    const column = event.currentTarget;
+    column.classList.remove("drag-over");
+    const issueId = Number(event.dataTransfer.getData("text/plain"));
+    const newStatus = column.dataset.status;
+    const originalIssue = currentIssues.find((i) => i.id === issueId);
+    if (!originalIssue || originalIssue.status === newStatus) return;
+    const originalStatus = originalIssue.status;
+
+    currentIssues = BoardLogic.moveIssueStatus(currentIssues, issueId, newStatus);
+    renderColumns(BoardLogic.groupIssuesByStatus(currentIssues)); // optimistic move
+
+    try {
+      await fetchJson(`/issues/${issueId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      clearError();
+    } catch (err) {
+      reportIssueMutationFailure("Moving issue", err, () => {
+        // 404: the card is gone server-side — drop the optimistic move and refresh from truth
+        loadIssuesFor(currentProjectId);
+      });
+      if (!BoardLogic.isNotFoundError(err)) {
+        currentIssues = BoardLogic.moveIssueStatus(currentIssues, issueId, originalStatus);
+        renderColumns(BoardLogic.groupIssuesByStatus(currentIssues)); // exact revert
+      }
+    }
+  }
+
+  for (const col of BoardLogic.BOARD_COLUMNS) {
+    const section = document.querySelector(`.column[data-status="${col.status}"]`);
+    section.addEventListener("dragover", onColumnDragOver);
+    section.addEventListener("dragleave", onColumnDragLeave);
+    section.addEventListener("drop", onColumnDrop);
+  }
+  document.getElementById("board").addEventListener("dragstart", onDragStart);
 })();

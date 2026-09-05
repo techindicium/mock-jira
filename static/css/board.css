@@ -64,6 +64,16 @@ header h1 {
   border: 1px solid #e2e4e8;
   border-radius: 4px;
   padding: 0.5rem 0.6rem;
+  cursor: grab;
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+.column.drag-over {
+  background: #eef4ff;
+  border-color: #7aa7ff;
 }
 
 .card h3 {
