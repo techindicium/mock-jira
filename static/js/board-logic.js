@@ -106,10 +106,20 @@
     return payload;
   }
 
+  const EDITABLE_ISSUE_FIELDS = ["summary", "description", "issue_type", "priority", "assignee", "reporter"];
+
+  function diffIssueFields(original, edited) {
+    const patch = {};
+    for (const field of EDITABLE_ISSUE_FIELDS) {
+      if (edited[field] !== original[field]) patch[field] = edited[field];
+    }
+    return patch;
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
     shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
-    buildIssueCreatePayload,
+    buildIssueCreatePayload, diffIssueFields,
   };
 });

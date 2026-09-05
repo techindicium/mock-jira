@@ -79,7 +79,8 @@ header h1 {
 
 #empty-state,
 #create-project,
-#create-issue {
+#create-issue,
+#edit-issue {
   background: #fff;
   border: 1px solid #dcdfe4;
   border-radius: 6px;
@@ -89,7 +90,8 @@ header h1 {
 }
 
 #create-project form label,
-#create-issue form label {
+#create-issue form label,
+#edit-issue form label {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.85rem;
@@ -97,7 +99,9 @@ header h1 {
 
 #create-project form input,
 #create-issue form input,
-#create-issue form select {
+#create-issue form select,
+#edit-issue form input,
+#edit-issue form select {
   display: block;
   width: 100%;
   box-sizing: border-box;
@@ -105,7 +109,8 @@ header h1 {
   padding: 0.35rem;
 }
 
-#create-issue form textarea {
+#create-issue form textarea,
+#edit-issue form textarea {
   display: block;
   width: 100%;
   box-sizing: border-box;

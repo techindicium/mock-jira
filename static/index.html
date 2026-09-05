@@ -72,5 +72,33 @@
       <p id="create-issue-error" role="alert" hidden></p>
     </form>
   </section>
+
+  <section id="edit-issue" hidden>
+    <h2>Edit Issue</h2>
+    <form id="edit-issue-form">
+      <input type="hidden" id="edit-issue-id" />
+      <label>Summary <input id="edit-issue-summary" name="summary" /></label>
+      <label>Type
+        <select id="edit-issue-type" name="issue_type">
+          <option value="bug">Bug</option>
+          <option value="task">Task</option>
+          <option value="story">Story</option>
+        </select>
+      </label>
+      <label>Priority
+        <select id="edit-issue-priority" name="priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </label>
+      <label>Description <textarea id="edit-issue-description" name="description"></textarea></label>
+      <label>Assignee <input id="edit-issue-assignee" name="assignee" /></label>
+      <button type="submit">Save Changes</button>
+      <button id="cancel-edit-issue" type="button">Cancel</button>
+      <button id="delete-issue" type="button">Delete</button>
+      <p id="edit-issue-error" role="alert" hidden></p>
+    </form>
+  </section>
 </body>
 </html>

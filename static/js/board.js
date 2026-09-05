@@ -70,11 +70,14 @@
   }
 
   let currentProjectId = null;
+  let currentIssues = [];
+  let editingIssue = null; // the full IssueRead currently loaded into the edit form
 
   async function loadIssuesFor(projectId) {
     currentProjectId = projectId;
     try {
       const issues = await fetchJson(`/issues?project_id=${projectId}`);
+      currentIssues = issues;
       clearError();
       renderBoardState(BoardLogic.computeBoardState(projectId, issues));
     } catch (err) {
@@ -169,7 +172,8 @@
   window.BoardApp = {
     fetchJson, showError, clearError, renderSwitcher, renderColumns, renderBoardState,
     loadIssuesFor, init, getLastSelectedKey, setLastSelectedKey, onProjectSwitch,
-    onCreateProjectSubmit, onCreateIssueSubmit,
+    onCreateProjectSubmit, onCreateIssueSubmit, onCardClick, onEditIssueSubmit,
+    reportIssueMutationFailure,
   };
 
   document.addEventListener("DOMContentLoaded", init);
@@ -219,4 +223,62 @@
   }
 
   document.getElementById("create-issue-form").addEventListener("submit", onCreateIssueSubmit);
+
+  function openEditIssue(issue) {
+    editingIssue = issue;
+    document.getElementById("edit-issue-id").value = issue.id;
+    document.getElementById("edit-issue-summary").value = issue.summary;
+    document.getElementById("edit-issue-type").value = issue.issue_type;
+    document.getElementById("edit-issue-priority").value = issue.priority;
+    document.getElementById("edit-issue-description").value = issue.description;
+    document.getElementById("edit-issue-assignee").value = issue.assignee;
+    document.getElementById("edit-issue-error").hidden = true;
+    document.getElementById("edit-issue").hidden = false;
+  }
+
+  function onCardClick(event) {
+    const card = event.target.closest(".card");
+    if (!card) return;
+    const issue = currentIssues.find((i) => i.id === Number(card.dataset.issueId));
+    if (issue) openEditIssue(issue);
+  }
+
+  async function onEditIssueSubmit(event) {
+    event.preventDefault();
+    const edited = {
+      ...editingIssue,
+      summary: document.getElementById("edit-issue-summary").value,
+      issue_type: document.getElementById("edit-issue-type").value,
+      priority: document.getElementById("edit-issue-priority").value,
+      description: document.getElementById("edit-issue-description").value,
+      assignee: document.getElementById("edit-issue-assignee").value,
+    };
+    const patch = BoardLogic.diffIssueFields(editingIssue, edited);
+    if (Object.keys(patch).length === 0) {
+      document.getElementById("edit-issue").hidden = true;
+      return; // nothing changed — close quietly, no network call
+    }
+    try {
+      await fetchJson(`/issues/${editingIssue.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(patch),
+      });
+    } catch (err) {
+      reportIssueMutationFailure("Updating issue", err, () => {
+        document.getElementById("edit-issue").hidden = true;
+        loadIssuesFor(currentProjectId); // 404: card is gone — refresh removes it from view
+      });
+      return; // non-404 failure: form stays open, prior input intact (nothing was optimistic)
+    }
+    document.getElementById("edit-issue").hidden = true;
+    await loadIssuesFor(currentProjectId); // reflect the server's response, not the local edit
+  }
+
+  document.getElementById("board").addEventListener("click", onCardClick);
+  document.getElementById("edit-issue-form").addEventListener("submit", onEditIssueSubmit);
+  document.getElementById("cancel-edit-issue").addEventListener("click", (event) => {
+    event.preventDefault();
+    document.getElementById("edit-issue").hidden = true;
+  });
 })();
