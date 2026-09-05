@@ -1,1 +1,58 @@
 {"event":"step_completed","step":"specify","verdict":"PASS","ts":"2026-09-04T23:19:33.241Z"}
+{"event":"lifecycle_step","step":"review","status":"started","ts":"2026-09-05T09:52:29.414Z"}
+{"event":"lifecycle_step","step":"review","status":"started","revision":1,"ts":"2026-09-05T09:53:00.661Z"}
+{"event":"reviewer_report","step":"review","reviewer":"quick-synthesized-reviewer","severity":"blocker","verdict":"PASS","notes":"Quick tier (medium risk). Contract verified against implemented issue-tracker-api routers. 1 suggestion, no warnings/blockers.","ts":"2026-09-05T09:54:30.744Z"}
+{"event":"step_completed","step":"review","verdict":"PASS","revision":1,"ts":"2026-09-05T09:55:29.111Z"}
+{"event":"step_completed","step":"review","verdict":"PASS","ts":"2026-09-05T09:55:47.656Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-05T09:55:47.854Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-05T09:56:24.849Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":1,"status":"pending","notes":"Static board shell & FastAPI static serving","ts":"2026-09-05T10:08:02.612Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":2,"status":"pending","notes":"Column & card rendering logic","ts":"2026-09-05T10:08:02.615Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":3,"status":"pending","notes":"Error banner & fetch helper","ts":"2026-09-05T10:08:02.616Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":4,"status":"pending","notes":"Board load & fetch wiring","ts":"2026-09-05T10:08:02.616Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":5,"status":"pending","notes":"Project switcher selection","ts":"2026-09-05T10:08:02.617Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":6,"status":"pending","notes":"Create-project form","ts":"2026-09-05T10:08:02.617Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":7,"status":"pending","notes":"Empty-state handling","ts":"2026-09-05T10:08:02.618Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-05T10:08:12.362Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-05T10:08:55.845Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-05T10:09:23.480Z"}
+{"event":"step_completed","step":"route","verdict":"PASS","ts":"2026-09-05T10:11:59.265Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-05T10:11:59.462Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-05T10:12:35.473Z"}
+{"event":"test_depth_assigned","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t1","depth":"minimal","source":"risk-policy","escalated":false,"escalation_skipped":"no-match","floor_applied":false,"floor_legs":[],"floor_inputs":"available","dimensions":{"spec_completeness":0.8,"pattern_coverage":0.2,"blast_radius":0.8,"novelty":1},"ts":"2026-09-05T10:14:22.666Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t1","pass":"provisional","depth":"full","source":"predicate-denied","floor_applied":false,"floor_legs":[],"ts":"2026-09-05T10:14:24.465Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t1","status":"done","notes":"Static board shell + FastAPI static serving","ts":"2026-09-05T10:16:16.749Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t1","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:16:16.818Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t1","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:16:16.888Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t2","pass":"provisional","depth":"full","source":"predicate-denied","floor_applied":false,"floor_legs":[],"ts":"2026-09-05T10:16:23.782Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t2","status":"done","notes":"Column grouping and card rendering logic","ts":"2026-09-05T10:17:13.500Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t2","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:17:13.570Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t2","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:17:13.642Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t3","status":"done","notes":"Error banner, fetch helper, test-js gate wired","ts":"2026-09-05T10:19:09.402Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t3","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:19:09.472Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t3","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:19:09.552Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t4","status":"done","notes":"Board load and fetch wiring (BEH-1)","ts":"2026-09-05T10:19:54.133Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t4","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:19:54.203Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t4","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:19:54.273Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t5","status":"done","notes":"Project switcher selection (BEH-3)","ts":"2026-09-05T10:20:45.393Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t5","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:20:45.463Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t5","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:20:45.536Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t6","status":"done","notes":"Create-project form (BEH-4)","ts":"2026-09-05T10:21:37.552Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t6","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:21:37.626Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t6","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:21:37.696Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t7","status":"done","notes":"Empty-state handling (BEH-6)","ts":"2026-09-05T10:22:15.107Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t7","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:22:15.176Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t7","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:22:15.246Z"}
+{"event":"step_completed","step":"implement","verdict":"PASS","ts":"2026-09-05T10:25:10.143Z"}
+{"event":"step_completed","step":"implement","verdict":"PASS","ts":"2026-09-05T10:26:13.477Z"}
+{"event":"lifecycle_step","step":"validate","status":"started","ts":"2026-09-05T10:26:19.775Z"}
+{"event":"lifecycle_step","step":"validate","status":"started","ts":"2026-09-05T10:26:51.480Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1-quality-gates","severity":"error","verdict":"PASS","notes":"fast tier: test(41 pass) lint(clean) test-js(23 pass); no integration/e2e gates configured","gate_outcomes":[{"id":"test","verdict":"pass","tier":"fast","command_sha":"22c558be4a77b6dd61531053c7225bd05830d00bfaf46f14f430e2f0a6a0cb2b"},{"id":"lint","verdict":"pass","tier":"fast","command_sha":"91ede4a4ad8774e8660350d4580b9e41c235ea911f560571d82f5d4f81aba16d"},{"id":"test-js","verdict":"pass","tier":"fast","command_sha":"4d4e3bbfdf575dc83338694f6da0b95a44b8490751148497dfe931c5af571c77"}],"manifest_sha":"5ff0304","ts":"2026-09-05T10:29:32.217Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1.5-source-manifest","severity":"warning","verdict":"PASS","notes":"SHA matches (5ff0304); all 13 manifest files verified committed to git","ts":"2026-09-05T10:29:47.594Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1.6-code-drift","severity":"warning","verdict":"PASS","notes":"drifted=false for this spec's own manifest","ts":"2026-09-05T10:29:59.189Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-8-boundaries","severity":"error","verdict":"PASS_WITH_NOTES","notes":"SKIP — no boundary rules declared (project has none configured)","ts":"2026-09-05T10:30:11.905Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-9-transition-gates","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"SKIP — no transitions configured (governance/gates.yaml transitions: {})","ts":"2026-09-05T10:30:22.342Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"6 findings (1 error-level within doctor scale, 5 warning): test-js glob would degrade under sh (shell-free execFile avoids this in practice); no CI config; lint/test-js runners lack collect-only verification; integration-test gate unwired","ts":"2026-09-05T10:30:51.896Z"}
+{"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T10:32:01.815Z"}
+{"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T10:33:51.432Z"}
+{"event":"code_drift_detected","drift_source":"static/js/board-logic.js","drift_at":"2026-09-05T10:55:15.250Z","ts":"2026-09-05T10:55:15.251Z"}

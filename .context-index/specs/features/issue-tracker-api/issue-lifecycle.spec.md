@@ -10,7 +10,7 @@ created: 2026-09-04
 updated: 2026-09-05
 kind: behavioral
 source-manifest:
-  sha: "b34bc32"
+  sha: "55d4af4"
   files:
     - app/db.py
     - app/errors.py
@@ -19,7 +19,8 @@ source-manifest:
     - app/routers/issues.py
     - tests/test_db.py
     - tests/test_issues.py
-  computed-at: "2026-09-05T01:28:17.357Z"
+  computed-at: "2026-09-05T12:16:10.644Z"
+drift_detected: true
 ---
 
 # Live Spec: Issue lifecycle CRUD

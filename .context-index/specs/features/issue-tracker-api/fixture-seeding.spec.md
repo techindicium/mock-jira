@@ -10,12 +10,13 @@ created: 2026-09-04
 updated: 2026-09-05
 kind: behavioral
 source-manifest:
-  sha: "a163164"
+  sha: "dfa553a"
   files:
     - app/main.py
     - app/seed.py
     - tests/test_seed.py
-  computed-at: "2026-09-05T01:20:09.796Z"
+  computed-at: "2026-09-05T12:16:10.707Z"
+drift_detected: true
 ---
 
 # Live Spec: Fixture seed data

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>mock-jira Kanban Board</title>
+  <link rel="stylesheet" href="/static/css/board.css" />
+  <script src="/static/js/board-logic.js"></script>
+  <script src="/static/js/board.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>mock-jira</h1>
+    <select id="project-switcher" aria-label="Select project"></select>
+    <button id="open-create-issue" type="button">New Issue</button>
+  </header>
+
+  <div id="board-error" role="alert" hidden></div>
+
+  <main id="board" hidden>
+    <section class="column" data-status="todo">
+      <h2>To Do</h2>
+      <div id="col-todo" class="cards"></div>
+    </section>
+    <section class="column" data-status="in_progress">
+      <h2>In Progress</h2>
+      <div id="col-in_progress" class="cards"></div>
+    </section>
+    <section class="column" data-status="done">
+      <h2>Done</h2>
+      <div id="col-done" class="cards"></div>
+    </section>
+  </main>
+
+  <section id="empty-state" hidden>
+    <p>No projects yet. Create one to get started.</p>
+  </section>
+
+  <section id="create-project">
+    <h2>New Project</h2>
+    <form id="create-project-form">
+      <label>Key <input id="project-key" name="key" required /></label>
+      <label>Name <input id="project-name" name="name" required /></label>
+      <button type="submit">Create Project</button>
+      <p id="create-project-error" role="alert" hidden></p>
+    </form>
+  </section>
+
+  <section id="create-issue" hidden>
+    <h2>New Issue</h2>
+    <form id="create-issue-form">
+      <label>Summary <input id="issue-summary" name="summary" required /></label>
+      <label>Type
+        <select id="issue-type" name="issue_type" required>
+          <option value="">Select type&hellip;</option>
+          <option value="bug">Bug</option>
+          <option value="task">Task</option>
+          <option value="story">Story</option>
+        </select>
+      </label>
+      <label>Priority
+        <select id="issue-priority" name="priority" required>
+          <option value="">Select priority&hellip;</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </label>
+      <label>Description <textarea id="issue-description" name="description"></textarea></label>
+      <label>Assignee <input id="issue-assignee" name="assignee" /></label>
+      <button type="submit">Create Issue</button>
+      <button id="cancel-create-issue" type="button">Cancel</button>
+      <p id="create-issue-error" role="alert" hidden></p>
+    </form>
+  </section>
+
+  <section id="edit-issue" hidden>
+    <h2>Edit Issue</h2>
+    <form id="edit-issue-form">
+      <input type="hidden" id="edit-issue-id" />
+      <label>Summary <input id="edit-issue-summary" name="summary" /></label>
+      <label>Type
+        <select id="edit-issue-type" name="issue_type">
+          <option value="bug">Bug</option>
+          <option value="task">Task</option>
+          <option value="story">Story</option>
+        </select>
+      </label>
+      <label>Priority
+        <select id="edit-issue-priority" name="priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </label>
+      <label>Description <textarea id="edit-issue-description" name="description"></textarea></label>
+      <label>Assignee <input id="edit-issue-assignee" name="assignee" /></label>
+      <button type="submit">Save Changes</button>
+      <button id="cancel-edit-issue" type="button">Cancel</button>
+      <button id="delete-issue" type="button">Delete</button>
+      <p id="edit-issue-error" role="alert" hidden></p>
+    </form>
+  </section>
+</body>
+</html>
