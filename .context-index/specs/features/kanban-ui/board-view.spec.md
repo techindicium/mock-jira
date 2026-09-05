@@ -1,14 +1,31 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 charter: kanban-ui
-status: review-passed
+status: implemented
 risk_level: medium
 milestone: mvp
 revision: 1
 charter-revision: 2
 created: 2026-09-04
-updated: 2026-09-04
+updated: 2026-09-05
 kind: behavioral
+source-manifest:
+  sha: "5ff0304"
+  files:
+    - .context-index/governance/gates.yaml
+    - app/main.py
+    - static/css/board.css
+    - static/index.html
+    - static/js/board-logic.js
+    - static/js/board.js
+    - tests/test_static_assets.py
+    - tests_js/beh-1-board-load.test.js
+    - tests_js/beh-2-render-columns.test.js
+    - tests_js/beh-3-project-switch.test.js
+    - tests_js/beh-4-create-project.test.js
+    - tests_js/beh-5-fetch-error.test.js
+    - tests_js/beh-6-empty-state.test.js
+  computed-at: "2026-09-05T10:22:50.091Z"
 ---
 
 # Live Spec: Kanban board view, project switcher, and project creation
@@ -86,11 +103,11 @@ kind: behavioral
 
 ## Acceptance Criteria
 
-- [ ] Board load fetches Projects, selects a default, fetches and renders that Project's Issues (BEH-1)
-- [ ] Issues render into the correct one of three fixed columns with the right card fields (BEH-2)
-- [ ] Switching Projects fully replaces the board, never merges two Projects' Issues (BEH-3)
-- [ ] Create-project form creates and selects the new Project (BEH-4)
-- [ ] Any API failure shows a visible message, never a silent failure or blank screen (BEH-5)
-- [ ] Zero Projects shows an empty state, not an error (BEH-6)
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] Board load fetches Projects, selects a default, fetches and renders that Project's Issues (BEH-1)
+- [x] Issues render into the correct one of three fixed columns with the right card fields (BEH-2)
+- [x] Switching Projects fully replaces the board, never merges two Projects' Issues (BEH-3)
+- [x] Create-project form creates and selects the new Project (BEH-4)
+- [x] Any API failure shows a visible message, never a silent failure or blank screen (BEH-5)
+- [x] Zero Projects shows an empty state, not an error (BEH-6)
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced

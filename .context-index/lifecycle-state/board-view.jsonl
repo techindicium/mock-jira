@@ -15,3 +15,31 @@
 {"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":7,"status":"pending","notes":"Empty-state handling","ts":"2026-09-05T10:08:02.618Z"}
 {"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-05T10:08:12.362Z"}
 {"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-05T10:08:55.845Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-05T10:09:23.480Z"}
+{"event":"step_completed","step":"route","verdict":"PASS","ts":"2026-09-05T10:11:59.265Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-05T10:11:59.462Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-05T10:12:35.473Z"}
+{"event":"test_depth_assigned","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t1","depth":"minimal","source":"risk-policy","escalated":false,"escalation_skipped":"no-match","floor_applied":false,"floor_legs":[],"floor_inputs":"available","dimensions":{"spec_completeness":0.8,"pattern_coverage":0.2,"blast_radius":0.8,"novelty":1},"ts":"2026-09-05T10:14:22.666Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t1","pass":"provisional","depth":"full","source":"predicate-denied","floor_applied":false,"floor_legs":[],"ts":"2026-09-05T10:14:24.465Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t1","status":"done","notes":"Static board shell + FastAPI static serving","ts":"2026-09-05T10:16:16.749Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t1","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:16:16.818Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t1","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:16:16.888Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t2","pass":"provisional","depth":"full","source":"predicate-denied","floor_applied":false,"floor_legs":[],"ts":"2026-09-05T10:16:23.782Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t2","status":"done","notes":"Column grouping and card rendering logic","ts":"2026-09-05T10:17:13.500Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t2","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:17:13.570Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t2","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:17:13.642Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t3","status":"done","notes":"Error banner, fetch helper, test-js gate wired","ts":"2026-09-05T10:19:09.402Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t3","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:19:09.472Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t3","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:19:09.552Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t4","status":"done","notes":"Board load and fetch wiring (BEH-1)","ts":"2026-09-05T10:19:54.133Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t4","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:19:54.203Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t4","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:19:54.273Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t5","status":"done","notes":"Project switcher selection (BEH-3)","ts":"2026-09-05T10:20:45.393Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t5","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:20:45.463Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t5","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:20:45.536Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t6","status":"done","notes":"Create-project form (BEH-4)","ts":"2026-09-05T10:21:37.552Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t6","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:21:37.626Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t6","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:21:37.696Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t7","status":"done","notes":"Empty-state handling (BEH-6)","ts":"2026-09-05T10:22:15.107Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t7","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T10:22:15.176Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/board-view.plan.md","task_id":"t7","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T10:22:15.246Z"}
