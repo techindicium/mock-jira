@@ -165,3 +165,84 @@ async def test_create_issue_tool_missing_required_field_errors_before_http_reque
 
     assert result.is_error is True
     assert called["value"] is False  # schema validation rejected the call before _client() ran
+
+
+class _FakeUpdateClient(_FakeClient):
+    def __init__(self, updated=None, error=None):
+        super().__init__()
+        self._updated = updated
+        self._error = error
+        self.received_kwargs = None
+
+    async def update_issue(self, issue_id, **fields):
+        self.received_kwargs = fields
+        if self._error is not None:
+            raise self._error
+        return self._updated
+
+
+@pytest.mark.anyio
+async def test_update_issue_tool_updates_mutable_fields_and_returns_result(monkeypatch):
+    updated = {**_SAMPLE_ISSUE, "status": "in_progress"}
+    fake = _FakeUpdateClient(updated=updated)
+    monkeypatch.setattr(issues_tools, "_client", lambda: fake)
+
+    async with Client(mcp) as client:
+        result = await client.call_tool("update_issue", {"issue_id": 1, "status": "in_progress"})
+
+    assert result.is_error is False
+    assert result.structured_content == updated
+    assert fake.received_kwargs["status"] == "in_progress"
+
+
+@pytest.mark.anyio
+async def test_update_issue_tool_ignores_immutable_fields(monkeypatch):
+    fake = _FakeUpdateClient(updated=_SAMPLE_ISSUE)
+    monkeypatch.setattr(issues_tools, "_client", lambda: fake)
+
+    async with Client(mcp) as client:
+        await client.call_tool(
+            "update_issue",
+            {"issue_id": 1, "id": 999, "key": "OTHER-9", "project_id": 2, "status": "done"},
+        )
+
+    # id/key/project_id are declared on the tool's input schema (explicit, not schema-excluded)
+    # but never reach the client call — only the mutable fields do.
+    assert fake.received_kwargs == {
+        "summary": None,
+        "description": None,
+        "issue_type": None,
+        "priority": None,
+        "assignee": None,
+        "reporter": None,
+        "status": "done",
+    }
+
+
+@pytest.mark.anyio
+async def test_update_issue_tool_unknown_id_errors_with_verbatim_message(monkeypatch):
+    fake = _FakeUpdateClient(error=UpstreamError(404, "Issue 999 not found"))
+    monkeypatch.setattr(issues_tools, "_client", lambda: fake)
+
+    async with Client(mcp) as client:
+        result = await client.call_tool("update_issue", {"issue_id": 999, "status": "done"})
+
+    assert result.is_error is True
+    assert "Issue 999 not found" in result.content[0].text
+
+
+@pytest.mark.anyio
+async def test_update_issue_tool_missing_issue_id_errors_before_http_request(monkeypatch):
+    called = {"value": False}
+
+    def _client_spy():
+        called["value"] = True
+        return _FakeUpdateClient()
+
+    monkeypatch.setattr(issues_tools, "_client", _client_spy)
+
+    async with Client(mcp) as client:
+        result = await client.call_tool("update_issue", {"status": "done"})  # missing "issue_id"
+
+    assert result.is_error is True
+    assert called["value"] is False
