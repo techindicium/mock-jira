@@ -1,0 +1,56 @@
+{"event":"step_completed","step":"specify","verdict":"PASS","ts":"2026-09-04T23:15:36.707Z"}
+{"event":"lifecycle_step","step":"review","status":"started","ts":"2026-09-04T23:23:15.764Z"}
+{"event":"lifecycle_step","step":"review","status":"started","revision":1,"ts":"2026-09-04T23:23:46.879Z"}
+{"event":"reviewer_report","step":"review","reviewer":"quick-synthesized-reviewer","severity":"blocker","verdict":"PASS_WITH_NOTES","notes":"1 warning (canon id-collision gap for runtime Projects), 1 suggestion (description field optionality)","ts":"2026-09-04T23:26:25.446Z"}
+{"event":"step_completed","step":"review","verdict":"PASS_WITH_NOTES","revision":1,"ts":"2026-09-04T23:27:10.611Z"}
+{"event":"step_completed","step":"review","verdict":"PASS_WITH_NOTES","ts":"2026-09-04T23:27:35.664Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-04T23:27:42.379Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-04T23:28:26.328Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"1","status":"pending","notes":"Stand up FastAPI app and SQLite schema","ts":"2026-09-04T23:39:08.002Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"2","status":"pending","notes":"Implement POST /projects","ts":"2026-09-04T23:39:08.005Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"3","status":"pending","notes":"Implement GET /projects","ts":"2026-09-04T23:39:08.006Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"4","status":"pending","notes":"Implement GET /projects/{id}","ts":"2026-09-04T23:39:08.006Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"5","status":"pending","notes":"Confirm OpenAPI wiring","ts":"2026-09-04T23:39:08.007Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-04T23:39:17.624Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-04T23:39:40.383Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-04T23:39:45.170Z"}
+{"event":"step_completed","step":"route","verdict":"PASS","ts":"2026-09-04T23:41:32.433Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-04T23:41:38.220Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-04T23:42:16.101Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t1","pass":"provisional","depth":"full","source":"predicate-denied","floor_applied":false,"floor_legs":[],"ts":"2026-09-04T23:43:42.555Z"}
+{"event":"test_depth_assigned","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t1","depth":"minimal","source":"risk-policy","escalated":false,"escalation_skipped":"no-match","floor_applied":false,"floor_legs":[],"floor_inputs":"available","dimensions":{"spec_completeness":0.8,"pattern_coverage":0.2,"blast_radius":0.8,"novelty":1},"ts":"2026-09-04T23:43:46.738Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t1","status":"in_progress","notes":null,"ts":"2026-09-04T23:44:01.380Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t1","pass":"final","depth":"full","source":"predicate-denied","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-04T23:52:17.722Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t1","stage":"spec-compliance","cycles":1,"ts":"2026-09-04T23:56:22.822Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t1","stage":"code-quality","cycles":2,"findings":1,"ts":"2026-09-04T23:56:22.892Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t1","status":"done","notes":"Foundation scaffold: FastAPI+SQLite, 2 review cycles (1 lint fix)","ts":"2026-09-04T23:56:22.963Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t2","pass":"provisional","depth":"full","source":"predicate-denied","floor_applied":false,"floor_legs":[],"ts":"2026-09-04T23:56:30.465Z"}
+{"event":"test_depth_assigned","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t2","depth":"minimal","source":"risk-policy","escalated":false,"escalation_skipped":"no-match","floor_applied":false,"floor_legs":[],"floor_inputs":"available","dimensions":{"spec_completeness":1,"pattern_coverage":0.4,"blast_radius":0.8,"novelty":1},"ts":"2026-09-04T23:56:30.549Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t2","status":"in_progress","notes":null,"ts":"2026-09-04T23:56:30.634Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t2","stage":"spec-compliance","cycles":1,"ts":"2026-09-04T23:57:31.063Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t2","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-04T23:57:31.132Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t2","status":"done","notes":"POST /projects with normalized error envelope; 1 review cycle","ts":"2026-09-04T23:57:31.202Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t3","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-04T23:57:31.369Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t3","status":"in_progress","notes":null,"ts":"2026-09-04T23:57:31.439Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t3","stage":"synthesized","cycles":1,"findings":1,"ts":"2026-09-04T23:58:21.337Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t3","status":"done","notes":"GET /projects list endpoint; fixed typing.List->list ruff finding","ts":"2026-09-04T23:58:21.407Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t4","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-04T23:58:21.575Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t4","status":"in_progress","notes":null,"ts":"2026-09-04T23:58:21.645Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t4","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-04T23:58:53.622Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t4","status":"done","notes":"GET /projects/{id} with PROJECT_NOT_FOUND 404","ts":"2026-09-04T23:58:53.692Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t5","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-04T23:58:53.859Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t5","status":"in_progress","notes":null,"ts":"2026-09-04T23:58:53.929Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t5","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-04T23:59:15.439Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/project-management.plan.md","task_id":"t5","status":"done","notes":"Confirmed auto-generated OpenAPI covers all Project routes, no code change","ts":"2026-09-04T23:59:15.509Z"}
+{"event":"step_completed","step":"implement","verdict":"PASS","ts":"2026-09-05T00:01:21.730Z"}
+{"event":"step_completed","step":"implement","verdict":"PASS","ts":"2026-09-05T00:03:05.062Z"}
+{"event":"lifecycle_step","step":"validate","status":"started","ts":"2026-09-05T00:03:10.270Z"}
+{"event":"lifecycle_step","step":"validate","status":"started","ts":"2026-09-05T00:03:49.127Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1-quality-gates","severity":"error","verdict":"PASS","notes":"fast tier: test+lint PASS. integration tier: no gates configured (unwired command).","gate_outcomes":[{"id":"test","verdict":"pass","tier":"fast","command_sha":"c3f2578d3a465d10ae97391fe2a54f1c10832286381277ce1355ccfb0bbac529"},{"id":"lint","verdict":"pass","tier":"fast","command_sha":"91ede4a4ad8774e8660350d4580b9e41c235ea911f560571d82f5d4f81aba16d"}],"manifest_sha":"2171931","ts":"2026-09-05T00:05:23.535Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1.5-source-manifest","severity":"warning","verdict":"PASS","notes":"SHA matches (2171931); all 13 manifest files committed to git.","ts":"2026-09-05T00:05:34.749Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-8-boundaries","severity":"error","verdict":"PASS","notes":"SKIP — no boundary rules declared (boundaries.yaml is empty).","ts":"2026-09-05T00:05:50.029Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-9-transition-gates","severity":"warning","verdict":"PASS","notes":"SKIP — no transitions configured (gates.yaml transitions: {}).","ts":"2026-09-05T00:05:50.099Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"gate-doctor: 1 error (test gate's 'python' binary not on bare PATH -- only resolves via .venv), 4 warnings (gate-set divergence: integration-test dropped by domain merge; no CI config; lint runner unidentified; integration-test has empty command).","ts":"2026-09-05T00:06:27.384Z"}
+{"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T00:07:17.410Z"}
+{"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T00:08:34.770Z"}
+{"event":"code_drift_detected","drift_source":"tests/test_db.py","drift_at":"2026-09-05T00:28:46.100Z","ts":"2026-09-05T00:28:46.101Z"}

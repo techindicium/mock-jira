@@ -1,0 +1,75 @@
+{"event":"step_completed","step":"specify","verdict":"PASS","ts":"2026-09-04T23:17:01.579Z"}
+{"event":"lifecycle_step","step":"review","status":"started","ts":"2026-09-05T00:09:11.407Z"}
+{"event":"lifecycle_step","step":"review","status":"started","revision":1,"ts":"2026-09-05T00:09:48.623Z"}
+{"event":"reviewer_report","step":"review","reviewer":"quick-synthesized-reviewer","severity":"blocker","verdict":"PASS_WITH_NOTES","notes":"1 warning (SA-1 project_id PATCH-immutability ambiguity), 1 suggestion (SA-2 BEH/error-table asymmetry)","revision":1,"ts":"2026-09-05T00:12:30.205Z"}
+{"event":"step_completed","step":"review","verdict":"PASS_WITH_NOTES","revision":1,"ts":"2026-09-05T00:13:13.220Z"}
+{"event":"step_completed","step":"review","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T00:13:50.808Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-05T00:13:58.049Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-05T00:14:42.537Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":1,"status":"pending","notes":null,"ts":"2026-09-05T00:22:41.487Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":2,"status":"pending","notes":null,"ts":"2026-09-05T00:22:41.490Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":3,"status":"pending","notes":null,"ts":"2026-09-05T00:22:41.491Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":4,"status":"pending","notes":null,"ts":"2026-09-05T00:22:41.491Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":5,"status":"pending","notes":null,"ts":"2026-09-05T00:22:41.492Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":6,"status":"pending","notes":null,"ts":"2026-09-05T00:22:41.492Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T00:22:51.416Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-05T00:23:16.093Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-05T00:23:20.813Z"}
+{"event":"step_completed","step":"route","verdict":"PASS","ts":"2026-09-05T00:25:20.703Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-05T00:25:26.227Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-05T00:26:00.956Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t1","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-05T00:28:34.256Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t1","status":"in_progress","notes":null,"ts":"2026-09-05T00:28:34.326Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t1","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T00:29:35.630Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t1","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T00:29:35.700Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t1","status":"done","notes":"Issue table, sequences, Pydantic models added","ts":"2026-09-05T00:29:35.770Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t2","pass":"provisional","depth":"full","source":"predicate-denied","floor_applied":false,"floor_legs":[],"ts":"2026-09-05T00:29:41.289Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t2","status":"in_progress","notes":null,"ts":"2026-09-05T00:29:41.357Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t2","pass":"final","depth":"full","source":"predicate-denied","floor_applied":true,"floor_legs":["critical-finding","scope-mismatch"],"ts":"2026-09-05T00:30:45.040Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t2","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T00:30:45.114Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t2","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T00:30:45.182Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t2","status":"done","notes":"POST /issues implemented with literal_error validation branch","ts":"2026-09-05T00:30:45.253Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t2","pass":"final","depth":"full","source":"predicate-denied","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-05T00:30:53.931Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t3","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-05T00:33:54.065Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t3","status":"in_progress","notes":null,"ts":"2026-09-05T00:33:54.137Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t3","pass":"final","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-05T00:34:46.874Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t3","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T00:34:46.948Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t3","stage":"code-quality","cycles":2,"findings":1,"ts":"2026-09-05T00:34:47.018Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t3","status":"done","notes":"GET /issues with project_id/status filters; fixed UP035/UP006 lint on first pass","ts":"2026-09-05T00:34:47.086Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t4","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-05T00:34:52.511Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t4","status":"in_progress","notes":null,"ts":"2026-09-05T00:34:52.580Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t4","pass":"final","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-05T00:35:25.669Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t4","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T00:35:25.739Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t4","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T00:35:25.809Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t4","status":"done","notes":"GET /issues/{id} implemented with 404 handling","ts":"2026-09-05T00:35:25.879Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t5","pass":"provisional","depth":"full","source":"predicate-denied","floor_applied":false,"floor_legs":[],"ts":"2026-09-05T00:35:31.706Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t5","status":"in_progress","notes":null,"ts":"2026-09-05T00:35:31.775Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t5","pass":"final","depth":"full","source":"predicate-denied","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-05T00:36:58.936Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t5","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T00:36:59.008Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t5","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T00:36:59.078Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t5","status":"done","notes":"PATCH /issues/{id} implemented; fixed updated_at sub-second precision bug found during GREEN","ts":"2026-09-05T00:36:59.148Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t6","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-05T00:37:04.341Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t6","status":"in_progress","notes":null,"ts":"2026-09-05T00:37:04.409Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t6","pass":"final","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-05T00:37:39.633Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t6","stage":"spec-compliance","cycles":1,"ts":"2026-09-05T00:37:39.706Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t6","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-05T00:37:39.776Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"t6","status":"done","notes":"DELETE /issues/{id} implemented, all 6 tasks complete","ts":"2026-09-05T00:37:39.845Z"}
+{"event":"step_completed","step":"implement","verdict":"PASS","ts":"2026-09-05T00:40:37.760Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"1","status":"done","notes":"Issue table, sequences, Pydantic models added","ts":"2026-09-05T00:41:12.169Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"2","status":"done","notes":"POST /issues implemented with literal_error validation branch","ts":"2026-09-05T00:41:12.238Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"3","status":"done","notes":"GET /issues with project_id/status filters","ts":"2026-09-05T00:41:12.307Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"4","status":"done","notes":"GET /issues/{id} implemented with 404 handling","ts":"2026-09-05T00:41:12.377Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"5","status":"done","notes":"PATCH /issues/{id} implemented; fixed updated_at sub-second precision bug","ts":"2026-09-05T00:41:12.450Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md","task_id":"6","status":"done","notes":"DELETE /issues/{id} implemented, all tasks complete","ts":"2026-09-05T00:41:12.520Z"}
+{"event":"step_completed","step":"implement","verdict":"PASS","ts":"2026-09-05T00:42:49.068Z"}
+{"event":"lifecycle_step","step":"validate","status":"started","ts":"2026-09-05T00:42:54.395Z"}
+{"event":"lifecycle_step","step":"validate","status":"started","ts":"2026-09-05T00:43:22.887Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1-quality-gates","severity":"error","verdict":"PASS","notes":"fast tier: test+lint PASS; integration/e2e tiers no gates configured","gate_outcomes":[{"id":"test","verdict":"pass","tier":"fast","command_sha":"22c558be4a77b6dd61531053c7225bd05830d00bfaf46f14f430e2f0a6a0cb2b"},{"id":"lint","verdict":"pass","tier":"fast","command_sha":"91ede4a4ad8774e8660350d4580b9e41c235ea911f560571d82f5d4f81aba16d"}],"manifest_sha":"bae9198","ts":"2026-09-05T00:45:51.493Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1.5-source-manifest","severity":"warning","verdict":"PASS","notes":"SHA matches (bae9198); all 7 manifest files committed to git","ts":"2026-09-05T00:46:05.056Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1.6-code-drift","severity":"warning","verdict":"PASS","notes":"No code-side drift detected for this spec","ts":"2026-09-05T00:46:18.714Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-8-boundaries","severity":"error","verdict":"PASS","notes":"SKIP — no boundary rules declared","ts":"2026-09-05T00:46:24.195Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-9-transition-gates","severity":"warning","verdict":"PASS","notes":"SKIP — no transitions configured (transitions: {} in gates.yaml)","ts":"2026-09-05T00:46:32.479Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"4 warning-severity findings (gate-set-divergence, ci-config-missing, runner-unknown/lint, empty-command/integration-test); 0 errors","ts":"2026-09-05T00:46:43.279Z"}
+{"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T00:48:31.465Z"}
+{"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T00:49:03.682Z"}
+{"event":"code_drift_detected","drift_source":"app/main.py","drift_at":"2026-09-05T01:17:06.844Z","ts":"2026-09-05T01:17:06.844Z"}

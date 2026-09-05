@@ -3,13 +3,13 @@
 framework: none          # not yet chosen — /adev:brainstorm should decide (e.g. Flask/FastAPI) before implementation
 version: "3.11"
 language: python
-database: none
+database: sqlite
 orm: none
 auth: none
 deployment: none         # runs locally only; no deployment target for a course fixture server
 
 commands:
-  test: "python -m pytest -q"
+  test: "python3 -m pytest -q"
   lint: "ruff check ."
   run: ""                # unset — no entrypoint exists yet
   install: "pip install -r requirements.txt"

@@ -1,0 +1,140 @@
+{
+  "version": 2,
+  "seq": 15,
+  "epics": [
+    {
+      "id": "epic-kphf39",
+      "title": "Project management and OpenAPI contract",
+      "status": "open",
+      "planRef": ".context-index/specs/features/issue-tracker-api/project-management.plan.md",
+      "notes": "Implement the Project management HTTP surface (POST/GET /projects, GET /projects/{id}) backed by local SQLite, plus confirm the auto-generated GET /openapi.json contract.",
+      "created": "2026-09-04T23:39:13.403Z",
+      "updated": "2026-09-04T23:39:13.403Z"
+    },
+    {
+      "id": "epic-16ufl7",
+      "title": "Implementation Plan: Issue lifecycle CRUD",
+      "status": "open",
+      "planRef": ".context-index/specs/features/issue-tracker-api/issue-lifecycle.plan.md",
+      "notes": "Implement the full Issue CRUD HTTP surface (POST/GET/GET-by-id/PATCH/DELETE /issues) with server-assigned per-project sequential keys, extending the existing FastAPI scaffold shipped by the project-management spec.",
+      "created": "2026-09-05T00:22:46.695Z",
+      "updated": "2026-09-05T00:39:39.297Z",
+      "next_action": "Implementation complete; run /adev:validate"
+    },
+    {
+      "id": "epic-t4vfr4",
+      "title": "Fixture seed data",
+      "status": "open",
+      "planRef": ".context-index/specs/features/issue-tracker-api/fixture-seeding.plan.md",
+      "notes": "On a fresh database, seed exactly one Project (ASSIST) and six Issues spanning all statuses/types/priorities, with real canon names and canon-reconciled identifiers, and never seed again once any Project row exists.",
+      "created": "2026-09-05T01:11:01.509Z",
+      "updated": "2026-09-05T01:11:01.509Z"
+    }
+  ],
+  "issues": [
+    {
+      "id": "issue-3bp9te",
+      "title": "Project management and OpenAPI contract",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/issue-tracker-api/project-management.spec.md",
+      "dependencies": [],
+      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/issue-tracker-api/project-management.validate.md | Files verified: 13 | Tests: PASS. Manual verification recommended.",
+      "next_action": "Manual review recommended (medium confidence); then close via /adev:issues close issue-3bp9te",
+      "created": "2026-09-04T23:15:31.992Z",
+      "updated": "2026-09-05T00:07:49.082Z"
+    },
+    {
+      "id": "issue-9fy0nw",
+      "title": "Issue lifecycle CRUD",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/issue-tracker-api/issue-lifecycle.spec.md",
+      "dependencies": [],
+      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/issue-tracker-api/issue-lifecycle.validate.md | Files verified: 7 | Tests: PASS. Manual verification recommended.",
+      "next_action": "Run /adev:review-specs --module issue-tracker-api",
+      "created": "2026-09-04T23:17:01.462Z",
+      "updated": "2026-09-05T00:48:26.624Z"
+    },
+    {
+      "id": "issue-i06jhl",
+      "title": "Fixture seed data",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/issue-tracker-api/fixture-seeding.spec.md",
+      "dependencies": [],
+      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/issue-tracker-api/fixture-seeding.validate.md | Files verified: 3 | Tests: PASS. Manual verification recommended.",
+      "next_action": "Run /adev:review-specs --module issue-tracker-api",
+      "created": "2026-09-04T23:18:34.261Z",
+      "updated": "2026-09-05T01:27:07.154Z"
+    },
+    {
+      "id": "issue-ipn1xg",
+      "title": "Kanban board view, project switcher, and project creation",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/kanban-ui/board-view.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/features/kanban-ui/board-view.spec.md. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --module kanban-ui",
+      "created": "2026-09-04T23:19:33.123Z",
+      "updated": "2026-09-04T23:19:33.123Z"
+    },
+    {
+      "id": "issue-8rb2d1",
+      "title": "Issue create, edit, delete, and column move",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/kanban-ui/issue-crud-forms.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/features/kanban-ui/issue-crud-forms.spec.md. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --module kanban-ui",
+      "created": "2026-09-04T23:20:17.202Z",
+      "updated": "2026-09-04T23:20:17.202Z"
+    },
+    {
+      "id": "issue-1g07sp",
+      "title": "Project MCP tools (list_projects, create_project)",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/mcp-server/project-tools.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/features/mcp-server/project-tools.spec.md. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --module mcp-server",
+      "created": "2026-09-04T23:21:25.477Z",
+      "updated": "2026-09-04T23:21:25.477Z"
+    },
+    {
+      "id": "issue-th0mof",
+      "title": "Issue MCP tools (list/get/create/update/delete)",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/mcp-server/issue-tools.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/features/mcp-server/issue-tools.spec.md. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --module mcp-server",
+      "created": "2026-09-04T23:21:25.591Z",
+      "updated": "2026-09-04T23:21:25.591Z"
+    },
+    {
+      "id": "issue-borgvx",
+      "title": "Docker packaging and run instructions",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/cross-cutting/docker-packaging.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec at .context-index/specs/cross-cutting/docker-packaging.spec.md. Cross-cutting spec. Affects: issue-tracker-api, kanban-ui, mcp-server. Created by /adev:specify on 2026-09-04.",
+      "next_action": "Run /adev:review-specs --spec .context-index/specs/cross-cutting/docker-packaging.spec.md",
+      "created": "2026-09-04T23:22:19.730Z",
+      "updated": "2026-09-04T23:22:19.730Z"
+    }
+  ]
+}
