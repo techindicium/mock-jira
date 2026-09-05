@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 14,
+  "seq": 15,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -66,10 +66,10 @@
       "type": "feature",
       "spec_ref": ".context-index/specs/features/issue-tracker-api/fixture-seeding.spec.md",
       "dependencies": [],
-      "notes": "Bound 1:1 to spec at .context-index/specs/features/issue-tracker-api/fixture-seeding.spec.md. Created by /adev:specify on 2026-09-04.",
+      "notes": "Validated: MEDIUM confidence (2026-09-05) | Report: .context-index/specs/features/issue-tracker-api/fixture-seeding.validate.md | Files verified: 3 | Tests: PASS. Manual verification recommended.",
       "next_action": "Run /adev:review-specs --module issue-tracker-api",
       "created": "2026-09-04T23:18:34.261Z",
-      "updated": "2026-09-04T23:18:34.261Z"
+      "updated": "2026-09-05T01:27:07.154Z"
     },
     {
       "id": "issue-ipn1xg",
