@@ -26,6 +26,7 @@ source-manifest:
     - tests/mcp_server/test_config.py
     - tests/mcp_server/test_project_tools.py
   computed-at: "2026-09-05T12:45:29.187Z"
+drift_detected: true
 ---
 
 # Live Spec: Project MCP tools (list_projects, create_project)

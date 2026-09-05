@@ -61,3 +61,4 @@
 {"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"3 error + 5 warning findings from gate doctor: test/lint gates point at gitignored .venv paths (won't run in CI/fresh clone); test-js glob under-expands on sh; no CI config found.","ts":"2026-09-05T17:43:31.874Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T17:44:52.228Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T17:47:07.476Z"}
+{"event":"code_drift_detected","drift_source":"tests/mcp_server/test_client.py","drift_at":"2026-09-05T18:13:13.667Z","ts":"2026-09-05T18:13:13.669Z"}

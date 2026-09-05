@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "_generated_by": "/adev:route — do not hand-edit; re-run instead.",
+  "entries": [
+    {
+      "task_id": "t1",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-1/2/3 and the 404 error row covered by exact test code, extending the already-tested IssueTrackerClient/_request pattern list_projects established; 2-file change."
+    },
+    {
+      "task_id": "t2",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-4/4b/5/6 and the 422 row covered by exact test code, extending create_project's payload-building pattern for three new client methods; 2-file change."
+    },
+    {
+      "task_id": "t3",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 1,
+        "blast_radius": 0.8,
+        "novelty": 1
+      },
+      "rationale": "Directly mirrors the already-working, SDK-verified _client()/@mcp.tool()/try-except-finally shape in mcp_server/tools/projects.py; 3-file change (new module + test + one-line server.py import)."
+    },
+    {
+      "task_id": "t4",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 1,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "Extends the tool file Task 3 just established with an explicit, plan-documented Literal-vs-str design decision; exact test code given, 2-file change."
+    },
+    {
+      "task_id": "t5",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 0.8
+      },
+      "rationale": "Extends the established tool pattern but adds a genuinely new nuance (SA-2: id/key/project_id accepted on schema, silently dropped before the client call); exact test code given."
+    },
+    {
+      "task_id": "t6",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "Extends the established tool pattern with the SA-3 synthesized {\"deleted\": true, \"id\": <id>} confirmation shape; exact test code given, 2-file change."
+    },
+    {
+      "task_id": "t7",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 1,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "Pure regression confirmation reusing the exact fake-client pattern from Tasks 3-6; no new production code expected, single test-file edit."
+    }
+  ]
+}
