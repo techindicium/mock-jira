@@ -4,3 +4,14 @@
 {"event":"reviewer_report","step":"review","reviewer":"quick-synthesized-reviewer","severity":"blocker","verdict":"PASS_WITH_NOTES","notes":"Quick tier (risk_level: low). 1 warning (health-check endpoint unspecified), 1 suggestion (Error Cases table missing invalid-enum row). 0 blockers.","ts":"2026-09-06T20:05:16.529Z"}
 {"event":"step_completed","step":"review","verdict":"PASS_WITH_NOTES","revision":1,"ts":"2026-09-06T20:06:13.706Z"}
 {"event":"step_completed","step":"review","verdict":"PASS_WITH_NOTES","ts":"2026-09-06T20:06:49.767Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-06T20:06:57.282Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-06T20:07:39.114Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"1","status":"pending","notes":"Real-server-process fixture","ts":"2026-09-06T20:20:12.206Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"2","status":"pending","notes":"Project CRUD e2e tests","ts":"2026-09-06T20:20:12.210Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"3","status":"pending","notes":"Issue lifecycle e2e tests","ts":"2026-09-06T20:20:12.211Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"4","status":"pending","notes":"Error-path e2e tests","ts":"2026-09-06T20:20:12.211Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"5","status":"pending","notes":"OpenAPI + seed-data e2e tests","ts":"2026-09-06T20:20:12.212Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"6","status":"pending","notes":"Isolate tests_e2e/ from the fast gate","ts":"2026-09-06T20:20:12.212Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"7","status":"pending","notes":"Wire the e2e-smoke gate","ts":"2026-09-06T20:20:12.213Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-06T20:20:24.668Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-06T20:20:48.927Z"}

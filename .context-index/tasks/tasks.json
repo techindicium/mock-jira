@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 29,
+  "seq": 30,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -74,6 +74,15 @@
       "notes": "Package issue-tracker-api and mcp-server into two Dockerfiles plus a docker-compose.yml, wired with a named volume for the SQLite file and a PORT/API_BASE_URL/DATABASE_PATH env-var convention, with run instructions in the README/CLAUDE.md.",
       "created": "2026-09-05T18:55:59.013Z",
       "updated": "2026-09-05T18:55:59.013Z"
+    },
+    {
+      "id": "epic-7q32wl",
+      "title": "Implementation Plan: End-to-end API test suite (real HTTP)",
+      "status": "open",
+      "planRef": ".context-index/specs/features/issue-tracker-api/api-e2e.plan.md",
+      "notes": "Add a real-HTTP e2e test suite (tests_e2e/) that starts app.main:app as its own OS process and drives the full Project/Issue CRUD surface, error paths, OpenAPI contract, and startup seeding over a live socket, with a reusable server-process fixture and a new e2e-smoke gate.",
+      "created": "2026-09-06T20:20:19.354Z",
+      "updated": "2026-09-06T20:20:19.354Z"
     }
   ],
   "issues": [
