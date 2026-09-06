@@ -26,3 +26,9 @@
 {"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","status":"in_progress","notes":null,"ts":"2026-09-06T21:03:28.192Z"}
 {"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","status":"done","notes":"Playwright fixture + deps; RED/GREEN; 2 tests pass","ts":"2026-09-06T21:03:28.261Z"}
 {"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:03:37.794Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:04:45.275Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","pass":"final","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-06T21:04:45.423Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:05:11.888Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","status":"in_progress","notes":null,"ts":"2026-09-06T21:05:19.301Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:05:19.372Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","status":"done","notes":"BEH-1 board-render e2e test; 1 test pass","ts":"2026-09-06T21:05:19.442Z"}
