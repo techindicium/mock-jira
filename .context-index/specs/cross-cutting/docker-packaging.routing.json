@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "_generated_by": "/adev:route — do not hand-edit; re-run instead.",
+  "entries": [
+    {
+      "task_id": "t1",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "DATABASE_PATH/PORT env-var read and startup error fully specified with exact code and tests; single-file blast radius (app/main.py); no golden sample but mirrors existing conftest monkeypatch pattern; mechanical implementation."
+    },
+    {
+      "task_id": "t2",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "PORT-driven transport switch fully specified with exact code and tests; single-file blast radius (mcp_server/server.py); no golden sample but standard env-var-conditional pattern; mechanical implementation."
+    },
+    {
+      "task_id": "t3",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 1,
+        "novelty": 0.8
+      },
+      "rationale": "issue-tracker-api Dockerfile fully specified with literal content and tests; first Dockerfile in this repo (no in-repo precedent) but a well-known python:slim pattern; 2-file blast radius, minor healthcheck-tuning judgment call."
+    },
+    {
+      "task_id": "t4",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "mcp-server Dockerfile fully specified with literal content and tests; simpler than Task 3 (no healthcheck); first Dockerfile in this repo but standard python:slim pattern; 2-file blast radius, fully mechanical."
+    },
+    {
+      "task_id": "t5",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.8,
+        "novelty": 0.8
+      },
+      "rationale": "docker-compose.yml fully specified with literal content and tests covering BEH-2/3/4; combines health-gated depends_on, named volume, and a deliberate dual-host-port design across compose + requirements.txt + test file; no in-repo compose precedent."
+    },
+    {
+      "task_id": "t6",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 0.6,
+        "novelty": 1
+      },
+      "rationale": "Run-instruction docs fully specified with exact prose and tests; touches README, constitution.md, and regenerated CLAUDE.md across docs/context-index/tests, but purely mechanical doc edits with no logic risk."
+    }
+  ]
+}

@@ -104,6 +104,21 @@ ruff check .
 
 <!-- No integration-test command yet — seeded once this repo has one. -->
 
+### Running with Docker
+
+```bash
+docker compose up
+```
+
+- Builds and starts `issue-tracker-api` (also serves `kanban-ui`'s static assets, published at
+  `http://localhost:8000`, override with `PORT=<port>`) and `mcp-server` (published at
+  `http://localhost:8001`, override with `MCP_PORT=<port>`), in dependency order.
+- Neither port is exposed beyond `localhost` by default.
+- The SQLite database lives in a named volume (`mock_jira_db`) and survives `docker compose down`
+  (without `-v`).
+- Confirm health: `docker compose ps` or `curl http://localhost:8000/`. Combined logs:
+  `docker compose logs -f`. Tear down: `docker compose down` (`-v` to also wipe data).
+
 ## Task Management
 
 Issues are tracked using the backend configured in `manifest.yaml` (`tasks.backend`: `json`).

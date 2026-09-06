@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 24,
+  "seq": 26,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -65,6 +65,15 @@
       "notes": "Extend mcp_server/ with list_issues, get_issue, create_issue, update_issue, and delete_issue MCP tools thinly wrapping issue-tracker-api's Issue endpoints, matching project-tools' established client/error/tool-registration conventions.",
       "created": "2026-09-05T18:04:01.393Z",
       "updated": "2026-09-05T18:04:01.393Z"
+    },
+    {
+      "id": "epic-44yauq",
+      "title": "Docker packaging and run instructions",
+      "status": "open",
+      "planRef": ".context-index/specs/cross-cutting/docker-packaging.plan.md",
+      "notes": "Package issue-tracker-api and mcp-server into two Dockerfiles plus a docker-compose.yml, wired with a named volume for the SQLite file and a PORT/API_BASE_URL/DATABASE_PATH env-var convention, with run instructions in the README/CLAUDE.md.",
+      "created": "2026-09-05T18:55:59.013Z",
+      "updated": "2026-09-05T18:55:59.013Z"
     }
   ],
   "issues": [
@@ -167,10 +176,10 @@
       "type": "feature",
       "spec_ref": ".context-index/specs/cross-cutting/docker-packaging.spec.md",
       "dependencies": [],
-      "notes": "Bound 1:1 to spec at .context-index/specs/cross-cutting/docker-packaging.spec.md. Cross-cutting spec. Affects: issue-tracker-api, kanban-ui, mcp-server. Created by /adev:specify on 2026-09-04.",
+      "notes": "Validated: MEDIUM confidence (2026-09-06) | Report: .context-index/specs/cross-cutting/docker-packaging.validate.md | Files verified: 11 | Tests: PASS. Manual verification recommended.",
       "next_action": "Run /adev:review-specs --spec .context-index/specs/cross-cutting/docker-packaging.spec.md",
       "created": "2026-09-04T23:22:19.730Z",
-      "updated": "2026-09-04T23:22:19.730Z"
+      "updated": "2026-09-06T17:44:57.161Z"
     }
   ]
 }

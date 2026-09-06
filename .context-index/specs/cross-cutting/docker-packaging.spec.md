@@ -1,15 +1,31 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 affects: [issue-tracker-api, kanban-ui, mcp-server]
-status: review-pending
+status: validated
 risk_level: low
 milestone: mvp
 revision: 1
 charter-revision: 4
 created: 2026-09-04
-updated: 2026-09-04
+updated: 2026-09-06
 kind: behavioral
 mode: cross-cutting
+source-manifest:
+  sha: "33dc650"
+  files:
+    - .context-index/constitution.md
+    - CLAUDE.md
+    - README.md
+    - app/main.py
+    - docker-compose.yml
+    - docker/issue-tracker-api/Dockerfile
+    - docker/mcp-server/Dockerfile
+    - mcp_server/server.py
+    - requirements.txt
+    - tests/mcp_server/test_transport.py
+    - tests/test_docker_deploy.py
+    - tests/test_main_env.py
+  computed-at: "2026-09-06T17:37:42.526Z"
 ---
 
 # Live Spec: Docker packaging and run instructions
@@ -88,11 +104,11 @@ mode: cross-cutting
 
 ## Acceptance Criteria
 
-- [ ] `docker compose build` produces exactly two images (BEH-1)
-- [ ] `docker compose up` starts issue-tracker-api first, then mcp-server once healthy (BEH-2)
-- [ ] The SQLite file survives a `docker compose down`/`up` cycle (BEH-3)
-- [ ] `PORT` overrides remap host ports with no code change (BEH-4)
-- [ ] `docker compose logs` shows both containers' combined output (BEH-5)
-- [ ] No port is exposed beyond localhost by default
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] `docker compose build` produces exactly two images (BEH-1)
+- [x] `docker compose up` starts issue-tracker-api first, then mcp-server once healthy (BEH-2)
+- [x] The SQLite file survives a `docker compose down`/`up` cycle (BEH-3)
+- [x] `PORT` overrides remap host ports with no code change (BEH-4)
+- [x] `docker compose logs` shows both containers' combined output (BEH-5)
+- [x] No port is exposed beyond localhost by default
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced

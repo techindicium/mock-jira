@@ -1,3 +1,5 @@
+import os
+import sqlite3
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -12,7 +14,12 @@ from app.routers.issues import router as issues_router
 from app.routers.projects import router as projects_router
 from app.seed import seed_if_empty
 
-DB_PATH = "mock_jira.db"
+
+def resolve_db_path() -> str:
+    return os.environ.get("DATABASE_PATH", "mock_jira.db")
+
+
+DB_PATH = resolve_db_path()
 STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 app = FastAPI(title="mock-jira", version="0.1.0")
@@ -32,7 +39,12 @@ def serve_board() -> FileResponse:
 
 @app.on_event("startup")
 def on_startup() -> None:
-    conn = get_connection(DB_PATH)
-    create_schema(conn)
+    try:
+        conn = get_connection(DB_PATH)
+        create_schema(conn)
+    except sqlite3.OperationalError as exc:
+        raise RuntimeError(
+            f"DATABASE_PATH '{DB_PATH}' is not writable: {exc}"
+        ) from exc
     seed_if_empty(conn, DB_PATH)
     app.state.db_conn = conn  # kept open for the process lifetime; sqlite3 handles serialization
