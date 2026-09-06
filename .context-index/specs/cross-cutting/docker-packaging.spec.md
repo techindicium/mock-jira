@@ -26,6 +26,7 @@ source-manifest:
     - tests/test_docker_deploy.py
     - tests/test_main_env.py
   computed-at: "2026-09-06T17:37:42.526Z"
+drift_detected: true
 ---
 
 # Live Spec: Docker packaging and run instructions

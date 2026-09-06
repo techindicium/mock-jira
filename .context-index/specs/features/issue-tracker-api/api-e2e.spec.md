@@ -25,6 +25,7 @@ source-manifest:
     - tests_e2e/test_project_crud_e2e.py
     - tests_e2e/test_server_fixture.py
   computed-at: "2026-09-06T20:31:56.801Z"
+drift_detected: true
 ---
 
 # Live Spec: End-to-end API test suite (real HTTP)
