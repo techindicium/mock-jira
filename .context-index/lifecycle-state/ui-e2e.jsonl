@@ -32,3 +32,7 @@
 {"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","status":"in_progress","notes":null,"ts":"2026-09-06T21:05:19.301Z"}
 {"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:05:19.372Z"}
 {"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","status":"done","notes":"BEH-1 board-render e2e test; 1 test pass","ts":"2026-09-06T21:05:19.442Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t3","status":"in_progress","notes":null,"ts":"2026-09-06T21:05:42.982Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t3","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:05:43.128Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t3","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:05:49.320Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t3","status":"done","notes":"BEH-2 column-move e2e test; 1 test pass","ts":"2026-09-06T21:05:49.391Z"}
