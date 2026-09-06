@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 33,
+  "seq": 34,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -92,6 +92,15 @@
       "notes": "Add a real-Chromium Playwright e2e suite (BEH-1..6 + network-failure error path) driving kanban-ui's actual served page against the real issue-tracker-api server, reusing the api-e2e fixture with its own isolated server instance.",
       "created": "2026-09-06T20:54:27.757Z",
       "updated": "2026-09-06T20:54:27.757Z"
+    },
+    {
+      "id": "epic-ffjbhv",
+      "title": "End-to-end MCP test suite (real client/transport)",
+      "status": "open",
+      "planRef": ".context-index/specs/features/mcp-server/mcp-e2e.plan.md",
+      "notes": "Add a real-client, real-transport e2e suite driving mcp-server's already-implemented tools over streamable-http, cross-verified against issue-tracker-api via real HTTP.",
+      "created": "2026-09-06T21:36:01.305Z",
+      "updated": "2026-09-06T21:36:01.305Z"
     }
   ],
   "issues": [
