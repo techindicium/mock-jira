@@ -32,9 +32,17 @@
     return counts;
   }
 
+  const KNOWN_PRIORITIES = ["low", "medium", "high"];
+
+  function priorityStripeAttr(priority) {
+    return KNOWN_PRIORITIES.includes(priority) ? priority : "unknown";
+  }
+
   function buildCardHtml(issue) {
     return (
-      `<article class="card" data-issue-id="${issue.id}" draggable="true">` +
+      `<article class="card" data-issue-id="${issue.id}" ` +
+      `data-priority="${priorityStripeAttr(issue.priority)}" draggable="true">` +
+      `<p class="card-key">${escapeHtml(issue.key || "")}</p>` +
       `<h3>${escapeHtml(issue.summary)}</h3>` +
       `<p class="card-meta">${escapeHtml(issue.issue_type)} &middot; ` +
       `${escapeHtml(issue.priority)} &middot; ` +
@@ -133,7 +141,8 @@
   }
 
   return {
-    BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, formatFetchError,
+    BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, priorityStripeAttr,
+    formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
     shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
     buildIssueCreatePayload, diffIssueFields, moveIssueStatus, removeIssueById,

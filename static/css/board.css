@@ -109,31 +109,64 @@ header h1 {
 }
 
 .card {
-  background: #fafbfc;
-  border: 1px solid #e2e4e8;
-  border-radius: 4px;
-  padding: 0.5rem 0.6rem;
+  background: var(--paper);
+  border: 1px solid var(--ink-line);
+  border-left-width: 5px;
+  border-left-style: solid;
+  border-radius: 2px;
+  padding: 0.55rem 0.65rem;
   cursor: grab;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  overflow-wrap: anywhere;
 }
 
 .card:active {
   cursor: grabbing;
 }
 
+.card[data-priority="high"] {
+  border-left-color: var(--stamp-red);
+}
+
+.card[data-priority="medium"] {
+  border-left-color: var(--stamp-gold);
+}
+
+.card[data-priority="low"] {
+  border-left-color: var(--stamp-green);
+}
+
+.card[data-priority="unknown"] {
+  border-left-color: var(--ink-line);
+}
+
 .column.drag-over {
-  background: #eef4ff;
-  border-color: #7aa7ff;
+  background: var(--rail-light);
+  border-color: var(--stamp-gold);
+}
+
+.card-key {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--ink-line);
+  margin: 0 0 0.2rem 0;
+  letter-spacing: 0.01em;
 }
 
 .card h3 {
   font-size: 0.9rem;
+  font-weight: 500;
   margin: 0 0 0.25rem 0;
+  color: var(--ink-text-on-paper);
+  overflow-wrap: anywhere;
 }
 
 .card-meta {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--ink-line);
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 #empty-state,
