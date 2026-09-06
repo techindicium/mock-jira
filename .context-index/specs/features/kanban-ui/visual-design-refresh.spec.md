@@ -1,6 +1,6 @@
 ---
 charter: kanban-ui
-status: review-passed
+status: implemented
 risk_level: low
 milestone: v1.2
 revision: 1
@@ -8,6 +8,22 @@ charter-revision: 12
 created: 2026-09-06
 updated: 2026-09-06
 kind: behavioral
+source-manifest:
+  sha: "470d4a0"
+  files:
+    - static/css/board.css
+    - static/index.html
+    - static/js/board-logic.js
+    - static/js/board.js
+    - tests_js/visual-refresh-beh-1-design-tokens.test.js
+    - tests_js/visual-refresh-beh-2-priority-stripe.test.js
+    - tests_js/visual-refresh-beh-3-issue-key.test.js
+    - tests_js/visual-refresh-beh-4-column-count.test.js
+    - tests_js/visual-refresh-beh-5-switcher-plate.test.js
+    - tests_js/visual-refresh-beh-6-form-fields-unchanged.test.js
+    - tests_js/visual-refresh-beh-7-8-accessibility-css.test.js
+    - tests_js/visual-refresh-no-cdn-fonts.test.js
+  computed-at: "2026-09-06T23:33:20.248Z"
 ---
 
 # Live Spec: Visual design refresh — dispatch-board identity

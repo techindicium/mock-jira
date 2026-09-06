@@ -1,7 +1,7 @@
 ---
 status: approved
 kind: feature
-revision: 15
+revision: 16
 updated: 2026-09-06
 ---
 
@@ -81,7 +81,7 @@ no separate server, no CORS configuration, and no runtime base-URL configuration
 | Project switcher | List Projects, select one to filter the board | should-have | mvp | validated |
 | Create project | Simple form calling the API's create-project endpoint | should-have | mvp | validated |
 | End-to-end UI test suite | Real browser automation (a real rendering engine, real clicks/drags/form fills) driving the actual served page — the same interface a person uses, never calling board-logic.js's functions directly | must-have | v1.1 | validated |
-| Visual design refresh | Distinctive ticket/dispatch-board visual identity — cards read as ticket stubs on a rail-mounted board, not a generic SaaS dashboard; no functional/behavioral change to any existing capability | should-have | v1.2 | implementing |
+| Visual design refresh | Distinctive ticket/dispatch-board visual identity — cards read as ticket stubs on a rail-mounted board, not a generic SaaS dashboard; no functional/behavioral change to any existing capability | should-have | v1.2 | implemented |
 
 ## Deferred Capabilities
 
