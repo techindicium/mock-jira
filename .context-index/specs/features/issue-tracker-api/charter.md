@@ -88,7 +88,7 @@ UI and MCP server modules are both clients of this API, never the other way arou
 | Delete Issue | Delete a single Issue | must-have | mvp | validated |
 | Seed fixture data | Populate the database with realistic starting Projects/Issues on first run, reconciled with `course-shared/canon` identifiers | must-have | mvp | validated |
 | OpenAPI contract | Auto-generated, browsable API documentation | should-have | mvp | validated |
-| End-to-end API test suite | Real HTTP calls (over a real socket, against a real running server process) exercising the full Project/Issue CRUD surface — the same interface a consuming track's real client uses, never FastAPI's in-process TestClient | must-have | v1.1 | — |
+| End-to-end API test suite | Real HTTP calls (over a real socket, against a real running server process) exercising the full Project/Issue CRUD surface — the same interface a consuming track's real client uses, never FastAPI's in-process TestClient | must-have | v1.1 | specified |
 
 ## Deferred Capabilities
 

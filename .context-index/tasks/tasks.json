@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 26,
+  "seq": 29,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -180,6 +180,45 @@
       "next_action": "Run /adev:review-specs --spec .context-index/specs/cross-cutting/docker-packaging.spec.md",
       "created": "2026-09-04T23:22:19.730Z",
       "updated": "2026-09-06T17:44:57.161Z"
+    },
+    {
+      "id": "issue-ehm73o",
+      "title": "End-to-end API test suite (real HTTP)",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/issue-tracker-api/api-e2e.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec. Created by /adev:specify on 2026-09-06.",
+      "next_action": "Run /adev:review-specs --spec .context-index/specs/features/issue-tracker-api/api-e2e.spec.md",
+      "created": "2026-09-06T20:00:48.695Z",
+      "updated": "2026-09-06T20:00:48.695Z"
+    },
+    {
+      "id": "issue-f2sf64",
+      "title": "End-to-end UI test suite (real browser)",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/kanban-ui/ui-e2e.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec. Created by /adev:specify on 2026-09-06.",
+      "next_action": "Run /adev:review-specs --spec .context-index/specs/features/kanban-ui/ui-e2e.spec.md",
+      "created": "2026-09-06T20:00:48.811Z",
+      "updated": "2026-09-06T20:00:48.811Z"
+    },
+    {
+      "id": "issue-sgyo81",
+      "title": "End-to-end MCP test suite (real client/transport)",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/mcp-server/mcp-e2e.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec. Created by /adev:specify on 2026-09-06.",
+      "next_action": "Run /adev:review-specs --spec .context-index/specs/features/mcp-server/mcp-e2e.spec.md",
+      "created": "2026-09-06T20:00:48.929Z",
+      "updated": "2026-09-06T20:00:48.929Z"
     }
   ]
 }
