@@ -1,7 +1,7 @@
 ---
 status: approved
 kind: feature
-revision: 10
+revision: 16
 updated: 2026-09-06
 ---
 
@@ -34,6 +34,10 @@ UI and MCP server modules are both clients of this API, never the other way arou
   Project's `key` is immutable once created (see Invariants), so Update has no mutable field to
   target yet, and Delete is deferred (see Deferred Capabilities) rather than chartering a
   cascade/conflict rule this milestone doesn't need.
+- User entity: a structured directory record (`name`, optional `email`, optional free-text
+  `role`) describing a person who may be referenced elsewhere in this API. Create/List/Get only
+  — an additive directory, not a hard relational dependency of Issue (see Invariants and Out of
+  Scope).
 - SQLite persistence, a single local file, created fresh on first run.
 - Seed fixture data whose account/identifier references reconcile with
   `../course-shared/canon/identifiers.md` where an overlap exists.
@@ -41,8 +45,16 @@ UI and MCP server modules are both clients of this API, never the other way arou
 
 ### Out of Scope
 
-- Authentication/authorization — there is no real user model; `assignee`/`reporter` are free-text
-  labels, not accounts with credentials.
+- Authentication/authorization/credentials/sessions — the User entity is a structured directory
+  record only (name/email/role), never an account. There is no login, no password, no token, no
+  session, and no permissions semantics anywhere in this API. This is an explicit, scoped
+  exception to nothing in the constitution's "no real auth" posture — the constitution forbids
+  real authentication, not a structured record of who's who; adding a User directory does not
+  reintroduce auth by another name.
+- A foreign-key relationship from Issue to User. `Issue.assignee` and `Issue.reporter` remain
+  free-text strings exactly as before; the User directory is additive and independently queried,
+  never joined against Issue at the schema level. This preserves the existing Issue contract
+  unchanged (see "Breaking API changes are coordinated, not silent").
 - Comments, attachments, activity history, webhooks, notifications.
 - Configurable/custom workflows — the three-status kanban model is fixed.
 - Full JQL-style search — filtering is limited to the fields capabilities below name.
@@ -62,11 +74,16 @@ UI and MCP server modules are both clients of this API, never the other way arou
 |--------|-------------|----------------|
 | Project | A named grouping of issues | `id`, `key` (short, unique, e.g. `SDLC`), `name`, `description` |
 | Issue | A single trackable unit of work | `id`, `key` (derived, e.g. `SDLC-1`), `project_id`, `summary`, `description`, `issue_type` (`bug`\|`task`\|`story`), `status` (`todo`\|`in_progress`\|`done`), `priority` (`low`\|`medium`\|`high`), `assignee`, `reporter`, `created_at`, `updated_at` |
+| User | A directory record describing a person, for reference only — not an account | `id`, `name` (required), `email` (optional, unique when present), `role` (optional free-text, descriptive only, no permissions semantics) |
 
 ### Relationships
 
 - Every Issue belongs to exactly one Project (`Issue.project_id` → `Project.id`). A Project has
   zero or more Issues.
+- User has no relationship to Project or Issue at the schema level. It is an independent,
+  additive directory — `Issue.assignee`/`Issue.reporter` stay free-text strings, not foreign keys
+  to `User.id` (see Out of Scope). A client may use the User list to auto-fill those free-text
+  fields, but this API never enforces or joins that association.
 
 ### Invariants
 
@@ -76,6 +93,8 @@ UI and MCP server modules are both clients of this API, never the other way arou
 - A Project's `key` is unique, immutable once created, and used only to derive Issue keys — it is
   never renumbered (mirrors the identifier-stability rule other course repos already follow for
   the shared canon).
+- A User's `email`, when provided, is unique across all Users; a User's `name` is required and
+  non-empty. A User's `id` is never reused once assigned.
 
 ## Capability Map
 
@@ -89,6 +108,7 @@ UI and MCP server modules are both clients of this API, never the other way arou
 | Seed fixture data | Populate the database with realistic starting Projects/Issues on first run, reconciled with `course-shared/canon` identifiers | must-have | mvp | validated |
 | OpenAPI contract | Auto-generated, browsable API documentation | should-have | mvp | validated |
 | End-to-end API test suite | Real HTTP calls (over a real socket, against a real running server process) exercising the full Project/Issue CRUD surface — the same interface a consuming track's real client uses, never FastAPI's in-process TestClient | must-have | v1.1 | validated |
+| User directory (create/list/get) | Create a User, list all Users, fetch one by id — an additive, structured directory of people (name/email/role), no authentication, no FK from Issue | must-have | v1.2 | validated |
 
 ## Deferred Capabilities
 
@@ -97,6 +117,8 @@ UI and MCP server modules are both clients of this API, never the other way arou
 | Comments on Issues | Not needed by either consuming track yet | v2 | — |
 | Configurable workflow rules | Fixed 3-status model is sufficient for course exercises | v2 | — |
 | Delete Project | Deferred until a real cascade/conflict rule is needed — no consumer requires it yet | v2 | — |
+| Update/Delete User | Deferred until a consumer needs to edit or remove a directory entry — the initial directory is create/list/get only, mirroring how Project deferred Update/Delete until a real need appeared | v2 | — |
+| Issue-to-User linkage (foreign key) | Deferred indefinitely per charter Out of Scope — `assignee`/`reporter` stay free-text; a future kanban-ui user picker only auto-fills those fields client-side | — | — |
 
 ## Interface Contracts
 
@@ -112,6 +134,9 @@ UI and MCP server modules are both clients of this API, never the other way arou
 | `GET /issues/{id}` | REST endpoint | Fetch one Issue |
 | `PATCH /issues/{id}` | REST endpoint | Update one or more Issue fields, including `status` |
 | `DELETE /issues/{id}` | REST endpoint | Delete one Issue |
+| `GET /users` | REST endpoint | List all Users |
+| `POST /users` | REST endpoint | Create a User |
+| `GET /users/{id}` | REST endpoint | Fetch one User |
 | `GET /openapi.json` | REST endpoint | Auto-generated OpenAPI contract document |
 
 ### Consumed APIs
