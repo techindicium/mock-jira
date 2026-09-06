@@ -309,3 +309,17 @@ button:hover {
   border: 1px solid var(--ink-line);
   border-radius: 2px;
 }
+
+/* ── Accessibility: deliberate keyboard focus, respected reduced-motion ──── */
+
+:focus-visible {
+  outline: 2px solid var(--stamp-gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
