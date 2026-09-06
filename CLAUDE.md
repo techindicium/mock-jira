@@ -48,6 +48,7 @@ something students build; they are a fixed dependency other tracks build against
 pip install -r requirements.txt
 python3 -m pytest -q    # tests
 ruff check .             # lint
+docker compose up        # run the full stack (issue-tracker-api + mcp-server)
 ```
 
 ## Context Routing
