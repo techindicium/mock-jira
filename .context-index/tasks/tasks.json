@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 25,
+  "seq": 26,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -176,10 +176,10 @@
       "type": "feature",
       "spec_ref": ".context-index/specs/cross-cutting/docker-packaging.spec.md",
       "dependencies": [],
-      "notes": "Bound 1:1 to spec at .context-index/specs/cross-cutting/docker-packaging.spec.md. Cross-cutting spec. Affects: issue-tracker-api, kanban-ui, mcp-server. Created by /adev:specify on 2026-09-04.",
+      "notes": "Validated: MEDIUM confidence (2026-09-06) | Report: .context-index/specs/cross-cutting/docker-packaging.validate.md | Files verified: 11 | Tests: PASS. Manual verification recommended.",
       "next_action": "Run /adev:review-specs --spec .context-index/specs/cross-cutting/docker-packaging.spec.md",
       "created": "2026-09-04T23:22:19.730Z",
-      "updated": "2026-09-04T23:22:19.730Z"
+      "updated": "2026-09-06T17:44:57.161Z"
     }
   ]
 }

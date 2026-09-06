@@ -1,7 +1,7 @@
 ---
 partial_schema: implement@1
 affects: [issue-tracker-api, kanban-ui, mcp-server]
-status: implemented
+status: validated
 risk_level: low
 milestone: mvp
 revision: 1
