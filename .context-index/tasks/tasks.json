@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 34,
+  "seq": 35,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -242,10 +242,10 @@
       "type": "feature",
       "spec_ref": ".context-index/specs/features/mcp-server/mcp-e2e.spec.md",
       "dependencies": [],
-      "notes": "Bound 1:1 to spec. Created by /adev:specify on 2026-09-06.",
+      "notes": "Validated: MEDIUM confidence (2026-09-06) | Report: .context-index/specs/features/mcp-server/mcp-e2e.validate.md | Files verified: 12 | Tests: PASS. Manual verification recommended.",
       "next_action": "Run /adev:review-specs --spec .context-index/specs/features/mcp-server/mcp-e2e.spec.md",
       "created": "2026-09-06T20:00:48.929Z",
-      "updated": "2026-09-06T20:00:48.929Z"
+      "updated": "2026-09-06T22:07:35.757Z"
     }
   ]
 }
