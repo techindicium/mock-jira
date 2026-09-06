@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 31,
+  "seq": 32,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -83,6 +83,15 @@
       "notes": "Validated: PASS (2026-09-06) | Report: .context-index/specs/features/issue-tracker-api/api-e2e.validate.md | Tests: PASS (105 fast + 44 JS + 11 e2e). Confidence: LOW — adev verify issue could not match this epic's plan_ref (known field-naming bug: epic store uses planRef, verifier expects plan_ref; already reported, non-blocking). Manual close recommended: adev issues close epic-7q32wl --reason \"validated, all tasks implemented\".",
       "created": "2026-09-06T20:20:19.354Z",
       "updated": "2026-09-06T20:39:57.352Z"
+    },
+    {
+      "id": "epic-ngpyfe",
+      "title": "End-to-end UI test suite (real browser) implementation plan",
+      "status": "open",
+      "planRef": ".context-index/specs/features/kanban-ui/ui-e2e.plan.md",
+      "notes": "Add a real-Chromium Playwright e2e suite (BEH-1..6 + network-failure error path) driving kanban-ui's actual served page against the real issue-tracker-api server, reusing the api-e2e fixture with its own isolated server instance.",
+      "created": "2026-09-06T20:54:27.757Z",
+      "updated": "2026-09-06T20:54:27.757Z"
     }
   ],
   "issues": [

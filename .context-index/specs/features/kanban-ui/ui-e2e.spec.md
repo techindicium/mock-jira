@@ -1,7 +1,7 @@
 ---
 partial_schema: spec@1
 charter: kanban-ui
-status: review-pending
+status: review-passed
 risk_level: low
 milestone: v1.1
 revision: 1
