@@ -1,7 +1,7 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 charter: kanban-ui
-status: review-passed
+status: implemented
 risk_level: low
 milestone: v1.1
 revision: 1
@@ -17,6 +17,22 @@ infra_requirements:
         - name: playwright
       notes: "One-time local setup: `playwright install chromium` downloads the browser binary this suite drives. No credentials, no network target beyond the real server this suite itself starts on localhost."
   ci_tag: "e2e"
+source-manifest:
+  sha: "b49b915"
+  files:
+    - .context-index/constitution.md
+    - README.md
+    - requirements-e2e.txt
+    - tests_e2e/browser.py
+    - tests_e2e/conftest.py
+    - tests_e2e/test_browser_fixture.py
+    - tests_e2e/test_ui_board_render_e2e.py
+    - tests_e2e/test_ui_column_move_e2e.py
+    - tests_e2e/test_ui_delete_issue_e2e.py
+    - tests_e2e/test_ui_error_path_e2e.py
+    - tests_e2e/test_ui_issue_forms_e2e.py
+    - tests_e2e/test_ui_project_switcher_e2e.py
+  computed-at: "2026-09-06T21:08:52.923Z"
 ---
 
 # Live Spec: End-to-end UI test suite (real browser)
@@ -95,11 +111,11 @@ infra_requirements:
 
 ## Acceptance Criteria
 
-- [ ] A real browser renders the seeded board with correctly-columned cards (BEH-1)
-- [ ] A real drag-and-drop column move persists across a real page reload (BEH-2)
-- [ ] A real create-issue form submission produces a visible new card (BEH-3)
-- [ ] A real edit-issue form submission updates the visible card (BEH-4)
-- [ ] A real delete removes the card, confirmed after reload (BEH-5)
-- [ ] A real project switch replaces the visible board contents (BEH-6)
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] A real browser renders the seeded board with correctly-columned cards (BEH-1)
+- [x] A real drag-and-drop column move persists across a real page reload (BEH-2)
+- [x] A real create-issue form submission produces a visible new card (BEH-3)
+- [x] A real edit-issue form submission updates the visible card (BEH-4)
+- [x] A real delete removes the card, confirmed after reload (BEH-5)
+- [x] A real project switch replaces the visible board contents (BEH-6)
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced
