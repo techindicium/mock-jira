@@ -1,7 +1,7 @@
 ---
 partial_schema: implement@1
 charter: issue-tracker-api
-status: implemented
+status: validated
 risk_level: low
 milestone: v1.1
 revision: 1

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 30,
+  "seq": 31,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -80,9 +80,9 @@
       "title": "Implementation Plan: End-to-end API test suite (real HTTP)",
       "status": "open",
       "planRef": ".context-index/specs/features/issue-tracker-api/api-e2e.plan.md",
-      "notes": "Add a real-HTTP e2e test suite (tests_e2e/) that starts app.main:app as its own OS process and drives the full Project/Issue CRUD surface, error paths, OpenAPI contract, and startup seeding over a live socket, with a reusable server-process fixture and a new e2e-smoke gate.",
+      "notes": "Validated: PASS (2026-09-06) | Report: .context-index/specs/features/issue-tracker-api/api-e2e.validate.md | Tests: PASS (105 fast + 44 JS + 11 e2e). Confidence: LOW — adev verify issue could not match this epic's plan_ref (known field-naming bug: epic store uses planRef, verifier expects plan_ref; already reported, non-blocking). Manual close recommended: adev issues close epic-7q32wl --reason \"validated, all tasks implemented\".",
       "created": "2026-09-06T20:20:19.354Z",
-      "updated": "2026-09-06T20:20:19.354Z"
+      "updated": "2026-09-06T20:39:57.352Z"
     }
   ],
   "issues": [
