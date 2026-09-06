@@ -1,6 +1,6 @@
 ---
 charter: kanban-ui
-status: review-pending
+status: review-passed
 risk_level: low
 milestone: v1.2
 revision: 1
