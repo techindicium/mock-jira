@@ -10,15 +10,14 @@ created: 2026-09-04
 updated: 2026-09-05
 kind: behavioral
 source-manifest:
-  sha: "d2ef81d"
+  sha: "ee081d8"
   files:
     - mcp_server/client.py
     - mcp_server/server.py
     - mcp_server/tools/issues.py
     - tests/mcp_server/test_client.py
     - tests/mcp_server/test_issue_tools.py
-  computed-at: "2026-09-05T18:22:09.781Z"
-drift_detected: true
+  computed-at: "2026-09-06T17:45:47.611Z"
 ---
 
 # Live Spec: Issue MCP tools (list/get/create/update/delete)
