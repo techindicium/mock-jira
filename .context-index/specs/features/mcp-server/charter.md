@@ -1,7 +1,7 @@
 ---
 status: approved
 kind: feature
-revision: 10
+revision: 11
 updated: 2026-09-06
 ---
 
@@ -42,6 +42,7 @@ persisted data and never touches the database directly.
 | Dependency | Type | Description |
 |-----------|------|-------------|
 | issue-tracker-api | internal module | Sole source of data and sole executor of every write. This module never opens the SQLite file directly. |
+| docker-packaging | cross-cutting spec | Added the streamable-http transport this module's tools are served over; the e2e test suite connects to that transport directly. |
 
 ## Domain Model
 
@@ -77,7 +78,7 @@ persisted data and never touches the database directly.
 | create_issue tool | Wraps `POST /issues` | must-have | mvp | validated |
 | update_issue tool | Wraps `PATCH /issues/{id}`, including status transitions | must-have | mvp | validated |
 | delete_issue tool | Wraps `DELETE /issues/{id}` | must-have | mvp | validated |
-| End-to-end MCP test suite | A real MCP client, over the real streamable-http transport, against a live server process — the same interface an external agent uses, never calling the tool functions directly in-process | must-have | v1.1 | specified |
+| End-to-end MCP test suite | A real MCP client, over the real streamable-http transport, against a live server process — the same interface an external agent uses, never calling the tool functions directly in-process | must-have | v1.1 | review-passed |
 
 ## Deferred Capabilities
 

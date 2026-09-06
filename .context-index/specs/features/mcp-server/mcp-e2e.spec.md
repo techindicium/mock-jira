@@ -1,7 +1,7 @@
 ---
 partial_schema: spec@1
 charter: mcp-server
-status: review-pending
+status: review-passed
 risk_level: low
 milestone: v1.1
 revision: 1
@@ -47,8 +47,10 @@ kind: behavioral
   **then** the protocol surfaces a tool-level error to the client — the call never hangs and
   never reaches `issue-tracker-api`.
 - **BEH-5** — **When** `mcp-server` is started with `API_BASE_URL` pointed at a port nothing is
-  listening on, **then** a real MCP client's tool call surfaces a clear connection error through
-  the protocol, not a hang or a crash.
+  listening on — a deliberately different topology from every other test in this suite, using
+  its own dedicated fixture that starts `mcp-server` alone (no `issue-tracker-api` process at
+  all, rather than the shared dual-server fixture) — **then** a real MCP client's tool call
+  surfaces a clear connection error through the protocol, not a hang or a crash.
 
 ### Postconditions
 
@@ -80,6 +82,7 @@ kind: behavioral
 | Task | Description | Estimated Complexity |
 |------|-------------|---------------------|
 | Dual-server e2e fixture | A pytest fixture starting both `issue-tracker-api` (reusing `api-e2e`'s fixture) and `mcp-server` as real processes, wired together via `API_BASE_URL`, torn down together | medium |
+| mcp-server-only e2e fixture | A separate, narrower fixture for BEH-5 that starts only `mcp-server`, with `API_BASE_URL` pointed at a port nothing listens on | small |
 | Real MCP client helper | A small helper wrapping the `mcp` SDK's `streamablehttp_client`/`ClientSession` connect-and-call pattern, reused across this suite's tests | medium |
 | Tool-discovery e2e test | Real-client test for BEH-1 | small |
 | Project-tools e2e tests | Real-client tests for BEH-2 | small |
