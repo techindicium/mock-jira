@@ -40,3 +40,7 @@
 {"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t4","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:06:13.572Z"}
 {"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t4","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:06:19.727Z"}
 {"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t4","status":"done","notes":"BEH-3/BEH-4 create/edit-issue e2e tests; 2 tests pass","ts":"2026-09-06T21:06:19.801Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","status":"in_progress","notes":null,"ts":"2026-09-06T21:06:42.461Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:06:42.603Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:06:49.461Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","status":"done","notes":"BEH-5 delete-issue e2e test; 1 test pass","ts":"2026-09-06T21:06:49.532Z"}
