@@ -1,7 +1,7 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 charter: mcp-server
-status: review-passed
+status: implemented
 risk_level: low
 milestone: v1.1
 revision: 1
@@ -9,6 +9,22 @@ charter-revision: 10
 created: 2026-09-06
 updated: 2026-09-06
 kind: behavioral
+source-manifest:
+  sha: "de7c0fa"
+  files:
+    - requirements-e2e.txt
+    - tests/test_requirements_files.py
+    - tests_e2e/conftest.py
+    - tests_e2e/mcp_client.py
+    - tests_e2e/servers.py
+    - tests_e2e/test_mcp_client_helper.py
+    - tests_e2e/test_mcp_error_paths_e2e.py
+    - tests_e2e/test_mcp_issue_tools_e2e.py
+    - tests_e2e/test_mcp_project_tools_e2e.py
+    - tests_e2e/test_mcp_server_fixture.py
+    - tests_e2e/test_mcp_server_unreachable_fixture.py
+    - tests_e2e/test_mcp_tool_discovery_e2e.py
+  computed-at: "2026-09-06T21:57:45.289Z"
 ---
 
 # Live Spec: End-to-end MCP test suite (real client/transport)
@@ -91,10 +107,10 @@ kind: behavioral
 
 ## Acceptance Criteria
 
-- [ ] A real MCP client discovers all 7 tools with correct schemas (BEH-1)
-- [ ] Project tools work end to end over the real protocol, matching real API state (BEH-2)
-- [ ] All 5 issue tools work end to end over the real protocol, cross-verified via real HTTP (BEH-3)
-- [ ] Schema-invalid tool input surfaces a protocol-level error, no upstream call made (BEH-4)
-- [ ] An unreachable upstream API surfaces a protocol-level connection error (BEH-5)
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] A real MCP client discovers all 7 tools with correct schemas (BEH-1)
+- [x] Project tools work end to end over the real protocol, matching real API state (BEH-2)
+- [x] All 5 issue tools work end to end over the real protocol, cross-verified via real HTTP (BEH-3)
+- [x] Schema-invalid tool input surfaces a protocol-level error, no upstream call made (BEH-4)
+- [x] An unreachable upstream API surfaces a protocol-level connection error (BEH-5)
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced

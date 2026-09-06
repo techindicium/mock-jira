@@ -16,3 +16,40 @@
 {"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-8","status":"pending","notes":null,"ts":"2026-09-06T21:35:54.876Z"}
 {"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-06T21:36:06.131Z"}
 {"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-06T21:36:27.079Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-06T21:36:35.086Z"}
+{"event":"step_completed","step":"route","verdict":"PASS","ts":"2026-09-06T21:38:13.362Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-06T21:38:13.559Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-06T21:38:50.190Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-1","status":"in_progress","notes":null,"ts":"2026-09-06T21:41:43.047Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-1","status":"done","notes":"requirements-e2e.txt now includes requirements-mcp.txt","ts":"2026-09-06T21:42:26.499Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-1","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T21:42:26.579Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-1","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-06T21:42:26.650Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-2","status":"in_progress","notes":null,"ts":"2026-09-06T21:42:33.413Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-2","status":"done","notes":"start_mcp_server + mcp_dual_server fixture added; fixed a flawed busy-port test","ts":"2026-09-06T21:45:55.876Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-3","status":"in_progress","notes":null,"ts":"2026-09-06T21:45:55.880Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-2","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T21:45:55.955Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-2","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-06T21:45:56.024Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-3","status":"done","notes":"mcp_server_unreachable fixture added","ts":"2026-09-06T21:46:41.936Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-4","status":"in_progress","notes":null,"ts":"2026-09-06T21:46:41.940Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-3","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T21:46:42.015Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-3","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-06T21:46:42.085Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-4","status":"done","notes":"mcp_client.py added; found+fixed real tool-registration bug in mcp_server/server.py (scope expansion, autonomous per constitution)","ts":"2026-09-06T21:51:57.037Z"}
+{"event":"debug_intervention","kind":"scope-expansion","note":"Task 4 SDK verification found mcp_server/server.py registers tools on a shadow MCPServer instance under -m invocation (double-import via __main__ vs package name), so real-transport clients saw 0 tools. Fixed with a minimal, non-breaking bootstrap fix (out-of-plan file, autonomous per constitution Architecture Boundaries).","ts":"2026-09-06T21:51:57.040Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-5","status":"in_progress","notes":null,"ts":"2026-09-06T21:51:57.041Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-4","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T21:51:57.110Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-4","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-06T21:51:57.182Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-5","status":"done","notes":"BEH-1 real-client tool discovery; fixed inputSchema->input_schema attr name","ts":"2026-09-06T21:53:00.638Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-6","status":"in_progress","notes":null,"ts":"2026-09-06T21:53:00.641Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-5","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T21:53:00.711Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-5","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-06T21:53:00.781Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-6","status":"done","notes":"BEH-2 real-client project tools cross-verified via HTTP","ts":"2026-09-06T21:54:16.262Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-7","status":"in_progress","notes":null,"ts":"2026-09-06T21:54:16.265Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-6","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T21:54:16.341Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-6","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-06T21:54:16.412Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-7","status":"done","notes":"BEH-3 full issue lifecycle cross-verified via HTTP","ts":"2026-09-06T21:55:20.764Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-8","status":"in_progress","notes":null,"ts":"2026-09-06T21:55:20.769Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-7","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T21:55:20.837Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-7","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-06T21:55:20.911Z"}
+{"event":"plan_task","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-8","status":"done","notes":"BEH-4/BEH-5 error paths verified; full 11-test mcp-e2e suite green together","ts":"2026-09-06T21:56:27.287Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-8","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T21:56:27.364Z"}
+{"event":"review_round","plan":".context-index/specs/features/mcp-server/mcp-e2e.plan.md","task_id":"task-8","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-06T21:56:27.435Z"}
