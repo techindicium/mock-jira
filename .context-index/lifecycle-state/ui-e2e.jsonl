@@ -44,3 +44,7 @@
 {"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:06:42.603Z"}
 {"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:06:49.461Z"}
 {"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","status":"done","notes":"BEH-5 delete-issue e2e test; 1 test pass","ts":"2026-09-06T21:06:49.532Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t6","status":"in_progress","notes":null,"ts":"2026-09-06T21:07:16.791Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t6","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:07:16.935Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t6","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:07:23.033Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t6","status":"done","notes":"BEH-6 project-switcher e2e test; 1 test pass","ts":"2026-09-06T21:07:23.105Z"}
