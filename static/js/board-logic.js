@@ -6,8 +6,8 @@
   }
 })(typeof window !== "undefined" ? window : globalThis, function () {
   const BOARD_COLUMNS = [
-    { status: "todo", label: "To Do", ordinal: 0 },
-    { status: "in_progress", label: "In Progress", ordinal: 1 },
+    { status: "todo", label: "To do", ordinal: 0 },
+    { status: "in_progress", label: "In progress", ordinal: 1 },
     { status: "done", label: "Done", ordinal: 2 },
   ];
 
@@ -24,6 +24,12 @@
       if (grouped[issue.status]) grouped[issue.status].push(issue);
     }
     return grouped;
+  }
+
+  function columnCounts(grouped) {
+    const counts = {};
+    for (const col of BOARD_COLUMNS) counts[col.status] = grouped[col.status].length;
+    return counts;
   }
 
   function buildCardHtml(issue) {
@@ -127,7 +133,7 @@
   }
 
   return {
-    BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, buildCardHtml, formatFetchError,
+    BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
     shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
     buildIssueCreatePayload, diffIssueFields, moveIssueStatus, removeIssueById,

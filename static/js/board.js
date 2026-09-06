@@ -63,6 +63,11 @@
       document.getElementById(`col-${col.status}`).innerHTML =
         grouped[col.status].map(BoardLogic.buildCardHtml).join("");
     }
+    const counts = BoardLogic.columnCounts(grouped);
+    for (const status of Object.keys(counts)) {
+      const badge = document.getElementById(`count-${status}`);
+      if (badge) badge.textContent = String(counts[status]);
+    }
   }
 
   function renderBoardState(state) {
