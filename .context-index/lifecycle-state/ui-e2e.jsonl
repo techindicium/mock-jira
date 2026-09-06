@@ -15,3 +15,14 @@
 {"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"7","status":"pending","notes":null,"ts":"2026-09-06T20:54:09.149Z"}
 {"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-06T20:54:32.667Z"}
 {"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-06T20:55:12.662Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-06T20:55:20.088Z"}
+{"event":"step_completed","step":"route","verdict":"PASS","ts":"2026-09-06T20:56:46.880Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-06T20:56:47.079Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-06T20:57:21.420Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:01:12.052Z"}
+{"event":"test_depth_assigned","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","depth":"minimal","source":"risk-policy","escalated":false,"escalation_skipped":"no-match","floor_applied":false,"floor_legs":[],"floor_inputs":"available","dimensions":{"spec_completeness":1,"pattern_coverage":0.8,"blast_radius":0.6,"novelty":0.8},"ts":"2026-09-06T21:01:12.307Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","pass":"final","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-06T21:02:26.557Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","status":"in_progress","notes":"","ts":"2026-09-06T21:03:18.318Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","status":"in_progress","notes":null,"ts":"2026-09-06T21:03:28.192Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","status":"done","notes":"Playwright fixture + deps; RED/GREEN; 2 tests pass","ts":"2026-09-06T21:03:28.261Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:03:37.794Z"}
