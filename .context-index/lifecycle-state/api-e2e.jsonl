@@ -15,3 +15,40 @@
 {"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"7","status":"pending","notes":"Wire the e2e-smoke gate","ts":"2026-09-06T20:20:12.213Z"}
 {"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-06T20:20:24.668Z"}
 {"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-06T20:20:48.927Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-06T20:20:56.600Z"}
+{"event":"step_completed","step":"route","verdict":"PASS","ts":"2026-09-06T20:22:40.054Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-06T20:22:40.258Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-06T20:23:10.621Z"}
+{"event":"test_depth_assigned","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t1","depth":"minimal","source":"risk-policy","escalated":false,"escalation_skipped":"no-match","floor_applied":false,"floor_legs":[],"floor_inputs":"available","dimensions":{"spec_completeness":1,"pattern_coverage":0.4,"blast_radius":1,"novelty":0.8},"ts":"2026-09-06T20:24:37.706Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t1","pass":"provisional","depth":"full","source":"predicate-denied","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T20:24:42.136Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t1","status":"in_progress","notes":null,"ts":"2026-09-06T20:24:57.125Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t1","status":"done","notes":"Real-server-process fixture: start_issue_tracker_api()","ts":"2026-09-06T20:26:32.286Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t1","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T20:26:32.358Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t1","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-06T20:26:32.429Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t2","status":"in_progress","notes":null,"ts":"2026-09-06T20:26:39.153Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t2","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T20:26:39.242Z"}
+{"event":"test_depth_assigned","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t2","depth":"minimal","source":"risk-policy","escalated":false,"escalation_skipped":"no-match","floor_applied":false,"floor_legs":[],"floor_inputs":"available","dimensions":{"spec_completeness":1,"pattern_coverage":0.8,"blast_radius":1,"novelty":1},"ts":"2026-09-06T20:26:39.325Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t2","status":"done","notes":"Project CRUD e2e (BEH-1)","ts":"2026-09-06T20:27:01.474Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t2","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T20:27:01.545Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t3","status":"in_progress","notes":null,"ts":"2026-09-06T20:27:06.272Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t3","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T20:27:06.366Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t3","status":"done","notes":"Issue lifecycle e2e (BEH-2)","ts":"2026-09-06T20:27:27.015Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t3","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T20:27:27.109Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t4","status":"in_progress","notes":null,"ts":"2026-09-06T20:27:32.062Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t4","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T20:27:32.350Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t4","status":"done","notes":"Error-path e2e (BEH-3), incl. 422 invalid-enum","ts":"2026-09-06T20:27:54.214Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t4","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T20:27:54.291Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t5","status":"in_progress","notes":null,"ts":"2026-09-06T20:27:59.026Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t5","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T20:27:59.116Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t5","status":"done","notes":"OpenAPI + seed-data e2e (BEH-4, BEH-5)","ts":"2026-09-06T20:28:29.359Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t5","stage":"synthesized","cycles":1,"findings":1,"ts":"2026-09-06T20:28:29.432Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t6","status":"in_progress","notes":null,"ts":"2026-09-06T20:28:35.463Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t6","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T20:28:35.552Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t6","status":"done","notes":"pytest.ini isolation; fixed self-referential test-name false positive","ts":"2026-09-06T20:30:35.406Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t6","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T20:30:35.478Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t6","stage":"code-quality","cycles":2,"findings":1,"ts":"2026-09-06T20:30:35.550Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t7","status":"in_progress","notes":null,"ts":"2026-09-06T20:30:40.773Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t7","pass":"provisional","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["sensitive-path"],"ts":"2026-09-06T20:30:40.865Z"}
+{"event":"plan_task","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t7","status":"done","notes":"e2e-smoke gate wired (tier: e2e, warning)","ts":"2026-09-06T20:31:26.231Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t7","stage":"spec-compliance","cycles":1,"ts":"2026-09-06T20:31:26.304Z"}
+{"event":"review_round","plan":".context-index/specs/features/issue-tracker-api/api-e2e.plan.md","task_id":"t7","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-06T20:31:26.376Z"}

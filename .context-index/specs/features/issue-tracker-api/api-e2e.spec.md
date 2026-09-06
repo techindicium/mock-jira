@@ -1,7 +1,7 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 charter: issue-tracker-api
-status: review-passed
+status: implemented
 risk_level: low
 milestone: v1.1
 revision: 1
@@ -9,6 +9,22 @@ charter-revision: 9
 created: 2026-09-06
 updated: 2026-09-06
 kind: behavioral
+source-manifest:
+  sha: "77daccc"
+  files:
+    - .context-index/governance/gates.yaml
+    - pytest.ini
+    - tests/test_gates_config.py
+    - tests/test_pytest_config.py
+    - tests_e2e/__init__.py
+    - tests_e2e/conftest.py
+    - tests_e2e/servers.py
+    - tests_e2e/test_error_paths_e2e.py
+    - tests_e2e/test_issue_lifecycle_e2e.py
+    - tests_e2e/test_openapi_and_seed_e2e.py
+    - tests_e2e/test_project_crud_e2e.py
+    - tests_e2e/test_server_fixture.py
+  computed-at: "2026-09-06T20:31:56.801Z"
 ---
 
 # Live Spec: End-to-end API test suite (real HTTP)
@@ -93,11 +109,11 @@ kind: behavioral
 
 ## Acceptance Criteria
 
-- [ ] The real server starts as its own process (never imported in-process) and becomes healthy before tests run (BEH-1 precondition)
-- [ ] Project create/list round-trips over real HTTP (BEH-1)
-- [ ] Full Issue lifecycle succeeds over a sequence of real HTTP requests (BEH-2)
-- [ ] Documented error responses (404/409/422) are returned correctly over real HTTP (BEH-3)
-- [ ] `GET /openapi.json` over real HTTP returns a valid document (BEH-4)
-- [ ] Seeded fixture data is visible over real HTTP on a fresh server start (BEH-5)
-- [ ] All quality gates pass (tests, lint)
-- [ ] No constitutional violations introduced
+- [x] The real server starts as its own process (never imported in-process) and becomes healthy before tests run (BEH-1 precondition)
+- [x] Project create/list round-trips over real HTTP (BEH-1)
+- [x] Full Issue lifecycle succeeds over a sequence of real HTTP requests (BEH-2)
+- [x] Documented error responses (404/409/422) are returned correctly over real HTTP (BEH-3)
+- [x] `GET /openapi.json` over real HTTP returns a valid document (BEH-4)
+- [x] Seeded fixture data is visible over real HTTP on a fresh server start (BEH-5)
+- [x] All quality gates pass (tests, lint)
+- [x] No constitutional violations introduced
