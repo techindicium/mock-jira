@@ -33,6 +33,7 @@ source-manifest:
     - tests_e2e/test_ui_issue_forms_e2e.py
     - tests_e2e/test_ui_project_switcher_e2e.py
   computed-at: "2026-09-06T21:08:52.923Z"
+drift_detected: true
 ---
 
 # Live Spec: End-to-end UI test suite (real browser)
