@@ -1,6 +1,12 @@
 import pytest
 
-from app.seed import SEED_ISSUES, SEED_PROJECT, SeedError, _validate_seed_data
+from app.seed import (
+    SEED_ISSUES,
+    SEED_PROJECT,
+    SEED_USERS,
+    SeedError,
+    _validate_seed_data,
+)
 
 _CANON_ASSIST_NAMES = {"Mei Tan", "Kofi Adjei", "Priya Nair", "Joao Pinto"}
 
@@ -76,6 +82,38 @@ def test_seed_if_empty_raises_seed_db_not_writable_when_connection_is_read_only(
         seed_if_empty(conn, str(db_path))
     assert exc_info.value.code == "SEED_DB_NOT_WRITABLE"
     assert str(db_path) in str(exc_info.value)
+
+
+def test_seed_users_use_real_canon_names():
+    assert len(SEED_USERS) >= 3
+    for user in SEED_USERS:
+        assert user["name"] in _CANON_ASSIST_NAMES
+
+
+def test_seed_users_if_empty_is_independent_of_project_seeding(tmp_path):
+    from app.db import create_schema, get_connection
+    from app.seed import seed_users_if_empty
+
+    db_path = tmp_path / "test.db"
+    conn = get_connection(str(db_path))
+    create_schema(conn)
+    # No Project/Issue seeding has run at all — User seeding must still work standalone.
+    seed_users_if_empty(conn, str(db_path))
+    users = conn.execute("SELECT * FROM users").fetchall()
+    assert len(users) == len(SEED_USERS)
+
+
+def test_seed_users_if_empty_is_idempotent(tmp_path):
+    from app.db import create_schema, get_connection
+    from app.seed import seed_users_if_empty
+
+    db_path = tmp_path / "test.db"
+    conn = get_connection(str(db_path))
+    create_schema(conn)
+    seed_users_if_empty(conn, str(db_path))
+    seed_users_if_empty(conn, str(db_path))  # second call must not duplicate
+    users = conn.execute("SELECT * FROM users").fetchall()
+    assert len(users) == len(SEED_USERS)
 
 
 def test_seeding_is_idempotent_across_restarts(tmp_path, monkeypatch):
