@@ -26,6 +26,7 @@ source-manifest:
     - tests_js/beh-5-fetch-error.test.js
     - tests_js/beh-6-empty-state.test.js
   computed-at: "2026-09-06T17:45:47.471Z"
+drift_detected: true
 ---
 
 # Live Spec: Kanban board view, project switcher, and project creation

@@ -57,3 +57,4 @@
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-05T10:33:51.432Z"}
 {"event":"code_drift_detected","drift_source":"static/js/board-logic.js","drift_at":"2026-09-05T10:55:15.250Z","ts":"2026-09-05T10:55:15.251Z"}
 {"event":"code_drift_detected","drift_source":".context-index/governance/gates.yaml","drift_at":"2026-09-05T15:37:20.489Z","ts":"2026-09-05T15:37:20.490Z"}
+{"event":"code_drift_detected","drift_source":".context-index/governance/gates.yaml","drift_at":"2026-09-06T20:30:56.051Z","ts":"2026-09-06T20:30:56.052Z"}
