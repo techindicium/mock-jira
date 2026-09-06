@@ -102,6 +102,13 @@ python3 -m pytest -q
 ruff check .
 ```
 
+One-time setup for the kanban-ui real-browser end-to-end suite (`tests_e2e/test_ui_*.py`):
+
+```bash
+pip install -r requirements-e2e.txt
+playwright install chromium
+```
+
 <!-- No integration-test command yet — seeded once this repo has one. -->
 
 ### Running with Docker

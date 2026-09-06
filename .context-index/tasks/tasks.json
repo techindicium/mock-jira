@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 26,
+  "seq": 35,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -74,6 +74,33 @@
       "notes": "Package issue-tracker-api and mcp-server into two Dockerfiles plus a docker-compose.yml, wired with a named volume for the SQLite file and a PORT/API_BASE_URL/DATABASE_PATH env-var convention, with run instructions in the README/CLAUDE.md.",
       "created": "2026-09-05T18:55:59.013Z",
       "updated": "2026-09-05T18:55:59.013Z"
+    },
+    {
+      "id": "epic-7q32wl",
+      "title": "Implementation Plan: End-to-end API test suite (real HTTP)",
+      "status": "open",
+      "planRef": ".context-index/specs/features/issue-tracker-api/api-e2e.plan.md",
+      "notes": "Validated: PASS (2026-09-06) | Report: .context-index/specs/features/issue-tracker-api/api-e2e.validate.md | Tests: PASS (105 fast + 44 JS + 11 e2e). Confidence: LOW — adev verify issue could not match this epic's plan_ref (known field-naming bug: epic store uses planRef, verifier expects plan_ref; already reported, non-blocking). Manual close recommended: adev issues close epic-7q32wl --reason \"validated, all tasks implemented\".",
+      "created": "2026-09-06T20:20:19.354Z",
+      "updated": "2026-09-06T20:39:57.352Z"
+    },
+    {
+      "id": "epic-ngpyfe",
+      "title": "End-to-end UI test suite (real browser) implementation plan",
+      "status": "open",
+      "planRef": ".context-index/specs/features/kanban-ui/ui-e2e.plan.md",
+      "notes": "Add a real-Chromium Playwright e2e suite (BEH-1..6 + network-failure error path) driving kanban-ui's actual served page against the real issue-tracker-api server, reusing the api-e2e fixture with its own isolated server instance.",
+      "created": "2026-09-06T20:54:27.757Z",
+      "updated": "2026-09-06T20:54:27.757Z"
+    },
+    {
+      "id": "epic-ffjbhv",
+      "title": "End-to-end MCP test suite (real client/transport)",
+      "status": "open",
+      "planRef": ".context-index/specs/features/mcp-server/mcp-e2e.plan.md",
+      "notes": "Add a real-client, real-transport e2e suite driving mcp-server's already-implemented tools over streamable-http, cross-verified against issue-tracker-api via real HTTP.",
+      "created": "2026-09-06T21:36:01.305Z",
+      "updated": "2026-09-06T21:36:01.305Z"
     }
   ],
   "issues": [
@@ -180,6 +207,45 @@
       "next_action": "Run /adev:review-specs --spec .context-index/specs/cross-cutting/docker-packaging.spec.md",
       "created": "2026-09-04T23:22:19.730Z",
       "updated": "2026-09-06T17:44:57.161Z"
+    },
+    {
+      "id": "issue-ehm73o",
+      "title": "End-to-end API test suite (real HTTP)",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/issue-tracker-api/api-e2e.spec.md",
+      "dependencies": [],
+      "notes": "Bound 1:1 to spec. Created by /adev:specify on 2026-09-06.",
+      "next_action": "Run /adev:review-specs --spec .context-index/specs/features/issue-tracker-api/api-e2e.spec.md",
+      "created": "2026-09-06T20:00:48.695Z",
+      "updated": "2026-09-06T20:00:48.695Z"
+    },
+    {
+      "id": "issue-f2sf64",
+      "title": "End-to-end UI test suite (real browser)",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/kanban-ui/ui-e2e.spec.md",
+      "dependencies": [],
+      "notes": "Validated: MEDIUM confidence (2026-09-06) | Report: .context-index/specs/features/kanban-ui/ui-e2e.validate.md | Files verified: 12 | Tests: PASS. Manual verification recommended.",
+      "next_action": "Run /adev:review-specs --spec .context-index/specs/features/kanban-ui/ui-e2e.spec.md",
+      "created": "2026-09-06T20:00:48.811Z",
+      "updated": "2026-09-06T21:17:53.447Z"
+    },
+    {
+      "id": "issue-sgyo81",
+      "title": "End-to-end MCP test suite (real client/transport)",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/mcp-server/mcp-e2e.spec.md",
+      "dependencies": [],
+      "notes": "Validated: MEDIUM confidence (2026-09-06) | Report: .context-index/specs/features/mcp-server/mcp-e2e.validate.md | Files verified: 12 | Tests: PASS. Manual verification recommended.",
+      "next_action": "Run /adev:review-specs --spec .context-index/specs/features/mcp-server/mcp-e2e.spec.md",
+      "created": "2026-09-06T20:00:48.929Z",
+      "updated": "2026-09-06T22:07:35.757Z"
     }
   ]
 }

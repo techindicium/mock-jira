@@ -10,7 +10,7 @@ created: 2026-09-04
 updated: 2026-09-05
 kind: behavioral
 source-manifest:
-  sha: "edefb62"
+  sha: "68fa3a5"
   files:
     - mcp_server/__init__.py
     - mcp_server/client.py
@@ -25,7 +25,8 @@ source-manifest:
     - tests/mcp_server/test_client.py
     - tests/mcp_server/test_config.py
     - tests/mcp_server/test_project_tools.py
-  computed-at: "2026-09-06T17:45:47.539Z"
+  computed-at: "2026-09-06T22:08:24.443Z"
+drift_detected: true
 ---
 
 # Live Spec: Project MCP tools (list_projects, create_project)

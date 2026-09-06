@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "_generated_by": "/adev:route — do not hand-edit; re-run instead.",
+  "entries": [
+    {
+      "task_id": "t1",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.4,
+        "blast_radius": 1,
+        "novelty": 0.8
+      },
+      "rationale": "Preconditions and E2E_SERVER_START_TIMEOUT error case fully specified with complete test/impl code given; no existing e2e-fixture pattern in-repo or in samples/, though the docker-compose healthcheck poll convention is mirrored; low blast radius (4 new files in a fresh tests_e2e/ dir)."
+    },
+    {
+      "task_id": "t2",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-1 fully specified with exact test code; mirrors tests/test_projects.py's existing CRUD assertions over real HTTP instead of TestClient; single new test file, no production code change, mechanical once Task 1's fixture lands."
+    },
+    {
+      "task_id": "t3",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-2 fully specified with exact test code; mirrors tests/test_issues.py's existing lifecycle assertions over real HTTP; single new test file, no production code change, mechanical once Task 1's fixture lands."
+    },
+    {
+      "task_id": "t4",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-3 and all four Error Cases rows fully specified with exact test code; mirrors existing in-process error-path assertions (404/409/422) over real HTTP; single new test file, no production code change."
+    },
+    {
+      "task_id": "t5",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-4 and BEH-5 fully specified with exact test code; mirrors tests/test_openapi.py and tests/test_seed.py assertions over real HTTP; single new test file, no production code change."
+    },
+    {
+      "task_id": "t6",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 0.8,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.8,
+        "novelty": 1
+      },
+      "rationale": "Fast/e2e gate isolation rationale and exact pytest.ini content are spelled out in the plan header, though it isn't its own spec BEH; no existing pytest.ini precedent in-repo, but testpaths scoping is a well-known, mechanical pytest convention; touches only pytest.ini plus one new fast-tree test."
+    },
+    {
+      "task_id": "t7",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "Actionable Task Map explicitly names this task with exact gate YAML and test code; directly follows the existing (unwired) integration-test gate's schema in the same governance/gates.yaml file; touches 2 files (1 modify, 1 create), no boundary crossings (boundaries.yaml is empty)."
+    }
+  ]
+}

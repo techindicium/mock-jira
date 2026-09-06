@@ -1,8 +1,8 @@
 ---
 status: approved
 kind: feature
-revision: 9
-updated: 2026-09-05
+revision: 11
+updated: 2026-09-06
 ---
 
 # Feature Charter: kanban-ui
@@ -80,6 +80,7 @@ no separate server, no CORS configuration, and no runtime base-URL configuration
 | Delete issue | Remove an Issue via the board | must-have | mvp | validated |
 | Project switcher | List Projects, select one to filter the board | should-have | mvp | validated |
 | Create project | Simple form calling the API's create-project endpoint | should-have | mvp | validated |
+| End-to-end UI test suite | Real browser automation (a real rendering engine, real clicks/drags/form fills) driving the actual served page — the same interface a person uses, never calling board-logic.js's functions directly | must-have | v1.1 | validated |
 
 ## Deferred Capabilities
 

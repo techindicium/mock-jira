@@ -11,7 +11,7 @@ updated: 2026-09-06
 kind: behavioral
 mode: cross-cutting
 source-manifest:
-  sha: "33dc650"
+  sha: "d92267d"
   files:
     - .context-index/constitution.md
     - CLAUDE.md
@@ -25,7 +25,8 @@ source-manifest:
     - tests/mcp_server/test_transport.py
     - tests/test_docker_deploy.py
     - tests/test_main_env.py
-  computed-at: "2026-09-06T17:37:42.526Z"
+  computed-at: "2026-09-06T22:08:24.574Z"
+drift_detected: true
 ---
 
 # Live Spec: Docker packaging and run instructions

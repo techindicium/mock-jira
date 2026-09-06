@@ -1,0 +1,67 @@
+{"event":"step_completed","step":"specify","verdict":"PASS","ts":"2026-09-06T20:00:49.165Z"}
+{"event":"lifecycle_step","step":"review","status":"started","ts":"2026-09-06T20:40:32.523Z"}
+{"event":"lifecycle_step","step":"review","status":"started","revision":1,"ts":"2026-09-06T20:41:04.203Z"}
+{"event":"reviewer_report","step":"review","reviewer":"quick-synthesized-reviewer","severity":"blocker","verdict":"PASS","notes":"3 suggestions (test isolation, client-sim network failure, error-code naming); no blockers/warnings","revision":1,"ts":"2026-09-06T20:43:08.635Z"}
+{"event":"step_completed","step":"review","verdict":"PASS","revision":1,"ts":"2026-09-06T20:43:49.793Z"}
+{"event":"step_completed","step":"review","verdict":"PASS","ts":"2026-09-06T20:44:07.011Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-06T20:44:07.224Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-06T20:44:50.570Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"1","status":"pending","notes":null,"ts":"2026-09-06T20:54:09.142Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"2","status":"pending","notes":null,"ts":"2026-09-06T20:54:09.146Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"3","status":"pending","notes":null,"ts":"2026-09-06T20:54:09.147Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"4","status":"pending","notes":null,"ts":"2026-09-06T20:54:09.147Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"5","status":"pending","notes":null,"ts":"2026-09-06T20:54:09.148Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"6","status":"pending","notes":null,"ts":"2026-09-06T20:54:09.148Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"7","status":"pending","notes":null,"ts":"2026-09-06T20:54:09.149Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-06T20:54:32.667Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-06T20:55:12.662Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-06T20:55:20.088Z"}
+{"event":"step_completed","step":"route","verdict":"PASS","ts":"2026-09-06T20:56:46.880Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-06T20:56:47.079Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-06T20:57:21.420Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:01:12.052Z"}
+{"event":"test_depth_assigned","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","depth":"minimal","source":"risk-policy","escalated":false,"escalation_skipped":"no-match","floor_applied":false,"floor_legs":[],"floor_inputs":"available","dimensions":{"spec_completeness":1,"pattern_coverage":0.8,"blast_radius":0.6,"novelty":0.8},"ts":"2026-09-06T21:01:12.307Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","pass":"final","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-06T21:02:26.557Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","status":"in_progress","notes":"","ts":"2026-09-06T21:03:18.318Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","status":"in_progress","notes":null,"ts":"2026-09-06T21:03:28.192Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","status":"done","notes":"Playwright fixture + deps; RED/GREEN; 2 tests pass","ts":"2026-09-06T21:03:28.261Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t1","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:03:37.794Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:04:45.275Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","pass":"final","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-06T21:04:45.423Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:05:11.888Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","status":"in_progress","notes":null,"ts":"2026-09-06T21:05:19.301Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:05:19.372Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t2","status":"done","notes":"BEH-1 board-render e2e test; 1 test pass","ts":"2026-09-06T21:05:19.442Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t3","status":"in_progress","notes":null,"ts":"2026-09-06T21:05:42.982Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t3","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:05:43.128Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t3","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:05:49.320Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t3","status":"done","notes":"BEH-2 column-move e2e test; 1 test pass","ts":"2026-09-06T21:05:49.391Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t4","status":"in_progress","notes":null,"ts":"2026-09-06T21:06:13.421Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t4","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:06:13.572Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t4","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:06:19.727Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t4","status":"done","notes":"BEH-3/BEH-4 create/edit-issue e2e tests; 2 tests pass","ts":"2026-09-06T21:06:19.801Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","status":"in_progress","notes":null,"ts":"2026-09-06T21:06:42.461Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:06:42.603Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:06:49.461Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t5","status":"done","notes":"BEH-5 delete-issue e2e test; 1 test pass","ts":"2026-09-06T21:06:49.532Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t6","status":"in_progress","notes":null,"ts":"2026-09-06T21:07:16.791Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t6","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:07:16.935Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t6","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:07:23.033Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t6","status":"done","notes":"BEH-6 project-switcher e2e test; 1 test pass","ts":"2026-09-06T21:07:23.105Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t7","status":"in_progress","notes":null,"ts":"2026-09-06T21:07:50.087Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t7","pass":"final","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-06T21:07:50.234Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t7","stage":"synthesized","cycles":1,"findings":0,"ts":"2026-09-06T21:07:56.831Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/ui-e2e.plan.md","task_id":"t7","status":"done","notes":"E2E_UI_FETCH_FAILED error-path e2e test; 1 test pass","ts":"2026-09-06T21:07:56.901Z"}
+{"event":"step_completed","step":"implement","verdict":"PASS","ts":"2026-09-06T21:10:15.180Z"}
+{"event":"step_completed","step":"implement","verdict":"PASS","ts":"2026-09-06T21:11:23.329Z"}
+{"event":"lifecycle_step","step":"validate","status":"started","ts":"2026-09-06T21:11:29.228Z"}
+{"event":"lifecycle_step","step":"validate","status":"started","ts":"2026-09-06T21:11:55.128Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1-quality-gates","severity":"error","verdict":"PASS","notes":"Fast: test 105 passed, lint clean, test-js 44 passed. Integration: no gates configured. E2E: e2e-smoke 20 passed (9.58s).","gate_outcomes":[{"id":"test","verdict":"pass","tier":"fast","command_sha":"864cd8c369fc558cf6a8235d2514a26c14a6e2c1de08efd0629c4f69d1843587"},{"id":"lint","verdict":"pass","tier":"fast","command_sha":"2ea305ec5813b091e1464bd56985f9caafca6483b6a08963281eaa2f0f5b3fb0"},{"id":"test-js","verdict":"pass","tier":"fast","command_sha":"4d4e3bbfdf575dc83338694f6da0b95a44b8490751148497dfe931c5af571c77"},{"id":"e2e-smoke","verdict":"pass","tier":"e2e","command_sha":"7c8b647af049708f0804d30421fde2eae089367de7e3cc18a17b1981febce10f"}],"manifest_sha":"b49b915","ts":"2026-09-06T21:14:27.318Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1.5-source-manifest","severity":"warning","verdict":"PASS","notes":"Manifest matches sha b49b915; all 12 listed files committed to git.","ts":"2026-09-06T21:14:56.845Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1.6-code-drift","severity":"warning","verdict":"PASS","notes":"No drift detected.","ts":"2026-09-06T21:15:08.912Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-8-boundaries","severity":"error","verdict":"PASS","notes":"SKIP — no boundary rules declared.","ts":"2026-09-06T21:15:45.502Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-9-transition-gates","severity":"warning","verdict":"PASS","notes":"SKIP — no transitions configured (implement-to-validate).","ts":"2026-09-06T21:15:47.326Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"FAIL","notes":"4 errors: test/lint/e2e-smoke enter gitignored .venv/bin paths (won't run in CI/fresh clone); test-js glob under-expands on sh. Pre-existing repo-wide gate config, not introduced by this spec. Check severity=warning per validate.yaml.","ts":"2026-09-06T21:15:49.280Z"}
+{"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-06T21:17:00.609Z"}
+{"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-06T21:19:06.621Z"}
+{"event":"code_drift_detected","drift_source":"tests_e2e/conftest.py","drift_at":"2026-09-06T21:43:00.254Z","ts":"2026-09-06T21:43:00.254Z"}
