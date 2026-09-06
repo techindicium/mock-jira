@@ -54,3 +54,16 @@ class IssuePatch(BaseModel):
     assignee: str | None = None
     reporter: str | None = None
     status: Literal["todo", "in_progress", "done"] | None = None
+
+
+class UserCreate(BaseModel):
+    name: str
+    email: str | None = None
+    role: str | None = None
+
+
+class UserRead(BaseModel):
+    id: int
+    name: str
+    email: str | None = None
+    role: str | None = None
