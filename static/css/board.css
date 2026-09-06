@@ -1,25 +1,50 @@
+:root {
+  /* Dispatch-board palette. Keep this list short: 7 named tokens + obvious derived shades. */
+  --ink: #16261f;        /* deep pine-teal-black — page/board background */
+  --rail: #2f4a3e;       /* mid-tone pine — column rail panels */
+  --paper: #f1ecdd;      /* warm off-white ticket stock — cards/surfaces only, never full-page bg */
+  --stamp-red: #a3402f;  /* brick/rubber-stamp red — high priority */
+  --stamp-gold: #b98a2e; /* brass/ochre — medium priority, brass rules/accents */
+  --stamp-green: #4c7a5e;/* low priority / done-adjacent accent */
+  --ink-line: #55483a;   /* warm dark hairline border/rule on paper surfaces */
+
+  /* Derived shades (opacity/lighten only — not new named colors). */
+  --rail-light: #3c5c4e;         /* hover/active state on rail surfaces */
+  --paper-dim: #e7e1cf;          /* subtle recessed paper surface (inputs, disabled) */
+  --ink-text-on-paper: #201a12;  /* near-black warm text color on --paper */
+  --paper-text-on-rail: #f1ecdd; /* --paper reused as text color on --rail */
+  --stamp-gold-dim: rgba(185, 138, 46, 0.35); /* brass rule at low opacity */
+}
+
 [hidden] {
   display: none !important;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: system-ui, sans-serif;
+  font-family: -apple-system, "Segoe UI", "Inter", system-ui, sans-serif;
   margin: 0;
   padding: 1rem 1.5rem;
-  color: #1a1a1a;
-  background: #f5f6f8;
+  color: var(--paper-text-on-rail);
+  background: var(--ink);
 }
 
 header {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 header h1 {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   margin: 0;
+  color: var(--paper);
 }
 
 #board-error,
