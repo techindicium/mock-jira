@@ -18,6 +18,7 @@ source-manifest:
     - tests/mcp_server/test_client.py
     - tests/mcp_server/test_issue_tools.py
   computed-at: "2026-09-05T18:22:09.781Z"
+drift_detected: true
 ---
 
 # Live Spec: Issue MCP tools (list/get/create/update/delete)
