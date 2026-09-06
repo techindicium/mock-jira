@@ -81,6 +81,30 @@ SEED_ISSUES = [
 ]
 
 
+# 4 Users: the "Assist engineering" roster already referenced by name (never by id — the User
+# directory is additive, not a foreign key) as Issue assignee/reporter above. Same sourcing rule
+# BEH-3 established: real names/roles from course-shared/canon/company.md's Named People table,
+# never invented placeholders.
+SEED_USERS = [
+    {"name": "Mei Tan", "email": "mei.tan@portwell.example", "role": "Head of Engineering"},
+    {
+        "name": "Kofi Adjei",
+        "email": "kofi.adjei@portwell.example",
+        "role": "Staff Engineer, Assist service",
+    },
+    {
+        "name": "Priya Nair",
+        "email": "priya.nair@portwell.example",
+        "role": "Solution Consultant, escalations",
+    },
+    {
+        "name": "Joao Pinto",
+        "email": "joao.pinto@portwell.example",
+        "role": "Support Engineer, pilot participant",
+    },
+]
+
+
 class SeedError(RuntimeError):
     """Raised when startup seeding cannot proceed. Carries a stable `code` for operators."""
 
@@ -173,4 +197,38 @@ def seed_if_empty(conn, db_path: str) -> None:
     except sqlite3.OperationalError as exc:
         raise SeedError(
             "SEED_DB_NOT_WRITABLE", f"Cannot write seed data to database at '{db_path}': {exc}"
+        ) from exc
+
+
+def _validate_seed_users(users: list[dict]) -> None:
+    for i, user in enumerate(users):
+        if not user.get("name") or not user["name"].strip():
+            raise SeedError("SEED_DATA_INVALID", f"Seed user {i} is missing a name")
+
+
+def seed_users_if_empty(conn, db_path: str) -> None:
+    """Seed the User directory on first run only. No-op if any User already exists.
+
+    Independent of `seed_if_empty` (Project/Issue seeding): the User directory is an additive,
+    unrelated resource (no foreign key to Issue/Project — see charter Out of Scope), so it gets
+    its own emptiness check rather than being folded into the Project/Issue seeding transaction.
+    """
+    existing = conn.execute("SELECT COUNT(*) AS n FROM users").fetchone()
+    if existing["n"] > 0:
+        return
+
+    _validate_seed_users(SEED_USERS)
+
+    import sqlite3
+
+    try:
+        for user in SEED_USERS:
+            conn.execute(
+                "INSERT INTO users (name, email, role) VALUES (?, ?, ?)",
+                (user["name"], user.get("email"), user.get("role")),
+            )
+        conn.commit()
+    except sqlite3.OperationalError as exc:
+        raise SeedError(
+            "SEED_DB_NOT_WRITABLE", f"Cannot write seed users to database at '{db_path}': {exc}"
         ) from exc

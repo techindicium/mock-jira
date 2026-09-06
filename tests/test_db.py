@@ -44,6 +44,27 @@ def test_allocate_issue_key_increments_per_project_starting_at_one(tmp_path):
     assert allocate_issue_key(conn, project_id, "SDLC") == "SDLC-2"
 
 
+def test_create_schema_creates_users_table(tmp_path):
+    db_path = tmp_path / "test.db"
+    conn = get_connection(str(db_path))
+    create_schema(conn)
+    cursor = conn.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='users'"
+    )
+    assert cursor.fetchone() is not None
+
+
+def test_users_table_allows_multiple_null_emails(tmp_path):
+    db_path = tmp_path / "test.db"
+    conn = get_connection(str(db_path))
+    create_schema(conn)
+    conn.execute("INSERT INTO users (name, email, role) VALUES ('A', NULL, NULL)")
+    conn.execute("INSERT INTO users (name, email, role) VALUES ('B', NULL, NULL)")
+    conn.commit()
+    count = conn.execute("SELECT COUNT(*) AS n FROM users").fetchone()["n"]
+    assert count == 2
+
+
 def test_allocate_issue_key_sequences_are_independent_per_project(tmp_path):
     from app.db import allocate_issue_key
 
