@@ -1,6 +1,12 @@
 from pathlib import Path
 
+import yaml
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
+
+
+def _load_compose():
+    return yaml.safe_load((REPO_ROOT / "docker-compose.yml").read_text())
 
 
 def test_issue_tracker_api_dockerfile_pins_python_3_12_slim():
@@ -30,3 +36,40 @@ def test_mcp_server_dockerfile_reads_env():
     content = (REPO_ROOT / "docker" / "mcp-server" / "Dockerfile").read_text()
     assert "API_BASE_URL" in content
     assert "PORT" in content
+
+
+def test_compose_builds_exactly_two_services_from_dockerfiles():  # BEH-1
+    compose = _load_compose()
+    services = compose["services"]
+    assert set(services) == {"issue-tracker-api", "mcp-server"}
+    for svc in services.values():
+        assert "build" in svc, "each service must build its own image, not pull one"
+
+
+def test_mcp_server_depends_on_issue_tracker_api_healthy():  # BEH-2
+    compose = _load_compose()
+    depends_on = compose["services"]["mcp-server"]["depends_on"]
+    assert depends_on["issue-tracker-api"]["condition"] == "service_healthy"
+    assert "healthcheck" in compose["services"]["issue-tracker-api"]
+
+
+def test_named_volume_backs_the_sqlite_path():  # BEH-3
+    compose = _load_compose()
+    assert "mock_jira_db" in compose.get("volumes", {})
+    api_volumes = compose["services"]["issue-tracker-api"]["volumes"]
+    assert any(v.startswith("mock_jira_db:") for v in api_volumes)
+
+
+def test_ports_are_env_var_driven_not_hardcoded():  # BEH-4
+    compose = _load_compose()
+    api_ports = compose["services"]["issue-tracker-api"]["ports"]
+    mcp_ports = compose["services"]["mcp-server"]["ports"]
+    assert any("${PORT" in p for p in api_ports)
+    assert any("${MCP_PORT" in p for p in mcp_ports)
+
+
+def test_no_port_exposed_beyond_localhost():  # postcondition
+    compose = _load_compose()
+    for svc in compose["services"].values():
+        for mapping in svc.get("ports", []):
+            assert mapping.startswith("127.0.0.1:"), f"{mapping} is not localhost-scoped"
