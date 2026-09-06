@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 35,
+  "seq": 36,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -101,6 +101,15 @@
       "notes": "Add a real-client, real-transport e2e suite driving mcp-server's already-implemented tools over streamable-http, cross-verified against issue-tracker-api via real HTTP.",
       "created": "2026-09-06T21:36:01.305Z",
       "updated": "2026-09-06T21:36:01.305Z"
+    },
+    {
+      "id": "epic-jxzxi2",
+      "title": "Visual design refresh — dispatch-board identity",
+      "status": "open",
+      "planRef": ".context-index/specs/features/kanban-ui/visual-design-refresh.plan.md",
+      "notes": "Restyle kanban-ui's board/forms into a ticket/dispatch-board visual identity (ink/rail/paper palette, priority-striped cards, system font stacks only), zero functional/DOM-hook change.",
+      "created": "2026-09-06T23:18:52.156Z",
+      "updated": "2026-09-06T23:18:52.156Z"
     }
   ],
   "issues": [
