@@ -1,7 +1,7 @@
 import pytest
 
 from tests_e2e.browser import launch_chromium
-from tests_e2e.servers import start_issue_tracker_api
+from tests_e2e.servers import start_issue_tracker_api, start_mcp_server
 
 
 @pytest.fixture(scope="session")
@@ -17,6 +17,23 @@ def server(tmp_path_factory) -> str:
     tmp_path = tmp_path_factory.mktemp("issue-tracker-api-e2e")
     with start_issue_tracker_api(tmp_path) as base_url:
         yield base_url
+
+
+@pytest.fixture(scope="session")
+def mcp_dual_server(tmp_path_factory) -> tuple[str, str]:
+    """Session-scoped real issue-tracker-api + real mcp-server pair, wired via API_BASE_URL.
+
+    Shared across BEH-1 through BEH-4 (all tests that need a live, reachable upstream). Tests
+    use unique project/issue keys per test to avoid cross-test collisions in the shared
+    database, matching the existing `server` fixture's convention. NOT used by BEH-5, which
+    needs mcp-server running with no reachable upstream at all — see mcp_server_unreachable.
+
+    Yields:
+        (api_base_url, mcp_base_url)
+    """
+    tmp_path = tmp_path_factory.mktemp("mcp-e2e-dual-server")
+    with start_issue_tracker_api(tmp_path) as api_base_url, start_mcp_server(api_base_url) as mcp_base_url:
+        yield api_base_url, mcp_base_url
 
 
 @pytest.fixture(scope="session")
