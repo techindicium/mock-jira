@@ -72,13 +72,61 @@ header h1 {
 }
 
 #board-error,
-#create-project-error {
-  background: #fdecea;
-  color: #611a15;
-  border: 1px solid #f5c2c0;
-  border-radius: 4px;
+#create-project-error,
+#create-issue-error,
+#edit-issue-error {
+  background: var(--paper);
+  color: var(--stamp-red);
+  border: 1px solid var(--stamp-red);
+  border-left: 4px solid var(--stamp-red);
+  border-radius: 2px;
   padding: 0.5rem 0.75rem;
   margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+button {
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 2px;
+  border: 1px solid var(--ink-line);
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  background: var(--paper);
+  color: var(--ink-text-on-paper);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+button:hover {
+  background: var(--paper-dim);
+}
+
+#open-create-issue,
+#create-project-form button[type="submit"],
+#create-issue-form button[type="submit"],
+#edit-issue-form button[type="submit"] {
+  background: var(--rail);
+  color: var(--paper);
+  border-color: var(--rail);
+}
+
+#open-create-issue:hover,
+#create-project-form button[type="submit"]:hover,
+#create-issue-form button[type="submit"]:hover,
+#edit-issue-form button[type="submit"]:hover {
+  background: var(--rail-light);
+}
+
+#delete-issue {
+  background: var(--paper);
+  color: var(--stamp-red);
+  border-color: var(--stamp-red);
+}
+
+#delete-issue:hover {
+  background: var(--stamp-red);
+  color: var(--paper);
 }
 
 #board {
@@ -197,20 +245,36 @@ header h1 {
 #create-project,
 #create-issue,
 #edit-issue {
-  background: #fff;
-  border: 1px solid #dcdfe4;
-  border-radius: 6px;
+  background: var(--paper);
+  border: 1px solid var(--ink-line);
+  border-radius: 2px;
   padding: 1rem;
   margin-top: 1rem;
   max-width: 360px;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+#empty-state {
+  color: var(--ink-text-on-paper);
+}
+
+#create-project h2,
+#create-issue h2,
+#edit-issue h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.75rem 0;
+  color: var(--ink-text-on-paper);
 }
 
 #create-project form label,
 #create-issue form label,
 #edit-issue form label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   font-size: 0.85rem;
+  color: var(--ink-text-on-paper);
 }
 
 #create-project form input,
@@ -221,8 +285,14 @@ header h1 {
   display: block;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 0.25rem;
-  padding: 0.35rem;
+  margin-top: 0.3rem;
+  padding: 0.4rem 0.5rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--ink-text-on-paper);
+  background: var(--paper-dim);
+  border: 1px solid var(--ink-line);
+  border-radius: 2px;
 }
 
 #create-issue form textarea,
@@ -230,6 +300,12 @@ header h1 {
   display: block;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 0.25rem;
-  padding: 0.35rem;
+  margin-top: 0.3rem;
+  padding: 0.4rem 0.5rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--ink-text-on-paper);
+  background: var(--paper-dim);
+  border: 1px solid var(--ink-line);
+  border-radius: 2px;
 }
