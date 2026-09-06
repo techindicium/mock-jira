@@ -1,7 +1,7 @@
 ---
 partial_schema: spec@1
 charter: issue-tracker-api
-status: review-pending
+status: review-passed
 risk_level: low
 milestone: v1.1
 revision: 1
@@ -25,7 +25,8 @@ kind: behavioral
   specs) is implemented.
 - These tests start the real application as its own OS process — `uvicorn app.main:app` bound
   to an ephemeral local port, with `DATABASE_PATH` pointed at a fresh temporary file per test
-  session — and wait for it to report healthy before any test runs. They never import
+  session — and poll `GET /` (the app's existing root route; there is no dedicated `/health`
+  endpoint) until it responds, before any test runs. They never import
   `app.main:app` into the test process or use FastAPI's `TestClient` (an in-process ASGI
   transport). This is the one thing that distinguishes this spec from the module's existing
   unit/integration tests: every request in this suite travels over a real TCP socket, exactly as
@@ -66,6 +67,7 @@ kind: behavioral
 | Real server process fails to become healthy within the startup timeout | Test setup fails loudly, naming the timeout and the last-seen process output — never a silent hang | `E2E_SERVER_START_TIMEOUT` |
 | A real HTTP request targets an unknown Issue/Project id | `404`, matching the documented `ISSUE_NOT_FOUND`/`PROJECT_NOT_FOUND` body | (inherited from issue-lifecycle/project-management) |
 | A real HTTP request submits a duplicate Project `key` | `409`, matching `PROJECT_KEY_DUPLICATE` | (inherited) |
+| A real HTTP request submits an invalid `status`/`issue_type`/`priority` enum value | `422`, matching `VALIDATION_ERROR` | (inherited) |
 
 ## System Constitution Reference
 
