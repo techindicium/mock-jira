@@ -1,3 +1,5 @@
+import socket
+
 import pytest
 
 from tests_e2e.browser import launch_chromium
@@ -34,6 +36,23 @@ def mcp_dual_server(tmp_path_factory) -> tuple[str, str]:
     tmp_path = tmp_path_factory.mktemp("mcp-e2e-dual-server")
     with start_issue_tracker_api(tmp_path) as api_base_url, start_mcp_server(api_base_url) as mcp_base_url:
         yield api_base_url, mcp_base_url
+
+
+@pytest.fixture
+def mcp_server_unreachable() -> str:
+    """Function-scoped: real mcp-server alone, API_BASE_URL pointed at a port nothing listens on.
+
+    Deliberately NOT mcp_dual_server (per BEH-5's own dedicated-fixture requirement — no
+    issue-tracker-api process is started at all here). Function-scoped since only the error-path
+    tests need this topology; no shared-database concerns apply since no upstream API exists to
+    hold state.
+    """
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
+        probe.bind(("127.0.0.1", 0))
+        dead_port = probe.getsockname()[1]
+    dead_api_base_url = f"http://127.0.0.1:{dead_port}"
+    with start_mcp_server(dead_api_base_url) as mcp_base_url:
+        yield mcp_base_url
 
 
 @pytest.fixture(scope="session")
