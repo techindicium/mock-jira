@@ -7,6 +7,11 @@ from tests_e2e.servers import start_issue_tracker_api, start_mcp_server
 
 
 @pytest.fixture(scope="session")
+def anyio_backend():
+    return "asyncio"
+
+
+@pytest.fixture(scope="session")
 def server(tmp_path_factory) -> str:
     """Session-scoped real server, shared across this repo's own e2e tests.
 
