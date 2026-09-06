@@ -18,7 +18,7 @@ infra_requirements:
       notes: "One-time local setup: `playwright install chromium` downloads the browser binary this suite drives. No credentials, no network target beyond the real server this suite itself starts on localhost."
   ci_tag: "e2e"
 source-manifest:
-  sha: "b49b915"
+  sha: "be6f9bc"
   files:
     - .context-index/constitution.md
     - README.md
@@ -32,7 +32,7 @@ source-manifest:
     - tests_e2e/test_ui_error_path_e2e.py
     - tests_e2e/test_ui_issue_forms_e2e.py
     - tests_e2e/test_ui_project_switcher_e2e.py
-  computed-at: "2026-09-06T21:08:52.923Z"
+  computed-at: "2026-09-06T22:08:24.375Z"
 drift_detected: true
 ---
 

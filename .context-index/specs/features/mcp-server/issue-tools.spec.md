@@ -10,14 +10,14 @@ created: 2026-09-04
 updated: 2026-09-05
 kind: behavioral
 source-manifest:
-  sha: "ee081d8"
+  sha: "ee5c6b0"
   files:
     - mcp_server/client.py
     - mcp_server/server.py
     - mcp_server/tools/issues.py
     - tests/mcp_server/test_client.py
     - tests/mcp_server/test_issue_tools.py
-  computed-at: "2026-09-06T17:45:47.611Z"
+  computed-at: "2026-09-06T22:08:24.510Z"
 drift_detected: true
 ---
 

@@ -10,7 +10,7 @@ created: 2026-09-06
 updated: 2026-09-06
 kind: behavioral
 source-manifest:
-  sha: "77daccc"
+  sha: "a81761f"
   files:
     - .context-index/governance/gates.yaml
     - pytest.ini
@@ -24,7 +24,7 @@ source-manifest:
     - tests_e2e/test_openapi_and_seed_e2e.py
     - tests_e2e/test_project_crud_e2e.py
     - tests_e2e/test_server_fixture.py
-  computed-at: "2026-09-06T20:31:56.801Z"
+  computed-at: "2026-09-06T22:08:24.242Z"
 drift_detected: true
 ---
 
