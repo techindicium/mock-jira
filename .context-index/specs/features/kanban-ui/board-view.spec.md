@@ -4,13 +4,13 @@ charter: kanban-ui
 status: validated
 risk_level: medium
 milestone: mvp
-revision: 1
+revision: 2
 charter-revision: 2
 created: 2026-09-04
-updated: 2026-09-05
+updated: 2026-09-07
 kind: behavioral
 source-manifest:
-  sha: "3f3afc3"
+  sha: "829e1aa"
   files:
     - .context-index/governance/gates.yaml
     - app/main.py
@@ -22,13 +22,12 @@ source-manifest:
     - tests_js/beh-1-board-load.test.js
     - tests_js/beh-2-render-columns.test.js
     - tests_js/beh-3-project-switch.test.js
-    - tests_js/beh-4-create-project.test.js
     - tests_js/beh-5-fetch-error.test.js
     - tests_js/beh-6-empty-state.test.js
-  computed-at: "2026-09-07T11:25:17.819Z"
+  computed-at: "2026-09-07T12:34:45.868Z"
 ---
 
-# Live Spec: Kanban board view, project switcher, and project creation
+# Live Spec: Kanban board view and project switcher
 
 <!-- Live Spec within the kanban-ui charter.
      This defines a specific behavioral contract that drives implementation and testing.
@@ -44,7 +43,14 @@ source-manifest:
 
 ### Behaviors
 
-<!-- retired-behavior-ids: (none) -->
+<!-- retired-behavior-ids: BEH-4 -->
+<!-- BEH-4 (retired 2026-09-07) — When the viewer submitted the create-project form (fields:
+     key, name) that lived next to the switcher, the UI called POST /projects, added the new
+     Project to the switcher, and selected it. Retired because it was a redundant, narrower
+     duplicate of the add-project form the Projects tab now owns (key, name, and description —
+     see project-management-screen.spec.md's own BEH-3/BEH-4/BEH-5). Project creation from the
+     board view is no longer part of this spec's scope; the switcher itself is unaffected and
+     remains fully in scope (BEH-1/BEH-3 below). -->
 
 - **BEH-1** — **When** the board page loads, **then** it fetches `GET /projects`, selects a
   Project by default (the first returned, or the last one the viewer selected, tracked
@@ -55,29 +61,27 @@ source-manifest:
 - **BEH-3** — **When** the viewer picks a different Project from the switcher, **then** the
   board re-fetches Issues for that Project and fully replaces what is shown — it never merges
   two Projects' Issues on screen at once.
-- **BEH-4** — **When** the viewer submits the create-project form with a non-empty `key` and
-  `name`, **then** the UI calls `POST /projects`, adds the new Project to the switcher, and
-  selects it.
 - **BEH-5** — **When** any API request in this spec fails (network error or non-2xx response),
   **then** the UI shows a visible message naming what failed — it never fails silently or shows
   a blank screen.
 - **BEH-6** — **When** `GET /projects` returns zero Projects, **then** the board shows an empty
-  state prompting Project creation, not an error and not a blank screen.
+  state prompting Project creation — via the Projects tab's add-project form, see
+  `project-management-screen.spec.md` — not an error and not a blank screen.
 
 ### Postconditions
 
 - The board's visible state always matches the currently selected Project — there is no stale
   render left over from a previous selection after a switch completes.
-- A Project created through the create-project form is immediately selectable and immediately
-  shows an empty board (zero Issues) until Issues are added under it.
+- A Project created through the Projects tab's add-project form (see
+  `project-management-screen.spec.md` BEH-3/BEH-7) is immediately selectable in this board's
+  switcher the next time the board's Project list is loaded or refreshed, and immediately shows
+  an empty board (zero Issues) until Issues are added under it.
 
 ### Error Cases
 
 | Condition | Expected Behavior | Error Code |
 |-----------|-------------------|------------|
 | Any API request fails (network error or 5xx) | Visible error message naming the failed action | `UI_FETCH_FAILED` |
-| Create-project form submits a duplicate `key` (API returns 409) | Form shows the error inline; input is not cleared | `UI_PROJECT_KEY_DUPLICATE` |
-| Create-project form submitted with an empty `key` or `name` | Client-side validation blocks the request before it is sent | `UI_VALIDATION_ERROR` |
 
 ## System Constitution Reference
 
@@ -95,10 +99,9 @@ source-manifest:
 
 | Task | Description | Estimated Complexity |
 |------|-------------|---------------------|
-| Static board page shell | HTML/CSS layout: three columns, project switcher, create-project control | medium |
+| Static board page shell | HTML/CSS layout: three columns, project switcher | medium |
 | Fetch and render | JS to call `GET /projects`/`GET /issues` and render cards into columns | medium |
 | Project switcher wiring | Selecting a Project re-fetches and fully replaces the board | small |
-| Create-project form | Form + `POST /projects` call + inline error handling | small |
 | Empty-state handling | Render a prompt-to-create state when there are zero Projects | small |
 
 ## Acceptance Criteria
@@ -106,8 +109,10 @@ source-manifest:
 - [x] Board load fetches Projects, selects a default, fetches and renders that Project's Issues (BEH-1)
 - [x] Issues render into the correct one of three fixed columns with the right card fields (BEH-2)
 - [x] Switching Projects fully replaces the board, never merges two Projects' Issues (BEH-3)
-- [x] Create-project form creates and selects the new Project (BEH-4)
 - [x] Any API failure shows a visible message, never a silent failure or blank screen (BEH-5)
 - [x] Zero Projects shows an empty state, not an error (BEH-6)
 - [x] All quality gates pass (tests, lint)
 - [x] No constitutional violations introduced
+- [x] (retired) BEH-4 create-project form removed from this spec's scope — see
+      `retired-behavior-ids` above and `project-management-screen.spec.md` for the surviving
+      add-project form

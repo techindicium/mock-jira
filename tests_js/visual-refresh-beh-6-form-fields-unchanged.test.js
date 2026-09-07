@@ -4,11 +4,6 @@ const { readFileSync } = require("node:fs");
 
 const html = readFileSync(require.resolve("../static/index.html"), "utf8");
 
-test("BEH-6: create-project required fields are unchanged", () => {
-  assert.match(html, /<input id="project-key" name="key" required/);
-  assert.match(html, /<input id="project-name" name="name" required/);
-});
-
 test("BEH-6: create-issue required fields are unchanged", () => {
   assert.match(html, /<input id="issue-summary" name="summary" required/);
   assert.match(html, /<select id="issue-type" name="issue_type" required/);

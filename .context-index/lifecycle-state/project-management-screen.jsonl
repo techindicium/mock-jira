@@ -12,3 +12,4 @@
 {"event":"validator_report","step":"validate","validator":"validate.check-8-boundaries","severity":"error","verdict":"PASS","notes":"SKIP: no boundary rules declared","ts":"2026-09-07T11:29:49.916Z"}
 {"event":"validator_report","step":"validate","validator":"validate.check-9-transition-gates","severity":"warning","verdict":"PASS","notes":"SKIP: no transitions configured","ts":"2026-09-07T11:29:51.920Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS","ts":"2026-09-07T11:30:15.379Z"}
+{"event":"code_drift_detected","drift_source":"static/index.html","drift_at":"2026-09-07T12:24:02.112Z","ts":"2026-09-07T12:24:02.112Z"}
