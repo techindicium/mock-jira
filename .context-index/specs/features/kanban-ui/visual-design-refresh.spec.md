@@ -9,7 +9,7 @@ created: 2026-09-06
 updated: 2026-09-06
 kind: behavioral
 source-manifest:
-  sha: "470d4a0"
+  sha: "6607a50"
   files:
     - static/css/board.css
     - static/index.html
@@ -23,7 +23,7 @@ source-manifest:
     - tests_js/visual-refresh-beh-6-form-fields-unchanged.test.js
     - tests_js/visual-refresh-beh-7-8-accessibility-css.test.js
     - tests_js/visual-refresh-no-cdn-fonts.test.js
-  computed-at: "2026-09-06T23:33:20.248Z"
+  computed-at: "2026-09-07T00:37:16.955Z"
 ---
 
 # Live Spec: Visual design refresh — dispatch-board identity

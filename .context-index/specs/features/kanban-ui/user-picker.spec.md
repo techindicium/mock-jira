@@ -1,7 +1,7 @@
 ---
-partial_schema: spec@1
+partial_schema: implement@1
 charter: kanban-ui
-status: review-passed
+status: implemented
 risk_level: low
 milestone: v1.3
 revision: 1
@@ -9,6 +9,18 @@ charter-revision: 18
 created: 2026-09-06
 updated: 2026-09-06
 kind: behavioral
+source-manifest:
+  sha: "1502410"
+  files:
+    - static/index.html
+    - static/js/board-logic.js
+    - static/js/board.js
+    - tests_e2e/test_ui_user_picker_e2e.py
+    - tests_js/user-picker-beh-2-3-datalist-markup.test.js
+    - tests_js/user-picker-beh-2-3-user-options.test.js
+    - tests_js/user-picker-beh-6-graceful-degradation.test.js
+    - tests_js/visual-refresh-beh-6-form-fields-unchanged.test.js
+  computed-at: "2026-09-07T00:36:59.036Z"
 ---
 
 # Live Spec: User picker in issue forms
