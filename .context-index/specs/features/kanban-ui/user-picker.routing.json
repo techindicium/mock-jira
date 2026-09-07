@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "_generated_by": "/adev:route — do not hand-edit; re-run instead.",
+  "entries": [
+    {
+      "task_id": "task-1",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "Pure option-builder function closely follows existing escapeHtml/buildCardHtml pattern; fully specified test cases; 2-file blast radius."
+    },
+    {
+      "task_id": "task-2",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 1,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "Trivial safe-fallback helper matching the existing formatFetchError/isNotFoundError small-helper pattern in the same file."
+    },
+    {
+      "task_id": "task-3",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 0.8,
+        "novelty": 1
+      },
+      "rationale": "Additive HTML markup with a native datalist, exact diffs specified in the plan; touches 3 files including one existing test relaxation."
+    },
+    {
+      "task_id": "task-4",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 1,
+        "blast_radius": 1,
+        "novelty": 0.8
+      },
+      "rationale": "Real-browser suite closely follows test_ui_issue_forms_e2e.py/test_ui_error_path_e2e.py patterns; single new file; minor novelty in request-count assertion."
+    },
+    {
+      "task_id": "task-5",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 1,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "Mechanical fetch/cache/render wiring mirroring board.js's existing init()/loadIssuesFor pattern; single file modify."
+    }
+  ]
+}
