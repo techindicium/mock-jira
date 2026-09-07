@@ -68,7 +68,7 @@
         </select>
       </label>
       <label>Description <textarea id="issue-description" name="description"></textarea></label>
-      <label>Assignee <input id="issue-assignee" name="assignee" /></label>
+      <label>Assignee <input id="issue-assignee" name="assignee" list="user-directory-options" /></label>
       <button type="submit">Create Issue</button>
       <button id="cancel-create-issue" type="button">Cancel</button>
       <p id="create-issue-error" role="alert" hidden></p>
@@ -95,12 +95,14 @@
         </select>
       </label>
       <label>Description <textarea id="edit-issue-description" name="description"></textarea></label>
-      <label>Assignee <input id="edit-issue-assignee" name="assignee" /></label>
+      <label>Assignee <input id="edit-issue-assignee" name="assignee" list="user-directory-options" /></label>
       <button type="submit">Save Changes</button>
       <button id="cancel-edit-issue" type="button">Cancel</button>
       <button id="delete-issue" type="button">Delete</button>
       <p id="edit-issue-error" role="alert" hidden></p>
     </form>
   </section>
+
+  <datalist id="user-directory-options"></datalist>
 </body>
 </html>

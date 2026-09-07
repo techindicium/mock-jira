@@ -17,7 +17,10 @@ test("BEH-6: create-issue required fields are unchanged", () => {
 
 test("BEH-6: create-issue optional fields carry no required attribute", () => {
   assert.match(html, /<textarea id="issue-description" name="description"><\/textarea>/);
-  assert.match(html, /<input id="issue-assignee" name="assignee" \/>/);
+  // user-picker.spec.md added a `list="user-directory-options"` attribute here — the only
+  // additive markup its BEH-2 postcondition permits. Asserted as an exact literal match (not
+  // a wildcard) so this test still proves nothing else was added to the tag.
+  assert.match(html, /<input id="issue-assignee" name="assignee" list="user-directory-options" \/>/);
 });
 
 test("BEH-6: edit-issue fields carry no required attribute (issue-crud-forms Preconditions)", () => {

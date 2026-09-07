@@ -1,8 +1,8 @@
 ---
 status: approved
 kind: feature
-revision: 17
-updated: 2026-09-06
+revision: 23
+updated: 2026-09-07
 ---
 
 # Feature Charter: kanban-ui
@@ -82,6 +82,7 @@ no separate server, no CORS configuration, and no runtime base-URL configuration
 | Create project | Simple form calling the API's create-project endpoint | should-have | mvp | validated |
 | End-to-end UI test suite | Real browser automation (a real rendering engine, real clicks/drags/form fills) driving the actual served page — the same interface a person uses, never calling board-logic.js's functions directly | must-have | v1.1 | validated |
 | Visual design refresh | Distinctive ticket/dispatch-board visual identity — cards read as ticket stubs on a rail-mounted board, not a generic SaaS dashboard; no functional/behavioral change to any existing capability | should-have | v1.2 | validated |
+| User picker in issue forms | Auto-fills the assignee field in the create/edit-issue forms by picking a name from issue-tracker-api's User directory (`GET /users`); the field stays free-text — no schema change, no foreign key, no requirement that assignee match a User | should-have | v1.3 | validated |
 
 ## Deferred Capabilities
 
@@ -108,6 +109,7 @@ other modules.
 | `GET /issues/{id}` | issue-tracker-api | Load full detail for the edit form |
 | `PATCH /issues/{id}` | issue-tracker-api | Save edits and column-move status changes |
 | `DELETE /issues/{id}` | issue-tracker-api | Delete-issue action |
+| `GET /users` | issue-tracker-api | Populate the assignee picker's suggestion list in the create/edit-issue forms |
 
 ## Quality Attributes
 

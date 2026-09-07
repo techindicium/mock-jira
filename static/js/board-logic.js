@@ -140,11 +140,24 @@
     return issues.filter((issue) => issue.id !== issueId);
   }
 
+  function buildUserOptionsHtml(users) {
+    if (!Array.isArray(users)) return "";
+    return users
+      .filter((u) => u && u.name && u.name.trim())
+      .map((u) => `<option value="${escapeHtml(u.name)}">`)
+      .join("");
+  }
+
+  function usersOrEmptyOnFailure(users) {
+    return Array.isArray(users) ? users : [];
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, priorityStripeAttr,
     formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
     shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
     buildIssueCreatePayload, diffIssueFields, moveIssueStatus, removeIssueById,
+    buildUserOptionsHtml, usersOrEmptyOnFailure,
   };
 });

@@ -97,7 +97,30 @@
     loadIssuesFor(projectId);
   }
 
+  let usersFetchStarted = false;
+
+  function renderUserDatalist(users) {
+    const datalist = document.getElementById("user-directory-options");
+    if (datalist) datalist.innerHTML = BoardLogic.buildUserOptionsHtml(users);
+  }
+
+  async function loadUsers() {
+    // BEH-1: fetch GET /users at most once per board load. init() re-runs later in the same
+    // page load (e.g. onCreateProjectSubmit's `await init()` after creating a project), so this
+    // guard is required, not just the single top-level call site, to keep the "once" guarantee.
+    if (usersFetchStarted) return;
+    usersFetchStarted = true;
+    let users;
+    try {
+      users = await fetchJson("/users");
+    } catch (_err) {
+      users = null; // BEH-6: degrade silently — no board-error banner for this convenience source
+    }
+    renderUserDatalist(BoardLogic.usersOrEmptyOnFailure(users));
+  }
+
   async function init() {
+    loadUsers(); // BEH-1: fetch GET /users exactly once per board load; never blocks board render
     let projects;
     try {
       projects = await fetchJson("/projects");
@@ -179,6 +202,7 @@
     loadIssuesFor, init, getLastSelectedKey, setLastSelectedKey, onProjectSwitch,
     onCreateProjectSubmit, onCreateIssueSubmit, onCardClick, onEditIssueSubmit,
     onDragStart, onColumnDrop, onDeleteIssueClick, reportIssueMutationFailure,
+    loadUsers, renderUserDatalist,
   };
 
   document.addEventListener("DOMContentLoaded", init);
