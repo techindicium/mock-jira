@@ -75,6 +75,7 @@ Deliberately lightweight, for a small standalone mock API in a training course:
 - **Risk policies** (`governance/risk-policies.yaml`): medium and low risk run `quick` mode,
   `minimal` test depth, no human-in-the-loop — most work here runs fully agentic. `high` risk
   keeps full rigor and human approval.
-- `merge_policy: merge`, but `main`/`master` stay in `protected_branches` — always branch first.
+- `merge_policy: merge`, `protected_branches: []` — no remote/PR capability exists for this
+  repo, so direct merges to `main` are allowed after gates pass. Always branch first regardless.
 
 <!-- User Additions -->
