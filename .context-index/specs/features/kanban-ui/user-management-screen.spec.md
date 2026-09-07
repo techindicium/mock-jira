@@ -9,7 +9,7 @@ created: 2026-09-07
 updated: 2026-09-07
 kind: behavioral
 source-manifest:
-  sha: "1ef19b4"
+  sha: "40f06c1"
   files:
     - static/css/board.css
     - static/index.html
@@ -18,7 +18,7 @@ source-manifest:
     - tests_e2e/test_ui_user_management_e2e.py
     - tests_js/user-mgmt-beh-1-list-render.test.js
     - tests_js/user-mgmt-beh-4-5-validate-and-errors.test.js
-  computed-at: "2026-09-07T11:26:17.475Z"
+  computed-at: "2026-09-07T12:36:24.046Z"
 ---
 
 # Live Spec: Users management screen

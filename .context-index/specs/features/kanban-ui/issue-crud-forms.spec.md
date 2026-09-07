@@ -10,7 +10,7 @@ created: 2026-09-04
 updated: 2026-09-05
 kind: behavioral
 source-manifest:
-  sha: "96c9b8c"
+  sha: "b5e9cfd"
   files:
     - static/css/board.css
     - static/index.html
@@ -22,7 +22,7 @@ source-manifest:
     - tests_js/issue-crud-beh-4-delete-issue.test.js
     - tests_js/issue-crud-beh-5-error-handling.test.js
     - tests_js/issue-crud-beh-6-create-validation.test.js
-  computed-at: "2026-09-07T11:25:42.967Z"
+  computed-at: "2026-09-07T12:35:43.540Z"
 ---
 
 # Live Spec: Issue create, edit, delete, and column move

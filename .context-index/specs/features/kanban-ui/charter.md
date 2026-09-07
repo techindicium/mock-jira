@@ -1,7 +1,7 @@
 ---
 status: approved
 kind: feature
-revision: 36
+revision: 37
 updated: 2026-09-07
 ---
 
@@ -87,7 +87,7 @@ no separate server, no CORS configuration, and no runtime base-URL configuration
 | Edit issue | Form/modal that calls the API's update-issue endpoint for non-status fields | must-have | mvp | validated |
 | Delete issue | Remove an Issue via the board | must-have | mvp | validated |
 | Project switcher | List Projects, select one to filter the board | should-have | mvp | validated |
-| Create project | Simple form calling the API's create-project endpoint | should-have | mvp | validated |
+| Create project | Retired 2026-09-07 — the board tab's own, narrower create-project form (key/name only) was removed as a redundant duplicate of the "Projects management screen" capability's superset add-project form (key/name/description); see `board-view.spec.md`'s `retired-behavior-ids: BEH-4` | should-have | mvp | retired |
 | End-to-end UI test suite | Real browser automation (a real rendering engine, real clicks/drags/form fills) driving the actual served page — the same interface a person uses, never calling board-logic.js's functions directly | must-have | v1.1 | validated |
 | Visual design refresh | Distinctive ticket/dispatch-board visual identity — cards read as ticket stubs on a rail-mounted board, not a generic SaaS dashboard; no functional/behavioral change to any existing capability | should-have | v1.2 | validated |
 | User picker in issue forms | Auto-fills the assignee field in the create/edit-issue forms by picking a name from issue-tracker-api's User directory (`GET /users`); the field stays free-text — no schema change, no foreign key, no requirement that assignee match a User | should-have | v1.3 | validated |

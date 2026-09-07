@@ -59,3 +59,4 @@
 {"event":"code_drift_detected","drift_source":".context-index/governance/gates.yaml","drift_at":"2026-09-05T15:37:20.489Z","ts":"2026-09-05T15:37:20.490Z"}
 {"event":"code_drift_detected","drift_source":".context-index/governance/gates.yaml","drift_at":"2026-09-06T20:30:56.051Z","ts":"2026-09-06T20:30:56.052Z"}
 {"event":"code_drift_detected","drift_source":"static/index.html","drift_at":"2026-09-07T11:12:41.920Z","ts":"2026-09-07T11:12:41.921Z"}
+{"event":"code_drift_detected","drift_source":"static/index.html","drift_at":"2026-09-07T12:24:02.109Z","ts":"2026-09-07T12:24:02.110Z"}

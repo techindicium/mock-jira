@@ -7,7 +7,6 @@ def test_root_serves_board_shell(client):
     assert 'id="col-in_progress"' in body
     assert 'id="col-done"' in body
     assert 'id="project-switcher"' in body
-    assert 'id="create-project-form"' in body
 
 
 def test_static_css_is_served(client):

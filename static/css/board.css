@@ -184,7 +184,6 @@ header h1 {
 }
 
 #board-error,
-#create-project-error,
 #create-issue-error,
 #edit-issue-error,
 #users-view-error,
@@ -219,7 +218,6 @@ button:hover {
 }
 
 #open-create-issue,
-#create-project-form button[type="submit"],
 #create-issue-form button[type="submit"],
 #edit-issue-form button[type="submit"],
 #create-user-form button[type="submit"],
@@ -230,7 +228,6 @@ button:hover {
 }
 
 #open-create-issue:hover,
-#create-project-form button[type="submit"]:hover,
 #create-issue-form button[type="submit"]:hover,
 #edit-issue-form button[type="submit"]:hover,
 #create-user-form button[type="submit"]:hover,
@@ -362,7 +359,6 @@ button:hover {
 }
 
 #empty-state,
-#create-project,
 #create-issue,
 #edit-issue,
 #create-user,
@@ -380,7 +376,6 @@ button:hover {
   color: var(--ink-text-on-paper);
 }
 
-#create-project h2,
 #create-issue h2,
 #edit-issue h2,
 #create-user h2,
@@ -392,7 +387,6 @@ button:hover {
   color: var(--ink-text-on-paper);
 }
 
-#create-project form label,
 #create-issue form label,
 #edit-issue form label,
 #create-user form label,
@@ -403,7 +397,6 @@ button:hover {
   color: var(--ink-text-on-paper);
 }
 
-#create-project form input,
 #create-issue form input,
 #create-issue form select,
 #edit-issue form input,

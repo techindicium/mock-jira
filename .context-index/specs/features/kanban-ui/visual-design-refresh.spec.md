@@ -3,13 +3,13 @@ charter: kanban-ui
 status: validated
 risk_level: low
 milestone: v1.2
-revision: 1
+revision: 2
 charter-revision: 12
 created: 2026-09-06
-updated: 2026-09-06
+updated: 2026-09-07
 kind: behavioral
 source-manifest:
-  sha: "5477684"
+  sha: "9b7d64b"
   files:
     - static/css/board.css
     - static/index.html
@@ -23,7 +23,7 @@ source-manifest:
     - tests_js/visual-refresh-beh-6-form-fields-unchanged.test.js
     - tests_js/visual-refresh-beh-7-8-accessibility-css.test.js
     - tests_js/visual-refresh-no-cdn-fonts.test.js
-  computed-at: "2026-09-07T11:25:44.916Z"
+  computed-at: "2026-09-07T12:35:07.205Z"
 ---
 
 # Live Spec: Visual design refresh — dispatch-board identity
@@ -73,11 +73,14 @@ source-manifest:
   plate/tab control (mono/brass treatment, not the default browser `<select>` chrome) while
   remaining the same functional `<select id="project-switcher">` element with its existing
   `change` event contract.
-- **BEH-6** — **When** any of the three forms (create-project, create-issue, edit-issue)
-  renders, **then** it uses the `--paper`/`--ink-line` palette, sharp corners, and a primary
-  action button styled from the palette (`--rail` or `--stamp-gold` background, never a generic
-  blue) — with no change to any field's `id`, `name`, `required` attribute, or submit/cancel
-  wiring.
+- **BEH-6** — **When** any form in the app (`create-issue`, `edit-issue`, and — added after
+  this spec's initial validation, per the Users/Projects management screens — `create-user` and
+  the Projects tab's own add-project form) renders, **then** it uses the `--paper`/`--ink-line`
+  palette, sharp corners, and a primary action button styled from the palette (`--rail` or
+  `--stamp-gold` background, never a generic blue) — with no change to any field's `id`, `name`,
+  `required` attribute, or submit/cancel wiring. (`board-view`'s own, narrower create-project
+  form has since been retired — see that spec's `retired-behavior-ids` — and is no longer part
+  of this list.)
 - **BEH-7** — **When** any focusable control (button, input, select, or card) receives keyboard
   focus, **then** a visible `:focus-visible` outline is shown, distinguishable against both
   `--ink` and `--paper` surfaces — never `outline: none` without a replacement.
@@ -132,7 +135,7 @@ source-manifest:
 | Column count badge | Add a small mono issue-count badge next to each column header's label, wired from `board.js`'s render path | small |
 | Card restyle + key | Restyle `.card` (paper surface, sharp corners, hard offset shadow, left priority stripe); add the issue's mono key to `board-logic.js`'s `buildCardHtml` | medium |
 | Project switcher restyle | Restyle `#project-switcher` as a bordered plate/tab control via CSS (`appearance: none` + custom chrome), same `<select>` element | small |
-| Form restyle | Restyle create-project/create-issue/edit-issue forms and their buttons to the palette | medium |
+| Form restyle | Restyle the app's forms (originally create-project/create-issue/edit-issue; create-project has since been retired) and their buttons to the palette | medium |
 | Focus/motion accessibility | Add deliberate `:focus-visible` styling and a `prefers-reduced-motion` guard around any added transitions | small |
 
 ## Visual Expectations
@@ -168,7 +171,7 @@ source-manifest:
 - [ ] Cards show the issue key in mono, summary, sentence-case type+priority meta, and assignee (BEH-3)
 - [ ] Column headers show sentence-case status names with a mono issue-count badge (BEH-4)
 - [ ] Project switcher is styled as a plate/tab control while remaining the same `<select id="project-switcher">` (BEH-5)
-- [ ] All three forms are restyled to the palette with sharp corners and `--ink-line` borders, with no field id/name/required-attribute changes (BEH-6)
+- [ ] Every form in the app is restyled to the palette with sharp corners and `--ink-line` borders, with no field id/name/required-attribute changes (BEH-6)
 - [ ] Keyboard focus remains visible via a deliberate `:focus-visible` style on every interactive element (BEH-7)
 - [ ] `prefers-reduced-motion: reduce` disables/reduces every added transition (BEH-8)
 - [ ] No existing `board-view`/`issue-crud-forms`/`ui-e2e` DOM hooks (ids, classes, data attributes) are broken — `tests_js/` and `tests_e2e/test_ui_*.py` pass unmodified, or with locator-only fixes, never a weakened assertion

@@ -105,9 +105,9 @@
   }
 
   async function loadUsers() {
-    // BEH-1: fetch GET /users at most once per board load. init() re-runs later in the same
-    // page load (e.g. onCreateProjectSubmit's `await init()` after creating a project), so this
-    // guard is required, not just the single top-level call site, to keep the "once" guarantee.
+    // BEH-1: fetch GET /users at most once per board load. init() could in principle run
+    // again later in the same page load, so this guard is required, not just the single
+    // top-level call site, to keep the "once" guarantee.
     if (usersFetchStarted) return;
     usersFetchStarted = true;
     let users;
@@ -152,55 +152,10 @@
     showError(BoardLogic.formatFetchError(action, err));
   }
 
-  function showFormError(message) {
-    const el = document.getElementById("create-project-error");
-    el.textContent = message;
-    el.hidden = false;
-  }
-
-  function clearFormError() {
-    document.getElementById("create-project-error").hidden = true;
-  }
-
-  async function onCreateProjectSubmit(event) {
-    event.preventDefault();
-    const keyInput = document.getElementById("project-key");
-    const nameInput = document.getElementById("project-name");
-    const { valid, errors } = BoardLogic.validateProjectForm(keyInput.value, nameInput.value);
-    if (!valid) {
-      showFormError(Object.values(errors)[0]);
-      return; // client-side block — input is not cleared, no request sent (UI_VALIDATION_ERROR)
-    }
-    clearFormError();
-    let resp;
-    try {
-      resp = await fetch("/projects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ key: keyInput.value, name: nameInput.value }),
-      });
-    } catch (networkErr) {
-      showError(BoardLogic.formatFetchError("Creating project", { message: networkErr.message }));
-      return;
-    }
-    const body = await resp.json().catch(() => null);
-    if (!resp.ok) {
-      const submitErr = BoardLogic.extractProjectSubmitError(resp.status, body);
-      showFormError(submitErr ? submitErr.message : "Could not create the project.");
-      return; // input is not cleared on error, per the spec's Error Cases table
-    }
-    keyInput.value = "";
-    nameInput.value = "";
-    setLastSelectedKey(body.key);
-    // Re-run init()'s project list + selection so the new project appears and is selected
-    // (pickDefaultProject will now find `body.key` as the remembered selection).
-    await init();
-  }
-
   window.BoardApp = {
     fetchJson, showError, clearError, renderSwitcher, renderColumns, renderBoardState,
     loadIssuesFor, init, getLastSelectedKey, setLastSelectedKey, onProjectSwitch,
-    onCreateProjectSubmit, onCreateIssueSubmit, onCardClick, onEditIssueSubmit,
+    onCreateIssueSubmit, onCardClick, onEditIssueSubmit,
     onDragStart, onColumnDrop, onDeleteIssueClick, reportIssueMutationFailure,
     loadUsers, renderUserDatalist,
   };
@@ -211,7 +166,6 @@
 
   document.addEventListener("DOMContentLoaded", init);
   document.getElementById("project-switcher").addEventListener("change", onProjectSwitch);
-  document.getElementById("create-project-form").addEventListener("submit", onCreateProjectSubmit);
 
   document.getElementById("open-create-issue").addEventListener("click", () => {
     document.getElementById("create-issue").hidden = false;

@@ -20,9 +20,12 @@ def test_assignee_datalist_is_populated_from_seeded_users(page, ui_board_server)
     assert len(users_requests) == 1
 
 
-def test_users_fetched_once_even_across_a_create_project_reinit(page, ui_board_server):
-    # BEH-1 regression guard: onCreateProjectSubmit calls init() again after a successful
-    # create-project submission, in the same page load — loadUsers() must not re-fire there.
+def test_users_fetched_once_even_across_a_board_reinit(page, ui_board_server):
+    # BEH-1 regression guard: something re-running init() later in the same page load (this
+    # used to happen via the board tab's own create-project form, since removed — project
+    # creation now lives solely in the Projects tab, see project-management-screen.spec.md)
+    # must not cause loadUsers() to re-fire. Exercised directly against the exposed
+    # window.BoardApp.init(), the same internal re-init path the guard protects.
     users_requests = []
     page.on("request", lambda req: users_requests.append(req) if "/users" in req.url else None)
 
@@ -32,15 +35,8 @@ def test_users_fetched_once_even_across_a_create_project_reinit(page, ui_board_s
         "document.getElementById('user-directory-options').options.length > 0"
     )
 
-    page.fill("#project-key", "UPK")
-    page.fill("#project-name", "User Picker Regression Project")
-    page.click("#create-project-form button[type=submit]")
-    # Options inside a closed native <select> aren't "visible" to Playwright's locator engine,
-    # so poll the DOM directly rather than waiting on a locator's visibility state.
-    page.wait_for_function(
-        "Array.from(document.querySelectorAll('#project-switcher option'))"
-        ".some(o => o.textContent.includes('UPK'))"
-    )
+    page.evaluate("() => window.BoardApp.init()")
+    page.wait_for_selector("#board:not([hidden])")
 
     assert len(users_requests) == 1
 
