@@ -1,6 +1,6 @@
 ---
 charter: kanban-ui
-status: review-passed
+status: implemented
 risk_level: low
 milestone: v1.4
 revision: 1
@@ -8,6 +8,15 @@ charter-revision: 24
 created: 2026-09-07
 updated: 2026-09-07
 kind: behavioral
+source-manifest:
+  sha: "d6332ea"
+  files:
+    - static/css/board.css
+    - static/index.html
+    - static/js/board.js
+    - tests_e2e/test_ui_navigation_e2e.py
+    - tests_js/navigation-beh-1-sidebar-markup.test.js
+  computed-at: "2026-09-07T11:26:15.463Z"
 ---
 
 # Live Spec: App navigation shell (sidebar)

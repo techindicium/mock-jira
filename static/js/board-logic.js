@@ -140,6 +140,61 @@
     return issues.filter((issue) => issue.id !== issueId);
   }
 
+  function buildUserListHtml(users) {
+    if (!Array.isArray(users)) return "";
+    return users
+      .map((u) => (
+        `<div class="ledger-row">` +
+        `<span class="ledger-primary">${escapeHtml(u.name)}</span>` +
+        `<span class="ledger-meta">${escapeHtml(u.email || "—")} &middot; ` +
+        `${escapeHtml(u.role || "—")}</span>` +
+        `</div>`
+      ))
+      .join("");
+  }
+
+  function buildProjectListHtml(projects) {
+    if (!Array.isArray(projects)) return "";
+    return projects
+      .map((p) => (
+        `<div class="ledger-row">` +
+        `<span class="ledger-key">${escapeHtml(p.key)}</span>` +
+        `<span class="ledger-primary">${escapeHtml(p.name)}</span>` +
+        `<span class="ledger-meta">${escapeHtml(p.description || "—")}</span>` +
+        `</div>`
+      ))
+      .join("");
+  }
+
+  function validateUserForm(name) {
+    const errors = {};
+    if (!name || !name.trim()) errors.name = "Name is required";
+    return { valid: Object.keys(errors).length === 0, errors };
+  }
+
+  function extractUserSubmitError(status, body) {
+    if (status === 409) {
+      return { field: "email", message: (body && body.message) || "That email is already taken." };
+    }
+    if (status === 422) {
+      return { field: "form", message: (body && body.message) || "Please fill in all required fields." };
+    }
+    return null;
+  }
+
+  function buildUserCreatePayload(fields) {
+    const payload = { name: fields.name };
+    if (fields.email && fields.email.trim()) payload.email = fields.email;
+    if (fields.role && fields.role.trim()) payload.role = fields.role;
+    return payload;
+  }
+
+  function buildProjectCreatePayload(fields) {
+    const payload = { key: fields.key, name: fields.name };
+    if (fields.description && fields.description.trim()) payload.description = fields.description;
+    return payload;
+  }
+
   function buildUserOptionsHtml(users) {
     if (!Array.isArray(users)) return "";
     return users
@@ -159,5 +214,7 @@
     shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
     buildIssueCreatePayload, diffIssueFields, moveIssueStatus, removeIssueById,
     buildUserOptionsHtml, usersOrEmptyOnFailure,
+    buildUserListHtml, buildProjectListHtml, validateUserForm, extractUserSubmitError,
+    buildUserCreatePayload, buildProjectCreatePayload,
   };
 });

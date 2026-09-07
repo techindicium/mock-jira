@@ -10,7 +10,7 @@ created: 2026-09-06
 updated: 2026-09-06
 kind: behavioral
 source-manifest:
-  sha: "1502410"
+  sha: "aea3f85"
   files:
     - static/index.html
     - static/js/board-logic.js
@@ -20,7 +20,7 @@ source-manifest:
     - tests_js/user-picker-beh-2-3-user-options.test.js
     - tests_js/user-picker-beh-6-graceful-degradation.test.js
     - tests_js/visual-refresh-beh-6-form-fields-unchanged.test.js
-  computed-at: "2026-09-07T00:36:59.036Z"
+  computed-at: "2026-09-07T11:25:46.866Z"
 ---
 
 # Live Spec: User picker in issue forms

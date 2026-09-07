@@ -1,6 +1,6 @@
 ---
 charter: kanban-ui
-status: review-passed
+status: implemented
 risk_level: low
 milestone: v1.4
 revision: 1
@@ -8,6 +8,17 @@ charter-revision: 24
 created: 2026-09-07
 updated: 2026-09-07
 kind: behavioral
+source-manifest:
+  sha: "1ef19b4"
+  files:
+    - static/css/board.css
+    - static/index.html
+    - static/js/board-logic.js
+    - static/js/board.js
+    - tests_e2e/test_ui_user_management_e2e.py
+    - tests_js/user-mgmt-beh-1-list-render.test.js
+    - tests_js/user-mgmt-beh-4-5-validate-and-errors.test.js
+  computed-at: "2026-09-07T11:26:17.475Z"
 ---
 
 # Live Spec: Users management screen
