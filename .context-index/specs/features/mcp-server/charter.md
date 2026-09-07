@@ -1,7 +1,7 @@
 ---
 status: approved
 kind: feature
-revision: 18
+revision: 20
 updated: 2026-09-07
 ---
 
@@ -79,8 +79,8 @@ of `issue-tracker-api`: it owns no persisted data and never touches the database
 | update_issue tool | Wraps `PATCH /issues/{id}`, including status transitions | must-have | mvp | validated |
 | delete_issue tool | Wraps `DELETE /issues/{id}` | must-have | mvp | validated |
 | End-to-end MCP test suite | A real MCP client, over the real streamable-http transport, against a live server process — the same interface an external agent uses, never calling the tool functions directly in-process | must-have | v1.1 | validated |
-| list_users tool | Wraps `GET /users`, full compatibility with the other modules' user-management support | must-have | v1.2 | implemented |
-| create_user tool | Wraps `POST /users` | must-have | v1.2 | implemented |
+| list_users tool | Wraps `GET /users`, full compatibility with the other modules' user-management support | must-have | v1.2 | validated |
+| create_user tool | Wraps `POST /users` | must-have | v1.2 | validated |
 
 ## Deferred Capabilities
 
