@@ -53,12 +53,22 @@ if [ -n "$MANIFEST" ]; then
     fi
   fi
 
-  # Extract protected_branches (simple line-by-line parse)
+  # Extract protected_branches (simple line-by-line parse).
+  # PROTECTED_KEY_FOUND distinguishes "key present but empty" (e.g. an
+  # explicit `protected_branches: []`, opting a repo out of the default
+  # protection) from "key absent entirely" (fall back to the safe
+  # default). Without this flag those two cases were indistinguishable —
+  # an explicitly empty list silently fell back to ["main","master"],
+  # defeating a documented, deliberate per-repo decision recorded in
+  # manifest.yaml. (Same bug, same fix, as the adev plugin's
+  # merge-guard.sh hook — this is an independent copy of the same check.)
   IN_PROTECTED=false
+  PROTECTED_KEY_FOUND=false
   CUSTOM_BRANCHES=()
   while IFS= read -r line; do
     if echo "$line" | grep -qE '^\s*protected_branches:'; then
       IN_PROTECTED=true
+      PROTECTED_KEY_FOUND=true
       continue
     fi
     if $IN_PROTECTED; then
@@ -73,15 +83,22 @@ if [ -n "$MANIFEST" ]; then
     fi
   done < "$MANIFEST"
 
-  if [ ${#CUSTOM_BRANCHES[@]} -gt 0 ]; then
-    PROTECTED_BRANCHES=("${CUSTOM_BRANCHES[@]}")
+  if [ "$PROTECTED_KEY_FOUND" = "true" ]; then
+    # Guard against expanding a zero-length array under `set -u` on bash 3.2
+    # (macOS's system bash) — "${CUSTOM_BRANCHES[@]}" on an empty array
+    # throws "unbound variable" there, even though it's fine on bash 4.4+.
+    if [ ${#CUSTOM_BRANCHES[@]} -eq 0 ]; then
+      PROTECTED_BRANCHES=()
+    else
+      PROTECTED_BRANCHES=("${CUSTOM_BRANCHES[@]}")
+    fi
   fi
 fi
 
 # --- Check if current branch is protected ---
 
 IS_PROTECTED=false
-for branch in "${PROTECTED_BRANCHES[@]}"; do
+for branch in ${PROTECTED_BRANCHES[@]+"${PROTECTED_BRANCHES[@]}"}; do
   if [ "$CURRENT_BRANCH" = "$branch" ]; then
     IS_PROTECTED=true
     break
