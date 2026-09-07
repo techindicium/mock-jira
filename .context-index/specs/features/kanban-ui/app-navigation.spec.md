@@ -1,6 +1,6 @@
 ---
 charter: kanban-ui
-status: implemented
+status: validated
 risk_level: low
 milestone: v1.4
 revision: 1
