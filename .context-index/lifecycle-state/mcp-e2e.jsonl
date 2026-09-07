@@ -65,3 +65,4 @@
 {"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"9 findings (4 error-sev: gitignored .venv paths in test/lint/e2e-smoke gates, test-js glob-under-expansion under sh; 5 warnings). Pre-existing infra gaps, not introduced by this spec.","ts":"2026-09-06T22:05:48.873Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-06T22:06:53.250Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-06T22:08:00.477Z"}
+{"event":"code_drift_detected","drift_source":"tests_e2e/test_mcp_tool_discovery_e2e.py","drift_at":"2026-09-07T00:16:47.937Z","ts":"2026-09-07T00:16:47.938Z"}

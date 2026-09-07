@@ -10,11 +10,13 @@ _EXPECTED_TOOL_NAMES = {
     "create_issue",
     "update_issue",
     "delete_issue",
+    "list_users",
+    "create_user",
 }
 
 
 @pytest.mark.anyio
-async def test_real_client_discovers_all_seven_tools_with_correct_schemas(mcp_dual_server):
+async def test_real_client_discovers_all_nine_tools_with_correct_schemas(mcp_dual_server):
     _, mcp_base_url = mcp_dual_server
 
     async with connect(mcp_base_url) as session:
@@ -30,3 +32,5 @@ async def test_real_client_discovers_all_seven_tools_with_correct_schemas(mcp_du
         "project_id", "summary", "issue_type", "priority",
     }
     assert "issue_id" not in by_name.get("list_issues").input_schema.get("required", [])
+    assert set(by_name["create_user"].input_schema["required"]) == {"name"}
+    assert by_name.get("list_users").input_schema.get("required", []) == []

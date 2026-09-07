@@ -4,13 +4,13 @@ charter: mcp-server
 status: validated
 risk_level: low
 milestone: v1.1
-revision: 1
-charter-revision: 10
+revision: 2
+charter-revision: 12
 created: 2026-09-06
-updated: 2026-09-06
+updated: 2026-09-07
 kind: behavioral
 source-manifest:
-  sha: "de7c0fa"
+  sha: "8eff9a7"
   files:
     - requirements-e2e.txt
     - tests/test_requirements_files.py
@@ -24,7 +24,7 @@ source-manifest:
     - tests_e2e/test_mcp_server_fixture.py
     - tests_e2e/test_mcp_server_unreachable_fixture.py
     - tests_e2e/test_mcp_tool_discovery_e2e.py
-  computed-at: "2026-09-06T21:57:45.289Z"
+  computed-at: "2026-09-07T00:18:29.196Z"
 ---
 
 # Live Spec: End-to-end MCP test suite (real client/transport)
@@ -52,7 +52,8 @@ source-manifest:
 <!-- retired-behavior-ids: (none) -->
 
 - **BEH-1** — **When** a real MCP client sends the protocol's tool-listing call to the live
-  server, **then** it returns all 7 registered tools with their correct names and input schemas.
+  server, **then** it returns all 9 registered tools with their correct names and input schemas
+  (7 Project/Issue tools plus `list_users`/`create_user`, added by the `user-tools` spec).
 - **BEH-2** — **When** a real MCP client calls `list_projects`/`create_project` against the live
   server, **then** the structured result matches what a direct real HTTP call to
   `issue-tracker-api` shows for the same data.

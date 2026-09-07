@@ -1,8 +1,8 @@
 ---
 status: approved
 kind: feature
-revision: 11
-updated: 2026-09-06
+revision: 20
+updated: 2026-09-07
 ---
 
 # Feature Charter: mcp-server
@@ -15,16 +15,16 @@ updated: 2026-09-06
 
 mcp-server exposes `issue-tracker-api`'s CRUD operations as MCP tools, so an AI agent working in
 a consuming course track (`portwell-assist`/SDLC, `portwell-analytics`/DDLC) can create and list
-Projects, and fully create, read, update, and delete Issues, directly through the Model Context
-Protocol, without hand-rolling HTTP calls. Like `kanban-ui`, it is a pure client of `issue-tracker-api`: it owns no
-persisted data and never touches the database directly.
+Projects, fully create, read, update, and delete Issues, and list/create Users, directly through
+the Model Context Protocol, without hand-rolling HTTP calls. Like `kanban-ui`, it is a pure client
+of `issue-tracker-api`: it owns no persisted data and never touches the database directly.
 
 ## Scope and Boundaries
 
 ### In Scope
 
 - MCP tool definitions mirroring every must-have capability of `issue-tracker-api`: list/create
-  Project, list/get/create/update/delete Issue.
+  Project, list/get/create/update/delete Issue, list/create User.
 - A running MCP server process that translates each tool call into an HTTP call against
   `issue-tracker-api` and returns its result (or its error) back through the tool response.
 - Structured, JSON-schema tool input/output definitions so any MCP client can discover the tools
@@ -41,7 +41,7 @@ persisted data and never touches the database directly.
 
 | Dependency | Type | Description |
 |-----------|------|-------------|
-| issue-tracker-api | internal module | Sole source of data and sole executor of every write. This module never opens the SQLite file directly. |
+| issue-tracker-api | internal module | Sole source of data and sole executor of every write. This module never opens the SQLite file directly. Now includes the `user-directory` spec's `/users` endpoints, alongside Project/Issue. |
 | docker-packaging | cross-cutting spec | Added the streamable-http transport this module's tools are served over; the e2e test suite connects to that transport directly. |
 
 ## Domain Model
@@ -79,6 +79,8 @@ persisted data and never touches the database directly.
 | update_issue tool | Wraps `PATCH /issues/{id}`, including status transitions | must-have | mvp | validated |
 | delete_issue tool | Wraps `DELETE /issues/{id}` | must-have | mvp | validated |
 | End-to-end MCP test suite | A real MCP client, over the real streamable-http transport, against a live server process — the same interface an external agent uses, never calling the tool functions directly in-process | must-have | v1.1 | validated |
+| list_users tool | Wraps `GET /users`, full compatibility with the other modules' user-management support | must-have | v1.2 | validated |
+| create_user tool | Wraps `POST /users` | must-have | v1.2 | validated |
 
 ## Deferred Capabilities
 
@@ -86,6 +88,7 @@ persisted data and never touches the database directly.
 |-----------|--------|-------------|------------|
 | get_project tool | No consumer has asked for single-project fetch via MCP yet; list_projects covers current need | v2 | — |
 | MCP resources exposing issue data | Tools-only scope was explicit in the original request | v2 | — |
+| get_user tool | Same "keep it simple" precedent as get_project: list_users covers current need, no consumer has asked for single-User fetch via MCP yet | v2 | — |
 
 ## Interface Contracts
 
@@ -100,6 +103,8 @@ persisted data and never touches the database directly.
 | `create_issue` | MCP tool | Create an Issue under a Project |
 | `update_issue` | MCP tool | Update one or more Issue fields, including `status` |
 | `delete_issue` | MCP tool | Delete one Issue |
+| `list_users` | MCP tool | List all Users |
+| `create_user` | MCP tool | Create a User |
 
 ### Consumed APIs
 
@@ -112,6 +117,8 @@ persisted data and never touches the database directly.
 | `POST /issues` | issue-tracker-api | Backs `create_issue` |
 | `PATCH /issues/{id}` | issue-tracker-api | Backs `update_issue` |
 | `DELETE /issues/{id}` | issue-tracker-api | Backs `delete_issue` |
+| `GET /users` | issue-tracker-api | Backs `list_users` |
+| `POST /users` | issue-tracker-api | Backs `create_user` |
 
 ## Quality Attributes
 

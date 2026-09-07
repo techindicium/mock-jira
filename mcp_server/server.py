@@ -7,7 +7,8 @@ mcp = MCPServer("mock-jira-mcp")
 
 def main() -> None:
     import mcp_server.tools.issues
-    import mcp_server.tools.projects  # noqa: F401  (import registers the tools as a side effect)
+    import mcp_server.tools.projects
+    import mcp_server.tools.users  # noqa: F401  (import registers the tools as a side effect)
 
     # Re-fetch the canonical MCPServer instance via its fully-qualified module name, rather
     # than using the `mcp` global above directly. When this file is run as the entrypoint

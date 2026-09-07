@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "_generated_by": "/adev:route — do not hand-edit; re-run instead.",
+  "entries": [
+    {
+      "task_id": "1",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "Mirrors list_projects/create_project in client.py almost verbatim; 2 files, single module."
+    },
+    {
+      "task_id": "2",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.8,
+        "novelty": 1
+      },
+      "rationale": "Direct mirror of projects.py tool pattern plus one import line in server.py's known-fixed registration spot."
+    },
+    {
+      "task_id": "3",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "New test file mirrors test_project_tools.py structure exactly; single file, single module."
+    },
+    {
+      "task_id": "4",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 0.8,
+        "pattern_coverage": 0.6,
+        "blast_radius": 1,
+        "novelty": 0.8
+      },
+      "rationale": "New e2e file mirrors test_mcp_project_tools_e2e.py/test_mcp_error_paths_e2e.py patterns; single file."
+    },
+    {
+      "task_id": "5",
+      "selected_agent": "assisted-agent",
+      "scores": {
+        "spec_completeness": 0.8,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.6,
+        "novelty": 0.8
+      },
+      "rationale": "Touches an already-validated sibling spec (mcp-e2e) plus its test file across two areas; reviewer flagged this cross-spec edit for care."
+    }
+  ]
+}

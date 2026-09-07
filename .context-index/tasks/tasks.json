@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 36,
+  "seq": 38,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -110,6 +110,24 @@
       "notes": "Restyle kanban-ui's board/forms into a ticket/dispatch-board visual identity (ink/rail/paper palette, priority-striped cards, system font stacks only), zero functional/DOM-hook change.",
       "created": "2026-09-06T23:18:52.156Z",
       "updated": "2026-09-06T23:18:52.156Z"
+    },
+    {
+      "id": "epic-g8v5sp",
+      "title": "User MCP tools (list_users, create_user)",
+      "status": "open",
+      "planRef": ".context-index/specs/features/mcp-server/user-tools.plan.md",
+      "notes": "Wrap issue-tracker-api's new /users endpoints as list_users/create_user MCP tools, mirroring project-tools' pattern, for full mcp-server user-management parity.",
+      "created": "2026-09-07T00:13:45.856Z",
+      "updated": "2026-09-07T00:13:45.856Z"
+    },
+    {
+      "id": "epic-ecv4hw",
+      "title": "User picker in issue forms",
+      "status": "open",
+      "planRef": ".context-index/specs/features/kanban-ui/user-picker.plan.md",
+      "notes": "Auto-fills the assignee field in create/edit-issue forms from issue-tracker-api's User directory; free-text field unchanged, no schema change.",
+      "created": "2026-09-07T00:14:37.428Z",
+      "updated": "2026-09-07T00:14:37.428Z"
     }
   ],
   "issues": [
