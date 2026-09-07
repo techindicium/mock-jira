@@ -148,12 +148,16 @@
       .join("");
   }
 
+  function usersOrEmptyOnFailure(users) {
+    return Array.isArray(users) ? users : [];
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, priorityStripeAttr,
     formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
     shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
     buildIssueCreatePayload, diffIssueFields, moveIssueStatus, removeIssueById,
-    buildUserOptionsHtml,
+    buildUserOptionsHtml, usersOrEmptyOnFailure,
   };
 });
