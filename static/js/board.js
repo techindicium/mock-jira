@@ -97,7 +97,7 @@
     loadIssuesFor(projectId);
   }
 
-  let cachedUsers = [];
+  let usersFetchStarted = false;
 
   function renderUserDatalist(users) {
     const datalist = document.getElementById("user-directory-options");
@@ -105,14 +105,18 @@
   }
 
   async function loadUsers() {
+    // BEH-1: fetch GET /users at most once per board load. init() re-runs later in the same
+    // page load (e.g. onCreateProjectSubmit's `await init()` after creating a project), so this
+    // guard is required, not just the single top-level call site, to keep the "once" guarantee.
+    if (usersFetchStarted) return;
+    usersFetchStarted = true;
     let users;
     try {
       users = await fetchJson("/users");
     } catch (_err) {
       users = null; // BEH-6: degrade silently — no board-error banner for this convenience source
     }
-    cachedUsers = BoardLogic.usersOrEmptyOnFailure(users);
-    renderUserDatalist(cachedUsers);
+    renderUserDatalist(BoardLogic.usersOrEmptyOnFailure(users));
   }
 
   async function init() {
