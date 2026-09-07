@@ -228,3 +228,78 @@ async def test_delete_issue_unknown_id_raises_upstream_error_verbatim():
     with pytest.raises(UpstreamError) as exc_info:
         await _client(handler).delete_issue(999)
     assert exc_info.value.status_code == 404
+
+
+@pytest.mark.anyio
+async def test_list_users_returns_api_response_unmodified():
+    def handler(request):
+        assert request.method == "GET"
+        assert request.url.path == "/users"
+        return httpx.Response(
+            200, json=[{"id": 1, "name": "Mei Tan", "email": "mei@example.com", "role": "engineer"}]
+        )
+
+    result = await _client(handler).list_users()
+    assert result == [{"id": 1, "name": "Mei Tan", "email": "mei@example.com", "role": "engineer"}]
+
+
+@pytest.mark.anyio
+async def test_create_user_sends_name_email_role_and_returns_created_user():
+    def handler(request):
+        assert request.method == "POST"
+        assert request.url.path == "/users"
+        import json as _json
+        assert _json.loads(request.content) == {
+            "name": "Mei Tan", "email": "mei@example.com", "role": "engineer",
+        }
+        return httpx.Response(
+            201, json={"id": 1, "name": "Mei Tan", "email": "mei@example.com", "role": "engineer"}
+        )
+
+    result = await _client(handler).create_user("Mei Tan", "mei@example.com", "engineer")
+    assert result["name"] == "Mei Tan"
+
+
+@pytest.mark.anyio
+async def test_create_user_omits_absent_email_and_role():
+    def handler(request):
+        import json as _json
+        assert _json.loads(request.content) == {"name": "Mei Tan"}
+        return httpx.Response(201, json={"id": 1, "name": "Mei Tan", "email": None, "role": None})
+
+    result = await _client(handler).create_user("Mei Tan")
+    assert result["name"] == "Mei Tan"
+
+
+@pytest.mark.anyio
+async def test_create_user_duplicate_email_raises_upstream_error_verbatim():
+    def handler(request):
+        return httpx.Response(
+            409,
+            json={"message": "Email 'mei@example.com' already exists", "code": "USER_EMAIL_DUPLICATE"},
+        )
+
+    with pytest.raises(UpstreamError) as exc_info:
+        await _client(handler).create_user("Mei Tan", "mei@example.com")
+    assert exc_info.value.status_code == 409
+    assert exc_info.value.message == "Email 'mei@example.com' already exists"
+
+
+@pytest.mark.anyio
+async def test_create_user_blank_name_raises_upstream_error_for_422():
+    def handler(request):
+        return httpx.Response(422, json={"message": "name is required", "code": "VALIDATION_ERROR"})
+
+    with pytest.raises(UpstreamError) as exc_info:
+        await _client(handler).create_user("")
+    assert exc_info.value.status_code == 422
+    assert exc_info.value.message == "name is required"
+
+
+@pytest.mark.anyio
+async def test_list_users_unreachable_api_raises_upstream_unreachable_error():
+    def handler(request):
+        raise httpx.ConnectError("Connection refused", request=request)
+
+    with pytest.raises(UpstreamUnreachableError):
+        await _client(handler).list_users()

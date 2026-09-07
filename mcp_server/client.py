@@ -67,6 +67,19 @@ class IssueTrackerClient:
     async def delete_issue(self, issue_id: int) -> None:
         await self._request("DELETE", f"/issues/{issue_id}")
 
+    async def list_users(self) -> list[dict]:
+        response = await self._request("GET", "/users")
+        return response.json()
+
+    async def create_user(self, name: str, email: str | None = None, role: str | None = None) -> dict:
+        payload: dict = {"name": name}
+        if email is not None:
+            payload["email"] = email
+        if role is not None:
+            payload["role"] = role
+        response = await self._request("POST", "/users", json=payload)
+        return response.json()
+
     async def _request(self, method: str, path: str, **kwargs) -> httpx.Response:
         try:
             response = await self._http.request(method, path, **kwargs)
