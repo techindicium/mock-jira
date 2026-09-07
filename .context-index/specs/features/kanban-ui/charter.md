@@ -1,7 +1,7 @@
 ---
 status: approved
 kind: feature
-revision: 23
+revision: 36
 updated: 2026-09-07
 ---
 
@@ -32,6 +32,14 @@ no separate server, no CORS configuration, and no runtime base-URL configuration
 - Create/edit/delete Issue via a form or modal.
 - A project switcher listing all Projects and filtering the board to the selected one.
 - Basic project creation via a simple form (the API already supports it).
+- A persistent left-hand navigation sidebar (Board / Users / Projects) that switches between
+  view containers client-side; the existing board (columns, switcher, issue forms) becomes the
+  "Board" view's content, unchanged in behavior.
+- A Users management screen: list all Users (name, email, role) and a simple add-user form
+  (`POST /users`) — no edit/delete, since the API does not support them yet.
+- A Projects management screen: list all Projects (key, name, description) and a simple
+  add-project form (`POST /projects`) — distinct from, and coexisting with, the in-board project
+  switcher. No edit/delete, since the API does not support them yet.
 
 ### Out of Scope
 
@@ -83,6 +91,9 @@ no separate server, no CORS configuration, and no runtime base-URL configuration
 | End-to-end UI test suite | Real browser automation (a real rendering engine, real clicks/drags/form fills) driving the actual served page — the same interface a person uses, never calling board-logic.js's functions directly | must-have | v1.1 | validated |
 | Visual design refresh | Distinctive ticket/dispatch-board visual identity — cards read as ticket stubs on a rail-mounted board, not a generic SaaS dashboard; no functional/behavioral change to any existing capability | should-have | v1.2 | validated |
 | User picker in issue forms | Auto-fills the assignee field in the create/edit-issue forms by picking a name from issue-tracker-api's User directory (`GET /users`); the field stays free-text — no schema change, no foreign key, no requirement that assignee match a User | should-have | v1.3 | validated |
+| App navigation shell (sidebar) | A persistent left-hand nav rail (Board / Users / Projects) that toggles client-side view containers; Board is the default/active view and wraps the existing board unchanged | should-have | v1.4 | validated |
+| Users management screen | List all Users and a simple add-user form (`POST /users`); no edit/delete (API does not support them) | should-have | v1.4 | validated |
+| Projects management screen | List all Projects and a simple add-project form (`POST /projects`), distinct from and coexisting with the in-board project switcher; no edit/delete (API does not support them) | should-have | v1.4 | validated |
 
 ## Deferred Capabilities
 
@@ -109,7 +120,8 @@ other modules.
 | `GET /issues/{id}` | issue-tracker-api | Load full detail for the edit form |
 | `PATCH /issues/{id}` | issue-tracker-api | Save edits and column-move status changes |
 | `DELETE /issues/{id}` | issue-tracker-api | Delete-issue action |
-| `GET /users` | issue-tracker-api | Populate the assignee picker's suggestion list in the create/edit-issue forms |
+| `GET /users` | issue-tracker-api | Populate the assignee picker's suggestion list in the create/edit-issue forms, and the Users management screen's list |
+| `POST /users` | issue-tracker-api | Users management screen's add-user form |
 
 ## Quality Attributes
 

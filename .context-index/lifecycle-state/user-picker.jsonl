@@ -36,3 +36,4 @@
 {"event":"validator_report","step":"validate","validator":"validate.check-9-transition-gates","severity":"warning","verdict":"PASS","notes":"SKIP: no transitions configured","ts":"2026-09-07T00:40:15.824Z"}
 {"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"1 error-severity (glob-under-expansion, pre-existing, unrelated to this spec), 5 warnings, severity=warning per registry","ts":"2026-09-07T00:40:15.869Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-07T00:41:14.681Z"}
+{"event":"code_drift_detected","drift_source":"static/index.html","drift_at":"2026-09-07T11:12:41.927Z","ts":"2026-09-07T11:12:41.927Z"}

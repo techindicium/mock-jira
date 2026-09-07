@@ -27,9 +27,121 @@
 body {
   font-family: -apple-system, "Segoe UI", "Inter", system-ui, sans-serif;
   margin: 0;
-  padding: 1rem 1.5rem;
+  padding: 0;
   color: var(--paper-text-on-rail);
   background: var(--ink);
+}
+
+/* ── App shell: sidebar + view containers ─────────────────────────────── */
+
+.app-shell {
+  display: flex;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.sidebar {
+  flex: 0 0 168px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 1rem 0;
+  background: var(--rail);
+  border-right: 1px solid var(--ink-line);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.nav-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  box-shadow: none;
+  border: none;
+  border-left: 4px solid transparent;
+  border-radius: 0;
+  padding: 0.6rem 1rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--paper-text-on-rail);
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.nav-item:hover {
+  background: var(--rail-light);
+}
+
+.nav-item.active {
+  background: var(--rail-light);
+  border-left-color: var(--stamp-gold);
+  color: var(--paper);
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  padding: 1rem 1.5rem;
+}
+
+.view h1 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem 0;
+  color: var(--paper);
+}
+
+/* ── Ledger list (Users/Projects management screens) ──────────────────── */
+
+.ledger-panel {
+  background: var(--paper);
+  border: 1px solid var(--ink-line);
+  border-radius: 2px;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 1rem;
+  max-width: 480px;
+}
+
+.ledger-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.ledger-row:last-child {
+  border-bottom: none;
+}
+
+.ledger-primary {
+  font-weight: 600;
+  color: var(--ink-text-on-paper);
+}
+
+.ledger-key {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", monospace;
+  font-weight: 600;
+  color: var(--ink-line);
+  margin-right: 0.5rem;
+}
+
+.ledger-meta {
+  font-size: 0.8rem;
+  color: var(--ink-line);
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.ledger-empty {
+  color: var(--ink-text-on-paper);
+  padding: 0.5rem 0;
+  margin: 0;
 }
 
 header {
@@ -74,7 +186,11 @@ header h1 {
 #board-error,
 #create-project-error,
 #create-issue-error,
-#edit-issue-error {
+#edit-issue-error,
+#users-view-error,
+#projects-view-error,
+#create-user-error,
+#mgmt-create-project-error {
   background: var(--paper);
   color: var(--stamp-red);
   border: 1px solid var(--stamp-red);
@@ -105,7 +221,9 @@ button:hover {
 #open-create-issue,
 #create-project-form button[type="submit"],
 #create-issue-form button[type="submit"],
-#edit-issue-form button[type="submit"] {
+#edit-issue-form button[type="submit"],
+#create-user-form button[type="submit"],
+#mgmt-create-project-form button[type="submit"] {
   background: var(--rail);
   color: var(--paper);
   border-color: var(--rail);
@@ -114,7 +232,9 @@ button:hover {
 #open-create-issue:hover,
 #create-project-form button[type="submit"]:hover,
 #create-issue-form button[type="submit"]:hover,
-#edit-issue-form button[type="submit"]:hover {
+#edit-issue-form button[type="submit"]:hover,
+#create-user-form button[type="submit"]:hover,
+#mgmt-create-project-form button[type="submit"]:hover {
   background: var(--rail-light);
 }
 
@@ -244,7 +364,9 @@ button:hover {
 #empty-state,
 #create-project,
 #create-issue,
-#edit-issue {
+#edit-issue,
+#create-user,
+#mgmt-create-project {
   background: var(--paper);
   border: 1px solid var(--ink-line);
   border-radius: 2px;
@@ -260,7 +382,9 @@ button:hover {
 
 #create-project h2,
 #create-issue h2,
-#edit-issue h2 {
+#edit-issue h2,
+#create-user h2,
+#mgmt-create-project h2 {
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -270,7 +394,9 @@ button:hover {
 
 #create-project form label,
 #create-issue form label,
-#edit-issue form label {
+#edit-issue form label,
+#create-user form label,
+#mgmt-create-project form label {
   display: block;
   margin-bottom: 0.6rem;
   font-size: 0.85rem;
@@ -281,7 +407,9 @@ button:hover {
 #create-issue form input,
 #create-issue form select,
 #edit-issue form input,
-#edit-issue form select {
+#edit-issue form select,
+#create-user form input,
+#mgmt-create-project form input {
   display: block;
   width: 100%;
   box-sizing: border-box;
@@ -296,7 +424,8 @@ button:hover {
 }
 
 #create-issue form textarea,
-#edit-issue form textarea {
+#edit-issue form textarea,
+#mgmt-create-project form textarea {
   display: block;
   width: 100%;
   box-sizing: border-box;

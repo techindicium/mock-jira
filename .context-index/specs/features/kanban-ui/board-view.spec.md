@@ -10,7 +10,7 @@ created: 2026-09-04
 updated: 2026-09-05
 kind: behavioral
 source-manifest:
-  sha: "31eec81"
+  sha: "3f3afc3"
   files:
     - .context-index/governance/gates.yaml
     - app/main.py
@@ -25,7 +25,7 @@ source-manifest:
     - tests_js/beh-4-create-project.test.js
     - tests_js/beh-5-fetch-error.test.js
     - tests_js/beh-6-empty-state.test.js
-  computed-at: "2026-09-07T00:37:16.865Z"
+  computed-at: "2026-09-07T11:25:17.819Z"
 ---
 
 # Live Spec: Kanban board view, project switcher, and project creation

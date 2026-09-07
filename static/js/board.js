@@ -204,6 +204,10 @@
     onDragStart, onColumnDrop, onDeleteIssueClick, reportIssueMutationFailure,
     loadUsers, renderUserDatalist,
   };
+  Object.assign(window.BoardApp, {
+    showView, onNavClick, loadUsersView, onCreateUserSubmit,
+    loadProjectsView, onMgmtCreateProjectSubmit,
+  });
 
   document.addEventListener("DOMContentLoaded", init);
   document.getElementById("project-switcher").addEventListener("change", onProjectSwitch);
@@ -390,4 +394,190 @@
   }
 
   document.getElementById("delete-issue").addEventListener("click", onDeleteIssueClick);
+
+  // ── App navigation shell (sidebar) ──────────────────────────────────────
+
+  const NAV_VIEWS = ["board", "users", "projects"];
+
+  function showView(name) {
+    for (const view of NAV_VIEWS) {
+      const section = document.getElementById(`view-${view}`);
+      if (section) section.hidden = view !== name;
+      const navBtn = document.getElementById(`nav-${view}`);
+      if (navBtn) {
+        navBtn.classList.toggle("active", view === name);
+        if (view === name) {
+          navBtn.setAttribute("aria-current", "page");
+        } else {
+          navBtn.removeAttribute("aria-current");
+        }
+      }
+    }
+  }
+
+  function onNavClick(event) {
+    const view = event.currentTarget.dataset.view;
+    if (!NAV_VIEWS.includes(view)) return; // UI_NAV_VIEW_NOT_FOUND: defensive no-op
+    showView(view);
+    if (view === "users") loadUsersView();
+    if (view === "projects") loadProjectsView();
+  }
+
+  document.getElementById("nav-board").addEventListener("click", onNavClick);
+  document.getElementById("nav-users").addEventListener("click", onNavClick);
+  document.getElementById("nav-projects").addEventListener("click", onNavClick);
+
+  // ── Users management screen ─────────────────────────────────────────────
+
+  function showUsersViewError(message) {
+    const el = document.getElementById("users-view-error");
+    el.textContent = message;
+    el.hidden = false;
+  }
+
+  function clearUsersViewError() {
+    document.getElementById("users-view-error").hidden = true;
+  }
+
+  function renderUsersList(users) {
+    document.getElementById("users-list").innerHTML = BoardLogic.buildUserListHtml(users);
+    document.getElementById("users-empty").hidden = !BoardLogic.shouldShowEmptyState(users);
+  }
+
+  async function loadUsersView() {
+    clearUsersViewError();
+    let users;
+    try {
+      users = await fetchJson("/users");
+    } catch (err) {
+      showUsersViewError(BoardLogic.formatFetchError("Loading users", err));
+      return;
+    }
+    renderUsersList(users);
+  }
+
+  function showUserFormError(message) {
+    const el = document.getElementById("create-user-error");
+    el.textContent = message;
+    el.hidden = false;
+  }
+
+  function clearUserFormError() {
+    document.getElementById("create-user-error").hidden = true;
+  }
+
+  async function onCreateUserSubmit(event) {
+    event.preventDefault();
+    const nameInput = document.getElementById("user-name");
+    const emailInput = document.getElementById("user-email");
+    const roleInput = document.getElementById("user-role");
+    const { valid, errors } = BoardLogic.validateUserForm(nameInput.value);
+    if (!valid) {
+      showUserFormError(Object.values(errors)[0]);
+      return; // client-side block — input is not cleared, no request sent (UI_VALIDATION_ERROR)
+    }
+    clearUserFormError();
+    let resp;
+    try {
+      resp = await fetch("/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(BoardLogic.buildUserCreatePayload({
+          name: nameInput.value, email: emailInput.value, role: roleInput.value,
+        })),
+      });
+    } catch (networkErr) {
+      showUsersViewError(BoardLogic.formatFetchError("Creating user", { message: networkErr.message }));
+      return;
+    }
+    const body = await resp.json().catch(() => null);
+    if (!resp.ok) {
+      const submitErr = BoardLogic.extractUserSubmitError(resp.status, body);
+      showUserFormError(submitErr ? submitErr.message : "Could not create the user.");
+      return; // input is not cleared on error, per the spec's Error Cases table
+    }
+    nameInput.value = "";
+    emailInput.value = "";
+    roleInput.value = "";
+    await loadUsersView();
+  }
+
+  document.getElementById("create-user-form").addEventListener("submit", onCreateUserSubmit);
+
+  // ── Projects management screen ──────────────────────────────────────────
+
+  function showProjectsViewError(message) {
+    const el = document.getElementById("projects-view-error");
+    el.textContent = message;
+    el.hidden = false;
+  }
+
+  function clearProjectsViewError() {
+    document.getElementById("projects-view-error").hidden = true;
+  }
+
+  function renderProjectsList(projects) {
+    document.getElementById("projects-list").innerHTML = BoardLogic.buildProjectListHtml(projects);
+    document.getElementById("projects-empty").hidden = !BoardLogic.shouldShowEmptyState(projects);
+  }
+
+  async function loadProjectsView() {
+    clearProjectsViewError();
+    let projects;
+    try {
+      projects = await fetchJson("/projects");
+    } catch (err) {
+      showProjectsViewError(BoardLogic.formatFetchError("Loading projects", err));
+      return;
+    }
+    renderProjectsList(projects);
+  }
+
+  function showMgmtProjectFormError(message) {
+    const el = document.getElementById("mgmt-create-project-error");
+    el.textContent = message;
+    el.hidden = false;
+  }
+
+  function clearMgmtProjectFormError() {
+    document.getElementById("mgmt-create-project-error").hidden = true;
+  }
+
+  async function onMgmtCreateProjectSubmit(event) {
+    event.preventDefault();
+    const keyInput = document.getElementById("mgmt-project-key");
+    const nameInput = document.getElementById("mgmt-project-name");
+    const descriptionInput = document.getElementById("mgmt-project-description");
+    const { valid, errors } = BoardLogic.validateProjectForm(keyInput.value, nameInput.value);
+    if (!valid) {
+      showMgmtProjectFormError(Object.values(errors)[0]);
+      return; // client-side block — input is not cleared, no request sent (UI_VALIDATION_ERROR)
+    }
+    clearMgmtProjectFormError();
+    let resp;
+    try {
+      resp = await fetch("/projects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(BoardLogic.buildProjectCreatePayload({
+          key: keyInput.value, name: nameInput.value, description: descriptionInput.value,
+        })),
+      });
+    } catch (networkErr) {
+      showProjectsViewError(BoardLogic.formatFetchError("Creating project", { message: networkErr.message }));
+      return;
+    }
+    const body = await resp.json().catch(() => null);
+    if (!resp.ok) {
+      const submitErr = BoardLogic.extractProjectSubmitError(resp.status, body);
+      showMgmtProjectFormError(submitErr ? submitErr.message : "Could not create the project.");
+      return; // input is not cleared on error, per the spec's Error Cases table
+    }
+    keyInput.value = "";
+    nameInput.value = "";
+    descriptionInput.value = "";
+    await loadProjectsView();
+  }
+
+  document.getElementById("mgmt-create-project-form").addEventListener("submit", onMgmtCreateProjectSubmit);
 })();

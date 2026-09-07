@@ -8,100 +8,150 @@
   <script src="/static/js/board.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>mock-jira</h1>
-    <div class="switcher-plate">
-      <select id="project-switcher" aria-label="Select project"></select>
+  <div class="app-shell">
+    <nav class="sidebar" aria-label="Main navigation">
+      <button type="button" class="nav-item active" id="nav-board" data-view="board" aria-current="page">Board</button>
+      <button type="button" class="nav-item" id="nav-users" data-view="users">Users</button>
+      <button type="button" class="nav-item" id="nav-projects" data-view="projects">Projects</button>
+    </nav>
+
+    <div class="app-main">
+      <section id="view-board" class="view">
+        <header>
+          <h1>mock-jira</h1>
+          <div class="switcher-plate">
+            <select id="project-switcher" aria-label="Select project"></select>
+          </div>
+          <button id="open-create-issue" type="button">New Issue</button>
+        </header>
+
+        <div id="board-error" role="alert" hidden></div>
+
+        <main id="board" hidden>
+          <section class="column" data-status="todo">
+            <div class="column-header"><h2>To do</h2><span class="col-count" id="count-todo"></span></div>
+            <div id="col-todo" class="cards"></div>
+          </section>
+          <section class="column" data-status="in_progress">
+            <div class="column-header"><h2>In progress</h2><span class="col-count" id="count-in_progress"></span></div>
+            <div id="col-in_progress" class="cards"></div>
+          </section>
+          <section class="column" data-status="done">
+            <div class="column-header"><h2>Done</h2><span class="col-count" id="count-done"></span></div>
+            <div id="col-done" class="cards"></div>
+          </section>
+        </main>
+
+        <section id="empty-state" hidden>
+          <p>No projects yet. Create one to get started.</p>
+        </section>
+
+        <section id="create-project">
+          <h2>New Project</h2>
+          <form id="create-project-form">
+            <label>Key <input id="project-key" name="key" required /></label>
+            <label>Name <input id="project-name" name="name" required /></label>
+            <button type="submit">Create Project</button>
+            <p id="create-project-error" role="alert" hidden></p>
+          </form>
+        </section>
+
+        <section id="create-issue" hidden>
+          <h2>New Issue</h2>
+          <form id="create-issue-form">
+            <label>Summary <input id="issue-summary" name="summary" required /></label>
+            <label>Type
+              <select id="issue-type" name="issue_type" required>
+                <option value="">Select type&hellip;</option>
+                <option value="bug">Bug</option>
+                <option value="task">Task</option>
+                <option value="story">Story</option>
+              </select>
+            </label>
+            <label>Priority
+              <select id="issue-priority" name="priority" required>
+                <option value="">Select priority&hellip;</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+            <label>Description <textarea id="issue-description" name="description"></textarea></label>
+            <label>Assignee <input id="issue-assignee" name="assignee" list="user-directory-options" /></label>
+            <button type="submit">Create Issue</button>
+            <button id="cancel-create-issue" type="button">Cancel</button>
+            <p id="create-issue-error" role="alert" hidden></p>
+          </form>
+        </section>
+
+        <section id="edit-issue" hidden>
+          <h2>Edit Issue</h2>
+          <form id="edit-issue-form">
+            <input type="hidden" id="edit-issue-id" />
+            <label>Summary <input id="edit-issue-summary" name="summary" /></label>
+            <label>Type
+              <select id="edit-issue-type" name="issue_type">
+                <option value="bug">Bug</option>
+                <option value="task">Task</option>
+                <option value="story">Story</option>
+              </select>
+            </label>
+            <label>Priority
+              <select id="edit-issue-priority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+            <label>Description <textarea id="edit-issue-description" name="description"></textarea></label>
+            <label>Assignee <input id="edit-issue-assignee" name="assignee" list="user-directory-options" /></label>
+            <button type="submit">Save Changes</button>
+            <button id="cancel-edit-issue" type="button">Cancel</button>
+            <button id="delete-issue" type="button">Delete</button>
+            <p id="edit-issue-error" role="alert" hidden></p>
+          </form>
+        </section>
+      </section>
+
+      <section id="view-users" class="view" hidden>
+        <h1>Users</h1>
+        <div id="users-view-error" role="alert" hidden></div>
+        <div id="users-panel" class="ledger-panel">
+          <div id="users-list" class="ledger"></div>
+          <p id="users-empty" class="ledger-empty" hidden>No users yet. Add one to get started.</p>
+        </div>
+        <section id="create-user">
+          <h2>Add user</h2>
+          <form id="create-user-form">
+            <label>Name <input id="user-name" name="name" required /></label>
+            <label>Email <input id="user-email" name="email" type="email" /></label>
+            <label>Role <input id="user-role" name="role" /></label>
+            <button type="submit">Add user</button>
+            <p id="create-user-error" role="alert" hidden></p>
+          </form>
+        </section>
+      </section>
+
+      <section id="view-projects" class="view" hidden>
+        <h1>Projects</h1>
+        <div id="projects-view-error" role="alert" hidden></div>
+        <div id="projects-panel" class="ledger-panel">
+          <div id="projects-list" class="ledger"></div>
+          <p id="projects-empty" class="ledger-empty" hidden>No projects yet. Add one to get started.</p>
+        </div>
+        <section id="mgmt-create-project">
+          <h2>Add project</h2>
+          <form id="mgmt-create-project-form">
+            <label>Key <input id="mgmt-project-key" name="key" required /></label>
+            <label>Name <input id="mgmt-project-name" name="name" required /></label>
+            <label>Description <textarea id="mgmt-project-description" name="description"></textarea></label>
+            <button type="submit">Add project</button>
+            <p id="mgmt-create-project-error" role="alert" hidden></p>
+          </form>
+        </section>
+      </section>
     </div>
-    <button id="open-create-issue" type="button">New Issue</button>
-  </header>
-
-  <div id="board-error" role="alert" hidden></div>
-
-  <main id="board" hidden>
-    <section class="column" data-status="todo">
-      <div class="column-header"><h2>To do</h2><span class="col-count" id="count-todo"></span></div>
-      <div id="col-todo" class="cards"></div>
-    </section>
-    <section class="column" data-status="in_progress">
-      <div class="column-header"><h2>In progress</h2><span class="col-count" id="count-in_progress"></span></div>
-      <div id="col-in_progress" class="cards"></div>
-    </section>
-    <section class="column" data-status="done">
-      <div class="column-header"><h2>Done</h2><span class="col-count" id="count-done"></span></div>
-      <div id="col-done" class="cards"></div>
-    </section>
-  </main>
-
-  <section id="empty-state" hidden>
-    <p>No projects yet. Create one to get started.</p>
-  </section>
-
-  <section id="create-project">
-    <h2>New Project</h2>
-    <form id="create-project-form">
-      <label>Key <input id="project-key" name="key" required /></label>
-      <label>Name <input id="project-name" name="name" required /></label>
-      <button type="submit">Create Project</button>
-      <p id="create-project-error" role="alert" hidden></p>
-    </form>
-  </section>
-
-  <section id="create-issue" hidden>
-    <h2>New Issue</h2>
-    <form id="create-issue-form">
-      <label>Summary <input id="issue-summary" name="summary" required /></label>
-      <label>Type
-        <select id="issue-type" name="issue_type" required>
-          <option value="">Select type&hellip;</option>
-          <option value="bug">Bug</option>
-          <option value="task">Task</option>
-          <option value="story">Story</option>
-        </select>
-      </label>
-      <label>Priority
-        <select id="issue-priority" name="priority" required>
-          <option value="">Select priority&hellip;</option>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </label>
-      <label>Description <textarea id="issue-description" name="description"></textarea></label>
-      <label>Assignee <input id="issue-assignee" name="assignee" list="user-directory-options" /></label>
-      <button type="submit">Create Issue</button>
-      <button id="cancel-create-issue" type="button">Cancel</button>
-      <p id="create-issue-error" role="alert" hidden></p>
-    </form>
-  </section>
-
-  <section id="edit-issue" hidden>
-    <h2>Edit Issue</h2>
-    <form id="edit-issue-form">
-      <input type="hidden" id="edit-issue-id" />
-      <label>Summary <input id="edit-issue-summary" name="summary" /></label>
-      <label>Type
-        <select id="edit-issue-type" name="issue_type">
-          <option value="bug">Bug</option>
-          <option value="task">Task</option>
-          <option value="story">Story</option>
-        </select>
-      </label>
-      <label>Priority
-        <select id="edit-issue-priority" name="priority">
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </label>
-      <label>Description <textarea id="edit-issue-description" name="description"></textarea></label>
-      <label>Assignee <input id="edit-issue-assignee" name="assignee" list="user-directory-options" /></label>
-      <button type="submit">Save Changes</button>
-      <button id="cancel-edit-issue" type="button">Cancel</button>
-      <button id="delete-issue" type="button">Delete</button>
-      <p id="edit-issue-error" role="alert" hidden></p>
-    </form>
-  </section>
+  </div>
 
   <datalist id="user-directory-options"></datalist>
 </body>
