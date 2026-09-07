@@ -1,7 +1,7 @@
 ---
 partial_schema: implement@1
 charter: kanban-ui
-status: implemented
+status: validated
 risk_level: low
 milestone: v1.3
 revision: 1
