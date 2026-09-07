@@ -17,7 +17,12 @@ test("BEH-6: create-issue required fields are unchanged", () => {
 
 test("BEH-6: create-issue optional fields carry no required attribute", () => {
   assert.match(html, /<textarea id="issue-description" name="description"><\/textarea>/);
-  assert.match(html, /<input id="issue-assignee" name="assignee" \/>/);
+  // user-picker.spec.md added a `list="user-directory-options"` attribute here (additive
+  // markup only) — this assertion is relaxed to tolerate it while still proving the field
+  // carries no `required` attribute, id, or name change.
+  const assigneeTag = html.match(/<input id="issue-assignee"[^>]*\/>/)[0];
+  assert.match(assigneeTag, /name="assignee"/);
+  assert.doesNotMatch(assigneeTag, /required/);
 });
 
 test("BEH-6: edit-issue fields carry no required attribute (issue-crud-forms Preconditions)", () => {
