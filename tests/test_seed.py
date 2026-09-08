@@ -4,23 +4,30 @@ from app.seed import (
     SEED_ISSUES,
     SEED_PROJECT,
     SEED_USERS,
+    load_seed_data,
     SeedError,
     _validate_seed_data,
 )
 
-_CANON_ASSIST_NAMES = {"Mei Tan", "Kofi Adjei", "Priya Nair", "Joao Pinto"}
+# The issue assignees and reporters: the people who touch the tracker.
+_CANON_NAMES = {"Mei Tan", "Kofi Adjei", "Priya Nair", "Joao Pinto", "Ana Fialho",
+                "Rui Bastos", "Gabriela Rocha", "Sofia Marques"}
+
+# The user directory carries the whole roster, which is wider than the tracker's users.
+_CANON_ROSTER = _CANON_NAMES | {"Inês Duarte", "Marta Oliveira", "Henrik Sole",
+                                "Declan Byrne", "Lucia Ferreira", "Tomas Silva"}
 
 
 def test_seed_project_key_and_name_are_not_placeholder_text():
-    assert SEED_PROJECT["key"] == "ASSIST"
-    assert SEED_PROJECT["name"] == "Portwell Assist Engineering"
+    assert SEED_PROJECT["key"] == "PORTAL"
+    assert SEED_PROJECT["name"] == "Help portal engineering"
     assert "lorem" not in SEED_PROJECT["description"].lower()
 
 
 def test_seed_issues_use_real_canon_names():
     for issue in SEED_ISSUES:
-        assert issue["assignee"] in _CANON_ASSIST_NAMES
-        assert issue["reporter"] in _CANON_ASSIST_NAMES
+        assert issue["assignee"] in _CANON_NAMES
+        assert issue["reporter"] in _CANON_NAMES
 
 
 def test_validate_seed_data_passes_for_shipped_fixture():
@@ -45,8 +52,8 @@ def test_fresh_startup_seeds_one_project_and_six_issues(client):
     projects = client.get("/projects").json()
     assert len(projects) == 1
     project = projects[0]
-    assert project["key"] == "ASSIST"
-    assert project["name"] == "Portwell Assist Engineering"
+    assert project["key"] == "PORTAL"
+    assert project["name"] == "Help portal engineering"
 
     issues = client.get("/issues", params={"project_id": project["id"]}).json()
     assert len(issues) == 6
@@ -87,7 +94,7 @@ def test_seed_if_empty_raises_seed_db_not_writable_when_connection_is_read_only(
 def test_seed_users_use_real_canon_names():
     assert len(SEED_USERS) >= 3
     for user in SEED_USERS:
-        assert user["name"] in _CANON_ASSIST_NAMES
+        assert user["name"] in _CANON_ROSTER
 
 
 def test_seed_users_if_empty_is_independent_of_project_seeding(tmp_path):
@@ -100,7 +107,8 @@ def test_seed_users_if_empty_is_independent_of_project_seeding(tmp_path):
     # No Project/Issue seeding has run at all — User seeding must still work standalone.
     seed_users_if_empty(conn, str(db_path))
     users = conn.execute("SELECT * FROM users").fetchall()
-    assert len(users) == len(SEED_USERS)
+    _, _, expected_users = load_seed_data()
+    assert len(users) == len(expected_users)
 
 
 def test_seed_users_if_empty_is_idempotent(tmp_path):
@@ -113,7 +121,8 @@ def test_seed_users_if_empty_is_idempotent(tmp_path):
     seed_users_if_empty(conn, str(db_path))
     seed_users_if_empty(conn, str(db_path))  # second call must not duplicate
     users = conn.execute("SELECT * FROM users").fetchall()
-    assert len(users) == len(SEED_USERS)
+    _, _, expected_users = load_seed_data()
+    assert len(users) == len(expected_users)
 
 
 def test_seeding_is_idempotent_across_restarts(tmp_path, monkeypatch):

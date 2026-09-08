@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 from app.models import ISSUE_PRIORITIES, ISSUE_STATUSES, ISSUE_TYPES
 
 # Reserved identifier prefixes from ../course-shared/canon/identifiers.md — read once, at
@@ -9,75 +12,68 @@ _CANON_RESERVED_PREFIXES = (
 )
 
 SEED_PROJECT = {
-    "key": "ASSIST",
-    "name": "Portwell Assist Engineering",
-    "description": (
-        "Engineering tracker for Portwell Assist, the AI-assisted support-ticket triage pilot."
-    ),
+    "key": "PORTAL",
+    "name": "Help portal engineering",
+    "description": "Change tracking for the customer help portal and the WMS modules it serves."
 }
 
 # 6 Issues: exactly 2 of each status (todo/in_progress/done), 2 of each issue_type
 # (bug/task/story), 2 of each priority (low/medium/high) — per BEH-1 as tightened by review.
 SEED_ISSUES = [
     {
-        "summary": "Investigate INCIDENT-01: proposal quoted a superseded refund window",
-        "description": (
-            "A billing proposal cited an out-of-date refund-window policy instead of the "
-            "current one. Trace which article version the retriever returned for ACCOUNT-1001 "
-            "and confirm the index only serves published, current articles."
-        ),
-        "issue_type": "bug", "status": "todo", "priority": "high",
-        "assignee": "Kofi Adjei", "reporter": "Joao Pinto",
+        "summary": "Answers on integrations topics are sent without review",
+        "description": "Raised after INCIDENT-02. Integrations is a consequential area and the routing rules do not treat it as one, so an answer reaches an Enterprise account with nobody having read it.",
+        "issue_type": "bug",
+        "status": "todo",
+        "priority": "high",
+        "assignee": "Kofi Adjei",
+        "reporter": "Priya Nair"
     },
     {
-        "summary": "Design review-queue triage rules for pilot expansion",
-        "description": (
-            "Support engineers flagged the review queue, not answer quality, as the pilot's "
-            "real bottleneck. Propose a triage rule set so low-confidence proposals reach a "
-            "reviewer faster without adding headcount."
-        ),
-        "issue_type": "story", "status": "todo", "priority": "medium",
-        "assignee": "Mei Tan", "reporter": "Priya Nair",
+        "summary": "Two refund windows in one answer",
+        "description": "A billing answer quoted 30 and 60 days in the same reply. Both articles are published and one supersedes the other; nothing at the point of retrieval says so.",
+        "issue_type": "bug",
+        "status": "todo",
+        "priority": "medium",
+        "assignee": "Kofi Adjei",
+        "reporter": "Joao Pinto"
     },
     {
-        "summary": "Add webhook-retry safeguard after INCIDENT-02",
-        "description": (
-            "An integrations proposal told an account to disable a webhook retry its EDI feed "
-            "depended on. Add a guard so the proposal generator never recommends disabling "
-            "retries on a webhook flagged as EDI-critical."
-        ),
-        "issue_type": "task", "status": "in_progress", "priority": "low",
-        "assignee": "Joao Pinto", "reporter": "Mei Tan",
+        "summary": "Articles with no reviewer are being used",
+        "description": "POLICY-02 says an article without a source and a reviewer is not eligible. ARTICLE-0131 has neither and is the only cycle-count article, so it answers alone.",
+        "issue_type": "task",
+        "status": "in_progress",
+        "priority": "high",
+        "assignee": "Kofi Adjei",
+        "reporter": "Ana Fialho"
     },
     {
-        "summary": "Fix stale-article lookup in the proposal generator",
-        "description": (
-            "The retriever can still surface a superseded article version. Filter the article "
-            "index to `status: published` only and drop anything a newer article's "
-            "`supersedes` list names."
-        ),
-        "issue_type": "bug", "status": "in_progress", "priority": "medium",
-        "assignee": "Priya Nair", "reporter": "Kofi Adjei",
+        "summary": "Password reset answer is out of date",
+        "description": "Self-service reset shipped in June. The article still describes the old process and tells the operator to raise a ticket.",
+        "issue_type": "bug",
+        "status": "in_progress",
+        "priority": "low",
+        "assignee": "Joao Pinto",
+        "reporter": "Joao Pinto"
     },
     {
-        "summary": "Publish pilot-expansion readiness checklist",
-        "description": (
-            "One side wants to expand the pilot; the other wants review capacity solved "
-            "first. Publish a checklist covering both positions so Product can decide with "
-            "the tradeoffs visible."
-        ),
-        "issue_type": "story", "status": "done", "priority": "high",
-        "assignee": "Kofi Adjei", "reporter": "Mei Tan",
+        "summary": "Match score is not calibrated",
+        "description": "The relevance score is word overlap with a floor. It ranks a close title match above a better body match, which is how a superseded article reaches the top of a result list.",
+        "issue_type": "story",
+        "status": "done",
+        "priority": "medium",
+        "assignee": "Kofi Adjei",
+        "reporter": "Kofi Adjei"
     },
     {
-        "summary": "Document review-capacity findings from the pilot",
-        "description": (
-            "Write up the pilot's review-queue bottleneck finding for the engineering team's "
-            "retro, referencing the 22-minute median response time on proposal-sent tickets."
-        ),
-        "issue_type": "task", "status": "done", "priority": "low",
-        "assignee": "Mei Tan", "reporter": "Joao Pinto",
-    },
+        "summary": "Restore the article index integration test",
+        "description": "It was stubbed on a branch to unblock a release and never restored. The test now builds its own two-article index, so its assertions pass against data written to satisfy them.",
+        "issue_type": "task",
+        "status": "done",
+        "priority": "low",
+        "assignee": "Kofi Adjei",
+        "reporter": "Kofi Adjei"
+    }
 ]
 
 
@@ -86,22 +82,62 @@ SEED_ISSUES = [
 # BEH-3 established: real names/roles from course-shared/canon/company.md's Named People table,
 # never invented placeholders.
 SEED_USERS = [
-    {"name": "Mei Tan", "email": "mei.tan@portwell.example", "role": "Head of Engineering"},
+    {
+        "name": "Inês Duarte",
+        "role": "Founder and CEO"
+    },
+    {
+        "name": "Mei Tan",
+        "role": "Head of Engineering"
+    },
+    {
+        "name": "Ana Fialho",
+        "role": "VP Product"
+    },
+    {
+        "name": "Gabriela Rocha",
+        "role": "Customer Success Director"
+    },
+    {
+        "name": "Sofia Marques",
+        "role": "Analytics Lead"
+    },
+    {
+        "name": "Marta Oliveira",
+        "role": "Commercial Director"
+    },
+    {
+        "name": "Henrik Sole",
+        "role": "Operations and Finance"
+    },
+    {
+        "name": "Rui Bastos",
+        "role": "Support Manager"
+    },
+    {
+        "name": "Lucia Ferreira",
+        "role": "Service Delivery Manager"
+    },
     {
         "name": "Kofi Adjei",
-        "email": "kofi.adjei@portwell.example",
-        "role": "Staff Engineer, Assist service",
+        "role": "Staff Engineer, help portal"
+    },
+    {
+        "name": "Declan Byrne",
+        "role": "Data Engineer"
     },
     {
         "name": "Priya Nair",
-        "email": "priya.nair@portwell.example",
-        "role": "Solution Consultant, escalations",
+        "role": "Solution Consultant"
     },
     {
         "name": "Joao Pinto",
-        "email": "joao.pinto@portwell.example",
-        "role": "Support Engineer, pilot participant",
+        "role": "Support Engineer, Tier 2"
     },
+    {
+        "name": "Tomas Silva",
+        "role": "Legal and Data Protection"
+    }
 ]
 
 
@@ -111,6 +147,22 @@ class SeedError(RuntimeError):
     def __init__(self, code: str, message: str):
         super().__init__(message)
         self.code = code
+
+
+_FIXTURE = Path(__file__).parent / "fixtures" / "seed_reference.json"
+
+
+def load_seed_data() -> tuple[dict, list[dict], list[dict]]:
+    """Project, issues and users, from the canon-generated fixture when it is present.
+
+    Generated by course-shared/tools/seed_mocks.py and committed here, so nothing outside this
+    repository is opened at runtime. The literals above stay as the fallback, which keeps this
+    repo standing alone if the fixture is ever absent.
+    """
+    if not _FIXTURE.exists():
+        return SEED_PROJECT, SEED_ISSUES, SEED_USERS
+    data = json.loads(_FIXTURE.read_text())
+    return data["project"], data["issues"], data["users"]
 
 
 def _validate_seed_data(project: dict, issues: list[dict]) -> None:
@@ -167,7 +219,8 @@ def seed_if_empty(conn, db_path: str) -> None:
     if existing["n"] > 0:
         return  # BEH-2: already seeded (or real data present) — never touch it
 
-    _validate_seed_data(SEED_PROJECT, SEED_ISSUES)  # hardcoded data; a failure here is a code bug
+    project, issues, _ = load_seed_data()
+    _validate_seed_data(project, issues)  # a failure here is a bug in the seed data
 
     import sqlite3
 
@@ -176,11 +229,11 @@ def seed_if_empty(conn, db_path: str) -> None:
     try:
         cursor = conn.execute(
             "INSERT INTO projects (key, name, description) VALUES (?, ?, ?)",
-            (SEED_PROJECT["key"], SEED_PROJECT["name"], SEED_PROJECT["description"]),
+            (project["key"], project["name"], project["description"]),
         )
         project_id = cursor.lastrowid
-        for issue in SEED_ISSUES:
-            key = allocate_issue_key(conn, project_id, SEED_PROJECT["key"])
+        for issue in issues:
+            key = allocate_issue_key(conn, project_id, project["key"])
             conn.execute(
                 """
                 INSERT INTO issues
@@ -217,12 +270,13 @@ def seed_users_if_empty(conn, db_path: str) -> None:
     if existing["n"] > 0:
         return
 
-    _validate_seed_users(SEED_USERS)
+    _, _, users = load_seed_data()
+    _validate_seed_users(users)
 
     import sqlite3
 
     try:
-        for user in SEED_USERS:
+        for user in users:
             conn.execute(
                 "INSERT INTO users (name, email, role) VALUES (?, ?, ?)",
                 (user["name"], user.get("email"), user.get("role")),

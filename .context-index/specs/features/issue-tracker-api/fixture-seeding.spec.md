@@ -41,7 +41,7 @@ source-manifest:
 <!-- retired-behavior-ids: (none) -->
 
 - **BEH-1** — **When** the API starts against an empty database (no Project rows exist),
-  **then** it seeds exactly one Project (`key: ASSIST`, `name: Portwell Assist Engineering`) and
+  **then** it seeds exactly one Project (`key: PORTAL`, `name: Help portal engineering`) and
   six Issues under it in a single transaction, all present and queryable immediately once
   startup completes — no placeholder or lorem-ipsum text in any field. The six Issues span all
   three statuses (two `todo`, two `in_progress`, two `done`) and a mix of `issue_type`
@@ -56,13 +56,13 @@ source-manifest:
 - **BEH-4** — **When** the seed module assigns a Project `key` or derives an Issue `key`,
   **then** neither value collides with any reserved-range identifier scheme in
   `course-shared/canon/identifiers.md` (`ACCOUNT-*`, `TICKET-*`, `ARTICLE-*`, `PROPOSAL-*`,
-  `INCIDENT-*`, `POLICY-*`, `OPPORTUNITY-*`, `EXPERIMENT-*`, `P-*`) — `ASSIST` and
-  `ASSIST-<n>` are outside every reserved prefix.
+  `INCIDENT-*`, `POLICY-*`, `OPPORTUNITY-*`, `EXPERIMENT-*`) are avoided. `PORTAL` and
+  `PORTAL-<n>` are outside every reserved prefix.
 
 ### Postconditions
 
 - After a fresh-database startup, `GET /projects` returns exactly one Project and
-  `GET /issues?project_id=<ASSIST's id>` returns exactly six Issues.
+  `GET /issues?project_id=<PORTAL's id>` returns exactly six Issues.
 - Seed Issue descriptions may mention canon entities by their real ID (e.g. `INCIDENT-01`,
   `ACCOUNT-1001`) as read-only narrative references, but this module never creates, owns, or
   exposes an endpoint for any canon-owned entity type (Account, Incident, Ticket, Article, etc.).

@@ -51,7 +51,7 @@ def test_list_projects_returns_all_ordered_by_creation(client):
     resp = client.get("/projects")
     assert resp.status_code == 200
     # Filtered to this test's own keys: fixture seeding (fixture-seeding spec BEH-1) may have
-    # already seeded its own ASSIST Project into this fresh database before this test runs.
+    # already seeded its own PORTAL Project into this fresh database before this test runs.
     keys = [p["key"] for p in resp.json() if p["key"] in ("SDLC", "DDLC")]
     assert keys == ["SDLC", "DDLC"]
 
