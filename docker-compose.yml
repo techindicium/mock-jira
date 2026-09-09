@@ -4,14 +4,14 @@ services:
       context: .
       dockerfile: docker/issue-tracker-api/Dockerfile
     ports:
-      - "127.0.0.1:${PORT:-8000}:${PORT:-8000}"
+      - "127.0.0.1:${PORT:-8010}:${PORT:-8010}"
     environment:
-      PORT: ${PORT:-8000}
+      PORT: ${PORT:-8010}
       DATABASE_PATH: /data/mock_jira.db
     volumes:
       - mock_jira_db:/data
     healthcheck:
-      test: ["CMD", "python3", "-c", "import os, urllib.request; urllib.request.urlopen('http://localhost:' + os.environ.get('PORT', '8000') + '/', timeout=2)"]
+      test: ["CMD", "python3", "-c", "import os, urllib.request; urllib.request.urlopen('http://localhost:' + os.environ.get('PORT', '8010') + '/', timeout=2)"]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -22,13 +22,13 @@ services:
       context: .
       dockerfile: docker/mcp-server/Dockerfile
     ports:
-      - "127.0.0.1:${MCP_PORT:-8001}:${MCP_PORT:-8001}"
+      - "127.0.0.1:${MCP_PORT:-8011}:${MCP_PORT:-8011}"
     environment:
       # Same PORT convention as issue-tracker-api, but a separate host-level
       # override variable (MCP_PORT) so remapping one service's published
       # port never collides with the other's. See plan Architecture note.
-      PORT: ${MCP_PORT:-8001}
-      API_BASE_URL: http://issue-tracker-api:${PORT:-8000}
+      PORT: ${MCP_PORT:-8011}
+      API_BASE_URL: http://issue-tracker-api:${PORT:-8010}
     depends_on:
       issue-tracker-api:
         condition: service_healthy
