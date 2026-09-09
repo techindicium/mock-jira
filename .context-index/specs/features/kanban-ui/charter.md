@@ -1,8 +1,8 @@
 ---
 status: approved
 kind: feature
-revision: 37
-updated: 2026-09-07
+revision: 45
+updated: 2026-09-09
 ---
 
 # Feature Charter: kanban-ui
@@ -32,7 +32,9 @@ no separate server, no CORS configuration, and no runtime base-URL configuration
 - Create/edit/delete Issue via a form or modal.
 - A project switcher listing all Projects and filtering the board to the selected one.
 - Basic project creation via a simple form (the API already supports it).
-- A persistent left-hand navigation sidebar (Board / Users / Projects) that switches between
+- A persistent left-hand navigation sidebar (Board / Users / Projects, extended by later
+  capabilities to Backlog and Sprint — see Capability Map; the nav item set is not fixed at
+  exactly these three) that switches between
   view containers client-side; the existing board (columns, switcher, issue forms) becomes the
   "Board" view's content, unchanged in behavior.
 - A Users management screen: list all Users (name, email, role) and a simple add-user form
@@ -94,6 +96,9 @@ no separate server, no CORS configuration, and no runtime base-URL configuration
 | App navigation shell (sidebar) | A persistent left-hand nav rail (Board / Users / Projects) that toggles client-side view containers; Board is the default/active view and wraps the existing board unchanged | should-have | v1.4 | validated |
 | Users management screen | List all Users and a simple add-user form (`POST /users`); no edit/delete (API does not support them) | should-have | v1.4 | validated |
 | Projects management screen | List all Projects and a simple add-project form (`POST /projects`), distinct from and coexisting with the in-board project switcher; no edit/delete (API does not support them) | should-have | v1.4 | validated |
+| Backlog list view and filters | A list/table view of the selected Project's Issues (alternative to the board), plus an assignee/type/priority filter bar shared by both the Backlog and Board views; purely client-side, no new API surface | should-have | v1.5 | validated |
+| Sprint view and Backlog sprint assignment | A "Sprint" nav view (board scoped to the Project's active Sprint), start/close-sprint controls, and an "Add to sprint" action on the Backlog view's rows; owned by the `sprints` cross-cutting charter (`.context-index/specs/cross-cutting/sprints/charter.md`) | should-have | v1.6 | implementing |
+| Comment thread panel in edit-issue form | A chronological Comment list plus an add-comment control inside the existing edit-issue form; owned by the `issue-comments` cross-cutting charter (`.context-index/specs/cross-cutting/issue-comments/charter.md`) | should-have | v1.6 | validated |
 
 ## Deferred Capabilities
 
@@ -121,6 +126,11 @@ other modules.
 | `PATCH /issues/{id}` | issue-tracker-api | Save edits and column-move status changes |
 | `DELETE /issues/{id}` | issue-tracker-api | Delete-issue action |
 | `GET /users` | issue-tracker-api | Populate the assignee picker's suggestion list in the create/edit-issue forms, and the Users management screen's list |
+| `GET /issues/{id}/comments` | issue-tracker-api | Populate the comment-thread panel in the edit-issue form (see `issue-comments` cross-cutting charter) |
+| `POST /projects/{id}/sprints` | issue-tracker-api | Create a Sprint (see `sprints` cross-cutting charter) |
+| `GET /projects/{id}/sprints` | issue-tracker-api | Populate the Sprint view and the Backlog's "Add to sprint" action with the Project's active Sprint |
+| `PATCH /sprints/{id}` | issue-tracker-api | Start/close a Sprint |
+| `POST /issues/{id}/comments` | issue-tracker-api | Submit a new Comment from the edit-issue form's add-comment control |
 | `POST /users` | issue-tracker-api | Users management screen's add-user form |
 
 ## Quality Attributes

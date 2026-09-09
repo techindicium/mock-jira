@@ -1,8 +1,8 @@
 ---
 status: approved
 kind: feature
-revision: 20
-updated: 2026-09-07
+revision: 29
+updated: 2026-09-09
 ---
 
 # Feature Charter: mcp-server
@@ -76,11 +76,16 @@ of `issue-tracker-api`: it owns no persisted data and never touches the database
 | list_issues tool | Wraps `GET /issues`, with `project_id`/`status` filter parameters | must-have | mvp | validated |
 | get_issue tool | Wraps `GET /issues/{id}` | must-have | mvp | validated |
 | create_issue tool | Wraps `POST /issues` | must-have | mvp | validated |
-| update_issue tool | Wraps `PATCH /issues/{id}`, including status transitions | must-have | mvp | validated |
+| update_issue tool | Wraps `PATCH /issues/{id}`, including status transitions; extended with an optional `sprint_id` parameter (see `sprints` cross-cutting charter) | must-have | mvp | validated |
 | delete_issue tool | Wraps `DELETE /issues/{id}` | must-have | mvp | validated |
 | End-to-end MCP test suite | A real MCP client, over the real streamable-http transport, against a live server process — the same interface an external agent uses, never calling the tool functions directly in-process | must-have | v1.1 | validated |
 | list_users tool | Wraps `GET /users`, full compatibility with the other modules' user-management support | must-have | v1.2 | validated |
 | create_user tool | Wraps `POST /users` | must-have | v1.2 | validated |
+| list_issue_comments tool | Wraps `GET /issues/{id}/comments`; owned by the `issue-comments` cross-cutting charter | should-have | v1.3 | validated |
+| create_issue_comment tool | Wraps `POST /issues/{id}/comments`; owned by the `issue-comments` cross-cutting charter | should-have | v1.3 | validated |
+| create_sprint tool | Wraps `POST /projects/{id}/sprints`; owned by the `sprints` cross-cutting charter | should-have | v1.4 | implementing |
+| list_sprints tool | Wraps `GET /projects/{id}/sprints`; owned by the `sprints` cross-cutting charter | should-have | v1.4 | implementing |
+| update_sprint tool | Wraps `PATCH /sprints/{id}`; owned by the `sprints` cross-cutting charter | should-have | v1.4 | implementing |
 
 ## Deferred Capabilities
 
@@ -105,6 +110,11 @@ of `issue-tracker-api`: it owns no persisted data and never touches the database
 | `delete_issue` | MCP tool | Delete one Issue |
 | `list_users` | MCP tool | List all Users |
 | `create_user` | MCP tool | Create a User |
+| `list_issue_comments` | MCP tool | List an Issue's Comments |
+| `create_issue_comment` | MCP tool | Add a Comment to an Issue |
+| `create_sprint` | MCP tool | Create a Sprint under a Project |
+| `list_sprints` | MCP tool | List a Project's Sprints |
+| `update_sprint` | MCP tool | Update a Sprint's name/dates, or transition its status |
 
 ### Consumed APIs
 
@@ -119,6 +129,11 @@ of `issue-tracker-api`: it owns no persisted data and never touches the database
 | `DELETE /issues/{id}` | issue-tracker-api | Backs `delete_issue` |
 | `GET /users` | issue-tracker-api | Backs `list_users` |
 | `POST /users` | issue-tracker-api | Backs `create_user` |
+| `GET /issues/{id}/comments` | issue-tracker-api | Backs `list_issue_comments` |
+| `POST /issues/{id}/comments` | issue-tracker-api | Backs `create_issue_comment` |
+| `POST /projects/{id}/sprints` | issue-tracker-api | Backs `create_sprint` |
+| `GET /projects/{id}/sprints` | issue-tracker-api | Backs `list_sprints` |
+| `PATCH /sprints/{id}` | issue-tracker-api | Backs `update_sprint` |
 
 ## Quality Attributes
 
