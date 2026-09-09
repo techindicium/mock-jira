@@ -1,0 +1,50 @@
+{"event":"lifecycle_step","step":"specify","status":"started","ts":"2026-09-09T10:55:02.633Z"}
+{"event":"step_completed","step":"specify","verdict":"PASS","ts":"2026-09-09T10:55:02.717Z"}
+{"event":"lifecycle_step","step":"review","status":"started","revision":1,"ts":"2026-09-09T10:55:44.045Z"}
+{"event":"reviewer_report","step":"review","reviewer":"quick-synthesized-reviewer","severity":"blocker","verdict":"PASS_WITH_NOTES","notes":"1 warning (CON-1: filter effect on board-view.spec.md not cross-referenced), 2 suggestions","revision":1,"ts":"2026-09-09T10:57:40.866Z"}
+{"event":"step_completed","step":"review","verdict":"PASS_WITH_NOTES","revision":1,"ts":"2026-09-09T10:58:31.949Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-09T11:00:28.376Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-09T11:09:53.113Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"1","status":"pending","notes":"Backlog nav item + view container","ts":"2026-09-09T11:09:59.816Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"2","status":"pending","notes":"Backlog table renderer","ts":"2026-09-09T11:09:59.820Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"3","status":"pending","notes":"Filtering logic","ts":"2026-09-09T11:09:59.821Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"4","status":"pending","notes":"Filter bar UI + wiring","ts":"2026-09-09T11:09:59.821Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"5","status":"pending","notes":"Zero-match empty state","ts":"2026-09-09T11:09:59.822Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"6","status":"pending","notes":"Styling","ts":"2026-09-09T11:09:59.823Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"7","status":"pending","notes":"End-to-end browser tests","ts":"2026-09-09T11:09:59.823Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-09T13:41:31.011Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-09T13:41:50.275Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-09T13:43:54.181Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-09T13:44:29.135Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"t1","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-09T13:46:14.303Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"t1","status":"in_progress","notes":null,"ts":"2026-09-09T13:46:33.935Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"1","status":"in_progress","notes":null,"ts":"2026-09-09T13:46:45.846Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"t1","pass":"final","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-09T16:35:30.262Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"t1","pass":"final","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-09T17:15:25.865Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"1","status":"done","notes":"Backlog nav item + view container added","ts":"2026-09-09T17:15:57.451Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"1","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T17:15:57.502Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"1","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-09T17:15:57.550Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"2","status":"done","notes":"buildBacklogRowsHtml added and exported","ts":"2026-09-09T17:17:04.816Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"2","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T17:17:04.865Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"2","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-09T17:17:04.912Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"3","status":"done","notes":"filterIssues + uniqueAssignees added and exported","ts":"2026-09-09T17:17:37.997Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"3","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T17:17:38.042Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"3","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-09T17:17:38.086Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"t4","pass":"final","depth":"full","source":"predicate-denied","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-09T17:20:24.413Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"4","status":"done","notes":"Filter bar wired to Board and Backlog; assisted-agent RED reviewed pre-GREEN","ts":"2026-09-09T17:20:46.343Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"4","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T17:20:46.402Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"4","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-09T17:20:46.456Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"5","status":"done","notes":"filter-empty-state added and wired","ts":"2026-09-09T17:22:07.827Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"5","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T17:22:07.881Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"5","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-09T17:22:07.933Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"6","status":"done","notes":"Styling added; bundled pre-existing uncommitted palette drift (token dependency)","ts":"2026-09-09T17:24:50.450Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"6","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T17:24:50.504Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"6","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-09T17:24:50.552Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-09T17:47:17.382Z"}
+{"event":"test_depth_assigned","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"7","depth":"minimal","source":"risk-policy","escalated":false,"escalation_skipped":"no-routing-entry","floor_applied":false,"floor_legs":[],"floor_inputs":"unavailable","ts":"2026-09-09T17:51:35.164Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"t7","pass":"provisional","depth":"quick","source":"predicate-grant","floor_applied":false,"floor_legs":[],"ts":"2026-09-09T17:51:35.255Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"7","status":"in_progress","notes":null,"ts":"2026-09-09T17:52:38.395Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"t7","pass":"final","depth":"full","source":"predicate-grant","floor_applied":true,"floor_legs":["scope-mismatch"],"ts":"2026-09-09T17:59:47.985Z"}
+{"event":"plan_task","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"7","status":"done","notes":"e2e coverage for BEH-2/6/7 added; 3/3 pass","ts":"2026-09-09T18:04:41.015Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"7","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T18:04:49.639Z"}
+{"event":"review_round","plan":".context-index/specs/features/kanban-ui/backlog-view.plan.md","task_id":"7","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-09T18:04:49.708Z"}
