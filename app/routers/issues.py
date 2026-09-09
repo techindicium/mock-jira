@@ -11,7 +11,7 @@ def _row_to_issue_read(row) -> IssueRead:
         id=row["id"], key=row["key"], project_id=row["project_id"], summary=row["summary"],
         description=row["description"], issue_type=row["issue_type"], status=row["status"],
         priority=row["priority"], assignee=row["assignee"], reporter=row["reporter"],
-        created_at=row["created_at"], updated_at=row["updated_at"],
+        created_at=row["created_at"], updated_at=row["updated_at"], sprint_id=row["sprint_id"],
     )
 
 
@@ -120,7 +120,9 @@ def list_comments(issue_id: int, request: Request):
     return [_row_to_comment_read(r) for r in rows]
 
 
-_PATCHABLE_FIELDS = ("summary", "description", "issue_type", "priority", "assignee", "reporter", "status")
+_PATCHABLE_FIELDS = (
+    "summary", "description", "issue_type", "priority", "assignee", "reporter", "status", "sprint_id",
+)
 
 
 @router.patch("/issues/{issue_id}", response_model=IssueRead)
@@ -134,6 +136,33 @@ def patch_issue(issue_id: int, payload: IssuePatch, request: Request):
         )
 
     updates = payload.model_dump(exclude_unset=True)
+
+    if "sprint_id" in updates and updates["sprint_id"] is not None:
+        sprint = conn.execute(
+            "SELECT * FROM sprints WHERE id = ?", (updates["sprint_id"],)
+        ).fetchone()
+        if sprint is None:
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "message": f"Sprint {updates['sprint_id']} not found",
+                    "code": "ISSUE_SPRINT_NOT_FOUND",
+                },
+            )
+        if sprint["project_id"] != row["project_id"]:
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "message": f"Sprint {sprint['id']} does not belong to Project {row['project_id']}",
+                    "code": "SPRINT_PROJECT_MISMATCH",
+                },
+            )
+        if sprint["status"] == "closed":
+            raise HTTPException(
+                status_code=409,
+                detail={"message": f"Sprint {sprint['id']} is closed", "code": "SPRINT_CLOSED"},
+            )
+
     set_clauses = [f"{field} = ?" for field in _PATCHABLE_FIELDS if field in updates]
     values = [updates[field] for field in _PATCHABLE_FIELDS if field in updates]
     if set_clauses:

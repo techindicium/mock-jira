@@ -33,7 +33,8 @@ def create_schema(conn: sqlite3.Connection) -> None:
             assignee TEXT NOT NULL DEFAULT '',
             reporter TEXT NOT NULL DEFAULT '',
             created_at TEXT NOT NULL DEFAULT (datetime('now')),
-            updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+            updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+            sprint_id INTEGER REFERENCES sprints(id)
         )
         """
     )

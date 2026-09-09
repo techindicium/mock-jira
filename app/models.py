@@ -44,6 +44,7 @@ class IssueRead(BaseModel):
     reporter: str
     created_at: str
     updated_at: str
+    sprint_id: int | None = None
 
 
 class IssuePatch(BaseModel):
@@ -54,6 +55,7 @@ class IssuePatch(BaseModel):
     assignee: str | None = None
     reporter: str | None = None
     status: Literal["todo", "in_progress", "done"] | None = None
+    sprint_id: int | None = None
 
 
 class UserCreate(BaseModel):
