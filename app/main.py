@@ -12,6 +12,7 @@ from app.db import create_schema, get_connection
 from app.errors import http_exception_handler, validation_exception_handler
 from app.routers.issues import router as issues_router
 from app.routers.projects import router as projects_router
+from app.routers.sprints import router as sprints_router
 from app.routers.users import router as users_router
 from app.seed import seed_if_empty, seed_users_if_empty
 
@@ -28,6 +29,7 @@ app = FastAPI(title="mock-jira", version="0.1.0")
 app.include_router(projects_router)
 app.include_router(issues_router)
 app.include_router(users_router)
+app.include_router(sprints_router)
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.add_exception_handler(StarletteHTTPException, http_exception_handler)
 

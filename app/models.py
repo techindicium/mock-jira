@@ -80,3 +80,29 @@ class CommentRead(BaseModel):
     body: str
     author: str
     created_at: str
+
+
+SPRINT_STATUSES = ("planned", "active", "closed")
+
+
+class SprintCreate(BaseModel):
+    name: str
+    start_date: str | None = None
+    end_date: str | None = None
+    status: str | None = None  # accepted but ignored at creation time; always 'planned'
+
+
+class SprintRead(BaseModel):
+    id: int
+    project_id: int
+    name: str
+    start_date: str | None = None
+    end_date: str | None = None
+    status: str
+
+
+class SprintPatch(BaseModel):
+    name: str | None = None
+    start_date: str | None = None
+    end_date: str | None = None
+    status: Literal["planned", "active", "closed"] | None = None

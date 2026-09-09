@@ -67,6 +67,18 @@ def create_schema(conn: sqlite3.Connection) -> None:
         )
         """
     )
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS sprints (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            project_id INTEGER NOT NULL REFERENCES projects(id),
+            name TEXT NOT NULL,
+            start_date TEXT,
+            end_date TEXT,
+            status TEXT NOT NULL DEFAULT 'planned'
+        )
+        """
+    )
     conn.commit()
 
 
