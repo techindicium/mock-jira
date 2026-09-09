@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>mock-jira Kanban Board</title>
+  <title>Jyra Kanban Board</title>
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232684FF'/%3E%3Cstop offset='1' stop-color='%230052CC'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='2' y='2' width='12' height='12' rx='3' transform='rotate(45 8 8)' fill='url(%23g)'/%3E%3Crect x='8' y='8' width='12' height='12' rx='3' transform='rotate(45 14 14)' fill='url(%23g)' opacity='0.85'/%3E%3C/svg%3E"
+  />
   <link rel="stylesheet" href="/static/css/board.css" />
   <script src="/static/js/board-logic.js"></script>
   <script src="/static/js/board.js" defer></script>
@@ -38,7 +42,19 @@
 
       <section id="view-board" class="view">
         <header>
-          <h1>mock-jira</h1>
+          <div class="brand">
+            <svg class="brand-mark" width="24" height="24" viewBox="0 0 22 22" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="brand-grad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#2684FF" />
+                  <stop offset="1" stop-color="#0052CC" />
+                </linearGradient>
+              </defs>
+              <rect x="2" y="2" width="12" height="12" rx="3" transform="rotate(45 8 8)" fill="url(#brand-grad)" />
+              <rect x="8" y="8" width="12" height="12" rx="3" transform="rotate(45 14 14)" fill="url(#brand-grad)" opacity="0.85" />
+            </svg>
+            <span class="brand-wordmark">Jyra</span>
+          </div>
           <div class="switcher-plate">
             <select id="project-switcher" aria-label="Select project"></select>
           </div>
