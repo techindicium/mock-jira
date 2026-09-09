@@ -48,15 +48,24 @@ def test_validate_seed_data_rejects_invalid_status():
     assert exc_info.value.code == "SEED_DATA_INVALID"
 
 
-def test_fresh_startup_seeds_one_project_and_six_issues(client):
+def test_fresh_startup_seeds_both_projects_and_their_issues(client):
     projects = client.get("/projects").json()
-    assert len(projects) == 1
-    project = projects[0]
-    assert project["key"] == "PORTAL"
+    assert len(projects) == 2
+    by_key = {p["key"]: p for p in projects}
+    assert set(by_key) == {"PORTAL", "DATA"}
+
+    project = by_key["PORTAL"]
     assert project["name"] == "Help portal engineering"
 
     issues = client.get("/issues", params={"project_id": project["id"]}).json()
     assert len(issues) == 6
+
+    # DATA is deliberately sparse. Engineering adopted this tracker and other teams did not,
+    # so it holds only the analytics requests that came from engineering.
+    data_issues = client.get(
+        "/issues", params={"project_id": by_key["DATA"]["id"]}
+    ).json()
+    assert len(data_issues) == 3
 
     statuses = [i["status"] for i in issues]
     assert statuses.count("todo") == 2
@@ -142,7 +151,7 @@ def test_seeding_is_idempotent_across_restarts(tmp_path, monkeypatch):
             "/issues", params={"project_id": second_projects[0]["id"]}
         ).json()
 
-    assert len(first_projects) == 1
-    assert len(second_projects) == 1
+    assert len(first_projects) == 2
+    assert len(second_projects) == 2
     assert first_projects[0]["id"] == second_projects[0]["id"]
     assert len(issues) == 6

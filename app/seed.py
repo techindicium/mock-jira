@@ -165,6 +165,21 @@ def load_seed_data() -> tuple[dict, list[dict], list[dict]]:
     return data["project"], data["issues"], data["users"]
 
 
+def load_seed_projects() -> list[dict]:
+    """Every seeded project, each with its own issues.
+
+    Engineering adopted this tracker in 2016 and other teams did not, so a second project
+    exists holding only the analytics requests that came from engineering. The rest of that
+    team's queue is a spreadsheet. Both being partial is the point.
+    """
+    if not _FIXTURE.exists():
+        return [{**SEED_PROJECT, "issues": SEED_ISSUES}]
+    data = json.loads(_FIXTURE.read_text())
+    if "projects" in data:
+        return data["projects"]
+    return [{**data["project"], "issues": data["issues"]}]
+
+
 def _validate_seed_data(project: dict, issues: list[dict]) -> None:
     if not project.get("key") or not project["key"].strip():
         raise SeedError("SEED_DATA_INVALID", "Seed project is missing a key")
@@ -176,7 +191,9 @@ def _validate_seed_data(project: dict, issues: list[dict]) -> None:
     if not project.get("name") or not project["name"].strip():
         raise SeedError("SEED_DATA_INVALID", "Seed project is missing a name")
 
-    if len(issues) != 6:
+    if not issues:
+        raise SeedError("SEED_DATA_INVALID", f"Project '{project['key']}' has no seed issues")
+    if project["key"] == "PORTAL" and len(issues) != 6:
         raise SeedError("SEED_DATA_INVALID", f"Expected 6 seed issues, found {len(issues)}")
 
     for i, issue in enumerate(issues):
@@ -199,6 +216,11 @@ def _validate_seed_data(project: dict, issues: list[dict]) -> None:
         if not issue.get("assignee") or not issue.get("reporter"):
             raise SeedError("SEED_DATA_INVALID", f"Seed issue {i} is missing assignee or reporter")
 
+    # Two per status is a board requirement, so the kanban shows populated columns rather than
+    # one column with everything in it. It applies to PORTAL, which is the populated project.
+    # DATA is sparse on purpose: it holds only what engineering happened to raise there.
+    if project["key"] != "PORTAL":
+        return
     statuses = [issue["status"] for issue in issues]
     for status in ISSUE_STATUSES:
         count = statuses.count(status)
@@ -219,14 +241,17 @@ def seed_if_empty(conn, db_path: str) -> None:
     if existing["n"] > 0:
         return  # BEH-2: already seeded (or real data present) — never touch it
 
-    project, issues, _ = load_seed_data()
-    _validate_seed_data(project, issues)  # a failure here is a bug in the seed data
+    projects = load_seed_projects()
+    for proj in projects:
+        _validate_seed_data(proj, proj["issues"])  # a failure here is a bug in the seed data
 
     import sqlite3
 
     from app.db import allocate_issue_key
 
     try:
+      for project in projects:
+        issues = project["issues"]
         cursor = conn.execute(
             "INSERT INTO projects (key, name, description) VALUES (?, ?, ?)",
             (project["key"], project["name"], project["description"]),

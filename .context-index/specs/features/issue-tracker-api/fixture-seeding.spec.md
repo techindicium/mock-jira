@@ -41,8 +41,8 @@ source-manifest:
 <!-- retired-behavior-ids: (none) -->
 
 - **BEH-1** — **When** the API starts against an empty database (no Project rows exist),
-  **then** it seeds exactly one Project (`key: PORTAL`, `name: Help portal engineering`) and
-  six Issues under it in a single transaction, all present and queryable immediately once
+  **then** it seeds two Projects in a single transaction: `PORTAL` (`name: Help portal
+  engineering`) with six Issues, and `DATA` (`name: Analytics requests`) with three, all present and queryable immediately once
   startup completes — no placeholder or lorem-ipsum text in any field. The six Issues span all
   three statuses (two `todo`, two `in_progress`, two `done`) and a mix of `issue_type`
   (`bug`/`task`/`story`) and `priority` (`low`/`medium`/`high`) values, so a fresh kanban board
@@ -61,8 +61,9 @@ source-manifest:
 
 ### Postconditions
 
-- After a fresh-database startup, `GET /projects` returns exactly one Project and
-  `GET /issues?project_id=<PORTAL's id>` returns exactly six Issues.
+- After a fresh-database startup, `GET /projects` returns two Projects,
+  `GET /issues?project_id=<PORTAL's id>` returns exactly six Issues, and
+  `GET /issues?project_id=<DATA's id>` returns exactly three.
 - Seed Issue descriptions may mention canon entities by their real ID (e.g. `INCIDENT-01`,
   `ACCOUNT-1001`) as read-only narrative references, but this module never creates, owns, or
   exposes an endpoint for any canon-owned entity type (Account, Incident, Ticket, Article, etc.).
@@ -90,16 +91,23 @@ source-manifest:
 
 | Task | Description | Estimated Complexity |
 |------|-------------|---------------------|
-| Write the seed fixture module | Hardcoded Project + 6 Issues, values reconciled with canon at authoring time (this spec), committed only in this repo | small |
+| Write the seed fixture module | Two Projects, 6 + 3 Issues, values reconciled with canon at authoring time (this spec), committed only in this repo | small |
 | Wire seed-on-empty-database startup check | Run the seed module once, only when no Project rows exist yet | small |
-| Idempotency test | Start twice against the same database file; assert exactly one Project and six Issues after both runs | small |
+| Idempotency test | Start twice against the same database file; assert two Projects and their issue counts after both runs | small |
 
 ## Acceptance Criteria
 
-- [x] Fresh-database startup seeds one Project and six Issues, no placeholder text (BEH-1)
+- [x] Fresh-database startup seeds two Projects and their Issues, no placeholder text (BEH-1)
 - [x] Restarting against an already-seeded database creates no duplicate rows (BEH-2)
 - [x] Every seeded `assignee`/`reporter` is a real canon name (BEH-3)
 - [x] No seeded Project/Issue key collides with a canon-reserved prefix (BEH-4)
 - [x] The seed module contains no runtime file read outside this repository
 - [x] All quality gates pass (tests, lint)
 - [x] No constitutional violations introduced
+
+
+**Why a second project.** Engineering adopted this tracker in 2016; other teams did not. The
+analytics team's request queue is mostly a spreadsheet, and only the requests that came from
+engineering ever reached the tracker. `DATA` holds those three and no more. Finding a request
+means knowing to look in both places, and nothing records which is authoritative. The two-per-
+status rule is a board requirement and applies to `PORTAL` only; `DATA` is sparse on purpose.
