@@ -84,9 +84,25 @@
       BoardLogic.buildBacklogRowsHtml(BoardLogic.filterIssues(issues, activeFilters));
   }
 
+  function isBoardOrBacklogVisible() {
+    return !document.getElementById("view-board").hidden || !document.getElementById("view-backlog").hidden;
+  }
+
+  function hasActiveFilter() {
+    return Object.values(activeFilters).some((value) => value);
+  }
+
+  function updateFilterEmptyState() {
+    const filtered = BoardLogic.filterIssues(currentIssues, activeFilters);
+    // BEH-6: distinct from #empty-state (no-Projects-at-all); never shown behind Users/Projects.
+    document.getElementById("filter-empty-state").hidden =
+      !(isBoardOrBacklogVisible() && hasActiveFilter() && filtered.length === 0);
+  }
+
   function renderAllViews() {
     renderBoardState(BoardLogic.computeBoardState(currentProjectId, BoardLogic.filterIssues(currentIssues, activeFilters)));
     renderBacklog(currentIssues);
+    updateFilterEmptyState();
   }
 
   function refreshAssigneeFilterOptions(issues) {
@@ -403,6 +419,7 @@
       }
     }
     document.getElementById("filter-bar").hidden = !(name === "board" || name === "backlog");
+    updateFilterEmptyState();
   }
 
   function onNavClick(event) {
