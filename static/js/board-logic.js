@@ -228,6 +228,24 @@
     return payload;
   }
 
+  function buildCommentListHtml(comments) {
+    if (!Array.isArray(comments)) return "";
+    return comments
+      .map((c) => (
+        `<div class="comment-row">` +
+        `<p class="comment-meta">${escapeHtml(c.author || "Unassigned")} &middot; ${escapeHtml(c.created_at)}</p>` +
+        `<p class="comment-body">${escapeHtml(c.body)}</p>` +
+        `</div>`
+      ))
+      .join("");
+  }
+
+  function validateCommentForm(body) {
+    const errors = {};
+    if (!body || !body.trim()) errors.body = "Comment cannot be empty";
+    return { valid: Object.keys(errors).length === 0, errors };
+  }
+
   function buildUserOptionsHtml(users) {
     if (!Array.isArray(users)) return "";
     return users
@@ -251,5 +269,6 @@
     buildUserOptionsHtml, usersOrEmptyOnFailure,
     buildUserListHtml, buildProjectListHtml, validateUserForm, extractUserSubmitError,
     buildUserCreatePayload, buildProjectCreatePayload,
+    buildCommentListHtml, validateCommentForm,
   };
 });

@@ -209,6 +209,7 @@
     onCreateIssueSubmit, onCardClick, onEditIssueSubmit,
     onDragStart, onColumnDrop, onDeleteIssueClick, reportIssueMutationFailure,
     loadUsers, renderUserDatalist,
+    loadComments, onCommentSubmit,
   };
   Object.assign(window.BoardApp, {
     showView, onNavClick, loadUsersView, onCreateUserSubmit,
@@ -262,8 +263,47 @@
 
   document.getElementById("create-issue-form").addEventListener("submit", onCreateIssueSubmit);
 
+  async function loadComments(issueId) {
+    let comments;
+    try {
+      comments = await fetchJson(`/issues/${issueId}/comments`);
+    } catch (_err) {
+      comments = []; // degrade silently on load failure — the edit form itself still works
+    }
+    document.getElementById("comment-list").innerHTML = BoardLogic.buildCommentListHtml(comments);
+  }
+
+  async function onCommentSubmit(event) {
+    event.preventDefault();
+    const textarea = document.getElementById("new-comment-body");
+    const errorEl = document.getElementById("comment-form-error");
+    const { valid, errors } = BoardLogic.validateCommentForm(textarea.value);
+    if (!valid) {
+      errorEl.textContent = Object.values(errors)[0];
+      errorEl.hidden = false;
+      return; // client-side block — no request sent (UI_VALIDATION_ERROR)
+    }
+    errorEl.hidden = true;
+    try {
+      await fetchJson(`/issues/${editingIssue.id}/comments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ body: textarea.value }),
+      });
+    } catch (err) {
+      reportIssueMutationFailure("Adding comment", err, () => {
+        document.getElementById("edit-issue").hidden = true;
+        loadIssuesFor(currentProjectId);
+      });
+      return;
+    }
+    textarea.value = "";
+    await loadComments(editingIssue.id);
+  }
+
   function openEditIssue(issue) {
     editingIssue = issue;
+    loadComments(issue.id);
     document.getElementById("edit-issue-id").value = issue.id;
     document.getElementById("edit-issue-summary").value = issue.summary;
     document.getElementById("edit-issue-type").value = issue.issue_type;
@@ -399,6 +439,7 @@
   }
 
   document.getElementById("delete-issue").addEventListener("click", onDeleteIssueClick);
+  document.getElementById("submit-comment").addEventListener("click", onCommentSubmit);
 
   // ── App navigation shell (sidebar) ──────────────────────────────────────
 
