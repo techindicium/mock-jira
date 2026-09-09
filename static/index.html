@@ -17,6 +17,24 @@
     </nav>
 
     <div class="app-main">
+      <div id="filter-bar">
+        <select id="filter-assignee" aria-label="Filter by assignee">
+          <option value="">All</option>
+        </select>
+        <select id="filter-issue-type" aria-label="Filter by type">
+          <option value="">All</option>
+          <option value="bug">Bug</option>
+          <option value="task">Task</option>
+          <option value="story">Story</option>
+        </select>
+        <select id="filter-priority" aria-label="Filter by priority">
+          <option value="">All</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+
       <section id="view-board" class="view">
         <header>
           <h1>mock-jira</h1>

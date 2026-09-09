@@ -77,6 +77,40 @@
   let currentProjectId = null;
   let currentIssues = [];
   let editingIssue = null; // the full IssueRead currently loaded into the edit form
+  let activeFilters = {};
+
+  function renderBacklog(issues) {
+    document.getElementById("backlog-rows").innerHTML =
+      BoardLogic.buildBacklogRowsHtml(BoardLogic.filterIssues(issues, activeFilters));
+  }
+
+  function renderAllViews() {
+    renderBoardState(BoardLogic.computeBoardState(currentProjectId, BoardLogic.filterIssues(currentIssues, activeFilters)));
+    renderBacklog(currentIssues);
+  }
+
+  function refreshAssigneeFilterOptions(issues) {
+    const select = document.getElementById("filter-assignee");
+    const current = select.value;
+    const names = BoardLogic.uniqueAssignees(issues);
+    select.innerHTML =
+      `<option value="">All</option>` +
+      names.map((name) => `<option value="${BoardLogic.escapeHtml(name)}">${BoardLogic.escapeHtml(name)}</option>`).join("");
+    if (names.includes(current)) select.value = current; // BEH-7: preserve selection if still valid
+  }
+
+  function onFilterChange() {
+    activeFilters = {
+      assignee: document.getElementById("filter-assignee").value,
+      issue_type: document.getElementById("filter-issue-type").value,
+      priority: document.getElementById("filter-priority").value,
+    };
+    renderAllViews();
+  }
+
+  document.getElementById("filter-assignee").addEventListener("change", onFilterChange);
+  document.getElementById("filter-issue-type").addEventListener("change", onFilterChange);
+  document.getElementById("filter-priority").addEventListener("change", onFilterChange);
 
   async function loadIssuesFor(projectId) {
     currentProjectId = projectId;
@@ -84,7 +118,8 @@
       const issues = await fetchJson(`/issues?project_id=${projectId}`);
       currentIssues = issues;
       clearError();
-      renderBoardState(BoardLogic.computeBoardState(projectId, issues));
+      refreshAssigneeFilterOptions(issues); // BEH-7: repopulate from the new Project's issues
+      renderAllViews();
     } catch (err) {
       showError(BoardLogic.formatFetchError("Loading issues", err));
     }
@@ -367,6 +402,7 @@
         }
       }
     }
+    document.getElementById("filter-bar").hidden = !(name === "board" || name === "backlog");
   }
 
   function onNavClick(event) {
