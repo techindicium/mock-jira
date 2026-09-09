@@ -58,16 +58,20 @@
       .join("");
   }
 
-  function renderColumns(grouped) {
+  function renderColumnGroup(grouped, colPrefix, countPrefix) {
     for (const col of BoardLogic.BOARD_COLUMNS) {
-      document.getElementById(`col-${col.status}`).innerHTML =
-        grouped[col.status].map(BoardLogic.buildCardHtml).join("");
+      const el = document.getElementById(`${colPrefix}${col.status}`);
+      el.innerHTML = grouped[col.status].map(BoardLogic.buildCardHtml).join("");
     }
     const counts = BoardLogic.columnCounts(grouped);
     for (const status of Object.keys(counts)) {
-      const badge = document.getElementById(`count-${status}`);
+      const badge = document.getElementById(`${countPrefix}${status}`);
       if (badge) badge.textContent = String(counts[status]);
     }
+  }
+
+  function renderColumns(grouped) {
+    renderColumnGroup(grouped, "col-", "count-");
   }
 
   function renderBoardState(state) {
@@ -214,6 +218,7 @@
   Object.assign(window.BoardApp, {
     showView, onNavClick, loadUsersView, onCreateUserSubmit,
     loadProjectsView, onMgmtCreateProjectSubmit,
+    renderSprintView, onStartSprint, onCloseSprint, loadSprintView,
   });
 
   document.addEventListener("DOMContentLoaded", init);
@@ -443,7 +448,7 @@
 
   // ── App navigation shell (sidebar) ──────────────────────────────────────
 
-  const NAV_VIEWS = ["board", "backlog", "users", "projects"];
+  const NAV_VIEWS = ["board", "backlog", "sprint", "users", "projects"];
 
   function showView(name) {
     for (const view of NAV_VIEWS) {
@@ -467,14 +472,106 @@
     const view = event.currentTarget.dataset.view;
     if (!NAV_VIEWS.includes(view)) return; // UI_NAV_VIEW_NOT_FOUND: defensive no-op
     showView(view);
+    if (view === "sprint") loadSprintView();
     if (view === "users") loadUsersView();
     if (view === "projects") loadProjectsView();
   }
 
   document.getElementById("nav-board").addEventListener("click", onNavClick);
   document.getElementById("nav-backlog").addEventListener("click", onNavClick);
+  document.getElementById("nav-sprint").addEventListener("click", onNavClick);
   document.getElementById("nav-users").addEventListener("click", onNavClick);
   document.getElementById("nav-projects").addEventListener("click", onNavClick);
+
+  // ── Sprint view ──────────────────────────────────────────────────────────
+
+  let currentActiveSprintId = null;
+  let currentStartableSprintId = null; // oldest/lowest-id `planned` sprint for the project; no sprint-picker UI is in scope (sprints charter, Out of Scope)
+
+  function showSprintViewError(message) {
+    const el = document.getElementById("sprint-view-error");
+    el.textContent = message;
+    el.hidden = false;
+  }
+
+  function clearSprintViewError() {
+    document.getElementById("sprint-view-error").hidden = true;
+  }
+
+  function updateSprintControls() {
+    document.getElementById("start-sprint").hidden = !(currentActiveSprintId == null && currentStartableSprintId != null);
+    document.getElementById("close-sprint").hidden = currentActiveSprintId == null;
+  }
+
+  function renderSprintView(issues, activeSprintId) {
+    const board = document.getElementById("sprint-board");
+    const noActive = document.getElementById("no-active-sprint");
+    if (activeSprintId == null) {
+      board.hidden = true;
+      noActive.hidden = false;
+      return;
+    }
+    noActive.hidden = true;
+    board.hidden = false;
+    const grouped = BoardLogic.groupIssuesByStatus(BoardLogic.filterIssuesBySprintId(issues, activeSprintId));
+    renderColumnGroup(grouped, "sprint-col-", "sprint-count-");
+  }
+
+  async function loadSprintView() {
+    clearSprintViewError();
+    let sprints;
+    try {
+      sprints = await fetchJson(`/projects/${currentProjectId}/sprints`);
+    } catch (err) {
+      showSprintViewError(BoardLogic.formatFetchError("Loading sprints", err));
+      sprints = [];
+    }
+    const active = Array.isArray(sprints) ? sprints.find((s) => s.status === "active") : null;
+    const planned = Array.isArray(sprints)
+      ? sprints.filter((s) => s.status === "planned").sort((a, b) => a.id - b.id)
+      : [];
+    currentActiveSprintId = active ? active.id : null;
+    currentStartableSprintId = planned.length > 0 ? planned[0].id : null;
+    updateSprintControls();
+    renderSprintView(currentIssues, currentActiveSprintId);
+  }
+
+  async function onStartSprint(event) {
+    event.preventDefault();
+    if (currentStartableSprintId == null) return;
+    try {
+      await fetchJson(`/sprints/${currentStartableSprintId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "active" }),
+      });
+      clearSprintViewError();
+    } catch (err) {
+      showSprintViewError(BoardLogic.formatFetchError("Starting sprint", err));
+      return;
+    }
+    await loadSprintView();
+  }
+
+  async function onCloseSprint(event) {
+    event.preventDefault();
+    if (currentActiveSprintId == null) return;
+    try {
+      await fetchJson(`/sprints/${currentActiveSprintId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "closed" }),
+      });
+      clearSprintViewError();
+    } catch (err) {
+      showSprintViewError(BoardLogic.formatFetchError("Closing sprint", err));
+      return;
+    }
+    await loadSprintView();
+  }
+
+  document.getElementById("start-sprint").addEventListener("click", onStartSprint);
+  document.getElementById("close-sprint").addEventListener("click", onCloseSprint);
 
   // ── Users management screen ─────────────────────────────────────────────
 

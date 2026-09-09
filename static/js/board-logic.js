@@ -258,6 +258,11 @@
     return Array.isArray(users) ? users : [];
   }
 
+  function filterIssuesBySprintId(issues, sprintId) {
+    if (sprintId == null) return [];
+    return Array.isArray(issues) ? issues.filter((i) => i.sprint_id === sprintId) : [];
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, buildBacklogRowsHtml,
     filterIssues, uniqueAssignees,
@@ -270,5 +275,6 @@
     buildUserListHtml, buildProjectListHtml, validateUserForm, extractUserSubmitError,
     buildUserCreatePayload, buildProjectCreatePayload,
     buildCommentListHtml, validateCommentForm,
+    filterIssuesBySprintId,
   };
 });
