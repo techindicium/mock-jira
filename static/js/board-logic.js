@@ -66,6 +66,7 @@
         `<td>${escapeHtml(issue.priority)}</td>` +
         `<td>${escapeHtml(issue.status)}</td>` +
         `<td>${escapeHtml(issue.assignee || "Unassigned")}</td>` +
+        `<td><button type="button" class="add-to-sprint" data-issue-id="${issue.id}">Add to sprint</button></td>` +
         `</tr>`
       ))
       .join("");
@@ -263,6 +264,10 @@
     return Array.isArray(issues) ? issues.filter((i) => i.sprint_id === sprintId) : [];
   }
 
+  function findActiveSprint(sprints) {
+    return Array.isArray(sprints) ? sprints.find((s) => s.status === "active") : null;
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, buildBacklogRowsHtml,
     filterIssues, uniqueAssignees,
@@ -275,6 +280,6 @@
     buildUserListHtml, buildProjectListHtml, validateUserForm, extractUserSubmitError,
     buildUserCreatePayload, buildProjectCreatePayload,
     buildCommentListHtml, validateCommentForm,
-    filterIssuesBySprintId,
+    filterIssuesBySprintId, findActiveSprint,
   };
 });

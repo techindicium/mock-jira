@@ -88,6 +88,51 @@
       BoardLogic.buildBacklogRowsHtml(BoardLogic.filterIssues(issues, activeFilters));
   }
 
+  async function resolveActiveSprintId() {
+    // BEH-11: reuse Task 3's tracked active sprint id when available; otherwise fetch fresh
+    // (the Backlog view can be opened without the Sprint view having loaded first).
+    if (currentActiveSprintId != null) return currentActiveSprintId;
+    let sprints;
+    try {
+      sprints = await fetchJson(`/projects/${currentProjectId}/sprints`);
+    } catch (_err) {
+      return null;
+    }
+    const active = BoardLogic.findActiveSprint(sprints);
+    return active ? active.id : null;
+  }
+
+  async function onAddToSprint(issueId) {
+    const activeSprintId = await resolveActiveSprintId();
+    if (activeSprintId == null) {
+      showError("Add to sprint failed: this Project has no active Sprint.");
+      return;
+    }
+    try {
+      await fetchJson(`/issues/${issueId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sprint_id: activeSprintId }),
+      });
+      clearError();
+    } catch (err) {
+      reportIssueMutationFailure("Adding issue to sprint", err, () => {
+        loadIssuesFor(currentProjectId);
+      });
+      return;
+    }
+    currentIssues = currentIssues.map((issue) =>
+      issue.id === issueId ? { ...issue, sprint_id: activeSprintId } : issue
+    );
+    renderBacklog(currentIssues); // BEH-11: reflect new Sprint membership without a full reload
+  }
+
+  function onBacklogClick(event) {
+    const button = event.target.closest(".add-to-sprint");
+    if (!button) return;
+    onAddToSprint(Number(button.dataset.issueId));
+  }
+
   function isBoardOrBacklogVisible() {
     return !document.getElementById("view-board").hidden || !document.getElementById("view-backlog").hidden;
   }
@@ -214,6 +259,7 @@
     onDragStart, onColumnDrop, onDeleteIssueClick, reportIssueMutationFailure,
     loadUsers, renderUserDatalist,
     loadComments, onCommentSubmit,
+    onAddToSprint, onBacklogClick,
   };
   Object.assign(window.BoardApp, {
     showView, onNavClick, loadUsersView, onCreateUserSubmit,
@@ -359,6 +405,7 @@
   }
 
   document.getElementById("board").addEventListener("click", onCardClick);
+  document.getElementById("backlog-table").addEventListener("click", onBacklogClick);
   document.getElementById("edit-issue-form").addEventListener("submit", onEditIssueSubmit);
   document.getElementById("cancel-edit-issue").addEventListener("click", (event) => {
     event.preventDefault();
@@ -526,7 +573,7 @@
       showSprintViewError(BoardLogic.formatFetchError("Loading sprints", err));
       sprints = [];
     }
-    const active = Array.isArray(sprints) ? sprints.find((s) => s.status === "active") : null;
+    const active = BoardLogic.findActiveSprint(sprints);
     const planned = Array.isArray(sprints)
       ? sprints.filter((s) => s.status === "planned").sort((a, b) => a.id - b.id)
       : [];
