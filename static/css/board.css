@@ -1,19 +1,21 @@
 :root {
-  /* Dispatch-board palette. Keep this list short: 7 named tokens + obvious derived shades. */
-  --ink: #16261f;        /* deep pine-teal-black — page/board background */
-  --rail: #2f4a3e;       /* mid-tone pine — column rail panels */
-  --paper: #f1ecdd;      /* warm off-white ticket stock — cards/surfaces only, never full-page bg */
-  --stamp-red: #a3402f;  /* brick/rubber-stamp red — high priority */
-  --stamp-gold: #b98a2e; /* brass/ochre — medium priority, brass rules/accents */
-  --stamp-green: #4c7a5e;/* low priority / done-adjacent accent */
-  --ink-line: #55483a;   /* warm dark hairline border/rule on paper surfaces */
+  /* Jyra palette — homage to the Atlassian Design System's light-theme product UI.
+     Keep this list short: 7 named tokens + obvious derived shades. */
+  --brand-blue: #0c66e4;       /* primary action / links / active state */
+  --brand-blue-dark: #0052cc;  /* hover/pressed shade of brand blue */
+  --surface: #ffffff;          /* cards, panels, header — the "paper" layer */
+  --surface-sunken: #f7f8f9;   /* page background, board columns, sidebar */
+  --border: #dfe1e6;           /* hairline border on every surface */
+  --text: #172b4d;             /* primary text — dark navy, not pure black */
+  --text-subtle: #6b778c;      /* secondary/meta text */
 
   /* Derived shades (opacity/lighten only — not new named colors). */
-  --rail-light: #3c5c4e;         /* hover/active state on rail surfaces */
-  --paper-dim: #e7e1cf;          /* subtle recessed paper surface (inputs, disabled) */
-  --ink-text-on-paper: #201a12;  /* near-black warm text color on --paper */
-  --paper-text-on-rail: #f1ecdd; /* --paper reused as text color on --rail */
-  --stamp-gold-dim: rgba(185, 138, 46, 0.35); /* brass rule at low opacity */
+  --brand-blue-subtle: #e9f2ff;      /* light blue wash for active nav / hover */
+  --surface-hover: #ebecf0;          /* hover state on sunken surfaces */
+  --danger: #e2483d;                 /* highest/high priority, destructive actions */
+  --warning: #ff991f;                /* medium priority */
+  --success: #36b37e;                /* low/lowest priority */
+  --shadow-card: 0 1px 1px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
 }
 
 [hidden] {
@@ -25,11 +27,12 @@
 }
 
 body {
-  font-family: -apple-system, "Segoe UI", "Inter", system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Atlassian Sans",
+    system-ui, sans-serif;
   margin: 0;
   padding: 0;
-  color: var(--paper-text-on-rail);
-  background: var(--ink);
+  color: var(--text);
+  background: var(--surface-sunken);
 }
 
 /* ── App shell: sidebar + view containers ─────────────────────────────── */
@@ -46,8 +49,8 @@ body {
   flex-direction: column;
   gap: 0.15rem;
   padding: 1rem 0;
-  background: var(--rail);
-  border-right: 1px solid var(--ink-line);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
   min-height: 100vh;
   box-sizing: border-box;
 }
@@ -59,25 +62,26 @@ body {
   background: none;
   box-shadow: none;
   border: none;
-  border-left: 4px solid transparent;
+  border-left: 3px solid transparent;
   border-radius: 0;
   padding: 0.6rem 1rem;
   font-family: inherit;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--paper-text-on-rail);
+  color: var(--text-subtle);
   cursor: pointer;
-  transition: background-color 0.12s ease, border-color 0.12s ease;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
 }
 
 .nav-item:hover {
-  background: var(--rail-light);
+  background: var(--surface-hover);
+  color: var(--text);
 }
 
 .nav-item.active {
-  background: var(--rail-light);
-  border-left-color: var(--stamp-gold);
-  color: var(--paper);
+  background: var(--brand-blue-subtle);
+  border-left-color: var(--brand-blue);
+  color: var(--brand-blue-dark);
 }
 
 .app-main {
@@ -88,19 +92,39 @@ body {
 
 .view h1 {
   font-size: 1.1rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   margin: 0 0 1rem 0;
-  color: var(--paper);
+  color: var(--text);
+}
+
+/* ── Brand mark (header logo + wordmark) ───────────────────────────────── */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-mark {
+  flex: none;
+  display: block;
+}
+
+.brand-wordmark {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text);
 }
 
 /* ── Ledger list (Users/Projects management screens) ──────────────────── */
 
 .ledger-panel {
-  background: var(--paper);
-  border: 1px solid var(--ink-line);
-  border-radius: 2px;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: var(--shadow-card);
   padding: 0.25rem 0.75rem;
   margin-bottom: 1rem;
   max-width: 480px;
@@ -112,7 +136,7 @@ body {
   align-items: baseline;
   gap: 1rem;
   padding: 0.5rem 0;
-  border-bottom: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--border);
 }
 
 .ledger-row:last-child {
@@ -121,25 +145,25 @@ body {
 
 .ledger-primary {
   font-weight: 600;
-  color: var(--ink-text-on-paper);
+  color: var(--text);
 }
 
 .ledger-key {
   font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", monospace;
   font-weight: 600;
-  color: var(--ink-line);
+  color: var(--brand-blue-dark);
   margin-right: 0.5rem;
 }
 
 .ledger-meta {
   font-size: 0.8rem;
-  color: var(--ink-line);
+  color: var(--text-subtle);
   text-align: right;
   overflow-wrap: anywhere;
 }
 
 .ledger-empty {
-  color: var(--ink-text-on-paper);
+  color: var(--text);
   padding: 0.5rem 0;
   margin: 0;
 }
@@ -151,21 +175,12 @@ header {
   margin-bottom: 1.25rem;
 }
 
-header h1 {
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0;
-  color: var(--paper);
-}
-
 .switcher-plate {
   display: inline-flex;
   align-items: center;
-  background: var(--paper);
-  border: 1px solid var(--ink-line);
-  border-radius: 2px;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
   padding: 0 0.25rem 0 0.6rem;
 }
 
@@ -174,13 +189,13 @@ header h1 {
   -webkit-appearance: none;
   border: none;
   background: transparent
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0 L5 6 L10 0 Z' fill='%2355483A'/></svg>")
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0 L5 6 L10 0 Z' fill='%236B778C'/></svg>")
     no-repeat right 0.5rem center;
   padding: 0.4rem 1.6rem 0.4rem 0.2rem;
-  font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", monospace;
+  font-family: inherit;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--ink-text-on-paper);
+  color: var(--text);
 }
 
 #board-error,
@@ -190,11 +205,11 @@ header h1 {
 #projects-view-error,
 #create-user-error,
 #mgmt-create-project-error {
-  background: var(--paper);
-  color: var(--stamp-red);
-  border: 1px solid var(--stamp-red);
-  border-left: 4px solid var(--stamp-red);
-  border-radius: 2px;
+  background: #ffebe6;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-left: 4px solid var(--danger);
+  border-radius: 3px;
   padding: 0.5rem 0.75rem;
   margin-bottom: 1rem;
   font-weight: 600;
@@ -204,17 +219,16 @@ button {
   font-family: inherit;
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 2px;
-  border: 1px solid var(--ink-line);
+  border-radius: 3px;
+  border: 1px solid var(--border);
   padding: 0.45rem 0.9rem;
   cursor: pointer;
-  background: var(--paper);
-  color: var(--ink-text-on-paper);
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  background: var(--surface);
+  color: var(--text);
 }
 
 button:hover {
-  background: var(--paper-dim);
+  background: var(--surface-hover);
 }
 
 #open-create-issue,
@@ -222,9 +236,9 @@ button:hover {
 #edit-issue-form button[type="submit"],
 #create-user-form button[type="submit"],
 #mgmt-create-project-form button[type="submit"] {
-  background: var(--rail);
-  color: var(--paper);
-  border-color: var(--rail);
+  background: var(--brand-blue);
+  color: var(--surface);
+  border-color: var(--brand-blue);
 }
 
 #open-create-issue:hover,
@@ -232,18 +246,19 @@ button:hover {
 #edit-issue-form button[type="submit"]:hover,
 #create-user-form button[type="submit"]:hover,
 #mgmt-create-project-form button[type="submit"]:hover {
-  background: var(--rail-light);
+  background: var(--brand-blue-dark);
+  border-color: var(--brand-blue-dark);
 }
 
 #delete-issue {
-  background: var(--paper);
-  color: var(--stamp-red);
-  border-color: var(--stamp-red);
+  background: var(--surface);
+  color: var(--danger);
+  border-color: var(--danger);
 }
 
 #delete-issue:hover {
-  background: var(--stamp-red);
-  color: var(--paper);
+  background: var(--danger);
+  color: var(--surface);
 }
 
 #board {
@@ -253,8 +268,8 @@ button:hover {
 }
 
 .column {
-  background: var(--rail);
-  border: 1px solid var(--ink-line);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
   border-radius: 3px;
   padding: 0.75rem;
   flex: 1;
@@ -268,25 +283,26 @@ button:hover {
   gap: 0.5rem;
   margin: 0 0 0.6rem 0;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--stamp-gold-dim);
+  border-bottom: 2px solid var(--border);
 }
 
 .column-header h2 {
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin: 0;
-  color: var(--paper);
+  color: var(--text-subtle);
 }
 
 .col-count {
-  font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", monospace;
+  font-family: inherit;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--ink);
-  background: var(--stamp-gold);
-  border-radius: 2px;
-  padding: 0.05rem 0.4rem;
+  color: var(--text-subtle);
+  background: var(--surface-hover);
+  border-radius: 10px;
+  padding: 0.05rem 0.5rem;
   min-width: 1.4em;
   text-align: center;
 }
@@ -298,14 +314,14 @@ button:hover {
 }
 
 .card {
-  background: var(--paper);
-  border: 1px solid var(--ink-line);
-  border-left-width: 5px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
   border-left-style: solid;
-  border-radius: 2px;
+  border-radius: 3px;
   padding: 0.55rem 0.65rem;
   cursor: grab;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  box-shadow: var(--shadow-card);
   overflow-wrap: anywhere;
 }
 
@@ -314,31 +330,31 @@ button:hover {
 }
 
 .card[data-priority="high"] {
-  border-left-color: var(--stamp-red);
+  border-left-color: var(--danger);
 }
 
 .card[data-priority="medium"] {
-  border-left-color: var(--stamp-gold);
+  border-left-color: var(--warning);
 }
 
 .card[data-priority="low"] {
-  border-left-color: var(--stamp-green);
+  border-left-color: var(--success);
 }
 
 .card[data-priority="unknown"] {
-  border-left-color: var(--ink-line);
+  border-left-color: var(--border);
 }
 
 .column.drag-over {
-  background: var(--rail-light);
-  border-color: var(--stamp-gold);
+  background: var(--brand-blue-subtle);
+  border-color: var(--brand-blue);
 }
 
 .card-key {
-  font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", monospace;
+  font-family: inherit;
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--ink-line);
+  color: var(--text-subtle);
   margin: 0 0 0.2rem 0;
   letter-spacing: 0.01em;
 }
@@ -347,13 +363,13 @@ button:hover {
   font-size: 0.9rem;
   font-weight: 500;
   margin: 0 0 0.25rem 0;
-  color: var(--ink-text-on-paper);
+  color: var(--text);
   overflow-wrap: anywhere;
 }
 
 .card-meta {
   font-size: 0.75rem;
-  color: var(--ink-line);
+  color: var(--text-subtle);
   margin: 0;
   overflow-wrap: anywhere;
 }
@@ -363,17 +379,17 @@ button:hover {
 #edit-issue,
 #create-user,
 #mgmt-create-project {
-  background: var(--paper);
-  border: 1px solid var(--ink-line);
-  border-radius: 2px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
   padding: 1rem;
   margin-top: 1rem;
   max-width: 360px;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  box-shadow: var(--shadow-card);
 }
 
 #empty-state {
-  color: var(--ink-text-on-paper);
+  color: var(--text);
 }
 
 #create-issue h2,
@@ -384,7 +400,7 @@ button:hover {
   font-weight: 700;
   letter-spacing: -0.01em;
   margin: 0 0 0.75rem 0;
-  color: var(--ink-text-on-paper);
+  color: var(--text);
 }
 
 #create-issue form label,
@@ -394,7 +410,7 @@ button:hover {
   display: block;
   margin-bottom: 0.6rem;
   font-size: 0.85rem;
-  color: var(--ink-text-on-paper);
+  color: var(--text);
 }
 
 #create-issue form input,
@@ -410,10 +426,10 @@ button:hover {
   padding: 0.4rem 0.5rem;
   font-family: inherit;
   font-size: 0.85rem;
-  color: var(--ink-text-on-paper);
-  background: var(--paper-dim);
-  border: 1px solid var(--ink-line);
-  border-radius: 2px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
 }
 
 #create-issue form textarea,
@@ -426,16 +442,62 @@ button:hover {
   padding: 0.4rem 0.5rem;
   font-family: inherit;
   font-size: 0.85rem;
-  color: var(--ink-text-on-paper);
-  background: var(--paper-dim);
-  border: 1px solid var(--ink-line);
-  border-radius: 2px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.filter-bar select {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.35rem 0.5rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  color: var(--text);
+  background: var(--surface);
+}
+
+#backlog-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+#backlog-table th,
+#backlog-table td {
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+#backlog-table th {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+#filter-empty-state {
+  color: var(--text-subtle);
+  padding: 0.75rem;
 }
 
 /* ── Accessibility: deliberate keyboard focus, respected reduced-motion ──── */
 
 :focus-visible {
-  outline: 2px solid var(--stamp-gold);
+  outline: 2px solid var(--brand-blue);
   outline-offset: 2px;
 }
 
