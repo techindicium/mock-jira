@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "_generated_by": "/adev:route — do not hand-edit; re-run instead.",
+  "entries": [
+    {
+      "task_id": "t1",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 0.8,
+        "novelty": 1
+      },
+      "rationale": "BEH-1 fully specified with exact test/markup; mirrors the existing NAV_VIEWS/#view-users nav-item pattern almost verbatim across 3 files."
+    },
+    {
+      "task_id": "t2",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-1 table rows fully specified with exact test/impl code; mirrors buildCardHtml's escaping/interpolation pattern directly in the same module."
+    },
+    {
+      "task_id": "t3",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 1,
+        "novelty": 0.8
+      },
+      "rationale": "BEH-3/4/5 fully specified with exact test/impl code; pure-function module pattern is established but AND-filter logic itself is new to this codebase."
+    },
+    {
+      "task_id": "t4",
+      "selected_agent": "assisted-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.4,
+        "blast_radius": 0.8,
+        "novelty": 0.6
+      },
+      "rationale": "BEH-3/BEH-7 well specified with pinned design decisions, but requires refactoring renderBoardState/loadIssuesFor call sites and new shared activeFilters state — non-trivial composition across 2 files."
+    },
+    {
+      "task_id": "t5",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 0.8,
+        "novelty": 0.8
+      },
+      "rationale": "BEH-6 fully specified with pinned design decision; mirrors the existing #empty-state toggle pattern with one added filter-active condition."
+    },
+    {
+      "task_id": "t6",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "Styling fully specified with exact CSS reusing only existing tokens, mirroring .ledger-panel/.column/.card conventions in the same file."
+    },
+    {
+      "task_id": "t7",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.8,
+        "blast_radius": 1,
+        "novelty": 1
+      },
+      "rationale": "BEH-2/6/7 fully specified with exact Playwright test code, mirroring test_ui_navigation_e2e.py/test_ui_project_switcher_e2e.py's established real-browser pattern."
+    }
+  ]
+}
