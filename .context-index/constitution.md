@@ -6,7 +6,7 @@
 ## Identity
 
 mock-jira is a standalone mock of a JIRA-shaped issue-tracking HTTP API. It exists so the
-adev-course track repos that need a realistic upstream issue tracker — `portwell-assist` (SDLC)
+adev-course track repos that need a realistic upstream issue tracker — `portwell-portal` (SDLC)
 and `portwell-analytics` (DDLC) today — have something concrete to integrate against, without
 any track ever reaching a real external endpoint.
 

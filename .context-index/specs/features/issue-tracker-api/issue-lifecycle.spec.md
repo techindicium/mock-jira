@@ -92,7 +92,7 @@ source-manifest:
 - **Principle:** "The HTTP contract is the boundary. Consuming tracks integrate through the
   documented API only, never by importing this repo's internals directly." — Applies because
   this spec defines the full Issue CRUD surface, the part of the contract both consuming tracks
-  (`portwell-assist`/SDLC, `portwell-analytics`/DDLC) will exercise most.
+  (`portwell-portal`/SDLC, `portwell-analytics`/DDLC) will exercise most.
 - **Principle:** "Breaking API changes are coordinated, not silent." — Applies because
   `PATCH /issues/{id}` (the status-transition endpoint) is the single most consumer-visible
   behavior in the whole module; its field/status semantics are the baseline every later change

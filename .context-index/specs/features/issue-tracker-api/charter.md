@@ -15,7 +15,7 @@ updated: 2026-09-06
 
 issue-tracker-api provides a JIRA-shaped issue-tracking domain (projects, issues, kanban
 statuses) backed by a local SQLite database, exposed over an HTTP CRUD API. It exists so the
-adev-course tracks that need a realistic upstream issue tracker — `portwell-assist` (SDLC) and
+adev-course tracks that need a realistic upstream issue tracker — `portwell-portal` (SDLC) and
 `portwell-analytics` (DDLC) today — have something concrete and offline to integrate against,
 without any real Atlassian service involved. This is the core module of `mock-jira`: the kanban
 UI and MCP server modules are both clients of this API, never the other way around.

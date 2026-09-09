@@ -47,7 +47,7 @@ drift_detected: true
   `app.main:app` into the test process or use FastAPI's `TestClient` (an in-process ASGI
   transport). This is the one thing that distinguishes this spec from the module's existing
   unit/integration tests: every request in this suite travels over a real TCP socket, exactly as
-  `portwell-assist`/`portwell-analytics` or any other real consumer would connect.
+  `portwell-portal`/`portwell-analytics` or any other real consumer would connect.
 - A real HTTP client (`httpx.Client(base_url=...)`) issues every request in this suite.
 - The server process is torn down after the test session, whether it passed or failed.
 
