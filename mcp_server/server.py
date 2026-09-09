@@ -6,6 +6,7 @@ mcp = MCPServer("mock-jira-mcp")
 
 
 def main() -> None:
+    import mcp_server.tools.comments
     import mcp_server.tools.issues
     import mcp_server.tools.projects
     import mcp_server.tools.users  # noqa: F401  (import registers the tools as a side effect)

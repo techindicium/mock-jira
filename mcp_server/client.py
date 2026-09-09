@@ -80,6 +80,14 @@ class IssueTrackerClient:
         response = await self._request("POST", "/users", json=payload)
         return response.json()
 
+    async def list_comments(self, issue_id: int) -> list[dict]:
+        response = await self._request("GET", f"/issues/{issue_id}/comments")
+        return response.json()
+
+    async def create_comment(self, issue_id: int, body: str) -> dict:
+        response = await self._request("POST", f"/issues/{issue_id}/comments", json={"body": body})
+        return response.json()
+
     async def _request(self, method: str, path: str, **kwargs) -> httpx.Response:
         try:
             response = await self._http.request(method, path, **kwargs)
