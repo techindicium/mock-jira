@@ -351,7 +351,7 @@
 
   // ── App navigation shell (sidebar) ──────────────────────────────────────
 
-  const NAV_VIEWS = ["board", "users", "projects"];
+  const NAV_VIEWS = ["board", "backlog", "users", "projects"];
 
   function showView(name) {
     for (const view of NAV_VIEWS) {
@@ -378,6 +378,7 @@
   }
 
   document.getElementById("nav-board").addEventListener("click", onNavClick);
+  document.getElementById("nav-backlog").addEventListener("click", onNavClick);
   document.getElementById("nav-users").addEventListener("click", onNavClick);
   document.getElementById("nav-projects").addEventListener("click", onNavClick);
 
