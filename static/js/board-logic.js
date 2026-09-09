@@ -38,6 +38,22 @@
     return KNOWN_PRIORITIES.includes(priority) ? priority : "unknown";
   }
 
+  function buildBacklogRowsHtml(issues) {
+    if (!Array.isArray(issues)) return "";
+    return issues
+      .map((issue) => (
+        `<tr data-issue-id="${issue.id}">` +
+        `<td>${escapeHtml(issue.key || "")}</td>` +
+        `<td>${escapeHtml(issue.summary)}</td>` +
+        `<td>${escapeHtml(issue.issue_type)}</td>` +
+        `<td>${escapeHtml(issue.priority)}</td>` +
+        `<td>${escapeHtml(issue.status)}</td>` +
+        `<td>${escapeHtml(issue.assignee || "Unassigned")}</td>` +
+        `</tr>`
+      ))
+      .join("");
+  }
+
   function buildCardHtml(issue) {
     return (
       `<article class="card" data-issue-id="${issue.id}" ` +
@@ -208,7 +224,8 @@
   }
 
   return {
-    BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, priorityStripeAttr,
+    BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, buildBacklogRowsHtml,
+    priorityStripeAttr,
     formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
     shouldShowEmptyState, isNotFoundError, formatIssueGoneMessage, validateIssueForm,
