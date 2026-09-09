@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request
 
 from app.db import allocate_issue_key
-from app.models import IssueCreate, IssuePatch, IssueRead
+from app.models import CommentCreate, CommentRead, IssueCreate, IssuePatch, IssueRead
 
 router = APIRouter()
 
@@ -75,6 +75,51 @@ def get_issue(issue_id: int, request: Request):
     return _row_to_issue_read(row)
 
 
+def _row_to_comment_read(row) -> CommentRead:
+    return CommentRead(
+        id=row["id"], issue_id=row["issue_id"], body=row["body"],
+        author=row["author"], created_at=row["created_at"],
+    )
+
+
+def _require_issue(conn, issue_id: int):
+    row = conn.execute("SELECT * FROM issues WHERE id = ?", (issue_id,)).fetchone()
+    if row is None:
+        raise HTTPException(
+            status_code=404,
+            detail={"message": f"Issue {issue_id} not found", "code": "ISSUE_NOT_FOUND"},
+        )
+    return row
+
+
+@router.post("/issues/{issue_id}/comments", response_model=CommentRead, status_code=201)
+def create_comment(issue_id: int, payload: CommentCreate, request: Request):
+    conn = request.app.state.db_conn
+    _require_issue(conn, issue_id)
+    if not payload.body or not payload.body.strip():
+        raise HTTPException(
+            status_code=422,
+            detail={"message": "body is required", "code": "VALIDATION_ERROR"},
+        )
+    cursor = conn.execute(
+        "INSERT INTO comments (issue_id, body, author) VALUES (?, ?, ?)",
+        (issue_id, payload.body, payload.author or ""),
+    )
+    conn.commit()
+    row = conn.execute("SELECT * FROM comments WHERE id = ?", (cursor.lastrowid,)).fetchone()
+    return _row_to_comment_read(row)
+
+
+@router.get("/issues/{issue_id}/comments", response_model=list[CommentRead])
+def list_comments(issue_id: int, request: Request):
+    conn = request.app.state.db_conn
+    _require_issue(conn, issue_id)
+    rows = conn.execute(
+        "SELECT * FROM comments WHERE issue_id = ? ORDER BY id ASC", (issue_id,)
+    ).fetchall()
+    return [_row_to_comment_read(r) for r in rows]
+
+
 _PATCHABLE_FIELDS = ("summary", "description", "issue_type", "priority", "assignee", "reporter", "status")
 
 
@@ -116,5 +161,6 @@ def delete_issue(issue_id: int, request: Request):
             status_code=404,
             detail={"message": f"Issue {issue_id} not found", "code": "ISSUE_NOT_FOUND"},
         )
+    conn.execute("DELETE FROM comments WHERE issue_id = ?", (issue_id,))
     conn.execute("DELETE FROM issues WHERE id = ?", (issue_id,))
     conn.commit()

@@ -67,3 +67,16 @@ class UserRead(BaseModel):
     name: str
     email: str | None = None
     role: str | None = None
+
+
+class CommentCreate(BaseModel):
+    body: str
+    author: str | None = None
+
+
+class CommentRead(BaseModel):
+    id: int
+    issue_id: int
+    body: str
+    author: str
+    created_at: str
