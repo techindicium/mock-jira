@@ -4,9 +4,9 @@ from app.seed import (
     SEED_ISSUES,
     SEED_PROJECT,
     SEED_USERS,
-    load_seed_data,
     SeedError,
     _validate_seed_data,
+    load_seed_data,
 )
 
 # The issue assignees and reporters: the people who touch the tracker.
