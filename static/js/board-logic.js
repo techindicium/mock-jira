@@ -38,6 +38,23 @@
     return KNOWN_PRIORITIES.includes(priority) ? priority : "unknown";
   }
 
+  const FILTERABLE_FIELDS = ["assignee", "issue_type", "priority"];
+
+  function filterIssues(issues, filters) {
+    const list = Array.isArray(issues) ? issues : [];
+    const active = FILTERABLE_FIELDS.filter((f) => filters && filters[f]);
+    if (active.length === 0) return list;
+    return list.filter((issue) => active.every((f) => issue[f] === filters[f]));
+  }
+
+  function uniqueAssignees(issues) {
+    const list = Array.isArray(issues) ? issues : [];
+    const names = new Set(
+      list.map((i) => (i.assignee || "").trim()).filter((name) => name !== "")
+    );
+    return Array.from(names).sort();
+  }
+
   function buildBacklogRowsHtml(issues) {
     if (!Array.isArray(issues)) return "";
     return issues
@@ -225,6 +242,7 @@
 
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, buildBacklogRowsHtml,
+    filterIssues, uniqueAssignees,
     priorityStripeAttr,
     formatFetchError,
     pickDefaultProject, computeBoardState, validateProjectForm, extractProjectSubmitError,
