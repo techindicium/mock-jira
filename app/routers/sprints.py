@@ -78,6 +78,16 @@ def patch_sprint(sprint_id: int, payload: SprintPatch, request: Request):
                 status_code=409,
                 detail={"message": f"Sprint {sprint_id} is closed", "code": "SPRINT_CLOSED"},
             )
+        if row["status"] == "active" and updates["status"] == "planned":
+            # A Sprint's status only ever moves forward (planned -> active -> closed);
+            # no code path may set it backward.
+            raise HTTPException(
+                status_code=409,
+                detail={
+                    "message": f"Sprint {sprint_id} cannot move backward from active to planned",
+                    "code": "SPRINT_STATUS_BACKWARD",
+                },
+            )
         if updates["status"] == "active":
             sibling = conn.execute(
                 "SELECT id FROM sprints WHERE project_id = ? AND status = 'active' AND id != ?",

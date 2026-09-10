@@ -45,6 +45,19 @@ def test_closing_sprint_then_reactivating_is_rejected(client):
     assert resp.status_code == 409
     assert resp.json()["code"] == "SPRINT_CLOSED"
 
+def test_reverting_an_active_sprint_to_planned_is_rejected(client):
+    # Postcondition: a Sprint's status only ever moves forward (planned -> active ->
+    # closed); no code path may set it backward.
+    project = _create_project(client)
+    sprint = client.post(f"/projects/{project['id']}/sprints", json={"name": "S"}).json()
+    client.patch(f"/sprints/{sprint['id']}", json={"status": "active"})
+    resp = client.patch(f"/sprints/{sprint['id']}", json={"status": "planned"})
+    assert resp.status_code == 409
+    assert resp.json()["code"] == "SPRINT_STATUS_BACKWARD"
+    # and the sprint's actual status was not mutated
+    still = client.get(f"/projects/{project['id']}/sprints").json()
+    assert still[0]["status"] == "active"
+
 def test_renaming_a_closed_sprint_is_allowed(client):
     # A closed Sprint rejects status changes, but name/date edits are NOT a status change
     # and must still succeed.
