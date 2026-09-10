@@ -264,7 +264,7 @@
   Object.assign(window.BoardApp, {
     showView, onNavClick, loadUsersView, onCreateUserSubmit,
     loadProjectsView, onMgmtCreateProjectSubmit,
-    renderSprintView, onStartSprint, onCloseSprint, loadSprintView,
+    renderSprintView, onStartSprint, onCloseSprint, loadSprintView, onCreateSprintSubmit,
   });
 
   document.addEventListener("DOMContentLoaded", init);
@@ -619,6 +619,41 @@
 
   document.getElementById("start-sprint").addEventListener("click", onStartSprint);
   document.getElementById("close-sprint").addEventListener("click", onCloseSprint);
+
+  function showCreateSprintError(message) {
+    const el = document.getElementById("create-sprint-error");
+    el.textContent = message;
+    el.hidden = false;
+  }
+
+  function clearCreateSprintError() {
+    document.getElementById("create-sprint-error").hidden = true;
+  }
+
+  async function onCreateSprintSubmit(event) {
+    event.preventDefault();
+    const nameInput = document.getElementById("sprint-name");
+    const { valid, errors } = BoardLogic.validateSprintForm(nameInput.value);
+    if (!valid) {
+      showCreateSprintError(Object.values(errors)[0]);
+      return; // client-side block — input is not cleared, no request sent (UI_VALIDATION_ERROR)
+    }
+    clearCreateSprintError();
+    try {
+      await fetchJson(`/projects/${currentProjectId}/sprints`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: nameInput.value }),
+      });
+    } catch (err) {
+      showCreateSprintError(BoardLogic.formatFetchError("Creating sprint", err));
+      return;
+    }
+    nameInput.value = "";
+    await loadSprintView();
+  }
+
+  document.getElementById("create-sprint-form").addEventListener("submit", onCreateSprintSubmit);
 
   // ── Users management screen ─────────────────────────────────────────────
 

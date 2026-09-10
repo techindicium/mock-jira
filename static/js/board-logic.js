@@ -268,6 +268,12 @@
     return Array.isArray(sprints) ? sprints.find((s) => s.status === "active") : null;
   }
 
+  function validateSprintForm(name) {
+    const errors = {};
+    if (!name || !name.trim()) errors.name = "Name is required";
+    return { valid: Object.keys(errors).length === 0, errors };
+  }
+
   return {
     BOARD_COLUMNS, escapeHtml, groupIssuesByStatus, columnCounts, buildCardHtml, buildBacklogRowsHtml,
     filterIssues, uniqueAssignees,
@@ -280,6 +286,6 @@
     buildUserListHtml, buildProjectListHtml, validateUserForm, extractUserSubmitError,
     buildUserCreatePayload, buildProjectCreatePayload,
     buildCommentListHtml, validateCommentForm,
-    filterIssuesBySprintId, findActiveSprint,
+    filterIssuesBySprintId, findActiveSprint, validateSprintForm,
   };
 });

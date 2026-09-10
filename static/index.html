@@ -199,6 +199,14 @@
           <button id="start-sprint" type="button" hidden>Start sprint</button>
           <button id="close-sprint" type="button" hidden>Close sprint</button>
         </div>
+        <section id="create-sprint">
+          <h2>New sprint</h2>
+          <form id="create-sprint-form">
+            <label>Name <input id="sprint-name" name="name" required /></label>
+            <button type="submit">Create sprint</button>
+            <p id="create-sprint-error" role="alert" hidden></p>
+          </form>
+        </section>
         <p id="no-active-sprint" hidden>No active sprint.</p>
         <main id="sprint-board" hidden>
           <section class="column" data-status="todo">
