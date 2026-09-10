@@ -51,13 +51,24 @@ async def update_issue(
     id: int | None = None,
     key: str | None = None,
     project_id: int | None = None,
+    sprint_id: int | None = None,
+    unassign_sprint: bool = False,
 ) -> dict[str, Any]:
     """Update one or more mutable fields on an Issue in issue-tracker-api.
 
     `id`, `key`, and `project_id` are immutable and are silently ignored if present —
     an Issue's identity and project never change after creation.
+
+    `sprint_id` assigns the Issue to that Sprint. `unassign_sprint=True` explicitly clears
+    the Issue's Sprint assignment; if both are passed, `unassign_sprint` wins.
     """
     client = _client()
+    if unassign_sprint:
+        sprint_kwargs = {"sprint_id": None}
+    elif sprint_id is not None:
+        sprint_kwargs = {"sprint_id": sprint_id}
+    else:
+        sprint_kwargs = {}
     try:
         return await client.update_issue(
             issue_id,
@@ -68,6 +79,7 @@ async def update_issue(
             assignee=assignee,
             reporter=reporter,
             status=status,
+            **sprint_kwargs,
         )
     except UpstreamError as exc:
         raise ToolError(exc.message) from exc

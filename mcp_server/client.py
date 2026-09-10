@@ -2,6 +2,8 @@ import httpx
 
 from mcp_server.errors import UpstreamError, UpstreamUnreachableError
 
+_UNSET = object()
+
 
 class IssueTrackerClient:
     def __init__(self, base_url: str, transport: httpx.AsyncBaseTransport | None = None):
@@ -59,13 +61,39 @@ class IssueTrackerClient:
         response = await self._request("POST", "/issues", json=payload)
         return response.json()
 
-    async def update_issue(self, issue_id: int, **fields) -> dict:
+    async def update_issue(self, issue_id: int, sprint_id=_UNSET, **fields) -> dict:
         payload = {key: value for key, value in fields.items() if value is not None}
+        if sprint_id is not _UNSET:
+            payload["sprint_id"] = sprint_id
         response = await self._request("PATCH", f"/issues/{issue_id}", json=payload)
         return response.json()
 
     async def delete_issue(self, issue_id: int) -> None:
         await self._request("DELETE", f"/issues/{issue_id}")
+
+    async def list_sprints(self, project_id: int) -> list[dict]:
+        response = await self._request("GET", f"/projects/{project_id}/sprints")
+        return response.json()
+
+    async def create_sprint(
+        self,
+        project_id: int,
+        name: str,
+        start_date: str | None = None,
+        end_date: str | None = None,
+    ) -> dict:
+        payload: dict = {"name": name}
+        if start_date is not None:
+            payload["start_date"] = start_date
+        if end_date is not None:
+            payload["end_date"] = end_date
+        response = await self._request("POST", f"/projects/{project_id}/sprints", json=payload)
+        return response.json()
+
+    async def update_sprint(self, sprint_id: int, **fields) -> dict:
+        payload = {key: value for key, value in fields.items() if value is not None}
+        response = await self._request("PATCH", f"/sprints/{sprint_id}", json=payload)
+        return response.json()
 
     async def list_users(self) -> list[dict]:
         response = await self._request("GET", "/users")

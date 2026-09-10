@@ -337,3 +337,46 @@ async def test_issue_tool_unreachable_api_errors_with_clear_message(monkeypatch,
 
     assert result.is_error is True
     assert "issue-tracker-api" in result.content[0].text
+
+
+class _SprintAssignClient(_FakeClient):
+    def __init__(self):
+        super().__init__(issue={**_SAMPLE_ISSUE, "sprint_id": 5})
+
+    async def update_issue(self, issue_id, **fields):
+        return {**_SAMPLE_ISSUE, "sprint_id": fields.get("sprint_id")}
+
+
+@pytest.mark.anyio
+async def test_update_issue_tool_assigns_sprint_id(monkeypatch):
+    monkeypatch.setattr(issues_tools, "_client", lambda: _SprintAssignClient())
+
+    async with Client(mcp) as client:
+        result = await client.call_tool("update_issue", {"issue_id": 1, "sprint_id": 5})
+
+    assert result.is_error is False
+    assert result.structured_content["sprint_id"] == 5
+
+
+@pytest.mark.anyio
+async def test_update_issue_tool_unassigns_sprint_via_dedicated_flag(monkeypatch):
+    monkeypatch.setattr(issues_tools, "_client", lambda: _SprintAssignClient())
+
+    async with Client(mcp) as client:
+        result = await client.call_tool("update_issue", {"issue_id": 1, "unassign_sprint": True})
+
+    assert result.is_error is False
+    assert result.structured_content["sprint_id"] is None
+
+
+@pytest.mark.anyio
+async def test_update_issue_tool_unassign_sprint_wins_over_sprint_id(monkeypatch):
+    monkeypatch.setattr(issues_tools, "_client", lambda: _SprintAssignClient())
+
+    async with Client(mcp) as client:
+        result = await client.call_tool(
+            "update_issue", {"issue_id": 1, "sprint_id": 5, "unassign_sprint": True}
+        )
+
+    assert result.is_error is False
+    assert result.structured_content["sprint_id"] is None

@@ -209,6 +209,63 @@ async def test_update_issue_unknown_id_raises_upstream_error_verbatim():
 
 
 @pytest.mark.anyio
+async def test_update_issue_without_sprint_id_kwarg_omits_it_from_payload():
+    def handler(request):
+        import json as _json
+        assert _json.loads(request.content) == {"status": "done"}
+        return httpx.Response(
+            200,
+            json={
+                "id": 1, "key": "SDLC-1", "project_id": 1, "summary": "Fix bug",
+                "description": "", "issue_type": "bug", "status": "done", "priority": "high",
+                "assignee": "", "reporter": "", "created_at": "2026-09-05 00:00:00",
+                "updated_at": "2026-09-05 00:00:01",
+            },
+        )
+
+    result = await _client(handler).update_issue(1, status="done")
+    assert result["status"] == "done"
+
+
+@pytest.mark.anyio
+async def test_update_issue_with_sprint_id_none_sends_null_in_payload():
+    def handler(request):
+        import json as _json
+        assert _json.loads(request.content) == {"sprint_id": None}
+        return httpx.Response(
+            200,
+            json={
+                "id": 1, "key": "SDLC-1", "project_id": 1, "summary": "Fix bug",
+                "description": "", "issue_type": "bug", "status": "todo", "priority": "high",
+                "assignee": "", "reporter": "", "created_at": "2026-09-05 00:00:00",
+                "updated_at": "2026-09-05 00:00:01", "sprint_id": None,
+            },
+        )
+
+    result = await _client(handler).update_issue(1, sprint_id=None)
+    assert result["sprint_id"] is None
+
+
+@pytest.mark.anyio
+async def test_update_issue_with_sprint_id_sends_it_in_payload():
+    def handler(request):
+        import json as _json
+        assert _json.loads(request.content) == {"sprint_id": 5}
+        return httpx.Response(
+            200,
+            json={
+                "id": 1, "key": "SDLC-1", "project_id": 1, "summary": "Fix bug",
+                "description": "", "issue_type": "bug", "status": "todo", "priority": "high",
+                "assignee": "", "reporter": "", "created_at": "2026-09-05 00:00:00",
+                "updated_at": "2026-09-05 00:00:01", "sprint_id": 5,
+            },
+        )
+
+    result = await _client(handler).update_issue(1, sprint_id=5)
+    assert result["sprint_id"] == 5
+
+
+@pytest.mark.anyio
 async def test_delete_issue_sends_delete_request():
     def handler(request):
         assert request.method == "DELETE"
@@ -303,3 +360,59 @@ async def test_list_users_unreachable_api_raises_upstream_unreachable_error():
 
     with pytest.raises(UpstreamUnreachableError):
         await _client(handler).list_users()
+
+
+@pytest.mark.anyio
+async def test_list_sprints_sends_get_request_under_project():
+    def handler(request):
+        assert request.method == "GET"
+        assert request.url.path == "/projects/1/sprints"
+        return httpx.Response(
+            200, json=[{"id": 1, "project_id": 1, "name": "Sprint 1", "start_date": None, "end_date": None, "status": "planned"}]
+        )
+
+    result = await _client(handler).list_sprints(1)
+    assert result == [{"id": 1, "project_id": 1, "name": "Sprint 1", "start_date": None, "end_date": None, "status": "planned"}]
+
+
+@pytest.mark.anyio
+async def test_create_sprint_sends_name_and_returns_created_sprint():
+    def handler(request):
+        assert request.method == "POST"
+        assert request.url.path == "/projects/1/sprints"
+        import json as _json
+        assert _json.loads(request.content) == {"name": "Sprint 1"}
+        return httpx.Response(
+            201, json={"id": 1, "project_id": 1, "name": "Sprint 1", "start_date": None, "end_date": None, "status": "planned"}
+        )
+
+    result = await _client(handler).create_sprint(1, "Sprint 1")
+    assert result["name"] == "Sprint 1"
+
+
+@pytest.mark.anyio
+async def test_create_sprint_omits_absent_start_and_end_dates():
+    def handler(request):
+        import json as _json
+        assert _json.loads(request.content) == {"name": "Sprint 1"}
+        return httpx.Response(
+            201, json={"id": 1, "project_id": 1, "name": "Sprint 1", "start_date": None, "end_date": None, "status": "planned"}
+        )
+
+    result = await _client(handler).create_sprint(1, "Sprint 1", start_date=None, end_date=None)
+    assert result["name"] == "Sprint 1"
+
+
+@pytest.mark.anyio
+async def test_update_sprint_sends_only_provided_fields_and_returns_result():
+    def handler(request):
+        assert request.method == "PATCH"
+        assert request.url.path == "/sprints/1"
+        import json as _json
+        assert _json.loads(request.content) == {"status": "active"}
+        return httpx.Response(
+            200, json={"id": 1, "project_id": 1, "name": "Sprint 1", "start_date": None, "end_date": None, "status": "active"}
+        )
+
+    result = await _client(handler).update_sprint(1, status="active")
+    assert result["status"] == "active"
