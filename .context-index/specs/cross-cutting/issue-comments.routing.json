@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "_generated_by": "/adev:route — do not hand-edit; re-run instead.",
+  "entries": [
+    {
+      "task_id": "t1",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.8,
+        "novelty": 1
+      },
+      "rationale": "BEH-1/2/8 and error cases fully specified with exact SQL/model/route code given; mirrors issues.py's existing create/get pattern exactly, no curated golden sample, 3-file blast radius within one module."
+    },
+    {
+      "task_id": "t2",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.8,
+        "novelty": 0.8
+      },
+      "rationale": "BEH-3/4/5 and error cases fully specified with exact JS given; mirrors buildUserListHtml/reportIssueMutationFailure patterns exactly, no curated golden sample, 3-file blast radius within kanban-ui, minor DOM-wiring adaptation across three files."
+    },
+    {
+      "task_id": "t3",
+      "selected_agent": "auto-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.8,
+        "novelty": 1
+      },
+      "rationale": "BEH-6/7 and error case fully specified with exact tool/client code given; mirrors tools/issues.py's ToolError translation and test_issue_tools.py's _FakeClient pattern exactly, no curated golden sample, 3-file blast radius (1 create, 2 modify) within mcp-server, file-independent of Task 1."
+    }
+  ]
+}

@@ -21,6 +21,7 @@ source-manifest:
     - tests_js/user-picker-beh-6-graceful-degradation.test.js
     - tests_js/visual-refresh-beh-6-form-fields-unchanged.test.js
   computed-at: "2026-09-07T12:35:18.847Z"
+drift_detected: true
 ---
 
 # Live Spec: User picker in issue forms

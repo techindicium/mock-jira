@@ -19,6 +19,7 @@ source-manifest:
     - tests_js/user-mgmt-beh-1-list-render.test.js
     - tests_js/user-mgmt-beh-4-5-validate-and-errors.test.js
   computed-at: "2026-09-07T12:36:24.046Z"
+drift_detected: true
 ---
 
 # Live Spec: Users management screen

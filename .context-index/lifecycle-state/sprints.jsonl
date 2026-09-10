@@ -1,0 +1,59 @@
+{"event":"lifecycle_step","step":"specify","status":"started","ts":"2026-09-09T13:14:10.561Z"}
+{"event":"step_completed","step":"specify","verdict":"PASS","ts":"2026-09-09T13:14:10.637Z"}
+{"event":"lifecycle_step","step":"review","status":"started","revision":1,"ts":"2026-09-09T13:14:37.750Z"}
+{"event":"reviewer_report","step":"review","reviewer":"structural-architect","severity":"blocker","verdict":"PASS_WITH_NOTES","notes":"4 findings (0 blockers): missing kanban-ui consumer ref, incomplete Sprint shape, check ordering, shared-helper note. All fixed.","revision":1,"ts":"2026-09-09T13:21:30.196Z"}
+{"event":"reviewer_report","step":"review","reviewer":"security-reviewer","severity":"blocker","verdict":"PASS_WITH_NOTES","notes":"4 findings (0 blockers): POST /issues sprint_id bypass gap (real), missing 404 parity, missing date validation. All fixed.","revision":1,"ts":"2026-09-09T13:21:30.263Z"}
+{"event":"reviewer_report","step":"review","reviewer":"consistency-analyzer","severity":"blocker","verdict":"PASS_WITH_NOTES","notes":"4 findings (0 blockers): error code naming, 3 sibling charters unsynced, nav scope staleness, stray banner ref. All fixed.","revision":1,"ts":"2026-09-09T13:21:30.323Z"}
+{"event":"step_completed","step":"review","verdict":"PASS_WITH_NOTES","revision":1,"ts":"2026-09-09T13:22:29.512Z"}
+{"event":"lifecycle_step","step":"plan","status":"started","ts":"2026-09-09T13:22:46.328Z"}
+{"event":"step_completed","step":"plan","verdict":"PASS","ts":"2026-09-09T13:30:59.072Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"1","status":"pending","notes":"Sprint entity + endpoints (issue-tracker-api)","ts":"2026-09-09T13:30:59.106Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"2","status":"pending","notes":"Issue.sprint_id extension + validation (issue-tracker-api)","ts":"2026-09-09T13:30:59.109Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"3","status":"pending","notes":"kanban-ui Sprint view","ts":"2026-09-09T13:30:59.109Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"4","status":"pending","notes":"Backlog Add to sprint integration (blocked on backlog-view)","ts":"2026-09-09T13:30:59.110Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"5","status":"pending","notes":"Sprint MCP tools + update_issue extension","ts":"2026-09-09T13:30:59.111Z"}
+{"event":"lifecycle_step","step":"route","status":"started","ts":"2026-09-09T22:03:29.098Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-09T22:05:48.738Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-09T22:06:25.716Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t1","pass":"provisional","depth":"full","source":"policy-baseline","floor_applied":true,"floor_legs":["risk-level"],"ts":"2026-09-09T22:09:04.240Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t1","status":"in_progress","notes":null,"ts":"2026-09-09T22:10:23.393Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t1","status":"done","notes":"Sprint entity + endpoints implemented, both reviews PASS","ts":"2026-09-09T22:16:06.707Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t1","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T22:16:06.776Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t1","stage":"code-quality","cycles":1,"findings":2,"ts":"2026-09-09T22:16:06.845Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t2","status":"in_progress","notes":null,"ts":"2026-09-09T22:16:13.122Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t2","pass":"provisional","depth":"full","source":"policy-baseline","floor_applied":true,"floor_legs":["risk-level"],"ts":"2026-09-09T22:16:13.227Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t2","status":"done","notes":"Issue.sprint_id assignment implemented, both reviews PASS","ts":"2026-09-09T22:19:44.435Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t2","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T22:19:44.508Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t2","stage":"code-quality","cycles":1,"findings":1,"ts":"2026-09-09T22:19:44.579Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t3","status":"in_progress","notes":null,"ts":"2026-09-09T22:19:52.462Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t3","pass":"provisional","depth":"full","source":"policy-baseline","floor_applied":true,"floor_legs":["risk-level"],"ts":"2026-09-09T22:19:52.549Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t3","status":"done","notes":"Sprint view implemented; 1 cq cycle to fix guard regression; both reviews PASS","ts":"2026-09-09T22:27:08.566Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t3","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T22:27:08.637Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t3","stage":"code-quality","cycles":2,"findings":1,"ts":"2026-09-09T22:27:08.707Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t4","status":"in_progress","notes":null,"ts":"2026-09-09T22:27:27.085Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t4","pass":"provisional","depth":"full","source":"policy-baseline","floor_applied":true,"floor_legs":["risk-level"],"ts":"2026-09-09T22:27:27.175Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t4","status":"done","notes":"Backlog Add-to-sprint implemented despite stale human-only route; both reviews PASS after 1 cq cycle","ts":"2026-09-09T22:33:37.845Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t4","stage":"spec-compliance","cycles":1,"ts":"2026-09-09T22:33:37.950Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t4","stage":"code-quality","cycles":2,"findings":3,"ts":"2026-09-09T22:33:38.032Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t5","status":"in_progress","notes":null,"ts":"2026-09-09T22:33:44.600Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t5","pass":"provisional","depth":"full","source":"policy-baseline","floor_applied":true,"floor_legs":["risk-level"],"ts":"2026-09-09T22:33:44.706Z"}
+{"event":"lifecycle_step","step":"implement","status":"started","ts":"2026-09-10T15:43:35.643Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t5","pass":"provisional","depth":"full","source":"policy-baseline","floor_applied":true,"floor_legs":["risk-level"],"ts":"2026-09-10T15:45:36.242Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t5","stage":"spec-compliance","cycles":1,"ts":"2026-09-10T15:48:42.326Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t5","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-10T15:48:42.399Z"}
+{"event":"review_depth_resolved","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t5","pass":"final","depth":"full","source":"policy-baseline","floor_applied":true,"floor_legs":["risk-level","scope-mismatch"],"ts":"2026-09-10T15:48:44.092Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t5","stage":"spec-compliance","cycles":1,"ts":"2026-09-10T15:48:50.894Z"}
+{"event":"review_round","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t5","stage":"code-quality","cycles":1,"findings":0,"ts":"2026-09-10T15:48:50.971Z"}
+{"event":"plan_task","plan":".context-index/specs/cross-cutting/sprints.plan.md","task_id":"t5","status":"done","notes":"Sprint MCP tools + update_issue sprint_id/unassign_sprint implemented, both reviews PASS on 1st cycle","ts":"2026-09-10T15:48:58.366Z"}
+{"event":"step_completed","step":"implement","verdict":"PASS","ts":"2026-09-10T15:58:00.523Z"}
+{"event":"step_completed","step":"implement","verdict":"PASS","ts":"2026-09-10T15:58:35.240Z"}
+{"event":"lifecycle_step","step":"validate","status":"started","ts":"2026-09-10T15:58:35.664Z"}
+{"event":"lifecycle_step","step":"validate","status":"started","ts":"2026-09-10T15:59:05.026Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1-quality-gates","severity":"error","verdict":"PASS_WITH_NOTES","notes":"Fast tier (test/lint/test-js) all pass. E2E-smoke (warning severity) failed 10/64 — browser-launch related, non-blocking.","gate_outcomes":[{"id":"test","verdict":"pass","tier":"fast","command_sha":"864cd8c369fc558cf6a8235d2514a26c14a6e2c1de08efd0629c4f69d1843587"},{"id":"lint","verdict":"pass","tier":"fast","command_sha":"2ea305ec5813b091e1464bd56985f9caafca6483b6a08963281eaa2f0f5b3fb0"},{"id":"test-js","verdict":"pass","tier":"fast","command_sha":"4d4e3bbfdf575dc83338694f6da0b95a44b8490751148497dfe931c5af571c77"},{"id":"e2e-smoke","verdict":"fail","tier":"e2e","command_sha":"7c8b647af049708f0804d30421fde2eae089367de7e3cc18a17b1981febce10f"}],"manifest_sha":"1bccb88","ts":"2026-09-10T16:04:38.712Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1.5-source-manifest","severity":"warning","verdict":"PASS","notes":"Source manifest matches (sha 1bccb88); all 19 files committed to git.","ts":"2026-09-10T16:04:40.416Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-1.6-code-drift","severity":"warning","verdict":"PASS","notes":"drift_detected: false","ts":"2026-09-10T16:04:42.388Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-8-boundaries","severity":"error","verdict":"PASS","notes":"SKIP — no boundary rules declared (41 files checked).","ts":"2026-09-10T16:04:43.945Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-9-transition-gates","severity":"warning","verdict":"PASS","notes":"SKIP — no transitions configured for implement-to-validate.","ts":"2026-09-10T16:04:45.504Z"}
+{"event":"validator_report","step":"validate","validator":"validate.check-14-gate-executability","severity":"warning","verdict":"PASS_WITH_NOTES","notes":"gate doctor: 4 error-severity findings (gitignored .venv paths, sh-globstar false-positive on test-js) — WARN per check severity, non-blocking.","ts":"2026-09-10T16:04:47.149Z"}
+{"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","ts":"2026-09-10T16:07:17.379Z"}
+{"event":"code_drift_detected","drift_source":"static/js/board-logic.js","drift_at":"2026-09-10T17:07:03.603Z","ts":"2026-09-10T17:07:03.603Z"}

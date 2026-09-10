@@ -131,7 +131,7 @@ UI and MCP server modules are both clients of this API, never the other way arou
 | End-to-end API test suite | Real HTTP calls (over a real socket, against a real running server process) exercising the full Project/Issue CRUD surface — the same interface a consuming track's real client uses, never FastAPI's in-process TestClient | must-have | v1.1 | validated |
 | User directory (create/list/get) | Create a User, list all Users, fetch one by id — an additive, structured directory of people (name/email/role), no authentication, no FK from Issue | must-have | v1.2 | validated |
 | Comments on Issues (create/list) | Add a Comment to an Issue, list an Issue's Comments in order — an append-only activity log; no update/delete endpoint (see Invariants). Additive: no existing endpoint's request/response shape changes. | should-have | v1.3 | validated |
-| Sprints (create/list/update, Issue assignment) | Sprint CRUD (minus delete) plus an optional `sprint_id` field on Issue; owned by the `sprints` cross-cutting charter. This is the one capability in this module with a recorded constitutional exception (extends an existing entity's response/request shape — see that charter's Governance note). | should-have | v1.4 | implemented |
+| Sprints (create/list/update, Issue assignment) | Sprint CRUD (minus delete) plus an optional `sprint_id` field on Issue; owned by the `sprints` cross-cutting charter. This is the one capability in this module with a recorded constitutional exception (extends an existing entity's response/request shape — see that charter's Governance note). | should-have | v1.4 | validated |
 
 ## Deferred Capabilities
 

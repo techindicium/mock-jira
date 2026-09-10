@@ -19,6 +19,7 @@ source-manifest:
     - tests/mcp_server/test_user_tools.py
     - tests_e2e/test_mcp_user_tools_e2e.py
   computed-at: "2026-09-07T00:24:16.946Z"
+drift_detected: true
 ---
 
 # Live Spec: User MCP tools (list_users, create_user)

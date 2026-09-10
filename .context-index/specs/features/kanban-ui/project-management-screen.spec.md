@@ -19,6 +19,7 @@ source-manifest:
     - tests_js/project-mgmt-beh-1-list-render.test.js
     - tests_js/project-mgmt-beh-4-5-validate-and-errors.test.js
   computed-at: "2026-09-07T12:34:56.929Z"
+drift_detected: true
 ---
 
 # Live Spec: Projects management screen

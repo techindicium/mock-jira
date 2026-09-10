@@ -97,7 +97,7 @@ no separate server, no CORS configuration, and no runtime base-URL configuration
 | Users management screen | List all Users and a simple add-user form (`POST /users`); no edit/delete (API does not support them) | should-have | v1.4 | validated |
 | Projects management screen | List all Projects and a simple add-project form (`POST /projects`), distinct from and coexisting with the in-board project switcher; no edit/delete (API does not support them) | should-have | v1.4 | validated |
 | Backlog list view and filters | A list/table view of the selected Project's Issues (alternative to the board), plus an assignee/type/priority filter bar shared by both the Backlog and Board views; purely client-side, no new API surface | should-have | v1.5 | validated |
-| Sprint view and Backlog sprint assignment | A "Sprint" nav view (board scoped to the Project's active Sprint), start/close-sprint controls, and an "Add to sprint" action on the Backlog view's rows; owned by the `sprints` cross-cutting charter (`.context-index/specs/cross-cutting/sprints/charter.md`) | should-have | v1.6 | implemented |
+| Sprint view and Backlog sprint assignment | A "Sprint" nav view (board scoped to the Project's active Sprint), start/close-sprint controls, and an "Add to sprint" action on the Backlog view's rows; owned by the `sprints` cross-cutting charter (`.context-index/specs/cross-cutting/sprints/charter.md`) | should-have | v1.6 | validated |
 | Comment thread panel in edit-issue form | A chronological Comment list plus an add-comment control inside the existing edit-issue form; owned by the `issue-comments` cross-cutting charter (`.context-index/specs/cross-cutting/issue-comments/charter.md`) | should-have | v1.6 | validated |
 
 ## Deferred Capabilities

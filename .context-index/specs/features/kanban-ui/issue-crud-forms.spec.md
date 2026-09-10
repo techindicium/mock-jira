@@ -23,6 +23,7 @@ source-manifest:
     - tests_js/issue-crud-beh-5-error-handling.test.js
     - tests_js/issue-crud-beh-6-create-validation.test.js
   computed-at: "2026-09-07T12:35:43.540Z"
+drift_detected: true
 ---
 
 # Live Spec: Issue create, edit, delete, and column move

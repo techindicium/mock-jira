@@ -22,6 +22,7 @@ source-manifest:
     - tests/test_users.py
     - tests_e2e/test_user_directory_e2e.py
   computed-at: "2026-09-06T23:15:14.154Z"
+drift_detected: true
 ---
 
 # Live Spec: User directory (create/list/get)

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "seq": 38,
+  "seq": 48,
   "epics": [
     {
       "id": "epic-kphf39",
@@ -128,6 +128,33 @@
       "notes": "Auto-fills the assignee field in create/edit-issue forms from issue-tracker-api's User directory; free-text field unchanged, no schema change.",
       "created": "2026-09-07T00:14:37.428Z",
       "updated": "2026-09-07T00:14:37.428Z"
+    },
+    {
+      "id": "epic-er0l6g",
+      "title": "Backlog list view and issue filters",
+      "status": "open",
+      "planRef": ".context-index/specs/features/kanban-ui/backlog-view.plan.md",
+      "notes": "Add a Backlog list/table view and a shared assignee/type/priority filter bar to kanban-ui, purely client-side.",
+      "created": "2026-09-09T13:11:01.477Z",
+      "updated": "2026-09-09T13:11:01.477Z"
+    },
+    {
+      "id": "epic-0bfzs5",
+      "title": "Issue comments and activity log",
+      "status": "open",
+      "planRef": ".context-index/specs/cross-cutting/issue-comments.plan.md",
+      "notes": "Add a per-Issue Comment activity log across issue-tracker-api, kanban-ui, and mcp-server.",
+      "created": "2026-09-09T13:21:40.310Z",
+      "updated": "2026-09-09T13:21:40.310Z"
+    },
+    {
+      "id": "epic-cb6xqv",
+      "title": "Sprints",
+      "status": "open",
+      "planRef": ".context-index/specs/cross-cutting/sprints.plan.md",
+      "notes": "Add Sprint entity/lifecycle, Issue.sprint_id, kanban-ui Sprint view, and mcp-server tools. Task 4 blocked on backlog-view's implementation.",
+      "created": "2026-09-09T13:30:59.195Z",
+      "updated": "2026-09-09T13:30:59.195Z"
     }
   ],
   "issues": [
@@ -273,6 +300,45 @@
       "next_action": "Run /adev:review-specs --spec .context-index/specs/features/mcp-server/mcp-e2e.spec.md",
       "created": "2026-09-06T20:00:48.929Z",
       "updated": "2026-09-06T22:07:35.757Z"
+    },
+    {
+      "id": "issue-zg7z1o",
+      "title": "Backlog list view and issue filters",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/features/kanban-ui/backlog-view.spec.md",
+      "dependencies": [],
+      "notes": "Validated: MEDIUM confidence (2026-09-09) | Report: .context-index/specs/features/kanban-ui/backlog-view.validate.md | Files verified: 11 | Tests: PASS. Manual verification recommended.",
+      "next_action": "Run /adev:review-specs --module kanban-ui",
+      "created": "2026-09-09T10:55:32.235Z",
+      "updated": "2026-09-09T21:15:03.629Z"
+    },
+    {
+      "id": "issue-l8vwyv",
+      "title": "Issue comments and activity log",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/cross-cutting/issue-comments.spec.md",
+      "dependencies": [],
+      "notes": "Validated: MEDIUM confidence (2026-09-09) | Report: .context-index/specs/cross-cutting/issue-comments.validate.md | Files verified: 13 | Tests: PASS. Manual verification recommended.",
+      "next_action": "Manual review recommended (medium confidence); then close via /adev:issues close issue-l8vwyv",
+      "created": "2026-09-09T11:03:10.562Z",
+      "updated": "2026-09-09T22:00:50.779Z"
+    },
+    {
+      "id": "issue-2t9bsb",
+      "title": "Sprints",
+      "status": "open",
+      "priority": 2,
+      "type": "feature",
+      "spec_ref": ".context-index/specs/cross-cutting/sprints.spec.md",
+      "dependencies": [],
+      "notes": "Validated: MEDIUM confidence (2026-09-10) | Report: .context-index/specs/cross-cutting/sprints.validate.md | Files verified: 19 | Tests: PASS. Manual verification recommended.",
+      "next_action": "Run /adev:review-specs --spec .context-index/specs/cross-cutting/sprints.spec.md --tier full",
+      "created": "2026-09-09T13:14:10.699Z",
+      "updated": "2026-09-10T16:07:13.352Z"
     }
   ]
 }

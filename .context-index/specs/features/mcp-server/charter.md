@@ -83,9 +83,9 @@ of `issue-tracker-api`: it owns no persisted data and never touches the database
 | create_user tool | Wraps `POST /users` | must-have | v1.2 | validated |
 | list_issue_comments tool | Wraps `GET /issues/{id}/comments`; owned by the `issue-comments` cross-cutting charter | should-have | v1.3 | validated |
 | create_issue_comment tool | Wraps `POST /issues/{id}/comments`; owned by the `issue-comments` cross-cutting charter | should-have | v1.3 | validated |
-| create_sprint tool | Wraps `POST /projects/{id}/sprints`; owned by the `sprints` cross-cutting charter | should-have | v1.4 | implemented |
-| list_sprints tool | Wraps `GET /projects/{id}/sprints`; owned by the `sprints` cross-cutting charter | should-have | v1.4 | implemented |
-| update_sprint tool | Wraps `PATCH /sprints/{id}`; owned by the `sprints` cross-cutting charter | should-have | v1.4 | implemented |
+| create_sprint tool | Wraps `POST /projects/{id}/sprints`; owned by the `sprints` cross-cutting charter | should-have | v1.4 | validated |
+| list_sprints tool | Wraps `GET /projects/{id}/sprints`; owned by the `sprints` cross-cutting charter | should-have | v1.4 | validated |
+| update_sprint tool | Wraps `PATCH /sprints/{id}`; owned by the `sprints` cross-cutting charter | should-have | v1.4 | validated |
 
 ## Deferred Capabilities
 

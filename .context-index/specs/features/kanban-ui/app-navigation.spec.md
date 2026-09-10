@@ -17,6 +17,7 @@ source-manifest:
     - tests_e2e/test_ui_navigation_e2e.py
     - tests_js/navigation-beh-1-sidebar-markup.test.js
   computed-at: "2026-09-07T12:35:59.600Z"
+drift_detected: true
 ---
 
 # Live Spec: App navigation shell (sidebar)

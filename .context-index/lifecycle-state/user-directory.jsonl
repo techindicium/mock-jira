@@ -9,3 +9,4 @@
 {"event":"step_completed","step":"implement","verdict":"PASS","revision":1,"ts":"2026-09-06T23:13:50.164Z"}
 {"event":"lifecycle_step","step":"validate","status":"started","revision":1,"ts":"2026-09-06T23:19:27.201Z"}
 {"event":"step_completed","step":"validate","verdict":"PASS_WITH_NOTES","revision":1,"ts":"2026-09-06T23:19:27.312Z"}
+{"event":"code_drift_detected","drift_source":"app/db.py","drift_at":"2026-09-09T21:02:16.174Z","ts":"2026-09-09T21:02:16.174Z"}

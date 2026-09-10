@@ -24,6 +24,7 @@ source-manifest:
     - tests_js/visual-refresh-beh-7-8-accessibility-css.test.js
     - tests_js/visual-refresh-no-cdn-fonts.test.js
   computed-at: "2026-09-07T12:35:07.205Z"
+drift_detected: true
 ---
 
 # Live Spec: Visual design refresh — dispatch-board identity

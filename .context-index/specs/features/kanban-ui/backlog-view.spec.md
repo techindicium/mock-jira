@@ -1,7 +1,7 @@
 ---
 partial_schema: implement@1
 charter: kanban-ui
-status: implemented
+status: validated
 risk_level: low
 milestone: v1.5
 revision: 1
@@ -25,6 +25,7 @@ source-manifest:
     - tests_js/backlog-view-beh-5-empty-filter-state.test.js
     - tests_js/backlog-view-beh-6-styling-tokens.test.js
   computed-at: "2026-09-09T18:22:16.647Z"
+drift_detected: true
 ---
 
 # Live Spec: Backlog list view and issue filters

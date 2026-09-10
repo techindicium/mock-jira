@@ -25,13 +25,19 @@ source-manifest:
     - tests_js/beh-5-fetch-error.test.js
     - tests_js/beh-6-empty-state.test.js
   computed-at: "2026-09-07T12:34:45.868Z"
+drift_detected: true
 ---
 
 # Live Spec: Kanban board view and project switcher
 
 <!-- Live Spec within the kanban-ui charter.
      This defines a specific behavioral contract that drives implementation and testing.
-     Parent Charter: .context-index/specs/features/kanban-ui/charter.md -->
+     Parent Charter: .context-index/specs/features/kanban-ui/charter.md
+
+     Forward reference: backlog-view.spec.md's filter bar (BEH-3/BEH-4/BEH-6) also filters this
+     view's rendered set once implemented. That spec owns the filter contract; this spec's own
+     Behaviors below describe the board's rendering of whatever issue set it is given, filtered
+     or not. -->
 
 ## Behavioral Contract
 

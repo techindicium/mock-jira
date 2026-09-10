@@ -2,7 +2,7 @@
 partial_schema: implement@1
 mode: cross-cutting
 affects: [issue-tracker-api, kanban-ui, mcp-server]
-status: implemented
+status: validated
 revision: 1
 created: 2026-09-09
 updated: 2026-09-10
@@ -31,6 +31,7 @@ source-manifest:
     - tests_js/sprints-beh-1-nav-and-render.test.js
     - tests_js/sprints-beh-2-add-to-sprint.test.js
   computed-at: "2026-09-10T15:54:30.802Z"
+drift_detected: true
 ---
 
 # Live Spec: Sprints

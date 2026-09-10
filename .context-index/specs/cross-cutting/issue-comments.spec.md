@@ -1,7 +1,7 @@
 ---
 mode: cross-cutting
 affects: [issue-tracker-api, kanban-ui, mcp-server]
-status: implemented
+status: validated
 revision: 1
 created: 2026-09-09
 updated: 2026-09-09
@@ -24,6 +24,7 @@ source-manifest:
     - tests_js/issue-comments-beh-1-render.test.js
     - tests_js/issue-comments-beh-2-validation.test.js
   computed-at: "2026-09-09T21:24:45.414Z"
+drift_detected: true
 ---
 
 # Live Spec: Issue comments and activity log

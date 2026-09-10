@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "_generated_by": "/adev:route — do not hand-edit; re-run instead.",
+  "entries": [
+    {
+      "task_id": "t1",
+      "selected_agent": "assisted-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.8,
+        "novelty": 0.8
+      },
+      "rationale": "Fully specified CRUD+invariants following projects.py's exact pattern (no curated sample); spec risk_level: high forces assisted-agent floor."
+    },
+    {
+      "task_id": "t2",
+      "selected_agent": "assisted-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.8,
+        "novelty": 0.8
+      },
+      "rationale": "Well-specified 3-step validation chain extending patch_issue; spec risk_level: high (Issue shape change) forces assisted-agent floor."
+    },
+    {
+      "task_id": "t3",
+      "selected_agent": "assisted-agent",
+      "scores": {
+        "spec_completeness": 0.8,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.8,
+        "novelty": 0.8
+      },
+      "rationale": "Sprint view reuses board-logic.js rendering verbatim with clear guidance; totals to assisted-agent and spec risk_level: high confirms the floor."
+    },
+    {
+      "task_id": "t4",
+      "selected_agent": "human-only",
+      "scores": {
+        "spec_completeness": 0.4,
+        "pattern_coverage": 0.2,
+        "blast_radius": 0.8,
+        "novelty": 0.4
+      },
+      "rationale": "Blocked on backlog-view; target markup does not exist yet in this repo, so pattern coverage and novelty score low, driving human-only routing."
+    },
+    {
+      "task_id": "t5",
+      "selected_agent": "assisted-agent",
+      "scores": {
+        "spec_completeness": 1,
+        "pattern_coverage": 0.6,
+        "blast_radius": 0.6,
+        "novelty": 0.6
+      },
+      "rationale": "Mirrors issues.py's tool pattern with a subtle sentinel-based assign/unassign design; spec risk_level: high forces assisted-agent floor."
+    }
+  ]
+}
