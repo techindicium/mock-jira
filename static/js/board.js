@@ -264,7 +264,7 @@
   Object.assign(window.BoardApp, {
     showView, onNavClick, loadUsersView, onCreateUserSubmit,
     loadProjectsView, onMgmtCreateProjectSubmit,
-    renderSprintView, onStartSprint, onCloseSprint, loadSprintView, onCreateSprintSubmit,
+    renderSprintView, onStartSprint, onCloseSprint, onCancelSprint, loadSprintView, onCreateSprintSubmit,
   });
 
   document.addEventListener("DOMContentLoaded", init);
@@ -547,6 +547,11 @@
 
   function updateSprintControls() {
     document.getElementById("start-sprint").hidden = !(currentActiveSprintId == null && currentStartableSprintId != null);
+    // Without a way to cancel an unstarted planned Sprint, "Start sprint" (which always
+    // targets the oldest planned Sprint) permanently blocks access to any Sprint created
+    // after it — there is no other UI path to reach a newer Sprint while an older, never
+    // started one still exists.
+    document.getElementById("cancel-sprint").hidden = currentStartableSprintId == null;
     document.getElementById("close-sprint").hidden = currentActiveSprintId == null;
   }
 
@@ -617,7 +622,25 @@
     await loadSprintView();
   }
 
+  async function onCancelSprint(event) {
+    event.preventDefault();
+    if (currentStartableSprintId == null) return;
+    try {
+      await fetchJson(`/sprints/${currentStartableSprintId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "closed" }),
+      });
+      clearSprintViewError();
+    } catch (err) {
+      showSprintViewError(BoardLogic.formatFetchError("Cancelling sprint", err));
+      return;
+    }
+    await loadSprintView();
+  }
+
   document.getElementById("start-sprint").addEventListener("click", onStartSprint);
+  document.getElementById("cancel-sprint").addEventListener("click", onCancelSprint);
   document.getElementById("close-sprint").addEventListener("click", onCloseSprint);
 
   function showCreateSprintError(message) {

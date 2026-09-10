@@ -17,3 +17,11 @@ test("validateSprintForm: empty/whitespace name is invalid", () => {
 test("validateSprintForm: non-empty name is valid", () => {
   assert.equal(validateSprintForm("Sprint 1").valid, true);
 });
+
+test("BEH-2 (dead-end fix): a cancel-sprint control exists for the oldest unstarted planned sprint", () => {
+  // Without this, once a planned Sprint exists, every later-created Sprint is permanently
+  // unreachable — "Start sprint" always targets the oldest planned one, and "Close sprint"
+  // only ever appears for an already-active Sprint. Reproduced live: creating Alpha then Beta
+  // left no control anywhere referencing Beta.
+  assert.match(html, /<button id="cancel-sprint" type="button" hidden>[^<]*<\/button>/);
+});
